@@ -1,0 +1,70 @@
+---
+// SPDX-FileCopyrightText: 2026 SecPal
+// SPDX-License-Identifier: AGPL-3.0-or-later
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  lang: string;
+  canonicalPath?: string;
+}
+
+const { title, description, lang, canonicalPath } = Astro.props;
+const siteUrl = Astro.site ?? new URL("https://secpal.app");
+const canonicalUrl = canonicalPath
+  ? new URL(canonicalPath, siteUrl).toString()
+  : undefined;
+const alternateEnUrl = new URL("/en/", siteUrl).toString();
+const alternateDeUrl = new URL("/de/", siteUrl).toString();
+---
+
+<!doctype html>
+<html lang={lang} class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <link
+      rel="icon"
+      type="image/png"
+      href="/logo-light-32.png"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/logo-dark-32.png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="alternate" hreflang="en" href={alternateEnUrl} />
+    <link rel="alternate" hreflang="de" href={alternateDeUrl} />
+    <link rel="alternate" hreflang="x-default" href={alternateEnUrl} />
+    <!-- Dark mode: runs before first paint to prevent flash -->
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem("theme");
+        var prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        if (stored === "dark" || (!stored && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+          var btn = document.getElementById("dark-toggle");
+          if (btn) {
+            btn.addEventListener("click", function () {
+              var isDark = document.documentElement.classList.toggle("dark");
+              localStorage.setItem("theme", isDark ? "dark" : "light");
+            });
+          }
+        });
+      })();
+    </script>
+  </head>
+  <body class="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,66 @@
+# SPDX-FileCopyrightText: 2026 SecPal
+# SPDX-License-Identifier: CC0-1.0
+
+version = 1
+
+[[annotations]]
+path = "src/**"
+SPDX-FileCopyrightText = "2026 SecPal"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# UI block components adapted from Tailwind Plus HTML blocks
+[[annotations]]
+path = [
+  "src/components/Nav.astro",
+  "src/components/Hero.astro",
+  "src/components/Features.astro",
+  "src/components/CTA.astro",
+  "src/components/Footer.astro",
+]
+SPDX-FileCopyrightText = ["2026 SecPal", "Tailwind Labs Inc."]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND LicenseRef-TailwindPlus"
+
+[[annotations]]
+path = "public/**"
+SPDX-FileCopyrightText = "2026 SecPal"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = [
+  "astro.config.mjs",
+  "tsconfig.json",
+  "eslint.config.js",
+  ".prettierrc.json",
+  ".prettierignore",
+  ".editorconfig",
+  ".gitignore",
+  ".gitattributes",
+  ".nvmrc",
+  ".yamllint.yml",
+  ".markdownlint.json",
+  ".markdownlint-cli2.yaml",
+  ".pre-commit-config.yaml",
+  "package.json",
+  "package-lock.json",
+  "CODEOWNERS",
+]
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = ["README.md", "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "CODE_OF_CONDUCT.md", ".github/**"]
+SPDX-FileCopyrightText = "2026 SecPal"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "scripts/**"
+SPDX-FileCopyrightText = "2026 SecPal Contributors"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = [
+  "package.json.license",
+  "package-lock.json.license",
+  "tsconfig.json.license",
+  "astro.config.mjs.license",
+]
+SPDX-License-Identifier = "CC0-1.0"

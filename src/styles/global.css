@@ -1,0 +1,7 @@
+/* SPDX-FileCopyrightText: 2026 SecPal */
+/* SPDX-License-Identifier: AGPL-3.0-or-later */
+
+@import "tailwindcss";
+
+/* Class-based dark mode — toggled via JS on <html> */
+@custom-variant dark (&:where(.dark, .dark *));

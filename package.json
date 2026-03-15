@@ -1,0 +1,50 @@
+{
+  "name": "@secpal/secpal.app",
+  "version": "0.0.1",
+  "description": "Landing page for SecPal — the open-source security notification platform",
+  "private": true,
+  "type": "module",
+  "author": "SecPal",
+  "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SecPal/secpal.app.git"
+  },
+  "homepage": "https://secpal.app",
+  "bugs": {
+    "url": "https://github.com/SecPal/secpal.app/issues"
+  },
+  "keywords": [
+    "secpal",
+    "landing-page",
+    "astro",
+    "tailwindcss",
+    "security",
+    "notifications"
+  ],
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "astro check",
+    "format": "prettier --write --cache '**/*.{md,yml,yaml,json,ts,tsx,js,jsx,astro}'",
+    "format:check": "prettier --check '**/*.{md,yml,yaml,json,ts,tsx,js,jsx,astro}'"
+  },
+  "dependencies": {
+    "@tailwindplus/elements": "^1.0.0",
+    "astro": "^6.0.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.7",
+    "@tailwindcss/vite": "^4.1.3",
+    "@typescript-eslint/parser": "^8.29.1",
+    "eslint": "^9.24.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "prettier": "^3.5.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "tailwindcss": "^4.1.3",
+    "typescript": "^5.8.3"
+  }
+}

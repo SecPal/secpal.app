@@ -1,0 +1,25 @@
+---
+// SPDX-FileCopyrightText: 2026 SecPal
+// SPDX-License-Identifier: AGPL-3.0-or-later
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import Hero from "../../components/Hero.astro";
+import Features from "../../components/Features.astro";
+import CTA from "../../components/CTA.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<Base
+  title="SecPal — Security-Benachrichtigungen, wie sie sein sollten"
+  description="SecPal ist die Open-Source-Plattform für zeitnahe Security-Benachrichtigungen an Ihre Nutzer — schnell, zuverlässig und DSGVO-konform."
+  lang="de"
+  canonicalPath="/de/"
+>
+  <Nav locale="de" />
+  <main>
+    <Hero locale="de" />
+    <Features locale="de" />
+    <CTA locale="de" />
+  </main>
+  <Footer locale="de" />
+</Base>
