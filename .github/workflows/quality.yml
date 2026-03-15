@@ -16,34 +16,28 @@ permissions:
 jobs:
   reuse:
     name: Check REUSE Compliance
-    timeout-minutes: 10
     uses: SecPal/.github/.github/workflows/reusable-reuse.yml@main
 
   license-compatibility:
     name: Check License Compatibility
-    timeout-minutes: 10
     uses: SecPal/.github/.github/workflows/reusable-license-compatibility.yml@main
 
   prettier:
     name: Formatting Check
-    timeout-minutes: 10
     uses: SecPal/.github/.github/workflows/reusable-prettier.yml@main
 
   markdown-lint:
     name: Markdown Lint
-    timeout-minutes: 10
     uses: SecPal/.github/.github/workflows/reusable-markdown-lint.yml@main
 
   eslint:
     name: ESLint
-    timeout-minutes: 15
     uses: SecPal/.github/.github/workflows/reusable-node-lint.yml@main
     with:
       node-version: "22"
 
   astro-check:
     name: Astro TypeScript Check
-    timeout-minutes: 15
     uses: SecPal/.github/.github/workflows/reusable-node-build.yml@main
     with:
       node-version: "22"
@@ -51,7 +45,6 @@ jobs:
 
   build:
     name: Astro Build
-    timeout-minutes: 15
     uses: SecPal/.github/.github/workflows/reusable-node-build.yml@main
     with:
       node-version: "22"
