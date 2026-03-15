@@ -32,3 +32,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full CI/CD pipeline with quality gates, PR size check, and project automation
 - Pre-commit hooks and preflight script
 - Contributing guidance now matches the Astro static-site repository instead of the generic multi-repo template
+- Project automation now skips cleanly when repository GitHub App secrets are not configured yet
+- Tailwind Plus-derived components now declare their dual licensing explicitly for REUSE compliance
