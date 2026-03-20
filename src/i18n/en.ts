@@ -3,65 +3,60 @@
 
 export const en = {
   nav: {
-    features: "Features",
-    pricing: "Pricing",
-    docs: "Documentation",
-    signIn: "Sign in",
-    getStarted: "Get started",
+    progress: "Progress",
+    updates: "Launch",
+    github: "GitHub",
+    contact: "Contact",
+    followProgress: "Follow progress",
   },
   hero: {
-    badge: "Open Source · AGPL-3.0 · On-Premise or SaaS",
-    headline: "A guard's best friend.",
-    subline:
-      "SecPal digitalises the back office of your security service — guard log, patrol control, shift planning, and staff management in one platform. No more paper, no more chaos.",
-    cta: "Get started for free",
-    ctaSecondary: "View on GitHub",
+    badge: "Work in progress · Open source · Built in public",
+    tagline: "SecPal – A guard’s best friend",
+    headline: "Less paperwork for security operations.",
+    subline: "Digital from shift planning to handover.",
+    explanation:
+      "SecPal is being developed for operational security service work and is intended to reduce day-to-day load for both staff and managers.",
+    highlights: [
+      "Shift planning, patrol rounds, and documentation belong in one coherent workflow.",
+      "Reports and handovers stay traceable instead of getting lost across paper notes and chats.",
+      "SecPal is still work in progress and is being built in public step by step.",
+    ],
+    cta: "Follow the build on GitHub",
+    ctaSecondary: "See what is taking shape",
+    note: "No public signup yet. SecPal is still under active construction and is currently presented as a focused coming-soon page.",
   },
   features: {
-    headline: "Everything a modern security service needs.",
+    headline: "Built for day-to-day security service work.",
     subline:
-      "From the first patrol to payroll — SecPal replaces the clipboard, the spreadsheet, and the filing cabinet.",
+      "SecPal is being built around operational work first, with a focus on clearer workflows, better oversight, and meaningful day-to-day relief.",
     items: [
       {
-        name: "Digital Guard Log",
+        name: "From planning to handover",
         description:
-          "Log incidents, events, and reports in a tamper-evident, paperless record — accessible from smartphone, tablet, or desktop.",
+          "SecPal is meant to cover the full operational arc: from shift planning through patrol rounds and reporting to a clean handover between teams.",
       },
       {
-        name: "Patrol Control",
+        name: "One operational system instead of scattered admin",
         description:
-          "NFC- and GPS-based checkpoint tracking. Every tour documented in full, deviations flagged instantly.",
+          "Beyond documentation and patrol workflows, SecPal is intended to bring additional operational admin tasks together in one coherent system over time.",
       },
       {
-        name: "Shift Planning",
+        name: "Relief for staff and leadership",
         description:
-          "Build schedules, manage availability, assign shifts. Changes reach your team immediately — no more printed rosters.",
-      },
-      {
-        name: "Staff Management",
-        description:
-          "Qualifications, certificates, and documents in one place. Expiring credentials flagged automatically.",
-      },
-      {
-        name: "On-Premise or SaaS",
-        description:
-          "Full data sovereignty: run SecPal on your own server, or use our hosted service. Your choice — no blind trust required.",
-      },
-      {
-        name: "GDPR-compliant",
-        description:
-          "All personal data encrypted at rest. Tamper-evident audit logs ready for regulatory inspections.",
+          "The focus is on clearer workflows, less operational friction, and meaningful relief for guards, supervisors, operations leads, and dispatch.",
       },
     ],
   },
   cta: {
-    headline: "Ready to go paperless?",
-    subline: "Start for free or self-host — no credit card required.",
-    button: "Get started",
-    buttonSecondary: "Get in touch",
+    headline: "Want launch updates instead of marketing noise?",
+    subline:
+      "Follow development on GitHub, reach out directly, and check back as the first release milestone gets closer.",
+    button: "Follow on GitHub",
+    buttonSecondary: "Write to us",
+    note: "SecPal is still under heavy construction. Public onboarding will open once the first launch milestone is ready.",
   },
   footer: {
-    rights: "All rights reserved.",
+    rights: "",
     links: {
       privacy: "Privacy",
       terms: "Terms",
@@ -71,12 +66,11 @@ export const en = {
   },
 } as const;
 
-type DeepLoosen<T> = {
-  [K in keyof T]: T[K] extends Record<string, unknown>
-    ? DeepLoosen<T[K]>
-    : T[K] extends ReadonlyArray<infer U>
-      ? DeepLoosen<U>[]
+type DeepLoosen<T> =
+  T extends ReadonlyArray<infer U>
+    ? DeepLoosen<U>[]
+    : T extends Record<string, unknown>
+      ? { [K in keyof T]: DeepLoosen<T[K]> }
       : string;
-};
 
 export type Translations = DeepLoosen<typeof en>;

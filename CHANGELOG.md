@@ -23,6 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- README and package metadata now match the landing page's security-operations and coming-soon positioning
+- Hero brand slogan now consistently uses the wording `SecPal – A guard’s best friend`
+- Hero now presents `SecPal – A guard’s best friend` as a compact brand slogan instead of competing with the main positioning claim
+- Footer no longer claims "All rights reserved" on the public site, avoiding a misleading rights statement for the AGPL-published project
+- Landing page now leads with the SecPal product name, removes the duplicated hero view, and reframes the homepage as a focused coming-soon preview while the product is still under active construction
 - Alternate deployment builds now derive canonical and hreflang URLs from `SECPAL_SITE_URL` so `dev.secpal.app` no longer points metadata at production
 - Dark mode toggle: added `is:inline` to ensure the script runs after DOM is ready
 - Language switcher: `getLocalizedPath` now produces trailing-slash URLs (`/de/`, `/en/`) matching Astro's canonical page paths

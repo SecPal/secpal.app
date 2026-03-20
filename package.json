@@ -1,7 +1,7 @@
 {
   "name": "@secpal/secpal.app",
   "version": "0.0.1",
-  "description": "Landing page for SecPal — the open-source security notification platform",
+  "description": "Landing page for SecPal — the open-source security operations platform built in public",
   "private": true,
   "type": "module",
   "author": "SecPal",
@@ -20,7 +20,8 @@
     "astro",
     "tailwindcss",
     "security",
-    "notifications"
+    "security-operations",
+    "built-in-public"
   ],
   "scripts": {
     "dev": "astro dev",

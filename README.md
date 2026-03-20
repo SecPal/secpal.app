@@ -9,15 +9,16 @@ SPDX-License-Identifier: CC0-1.0
 [![PR Size](https://github.com/SecPal/secpal.app/actions/workflows/pr-size.yml/badge.svg)](https://github.com/SecPal/secpal.app/actions/workflows/pr-size.yml)
 [![License](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
-Public landing page for [secpal.app](https://secpal.app) — the open-source platform for delivering timely security notifications to your users.
+Public landing page for [secpal.app](https://secpal.app) — the open-source security operations product being built in public for day-to-day security service work.
 
 Built with [Astro](https://astro.build), [Tailwind CSS v4](https://tailwindcss.com), and [Tailwind Plus UI Blocks](https://tailwindcss.com/plus).
 
 ## Features
 
 - **Multilingual** — English and German (`/en/`, `/de/`)
+- **Built in public** — product progress and launch positioning instead of premature app onboarding
 - **Dark mode** — class-based, persisted in `localStorage`, flash-free
-- **Static** — zero client-side JS by default (Astro island architecture)
+- **Static** — minimal client-side JS with Astro-first rendering
 - **REUSE-compliant** — all files carry SPDX headers
 
 ## Development
