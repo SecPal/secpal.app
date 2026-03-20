@@ -58,7 +58,7 @@ const year = new Date().getFullYear();
     <p
       class="mt-8 text-center text-sm/6 text-gray-600 md:order-1 md:mt-0 dark:text-gray-400"
     >
-      &copy; {year} SecPal. {t.footer.rights}
+      &copy; {year} SecPal{t.footer.rights ? `. ${t.footer.rights}` : ""}
     </p>
   </div>
 </footer>

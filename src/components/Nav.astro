@@ -23,7 +23,7 @@ const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
 <header class="bg-white dark:bg-gray-900">
   <nav
     aria-label="Global"
-    class="mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8"
+    class="mx-auto flex max-w-7xl items-center justify-between gap-x-6 px-6 py-4 lg:px-8 lg:py-5"
   >
     <!-- Logo -->
     <div class="flex lg:flex-1">
@@ -46,19 +46,19 @@ const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
     <!-- Desktop nav links -->
     <div class="hidden lg:flex lg:gap-x-12">
       <a
-        href="#features"
+        href="#progress"
         class="text-sm/6 font-semibold text-gray-900 dark:text-white"
-        >{t.nav.features}</a
+        >{t.nav.progress}</a
       >
       <a
-        href="#pricing"
+        href="#updates"
         class="text-sm/6 font-semibold text-gray-900 dark:text-white"
-        >{t.nav.pricing}</a
+        >{t.nav.updates}</a
       >
       <a
-        href="https://docs.secpal.app"
+        href="https://github.com/SecPal"
         class="text-sm/6 font-semibold text-gray-900 dark:text-white"
-        >{t.nav.docs}</a
+        >{t.nav.github}</a
       >
     </div>
 
@@ -115,14 +115,9 @@ const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
       </button>
 
       <a
-        href="https://app.secpal.app/login"
-        class="hidden text-sm/6 font-semibold text-gray-900 lg:block dark:text-white"
-        >{t.nav.signIn}</a
-      >
-      <a
-        href="https://app.secpal.app/register"
+        href="https://github.com/SecPal"
         class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
-        >{t.nav.getStarted}</a
+        >{t.nav.followProgress}</a
       >
     </div>
 
@@ -179,9 +174,9 @@ const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
           />
         </a>
         <a
-          href="https://app.secpal.app/register"
+          href="https://github.com/SecPal"
           class="ml-auto rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400"
-          >{t.nav.getStarted}</a
+          >{t.nav.followProgress}</a
         >
         <button
           type="button"
@@ -209,19 +204,24 @@ const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
         <div class="-my-6 divide-y divide-gray-500/10 dark:divide-white/10">
           <div class="space-y-2 py-6">
             <a
-              href="#features"
+              href="#progress"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-              >{t.nav.features}</a
+              >{t.nav.progress}</a
             >
             <a
-              href="#pricing"
+              href="#updates"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-              >{t.nav.pricing}</a
+              >{t.nav.updates}</a
             >
             <a
-              href="https://docs.secpal.app"
+              href="https://github.com/SecPal"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-              >{t.nav.docs}</a
+              >{t.nav.github}</a
+            >
+            <a
+              href="mailto:hello@secpal.app"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
+              >{t.nav.contact}</a
             >
             <!-- Language switcher in mobile menu -->
             <a
@@ -230,13 +230,6 @@ const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
             >
               {otherLocale === "de" ? "Deutsch" : "English"}
             </a>
-          </div>
-          <div class="py-6">
-            <a
-              href="https://app.secpal.app/login"
-              class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-              >{t.nav.signIn}</a
-            >
           </div>
         </div>
       </div>
