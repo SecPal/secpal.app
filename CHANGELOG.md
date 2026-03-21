@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Landing page and legal pages now use tighter, aligned English and German copy, a release-ready claim, and more precise metadata for `title`, description, canonical, and `hreflang`
+- Landing page wording now emphasizes less paperwork, fewer media breaks, and clearer handovers while reducing repeated phrasing across hero, features, CTA, and legal metadata
 
 - README and package metadata now match the landing page's security-operations and coming-soon positioning
 - Hero now presents `SecPal – A guard’s best friend` as a compact eyebrow tagline above the main positioning headline

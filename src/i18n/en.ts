@@ -10,50 +10,50 @@ export const en = {
     followProgress: "Follow progress",
   },
   hero: {
-    badge: "Public website · Open source · Built in public",
+    badge: "From operational practice · Open source · Built in public",
     tagline: "SecPal – A guard’s best friend",
     headline: "Less friction in security operations.",
-    subline: "One clear operational flow from shift planning to handover.",
+    subline: "Less paperwork, fewer fragmented tools, clearer handovers.",
     explanation:
-      "SecPal is being developed for security service operations that need dependable planning, patrol documentation, reporting, and clean handovers without paper-heavy workarounds.",
+      "SecPal is being built for security service operations that need day-to-day work to follow one clear operational flow instead of being scattered across paper notes, chats, and disconnected tools.",
     highlights: [
-      "Shift planning, patrol rounds, reports, and handovers belong in one operational flow.",
-      "Information should stay traceable instead of being scattered across paper notes, chats, and disconnected tools.",
+      "Operational work belongs in one connected system instead of isolated tools.",
+      "Information should remain traceable instead of being lost across notes, chats, and isolated tools.",
       "SecPal is taking shape in public, with a focused scope and clear release steps.",
     ],
     cta: "Follow development on GitHub",
-    ctaSecondary: "See the current scope",
+    ctaSecondary: "See the current state",
     note: "The public website shows the product direction, legal information, and contact paths. Public access to the app is not open yet.",
   },
   features: {
     headline: "Built around operational reality.",
     subline:
-      "The first public release is being shaped around the routine work security teams actually do every day: plan, patrol, report, hand over, and keep oversight.",
+      "SecPal focuses on what needs to work every day in security operations: clear workflows, dependable documentation, and better oversight.",
     items: [
       {
-        name: "Planning to handover, kept connected",
+        name: "One system instead of patchwork",
         description:
-          "SecPal is being designed as one operational thread: from shift planning and patrol rounds to incident reporting and clean handovers.",
+          "SecPal is meant to support operational work as one connected whole instead of spreading it across separate tools and partial workflows.",
       },
       {
-        name: "Less fragmentation in daily operations",
+        name: "Fewer fragmented tools in daily work",
         description:
-          "Instead of separate paper logs, chats, and ad hoc admin, SecPal brings the essentials into one structured system.",
+          "Instead of paper logs, chats, and isolated tools, SecPal brings information and workflows together in one structured system.",
       },
       {
-        name: "Useful for teams and leadership",
+        name: "Better oversight day to day",
         description:
-          "The goal is clearer status, less duplicate work, and better oversight for guards, supervisors, operations leads, and dispatch.",
+          "That creates clearer status, less duplicate work, and better oversight for teams, leadership, and dispatch.",
       },
     ],
   },
   cta: {
-    headline: "Follow the release, not the noise.",
+    headline: "Progress, not marketing noise.",
     subline:
-      "GitHub shows the current build, contact stays direct, and the public site remains focused until the first release is ready.",
+      "GitHub shows the current state. For questions, feedback, or early contact, you can reach SecPal directly.",
     button: "View GitHub",
-    buttonSecondary: "Contact SecPal",
-    note: "SecPal is being prepared for a first public release. This site stays intentionally lean until that milestone is ready.",
+    buttonSecondary: "Get in touch",
+    note: "The public website stays intentionally focused while SecPal is not yet publicly accessible.",
   },
   footer: {
     rights: "",

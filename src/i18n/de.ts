@@ -12,51 +12,51 @@ export const de: Translations = {
     followProgress: "Fortschritt verfolgen",
   },
   hero: {
-    badge: "Öffentliche Website · Open Source · Öffentlich entwickelt",
+    badge: "Aus der Praxis · Open Source · Öffentlich entwickelt",
     tagline: "SecPal – A guard’s best friend",
     headline: "Weniger Reibung im Sicherheitsdienst.",
     subline:
-      "Ein klarer operativer Ablauf von der Dienstplanung bis zur Übergabe.",
+      "Weniger Zettelwirtschaft, weniger Medienbrüche, klarere Übergaben.",
     explanation:
-      "SecPal wird für Sicherheitsdienste entwickelt, die Dienstplanung, Kontrollgänge, Meldungen und saubere Übergaben ohne papierlastige Umwege abbilden wollen.",
+      "SecPal entsteht für Sicherheitsdienste, die ihre operative Arbeit in einem klaren Ablauf zusammenführen wollen, statt Informationen über Papier, Chats und Insellösungen zu verstreuen.",
     highlights: [
-      "Dienstplanung, Kontrollgänge, Meldungen und Übergaben gehören in einen durchgehenden Ablauf.",
-      "Informationen sollen nachvollziehbar bleiben statt in Zetteln, Chats und Einzellösungen zu verschwinden.",
+      "Operative Abläufe gehören in ein durchgängiges System statt in einzelne Teillösungen.",
+      "Informationen sollen nachvollziehbar bleiben statt in Zetteln, Chats und Insellösungen zu verschwinden.",
       "SecPal entsteht öffentlich, mit klarem Fokus und nachvollziehbaren Release-Schritten.",
     ],
     cta: "Entwicklung auf GitHub verfolgen",
-    ctaSecondary: "Aktuellen Umfang ansehen",
-    note: "Die öffentliche Website zeigt Produktrichtung, Rechtsinformationen und Kontaktwege. Ein öffentlicher Zugang zur App ist noch nicht geöffnet.",
+    ctaSecondary: "Mehr zum aktuellen Stand",
+    note: "Die öffentliche Website zeigt Produktrichtung, Rechtsinformationen und Kontaktwege. Ein öffentlicher Zugang zur App ist derzeit noch nicht geöffnet.",
   },
   features: {
     headline: "Für die operative Realität gebaut.",
     subline:
-      "Die erste öffentliche Version entsteht ausgehend von den Abläufen, die Sicherheitsdienste täglich wirklich brauchen: planen, kontrollieren, melden, übergeben und Überblick behalten.",
+      "SecPal konzentriert sich auf das, was im Sicherheitsdienst täglich funktionieren muss: klare Abläufe, verlässliche Dokumentation und bessere Übersicht.",
     items: [
       {
-        name: "Von der Planung bis zur Übergabe verbunden",
+        name: "Ein System statt Stückwerk",
         description:
-          "SecPal wird als durchgehender operativer Faden angelegt: von der Dienstplanung und Kontrollgängen bis zu Meldungen und sauberen Übergaben.",
+          "SecPal soll operative Arbeit in einem klaren Zusammenhang abbilden statt Einzelschritte in getrennten Werkzeugen zu verteilen.",
       },
       {
-        name: "Weniger Brüche im Arbeitsalltag",
+        name: "Weniger Medienbrüche im Alltag",
         description:
-          "Statt getrennter Papierprotokolle, Chats und Nebenlisten bündelt SecPal die wesentlichen Abläufe in einem strukturierten System.",
+          "Statt Papier, Chats und Insellösungen bündelt SecPal Informationen und Abläufe in einem strukturierten System.",
       },
       {
-        name: "Nützlich für Teams und Führung",
+        name: "Mehr Überblick im Alltag",
         description:
-          "Ziel sind klarere Statusbilder, weniger Doppelarbeit und bessere Übersicht für Sicherheitskräfte, Objektleitungen, Einsatzleitungen und Disposition.",
+          "Das schafft klarere Statusbilder, weniger Doppelarbeit und bessere Übersicht für Teams, Führung und Disposition.",
       },
     ],
   },
   cta: {
-    headline: "Die Veröffentlichung verfolgen, nicht den Lärm.",
+    headline: "Fortschritt statt Marketing-Lärm.",
     subline:
-      "Auf GitHub ist der aktuelle Stand sichtbar, Kontakt bleibt direkt, und die öffentliche Website bleibt bewusst fokussiert, bis die erste Version bereit ist.",
+      "Auf GitHub ist der aktuelle Stand sichtbar. Für Fragen, Hinweise oder frühen Austausch erreichen Sie SecPal direkt.",
     button: "GitHub ansehen",
-    buttonSecondary: "SecPal kontaktieren",
-    note: "SecPal wird für eine erste öffentliche Veröffentlichung vorbereitet. Bis dahin bleibt diese Website bewusst schlank.",
+    buttonSecondary: "Kontakt aufnehmen",
+    note: "Die öffentliche Website bleibt bewusst fokussiert, solange SecPal noch nicht öffentlich zugänglich ist.",
   },
   footer: {
     rights: "",
