@@ -6,7 +6,7 @@ import type { Translations } from "./en.ts";
 export const de: Translations = {
   nav: {
     progress: "Fortschritt",
-    updates: "Kontakt",
+    updates: "Folgen",
     github: "GitHub",
     contact: "Kontakt",
     followProgress: "Fortschritt verfolgen",
@@ -44,9 +44,9 @@ export const de: Translations = {
           "Formulare, Kontrollgänge und Schichtübergaben entstehen direkt im Ablauf statt nachträglich auf Papier oder in separaten Apps.",
       },
       {
-        name: "Mehr Überblick im Alltag",
+        name: "Überblick für Teams und Führung",
         description:
-          "Klare Statusbilder, weniger Doppelarbeit und bessere Übersicht für Teams, Führung und Disposition.",
+          "Klare Statusbilder, weniger Doppelarbeit und Überblick für Teams, Führung und Disposition.",
       },
     ],
   },

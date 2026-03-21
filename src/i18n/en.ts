@@ -4,7 +4,7 @@
 export const en = {
   nav: {
     progress: "Progress",
-    updates: "Contact",
+    updates: "Follow",
     github: "GitHub",
     contact: "Contact",
     followProgress: "Follow progress",
@@ -41,9 +41,9 @@ export const en = {
           "Forms, patrol records, and shift handovers are captured in the workflow directly instead of being written up separately on paper or in disconnected apps.",
       },
       {
-        name: "Better oversight day to day",
+        name: "Visibility for teams and leadership",
         description:
-          "Clearer status, less duplicate work, and better oversight for teams, leadership, and dispatch.",
+          "Clearer status, less duplicate work, and visibility for teams, leadership, and dispatch.",
       },
     ],
   },
