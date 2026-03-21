@@ -39,9 +39,13 @@ const t = useTranslations(locale);
             >{t.cta.buttonSecondary} <span aria-hidden="true">→</span></a
           >
         </div>
-        <p class="mx-auto mt-6 max-w-xl text-sm/6 text-gray-400">
-          {t.cta.note}
-        </p>
+        {
+          t.cta.note && (
+            <p class="mx-auto mt-6 max-w-xl text-sm/6 text-gray-400">
+              {t.cta.note}
+            </p>
+          )
+        }
       </div>
       <svg
         viewBox="0 0 1024 1024"

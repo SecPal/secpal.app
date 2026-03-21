@@ -4,7 +4,7 @@
 export const en = {
   nav: {
     progress: "Progress",
-    updates: "Release",
+    updates: "Contact",
     github: "GitHub",
     contact: "Contact",
     followProgress: "Follow progress",
@@ -18,11 +18,11 @@ export const en = {
       "SecPal is being built for security service operations that need day-to-day work to follow one clear operational flow instead of being scattered across paper notes, chats, and disconnected tools.",
     highlights: [
       "Operational work belongs in one connected system instead of isolated tools.",
-      "Information should remain traceable instead of being lost across notes, chats, and isolated tools.",
+      "Information should remain traceable, not disappear into notes, messages, and scattered files.",
       "SecPal is taking shape in public, with a focused scope and clear release steps.",
     ],
     cta: "Follow development on GitHub",
-    ctaSecondary: "See the current state",
+    ctaSecondary: "See the features",
     note: "The public website shows the product direction, legal information, and contact paths. Public access to the app is not open yet.",
   },
   features: {
@@ -36,14 +36,14 @@ export const en = {
           "SecPal is meant to support operational work as one connected whole instead of spreading it across separate tools and partial workflows.",
       },
       {
-        name: "Fewer fragmented tools in daily work",
+        name: "Documented in the workflow, not after the fact",
         description:
-          "Instead of paper logs, chats, and isolated tools, SecPal brings information and workflows together in one structured system.",
+          "Forms, patrol records, and shift handovers are captured in the workflow directly instead of being written up separately on paper or in disconnected apps.",
       },
       {
         name: "Better oversight day to day",
         description:
-          "That creates clearer status, less duplicate work, and better oversight for teams, leadership, and dispatch.",
+          "Clearer status, less duplicate work, and better oversight for teams, leadership, and dispatch.",
       },
     ],
   },
@@ -53,7 +53,7 @@ export const en = {
       "GitHub shows the current state. For questions, feedback, or early contact, you can reach SecPal directly.",
     button: "View GitHub",
     buttonSecondary: "Get in touch",
-    note: "The public website stays intentionally focused while SecPal is not yet publicly accessible.",
+    note: "",
   },
   footer: {
     rights: "",

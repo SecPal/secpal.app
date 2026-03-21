@@ -6,7 +6,7 @@ import type { Translations } from "./en.ts";
 export const de: Translations = {
   nav: {
     progress: "Fortschritt",
-    updates: "Veröffentlichung",
+    updates: "Kontakt",
     github: "GitHub",
     contact: "Kontakt",
     followProgress: "Fortschritt verfolgen",
@@ -21,12 +21,12 @@ export const de: Translations = {
       "SecPal entsteht für Sicherheitsdienste, die ihre operative Arbeit in einem klaren Ablauf zusammenführen wollen, statt Informationen über Papier, Chats und Insellösungen zu verstreuen.",
     highlights: [
       "Operative Abläufe gehören in ein durchgängiges System statt in einzelne Teillösungen.",
-      "Informationen sollen nachvollziehbar bleiben statt in Zetteln, Chats und Insellösungen zu verschwinden.",
+      "Informationen sollen nachvollziehbar bleiben, nicht in Notizen, Kurznachrichten und verteilten Dateien verschwinden.",
       "SecPal entsteht öffentlich, mit klarem Fokus und nachvollziehbaren Release-Schritten.",
     ],
     cta: "Entwicklung auf GitHub verfolgen",
-    ctaSecondary: "Mehr zum aktuellen Stand",
-    note: "Die öffentliche Website zeigt Produktrichtung, Rechtsinformationen und Kontaktwege. Ein öffentlicher Zugang zur App ist derzeit noch nicht geöffnet.",
+    ctaSecondary: "Zu den Features",
+    note: "Die öffentliche Website zeigt die Produktrichtung, Rechtsinformationen und Kontaktwege. Ein öffentlicher Zugang zur App ist derzeit noch nicht geöffnet.",
   },
   features: {
     headline: "Für die operative Realität gebaut.",
@@ -39,14 +39,14 @@ export const de: Translations = {
           "SecPal soll operative Arbeit in einem klaren Zusammenhang abbilden statt Einzelschritte in getrennten Werkzeugen zu verteilen.",
       },
       {
-        name: "Weniger Medienbrüche im Alltag",
+        name: "Dokumentiert im Ablauf, nicht im Nachhinein",
         description:
-          "Statt Papier, Chats und Insellösungen bündelt SecPal Informationen und Abläufe in einem strukturierten System.",
+          "Formulare, Kontrollgänge und Schichtübergaben entstehen direkt im Ablauf statt nachträglich auf Papier oder in separaten Apps.",
       },
       {
         name: "Mehr Überblick im Alltag",
         description:
-          "Das schafft klarere Statusbilder, weniger Doppelarbeit und bessere Übersicht für Teams, Führung und Disposition.",
+          "Klare Statusbilder, weniger Doppelarbeit und bessere Übersicht für Teams, Führung und Disposition.",
       },
     ],
   },
@@ -56,7 +56,7 @@ export const de: Translations = {
       "Auf GitHub ist der aktuelle Stand sichtbar. Für Fragen, Hinweise oder frühen Austausch erreichen Sie SecPal direkt.",
     button: "GitHub ansehen",
     buttonSecondary: "Kontakt aufnehmen",
-    note: "Die öffentliche Website bleibt bewusst fokussiert, solange SecPal noch nicht öffentlich zugänglich ist.",
+    note: "",
   },
   footer: {
     rights: "",
