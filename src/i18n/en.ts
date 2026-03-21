@@ -15,7 +15,7 @@ export const en = {
     headline: "Less friction in security operations.",
     subline: "Less paperwork, fewer fragmented tools, clearer workflows.",
     explanation:
-      "SecPal is built for security operations that run on one clear operational flow instead of spreading day-to-day work across paper notes, chats, and disconnected tools.",
+      "SecPal is built for security operations that follow one clear operational flow instead of spreading day-to-day work across paper notes, chats, and disconnected tools.",
     highlights: [
       "Operational work belongs in one connected system instead of isolated tools.",
       "Information stays traceable instead of disappearing into notes, messages, and scattered files.",

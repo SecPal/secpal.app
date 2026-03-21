@@ -17,7 +17,7 @@ export const de: Translations = {
     headline: "Weniger Reibung im Sicherheitsdienst.",
     subline: "Weniger Zettelwirtschaft, weniger Medienbrüche, klarere Abläufe.",
     explanation:
-      "SecPal ist für Sicherheitsdienste gebaut, die operative Arbeit in einem klaren Ablauf führen statt sie über Papier, Chats und Insellösungen zu verteilen.",
+      "SecPal ist für Sicherheitsdienste gebaut, die operative Arbeit in einem klaren Ablauf organisieren statt sie über Papier, Chats und Insellösungen zu verteilen.",
     highlights: [
       "Operative Abläufe gehören in ein durchgängiges System statt in einzelne Teillösungen.",
       "Informationen bleiben nachvollziehbar — nicht verstreut in Notizen, Kurznachrichten und verteilten Dateien.",
