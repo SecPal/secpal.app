@@ -1,0 +1,133 @@
+---
+// SPDX-FileCopyrightText: 2026 SecPal
+// SPDX-License-Identifier: AGPL-3.0-or-later
+import LegalPageShell from "../../components/LegalPageShell.astro";
+import SecurityFaq from "../../components/SecurityFaq.astro";
+
+const faqItems = [
+  {
+    question: "How should a vulnerability be reported?",
+    answer:
+      "Please do not open a public issue for security vulnerabilities. Send reports to security@secpal.app or use GitHub Security Advisories so coordinated disclosure remains possible.",
+  },
+  {
+    question: "What happens after a vulnerability is reported?",
+    answer:
+      "Incoming reports are reviewed confidentially, prioritized, and fixed where possible through a coordinated process. Where appropriate, a later public note may describe the correction.",
+  },
+  {
+    question: "Is SecPal already a production service?",
+    answer:
+      "No. SecPal is still under construction. This page describes the reporting path and the current public state, not the full assurance level of a live production platform.",
+  },
+  {
+    question: "Are tracking or advertising services already in use?",
+    answer:
+      "Not at the moment. The public landing page intentionally stays lean and currently avoids marketing trackers or ad networks.",
+  },
+];
+---
+
+<LegalPageShell
+  locale="en"
+  title="Security | SecPal"
+  description="Public security information and vulnerability reporting path for SecPal."
+  canonicalPath="/en/security/"
+  currentPath="/security"
+  xDefaultPath="/security/"
+  eyebrow="Trust & Security"
+  headline="Security"
+  intro="This page gives the reporting path for security issues and briefly states what already applies to the public website today."
+  updatedLabel="Last updated"
+  updatedAt="March 21, 2026"
+>
+  <section class="space-y-8">
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        Vulnerability reporting
+      </h2>
+      <p class="mt-6">
+        If you discover a vulnerability, please report it confidentially to
+        <a
+          href="mailto:security@secpal.app"
+          class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+          >security@secpal.app</a
+        >. Public bug reports for security issues should be avoided so
+        unnecessary risk is not created for others.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        Current status
+      </h2>
+      <p class="mt-6">
+        SecPal is not yet a live production platform. The public website is a
+        lean coming-soon presence with contact and legal information. This page
+        therefore focuses only on vulnerability reporting and the currently
+        visible public state.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        Current principles
+      </h2>
+      <ul
+        role="list"
+        class="mt-8 max-w-xl space-y-6 text-gray-600 dark:text-gray-400"
+      >
+        <li class="flex gap-x-3">
+          <span
+            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
+          ></span>
+          <span
+            ><strong class="font-semibold text-gray-900 dark:text-white"
+              >Responsible disclosure:</strong
+            > vulnerabilities should be reported confidentially and handled in a coordinated
+            way.</span
+          >
+        </li>
+        <li class="flex gap-x-3">
+          <span
+            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
+          ></span>
+          <span
+            ><strong class="font-semibold text-gray-900 dark:text-white"
+              >Data minimization:</strong
+            > the landing page currently avoids unnecessary tracking and marketing
+            services.</span
+          >
+        </li>
+        <li class="flex gap-x-3">
+          <span
+            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
+          ></span>
+          <span
+            ><strong class="font-semibold text-gray-900 dark:text-white"
+              >No inflated claims:</strong
+            > this page does not promise production-grade controls for features that
+            are not yet live.</span
+          >
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <Fragment slot="afterContent">
+    <SecurityFaq
+      title="Security FAQ"
+      intro="If your question is not covered here, reach out by "
+      contactLabel="email"
+      contactHref="mailto:security@secpal.app"
+      contactText="."
+      items={faqItems}
+    />
+  </Fragment>
+</LegalPageShell>

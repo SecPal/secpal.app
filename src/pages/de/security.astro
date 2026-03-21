@@ -1,0 +1,132 @@
+---
+// SPDX-FileCopyrightText: 2026 SecPal
+// SPDX-License-Identifier: AGPL-3.0-or-later
+import LegalPageShell from "../../components/LegalPageShell.astro";
+import SecurityFaq from "../../components/SecurityFaq.astro";
+
+const faqItems = [
+  {
+    question: "Wie meldet man eine Sicherheitslücke?",
+    answer:
+      "Bitte keine öffentliche Issue anlegen. Sicherheitsmeldungen gehen an security@secpal.app oder über GitHub Security Advisories, damit koordinierte Offenlegung möglich bleibt.",
+  },
+  {
+    question: "Wie wird mit gemeldeten Schwachstellen umgegangen?",
+    answer:
+      "Eingehende Meldungen werden vertraulich geprüft, priorisiert und nach Möglichkeit koordiniert behoben. Falls sinnvoll, wird eine Korrektur später auch öffentlich dokumentiert.",
+  },
+  {
+    question: "Ist SecPal schon produktiv verfügbar?",
+    answer:
+      "Nein. SecPal befindet sich noch im Aufbau. Diese Seite beschreibt den Meldeweg und den aktuellen öffentlichen Stand, nicht den vollständigen Sicherheitsumfang einer produktiven Plattform.",
+  },
+  {
+    question: "Werden bereits Tracking- oder Werbedienste eingesetzt?",
+    answer:
+      "Aktuell nicht. Die öffentliche Landingpage bleibt bewusst schlank und verzichtet derzeit auf Marketing-Tracker oder Werbenetzwerke.",
+  },
+];
+---
+
+<LegalPageShell
+  locale="de"
+  title="Sicherheit | SecPal"
+  description="Öffentliche Sicherheitsinformationen und Kontaktweg für Sicherheitsmeldungen bei SecPal."
+  canonicalPath="/de/security/"
+  currentPath="/security"
+  xDefaultPath="/security/"
+  eyebrow="Vertrauen & Sicherheit"
+  headline="Sicherheit"
+  intro="Dieser Bereich nennt den Meldeweg für Sicherheitslücken und fasst knapp zusammen, was für die öffentliche Website heute bereits gilt."
+  updatedLabel="Stand"
+  updatedAt="21. März 2026"
+>
+  <section class="space-y-8">
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        Sicherheitsmeldungen
+      </h2>
+      <p class="mt-6">
+        Wenn Sie eine Schwachstelle entdecken, melden Sie diese bitte
+        vertraulich an
+        <a
+          href="mailto:security@secpal.app"
+          class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+          >security@secpal.app</a
+        >. Öffentliche Bugreports für Sicherheitslücken sollen vermieden werden,
+        damit keine unnötigen Risiken für Dritte entstehen.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        Aktueller Stand
+      </h2>
+      <p class="mt-6">
+        SecPal ist noch keine produktive Plattform. Die öffentliche Website ist
+        eine schlanke Coming-Soon-Präsenz mit Kontakt- und Rechtsinformationen.
+        Diese Seite beschreibt deshalb bewusst nur den Meldeweg für
+        Sicherheitslücken und den aktuell sichtbaren öffentlichen Zustand.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        Aktuelle Grundsätze
+      </h2>
+      <ul
+        role="list"
+        class="mt-8 max-w-xl space-y-6 text-gray-600 dark:text-gray-400"
+      >
+        <li class="flex gap-x-3">
+          <span
+            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
+          ></span>
+          <span
+            ><strong class="font-semibold text-gray-900 dark:text-white"
+              >Responsible Disclosure:</strong
+            > Sicherheitslücken sollen vertraulich und koordiniert gemeldet werden.</span
+          >
+        </li>
+        <li class="flex gap-x-3">
+          <span
+            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
+          ></span>
+          <span
+            ><strong class="font-semibold text-gray-900 dark:text-white"
+              >Datensparsamkeit:</strong
+            > Die Landingpage verzichtet aktuell auf unnötige Tracking- und Marketingdienste.</span
+          >
+        </li>
+        <li class="flex gap-x-3">
+          <span
+            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
+          ></span>
+          <span
+            ><strong class="font-semibold text-gray-900 dark:text-white"
+              >Realistische Kommunikation:</strong
+            > Es werden keine unbelegten Sicherheitsversprechen für Funktionen gemacht,
+            die noch nicht live sind.</span
+          >
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <Fragment slot="afterContent">
+    <SecurityFaq
+      title="Häufige Fragen zur Sicherheit"
+      intro="Wenn Ihre Frage hier nicht beantwortet wird, können Sie sich direkt per "
+      contactLabel="E-Mail"
+      contactHref="mailto:security@secpal.app"
+      contactText=" melden."
+      items={faqItems}
+    />
+  </Fragment>
+</LegalPageShell>

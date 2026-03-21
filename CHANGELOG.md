@@ -20,6 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dark mode support (class-based, `localStorage`-persisted, flash-free)
 - Nav, Hero, Features, CTA, and Footer components adapted from Tailwind Plus HTML blocks
 - Repo-local GitHub instructions, workflow rules, and PR template aligned with the other SecPal repositories
+- Public legal pages for privacy, legal notice, and security in German and English, built from Tailwind Plus-inspired content and FAQ layouts
+- Discovery files for crawlers and security researchers via a minimal `robots.txt` and RFC 9116-compliant `security.txt` endpoints
+- An environment-aware `sitemap.xml` and `robots.txt` endpoint for the public site, so crawler discovery stays correct on both `secpal.app` and `secpal.dev`
+- Environment-aware `security.txt` endpoints for both `/.well-known/security.txt` and `/security.txt`, so disclosure metadata matches the active deployment domain
+- A neutral `/security/` policy URL plus hreflang alternates in `sitemap.xml`, so discovery and multilingual indexing stay aligned
 
 ### Fixed
 
@@ -39,3 +44,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Contributing guidance now matches the Astro static-site repository instead of the generic multi-repo template
 - Project automation now skips cleanly when repository GitHub App secrets are not configured yet
 - Tailwind Plus-derived components now declare their dual licensing explicitly for REUSE compliance
+- Footer legal navigation now points to `Impressum` / `Legal Notice` instead of incorrectly advertising terms and conditions that do not yet exist
+- Privacy pages were reduced to a lean landing-page notice that reflects the current site instead of implying broader business processes
+- English privacy copy now uses plainer wording so it matches the concise tone of the German landing-page notice more closely
+- Privacy pages now include a short storage-duration disclosure for server logs and email communication
+- Header links for `Fortschritt` / `Progress` and `Launch` now jump back to the locale-specific homepage sections instead of breaking on legal subpages
+- Public security pages now focus more tightly on vulnerability reporting, current public status, and a small set of verifiable statements
+- Legal and security pages now emit page-specific `hreflang` alternates instead of always pointing search engines back to the localized homepages
+- Security pages now expose `/security/` consistently as the neutral `x-default` target in both page metadata and the sitemap

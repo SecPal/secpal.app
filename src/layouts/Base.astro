@@ -8,15 +8,30 @@ interface Props {
   description: string;
   lang: string;
   canonicalPath?: string;
+  alternateEnPath?: string;
+  alternateDePath?: string;
+  xDefaultPath?: string;
 }
 
-const { title, description, lang, canonicalPath } = Astro.props;
+const {
+  title,
+  description,
+  lang,
+  canonicalPath,
+  alternateEnPath = "/en/",
+  alternateDePath = "/de/",
+  xDefaultPath,
+} = Astro.props;
 const siteUrl = Astro.site ?? new URL("https://secpal.app");
 const canonicalUrl = canonicalPath
   ? new URL(canonicalPath, siteUrl).toString()
   : undefined;
-const alternateEnUrl = new URL("/en/", siteUrl).toString();
-const alternateDeUrl = new URL("/de/", siteUrl).toString();
+const alternateEnUrl = new URL(alternateEnPath, siteUrl).toString();
+const alternateDeUrl = new URL(alternateDePath, siteUrl).toString();
+const xDefaultUrl = new URL(
+  xDefaultPath ?? alternateEnPath,
+  siteUrl
+).toString();
 ---
 
 <!doctype html>
@@ -41,7 +56,7 @@ const alternateDeUrl = new URL("/de/", siteUrl).toString();
     />
     <link rel="alternate" hreflang="en" href={alternateEnUrl} />
     <link rel="alternate" hreflang="de" href={alternateDeUrl} />
-    <link rel="alternate" hreflang="x-default" href={alternateEnUrl} />
+    <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
     <!-- Dark mode: runs before first paint to prevent flash -->
     <script is:inline>
       (function () {

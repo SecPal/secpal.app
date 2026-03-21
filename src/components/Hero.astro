@@ -5,7 +5,7 @@
 // Hero block based on Tailwind Plus UI Blocks — "Simple centered"
 // Source: https://tailwindcss.com/plus/ui-blocks/marketing/sections/heroes
 import type { Locale } from "../i18n/index.ts";
-import { useTranslations } from "../i18n/index.ts";
+import { useTranslations, getLocalizedPath } from "../i18n/index.ts";
 
 interface Props {
   locale: Locale;
@@ -13,6 +13,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+const progressPath = `${getLocalizedPath("/", locale)}#progress`;
 ---
 
 <div class="bg-white dark:bg-gray-900">
@@ -88,7 +89,7 @@ const t = useTranslations(locale);
             {t.hero.cta}
           </a>
           <a
-            href="#progress"
+            href={progressPath}
             class="text-sm/6 font-semibold text-gray-900 dark:text-white"
           >
             {t.hero.ctaSecondary}
