@@ -77,7 +77,16 @@ const pages = [
   },
 ];
 
-const lastModified = "2026-03-21";
+const getLastModified = (): string => {
+  const fromEnv = import.meta.env.BUILD_LAST_MODIFIED as string | undefined;
+  if (fromEnv) {
+    return fromEnv;
+  }
+
+  return new Date().toISOString().slice(0, 10);
+};
+
+const lastModified = getLastModified();
 
 export const GET: APIRoute = ({ site }) => {
   const siteUrl = site ?? new URL("https://secpal.app");

@@ -14,5 +14,6 @@ export function useTranslations(locale: Locale) {
 }
 
 export function getLocalizedPath(path: string, locale: Locale): string {
-  return `/${locale}${path === "/" ? "/" : path}`;
+  const normalized = path === "/" ? "/" : path.replace(/\/?$/, "/");
+  return `/${locale}${normalized}`;
 }

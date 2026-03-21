@@ -35,6 +35,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Alternate deployment builds now derive canonical and hreflang URLs from `SECPAL_SITE_URL` so `dev.secpal.app` no longer points metadata at production
 - Dark mode toggle: added `is:inline` to ensure the script runs after DOM is ready
 - Language switcher: `getLocalizedPath` now produces trailing-slash URLs (`/de/`, `/en/`) matching Astro's canonical page paths
+- Footer links and Nav language switcher now always produce canonical trailing-slash URLs for non-root paths (e.g. `/en/privacy/` instead of `/en/privacy`) — `getLocalizedPath` normalized to always append trailing slash for non-root routes, so no unnecessary redirects occur
+- `sitemap.xml` `lastmod` date now derives from build time (via `import.meta.env.BUILD_LAST_MODIFIED` or `new Date()` fallback) instead of a hard-coded value, so the sitemap stays accurate without manual edits
+- Preflight hook now verifies all commits between `origin/main` and `HEAD` are signed, preventing unsigned commits from being pushed
 - Navbar logo: replaced placeholder lock icon with real SecPal `logo-light.svg` / `logo-dark.svg`
 - Logo: switched from broken SVG assets to working 48px PNGs (`logo-light-48.png` / `logo-dark-48.png`)
 - Favicon: switched from placeholder lock SVG to `logo-light-32.png`
