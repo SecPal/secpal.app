@@ -38,6 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Navbar logo: replaced placeholder lock icon with real SecPal `logo-light.svg` / `logo-dark.svg`
 - Logo: switched from broken SVG assets to working 48px PNGs (`logo-light-48.png` / `logo-dark-48.png`)
 - Favicon: switched from placeholder lock SVG to `logo-light-32.png`
+- `LegalPageShell`: `x-default` hreflang for DE pages now correctly resolves to the English URL instead of the German URL, consistent with the sitemap declarations
+- `security-txt.ts`: ISO date formatting now uses a regex replace to prevent potential silent mismatches
 - REUSE-compliant licensing across all files
 - Full CI/CD pipeline with quality gates, PR size check, and project automation
 - Pre-commit hooks and preflight script

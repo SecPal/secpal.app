@@ -37,8 +37,7 @@ const {
 } = Astro.props;
 const alternateEnPath = `/en${currentPath}/`;
 const alternateDePath = `/de${currentPath}/`;
-const resolvedXDefaultPath =
-  xDefaultPath ?? (locale === "en" ? alternateEnPath : alternateDePath);
+const resolvedXDefaultPath = xDefaultPath ?? alternateEnPath;
 ---
 
 <Base

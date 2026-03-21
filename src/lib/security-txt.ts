@@ -5,7 +5,7 @@ export function buildSecurityTxt(siteUrl: URL, headerComment: string): string {
   const expiresDate = new Date();
   expiresDate.setUTCHours(0, 0, 0, 0);
   expiresDate.setUTCDate(expiresDate.getUTCDate() + 180);
-  const expiresAt = expiresDate.toISOString().replace(".000Z", "Z");
+  const expiresAt = expiresDate.toISOString().replace(/\.000Z$/, "Z");
   const canonicalWellKnownUrl = new URL(
     "/.well-known/security.txt",
     siteUrl
