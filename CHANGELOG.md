@@ -33,6 +33,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed (stable release health checks)
 
 - `scripts/check-stable.sh` no longer fails the nginx binary availability check when `--skip-nginx-validation` is passed, so the script works correctly in restricted shells where the nginx binary is not accessible
+- `release-stable.sh` and `rollback-stable.sh` now use `sudo -n` instead of plain `sudo` so they fail with a clear error message instead of blocking on an interactive password prompt in non-interactive environments
+- `release-stable.sh` cleanup trap now also removes the temporary worktree directory with `rm -rf` so `/tmp` is cleaned up even when `git worktree remove` fails
+- `release-stable.sh` and `rollback-stable.sh` now resolve the nginx binary via `NGINX_BIN` (checking PATH and `/usr/sbin/nginx`) and verify `systemctl` is available before attempting to reload nginx, so failures are actionable rather than "command not found"
+- `check-stable.sh` curl calls now include `--connect-timeout 10 --max-time 30` to prevent indefinite hangs in degraded network or TLS scenarios, and fail with a clear error message on curl errors
 
 ### Fixed
 

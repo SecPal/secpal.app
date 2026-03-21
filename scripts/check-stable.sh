@@ -91,7 +91,8 @@ assert_redirect() {
     local status_code
     local redirect_url
 
-    response="$(curl --silent --show-error --output /dev/null --max-redirs 0 --write-out '%{http_code} %{redirect_url}' "$source_url")"
+    response="$(curl --silent --show-error --connect-timeout 10 --max-time 30 --output /dev/null --max-redirs 0 --write-out '%{http_code} %{redirect_url}' "$source_url")" \
+        || fail "curl failed for $source_url: connection or timeout error"
     status_code="${response%% *}"
     redirect_url="${response#* }"
 
@@ -107,7 +108,8 @@ assert_final_destination() {
     local status_code
     local final_url
 
-    response="$(curl --silent --show-error --location --output /dev/null --max-redirs 10 --write-out '%{http_code} %{url_effective}' "$source_url")"
+    response="$(curl --silent --show-error --connect-timeout 10 --max-time 30 --location --output /dev/null --max-redirs 10 --write-out '%{http_code} %{url_effective}' "$source_url")" \
+        || fail "curl failed for $source_url: connection or timeout error"
     status_code="${response%% *}"
     final_url="${response#* }"
 
@@ -124,7 +126,8 @@ assert_http_ok() {
     local url="$1"
     local status_code
 
-    status_code="$(curl --silent --show-error --location --output /dev/null --write-out '%{http_code}' "$url")"
+    status_code="$(curl --silent --show-error --connect-timeout 10 --max-time 30 --location --output /dev/null --write-out '%{http_code}' "$url")" \
+        || fail "curl failed for $url: connection or timeout error"
     [[ "$status_code" == "200" ]] || fail "Expected HTTP 200 for $url, got $status_code"
 
     log "Verified HTTP 200: $url"

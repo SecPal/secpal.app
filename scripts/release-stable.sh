@@ -47,7 +47,9 @@ run_privileged() {
     fi
 
     require_command sudo
-    sudo "$@"
+    if ! sudo -n "$@"; then
+        fail "Unable to run privileged command (passwordless sudo required). Command: $*"
+    fi
 }
 
 if [[ "${1:-}" == "-h" || "${1:-}" == "--help" || $# -lt 1 || $# -gt 2 ]]; then
@@ -79,6 +81,7 @@ cleanup() {
     if [[ -n "$WORKTREE_DIR" && -d "$WORKTREE_DIR" ]]; then
         cd "$REPO_ROOT"
         git worktree remove --force "$WORKTREE_DIR" >/dev/null 2>&1 || true
+        rm -rf "$WORKTREE_DIR" >/dev/null 2>&1 || true
     fi
 }
 
@@ -125,8 +128,15 @@ fi
 ln -sfn "$TARGET_DIST_DIR" "$CURRENT_LINK"
 log "Updated current release link -> $TARGET_DIST_DIR"
 
+NGINX_BIN="${NGINX_BIN:-$(command -v nginx 2>/dev/null || true)}"
+if [[ -z "$NGINX_BIN" && -x "/usr/sbin/nginx" ]]; then
+    NGINX_BIN="/usr/sbin/nginx"
+fi
+[[ -n "$NGINX_BIN" && -x "$NGINX_BIN" ]] || fail "Required command not found: nginx"
+command -v systemctl >/dev/null 2>&1 || fail "Required command not found: systemctl"
+
 log "Validating nginx configuration"
-run_privileged nginx -t
+run_privileged "$NGINX_BIN" -t
 
 log "Reloading nginx"
 run_privileged systemctl reload nginx

@@ -42,7 +42,9 @@ run_privileged() {
     fi
 
     require_command sudo
-    sudo "$@"
+    if ! sudo -n "$@"; then
+        fail "Unable to run privileged command (passwordless sudo required). Command: $*"
+    fi
 }
 
 if [[ "${1:-}" == "-h" || "${1:-}" == "--help" || $# -gt 1 ]]; then
@@ -73,8 +75,15 @@ log "Rolling back current release to $PREVIOUS_TARGET"
 ln -sfn "$CURRENT_TARGET" "$PREVIOUS_LINK"
 ln -sfn "$PREVIOUS_TARGET" "$CURRENT_LINK"
 
+NGINX_BIN="${NGINX_BIN:-$(command -v nginx 2>/dev/null || true)}"
+if [[ -z "$NGINX_BIN" && -x "/usr/sbin/nginx" ]]; then
+    NGINX_BIN="/usr/sbin/nginx"
+fi
+[[ -n "$NGINX_BIN" && -x "$NGINX_BIN" ]] || fail "Required command not found: nginx"
+command -v systemctl >/dev/null 2>&1 || fail "Required command not found: systemctl"
+
 log "Validating nginx configuration"
-run_privileged nginx -t
+run_privileged "$NGINX_BIN" -t
 
 log "Reloading nginx"
 run_privileged systemctl reload nginx
