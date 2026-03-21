@@ -28,7 +28,7 @@ export const en = {
   features: {
     headline: "Built around operational reality.",
     subline:
-      "SecPal focuses on what needs to work every day in security operations: clear workflows, dependable documentation, and better oversight.",
+      "SecPal focuses on what needs to work every day in security operations: clear workflows, dependable documentation, and visibility for teams and leadership.",
     items: [
       {
         name: "One system instead of patchwork",

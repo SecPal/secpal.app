@@ -31,7 +31,7 @@ export const de: Translations = {
   features: {
     headline: "Für die operative Realität gebaut.",
     subline:
-      "SecPal konzentriert sich auf das, was im Sicherheitsdienst täglich funktionieren muss: klare Abläufe, verlässliche Dokumentation und bessere Übersicht.",
+      "SecPal konzentriert sich auf das, was im Sicherheitsdienst täglich funktionieren muss: klare Abläufe, verlässliche Dokumentation und Übersicht für Teams und Führung.",
     items: [
       {
         name: "Ein System statt Stückwerk",
