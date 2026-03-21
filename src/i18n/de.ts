@@ -18,10 +18,10 @@ export const de: Translations = {
     subline:
       "Weniger Zettelwirtschaft, weniger Medienbrüche, klarere Übergaben.",
     explanation:
-      "SecPal entsteht für Sicherheitsdienste, die ihre operative Arbeit in einem klaren Ablauf zusammenführen wollen, statt Informationen über Papier, Chats und Insellösungen zu verstreuen.",
+      "SecPal ist für Sicherheitsdienste gebaut, die operative Arbeit in einem klaren Ablauf führen statt sie über Papier, Chats und Insellösungen zu verteilen.",
     highlights: [
       "Operative Abläufe gehören in ein durchgängiges System statt in einzelne Teillösungen.",
-      "Informationen sollen nachvollziehbar bleiben, nicht in Notizen, Kurznachrichten und verteilten Dateien verschwinden.",
+      "Informationen bleiben nachvollziehbar — nicht verstreut in Notizen, Kurznachrichten und verteilten Dateien.",
       "SecPal entsteht öffentlich, mit klarem Fokus und nachvollziehbaren Release-Schritten.",
     ],
     cta: "Entwicklung auf GitHub verfolgen",
@@ -36,7 +36,7 @@ export const de: Translations = {
       {
         name: "Ein System statt Stückwerk",
         description:
-          "SecPal soll operative Arbeit in einem klaren Zusammenhang abbilden statt Einzelschritte in getrennten Werkzeugen zu verteilen.",
+          "SecPal bildet operative Arbeit in einem klaren Zusammenhang ab statt Einzelschritte auf getrennte Werkzeuge zu verteilen.",
       },
       {
         name: "Dokumentiert im Ablauf, nicht im Nachhinein",
@@ -44,7 +44,7 @@ export const de: Translations = {
           "Formulare, Kontrollgänge und Schichtübergaben entstehen direkt im Ablauf statt nachträglich auf Papier oder in separaten Apps.",
       },
       {
-        name: "Überblick für Teams und Führung",
+        name: "Kein Statusrätsel für Objektleitung und Disposition",
         description:
           "Klare Statusbilder, weniger Doppelarbeit und Überblick für Teams, Führung und Disposition.",
       },

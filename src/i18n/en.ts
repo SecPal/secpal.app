@@ -15,10 +15,10 @@ export const en = {
     headline: "Less friction in security operations.",
     subline: "Less paperwork, fewer fragmented tools, clearer handovers.",
     explanation:
-      "SecPal is being built for security service operations that need day-to-day work to follow one clear operational flow instead of being scattered across paper notes, chats, and disconnected tools.",
+      "SecPal is built for security operations that run on one clear operational flow instead of spreading day-to-day work across paper notes, chats, and disconnected tools.",
     highlights: [
       "Operational work belongs in one connected system instead of isolated tools.",
-      "Information should remain traceable, not disappear into notes, messages, and scattered files.",
+      "Information stays traceable instead of disappearing into notes, messages, and scattered files.",
       "SecPal is taking shape in public, with a focused scope and clear release steps.",
     ],
     cta: "Follow development on GitHub",
@@ -33,7 +33,7 @@ export const en = {
       {
         name: "One system instead of patchwork",
         description:
-          "SecPal is meant to support operational work as one connected whole instead of spreading it across separate tools and partial workflows.",
+          "SecPal brings operational work together as one connected whole instead of spreading it across separate tools and partial workflows.",
       },
       {
         name: "Documented in the workflow, not after the fact",
@@ -41,7 +41,7 @@ export const en = {
           "Forms, patrol records, and shift handovers are captured in the workflow directly instead of being written up separately on paper or in disconnected apps.",
       },
       {
-        name: "Visibility for teams and leadership",
+        name: "No guesswork for supervisors and dispatch",
         description:
           "Clearer status, less duplicate work, and visibility for teams, leadership, and dispatch.",
       },
