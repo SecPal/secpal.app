@@ -43,7 +43,7 @@ export const de: Translations = {
           "Formulare, Kontrollgänge und Schichtübergaben entstehen direkt im Ablauf statt nachträglich auf Papier oder in separaten Apps.",
       },
       {
-        name: "Kein Statusrätsel für Objektleitung und Disposition",
+        name: "Kein Statusrätsel für Einsatzleitung und Disposition",
         description:
           "Klare Statusbilder, weniger Doppelarbeit und Überblick für Teams, Führung und Disposition.",
       },
