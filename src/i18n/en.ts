@@ -4,56 +4,56 @@
 export const en = {
   nav: {
     progress: "Progress",
-    updates: "Launch",
+    updates: "Release",
     github: "GitHub",
     contact: "Contact",
     followProgress: "Follow progress",
   },
   hero: {
-    badge: "Work in progress · Open source · Built in public",
+    badge: "Public website · Open source · Built in public",
     tagline: "SecPal – A guard’s best friend",
-    headline: "Less paperwork for security operations.",
-    subline: "Digital from shift planning to handover.",
+    headline: "Less friction in security operations.",
+    subline: "One clear operational flow from shift planning to handover.",
     explanation:
-      "SecPal is being developed for operational security service work and is intended to reduce day-to-day load for both staff and managers.",
+      "SecPal is being developed for security service operations that need dependable planning, patrol documentation, reporting, and clean handovers without paper-heavy workarounds.",
     highlights: [
-      "Shift planning, patrol rounds, and documentation belong in one coherent workflow.",
-      "Reports and handovers stay traceable instead of getting lost across paper notes and chats.",
-      "SecPal is still work in progress and is being built in public step by step.",
+      "Shift planning, patrol rounds, reports, and handovers belong in one operational flow.",
+      "Information should stay traceable instead of being scattered across paper notes, chats, and disconnected tools.",
+      "SecPal is taking shape in public, with a focused scope and clear release steps.",
     ],
-    cta: "Follow the build on GitHub",
-    ctaSecondary: "See what is taking shape",
-    note: "No public signup yet. SecPal is still under active construction and is currently presented as a focused coming-soon page.",
+    cta: "Follow development on GitHub",
+    ctaSecondary: "See the current scope",
+    note: "The public website shows the product direction, legal information, and contact paths. Public access to the app is not open yet.",
   },
   features: {
-    headline: "Built for day-to-day security service work.",
+    headline: "Built around operational reality.",
     subline:
-      "SecPal is being built around operational work first, with a focus on clearer workflows, better oversight, and meaningful day-to-day relief.",
+      "The first public release is being shaped around the routine work security teams actually do every day: plan, patrol, report, hand over, and keep oversight.",
     items: [
       {
-        name: "From planning to handover",
+        name: "Planning to handover, kept connected",
         description:
-          "SecPal is meant to cover the full operational arc: from shift planning through patrol rounds and reporting to a clean handover between teams.",
+          "SecPal is being designed as one operational thread: from shift planning and patrol rounds to incident reporting and clean handovers.",
       },
       {
-        name: "One operational system instead of scattered admin",
+        name: "Less fragmentation in daily operations",
         description:
-          "Beyond documentation and patrol workflows, SecPal is intended to bring additional operational admin tasks together in one coherent system over time.",
+          "Instead of separate paper logs, chats, and ad hoc admin, SecPal brings the essentials into one structured system.",
       },
       {
-        name: "Relief for staff and leadership",
+        name: "Useful for teams and leadership",
         description:
-          "The focus is on clearer workflows, less operational friction, and meaningful relief for guards, supervisors, operations leads, and dispatch.",
+          "The goal is clearer status, less duplicate work, and better oversight for guards, supervisors, operations leads, and dispatch.",
       },
     ],
   },
   cta: {
-    headline: "Want launch updates instead of marketing noise?",
+    headline: "Follow the release, not the noise.",
     subline:
-      "Follow development on GitHub, reach out directly, and check back as the first release milestone gets closer.",
-    button: "Follow on GitHub",
-    buttonSecondary: "Write to us",
-    note: "SecPal is still under heavy construction. Public onboarding will open once the first launch milestone is ready.",
+      "GitHub shows the current build, contact stays direct, and the public site remains focused until the first release is ready.",
+    button: "View GitHub",
+    buttonSecondary: "Contact SecPal",
+    note: "SecPal is being prepared for a first public release. This site stays intentionally lean until that milestone is ready.",
   },
   footer: {
     rights: "",

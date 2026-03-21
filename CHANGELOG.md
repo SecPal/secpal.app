@@ -28,8 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Landing page and legal pages now use tighter, aligned English and German copy, a release-ready claim, and more precise metadata for `title`, description, canonical, and `hreflang`
+
 - README and package metadata now match the landing page's security-operations and coming-soon positioning
-- Hero now presents `SecPal – A guard's best friend` as a compact eyebrow tagline above the main positioning headline
+- Hero now presents `SecPal – A guard’s best friend` as a compact eyebrow tagline above the main positioning headline
 - Footer no longer claims "All rights reserved" on the public site, avoiding a misleading rights statement for the AGPL-published project
 - Landing page now leads with the SecPal product name, removes the duplicated hero view, and reframes the homepage as a focused coming-soon preview while the product is still under active construction
 - Alternate deployment builds now derive canonical and hreflang URLs from `SECPAL_SITE_URL` so `dev.secpal.app` no longer points metadata at production
