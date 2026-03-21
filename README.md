@@ -18,6 +18,7 @@ Built with [Astro](https://astro.build), [Tailwind CSS v4](https://tailwindcss.c
 ## Features
 
 - **Multilingual** — English and German (`/en/`, `/de/`)
+- **HTTP-level root locale redirect** — Nginx sends `/` to `/de/` for German browsers and `/en/` otherwise
 - **Built in public** — product progress and release readiness instead of premature app onboarding
 - **Dark mode** — class-based, persisted in `localStorage`, flash-free
 - **Static** — minimal client-side JS with Astro-first rendering
@@ -107,7 +108,8 @@ bash ./scripts/check-stable.sh
 The health-check helper verifies the `current` and `previous` release links,
 checks that the localized static files and `RELEASE.txt` exist, validates the
 Nginx configuration, and confirms that `secpal.app`, `www.secpal.app`,
-`secpal.dev`, and `www.secpal.dev` behave as expected over HTTPS.
+`secpal.dev`, and `www.secpal.dev` behave as expected over HTTPS, including the
+language-based root redirect on `secpal.app`.
 
 If the shell session cannot read the live TLS material and also cannot use
 passwordless `sudo`, you can skip only the `nginx -t` step explicitly:
@@ -134,6 +136,11 @@ public/
 ## i18n
 
 All user-facing strings live in `src/i18n/en.ts` and `src/i18n/de.ts`. Both files export the same shape defined by the `Translations` type. Add a new locale by creating a new file and extending the locales array in `astro.config.mjs`.
+
+The root route `/` is redirected at the web-server layer. `Accept-Language`
+requests preferring German resolve to `/de/`, while all other requests fall
+back to `/en/`. The Astro site itself remains a static build with localized
+pages under `/en/` and `/de/`.
 
 ## License
 
