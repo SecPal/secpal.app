@@ -172,7 +172,9 @@ PREVIOUS_LINK="$DEPLOY_ROOT/previous"
 
 require_command curl
 require_command readlink
-[[ -n "$NGINX_BIN" && -x "$NGINX_BIN" ]] || fail "Required command not found: nginx"
+if [[ "$SKIP_NGINX_VALIDATION" != "1" ]]; then
+    [[ -n "$NGINX_BIN" && -x "$NGINX_BIN" ]] || fail "Required command not found: nginx"
+fi
 
 assert_symlink "$CURRENT_LINK"
 assert_symlink "$PREVIOUS_LINK"

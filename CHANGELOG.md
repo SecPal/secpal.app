@@ -30,6 +30,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - A `scripts/check-stable.sh` helper that verifies the stable release symlinks, static build artifacts, Nginx config, and the live HTTPS redirect behavior for the public domains
 - README guidance for the VPS stable release and rollback workflow, so `secpal.app` can be promoted from `origin/main` without serving directly from the repository checkout
 
+### Fixed (stable release health checks)
+
+- `scripts/check-stable.sh` no longer fails the nginx binary availability check when `--skip-nginx-validation` is passed, so the script works correctly in restricted shells where the nginx binary is not accessible
+
 ### Fixed
 
 - German landing and legal pages now point social preview metadata at a dedicated German Open Graph image instead of reusing the English preview card
