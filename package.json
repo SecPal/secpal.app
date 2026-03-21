@@ -1,7 +1,7 @@
 {
   "name": "@secpal/secpal.app",
   "version": "0.0.1",
-  "description": "Landing page for SecPal — the open-source security operations platform built in public",
+  "description": "Public website for SecPal – A guard’s best friend",
   "private": true,
   "type": "module",
   "author": "SecPal",

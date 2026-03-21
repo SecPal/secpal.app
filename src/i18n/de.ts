@@ -6,56 +6,56 @@ import type { Translations } from "./en.ts";
 export const de: Translations = {
   nav: {
     progress: "Fortschritt",
-    updates: "Launch",
+    updates: "Folgen",
     github: "GitHub",
     contact: "Kontakt",
     followProgress: "Fortschritt verfolgen",
   },
   hero: {
-    badge: "Work in progress · Open Source · Öffentlich entwickelt",
+    badge: "Aus der Praxis · Open Source · Öffentlich entwickelt",
     tagline: "SecPal – A guard’s best friend",
-    headline: "Schluss mit der Zettelwirtschaft im Sicherheitsdienst.",
-    subline: "Digital von der Dienstplanung bis zur Schichtübergabe.",
+    headline: "Weniger Reibung im Sicherheitsdienst.",
+    subline: "Weniger Zettelwirtschaft, weniger Medienbrüche, klarere Abläufe.",
     explanation:
-      "SecPal wird für die operative Arbeit im Sicherheitsdienst entwickelt und soll Mitarbeitende wie Führungskräfte im Alltag spürbar entlasten.",
+      "SecPal ist für Sicherheitsdienste gebaut, die operative Arbeit in einem klaren Ablauf organisieren statt sie über Papier, Chats und Insellösungen zu verteilen.",
     highlights: [
-      "Dienstplanung, Kontrollgänge und Dokumentation greifen endlich sauber ineinander.",
-      "Meldungen und Übergaben bleiben nachvollziehbar statt in Zetteln und Chats zu verschwinden.",
-      "SecPal ist noch im Aufbau und wird Schritt für Schritt öffentlich weiterentwickelt.",
+      "Operative Abläufe gehören in ein durchgängiges System statt in einzelne Teillösungen.",
+      "Informationen bleiben nachvollziehbar — nicht verstreut in Notizen, Kurznachrichten und verteilten Dateien.",
+      "SecPal entsteht öffentlich, mit klarem Fokus und nachvollziehbaren Release-Schritten.",
     ],
-    cta: "Build auf GitHub verfolgen",
-    ctaSecondary: "Ansehen, was gerade entsteht",
-    note: "Noch kein öffentliches Signup. SecPal befindet sich weiterhin im Aufbau und wird zunächst als fokussierte Coming-Soon-Seite vorgestellt.",
+    cta: "Entwicklung auf GitHub verfolgen",
+    ctaSecondary: "Zu den Features",
+    note: "Die öffentliche Website zeigt die Produktrichtung, Rechtsinformationen und Kontaktwege. Ein öffentlicher Zugang zur App ist derzeit noch nicht geöffnet.",
   },
   features: {
-    headline: "Für den Arbeitsalltag im Sicherheitsdienst gedacht.",
+    headline: "Für die operative Realität gebaut.",
     subline:
-      "SecPal wird für die operative Arbeit gebaut und mit Fokus auf klare Abläufe, bessere Übersicht und spürbare Entlastung im Alltag entwickelt.",
+      "SecPal konzentriert sich auf das, was im Sicherheitsdienst täglich funktionieren muss: klare Abläufe, verlässliche Dokumentation und Übersicht für Teams und Führung.",
     items: [
       {
-        name: "Von der Planung bis zur Übergabe",
+        name: "Ein System statt verteilter Teillösungen",
         description:
-          "SecPal spannt den Bogen über den gesamten operativen Ablauf: von der Dienstplanung über Kontrollgänge und Meldungen bis zur sauberen Schichtübergabe.",
+          "SecPal bildet operative Arbeit in einem klaren Zusammenhang ab statt Einzelschritte auf getrennte Werkzeuge zu verteilen.",
       },
       {
-        name: "Operative Verwaltung aus einem Guss",
+        name: "Dokumentiert im Ablauf, nicht im Nachhinein",
         description:
-          "Neben Dokumentation und Einsatzabläufen soll SecPal Schritt für Schritt weitere operative Verwaltungsaufgaben sinnvoll in einem System zusammenführen.",
+          "Formulare, Kontrollgänge und Schichtübergaben entstehen direkt im Ablauf statt nachträglich auf Papier oder in separaten Apps.",
       },
       {
-        name: "Entlastung für Teams und Führungskräfte",
+        name: "Kein Statusrätsel für Einsatzleitung und Disposition",
         description:
-          "Der Fokus liegt auf klaren Abläufen, weniger Reibung im Alltag und einer spürbaren Entlastung für Mitarbeitende, Objektleitungen und Disposition.",
+          "Klare Statusbilder, weniger Doppelarbeit und Überblick für Teams, Führung und Disposition.",
       },
     ],
   },
   cta: {
-    headline: "Lieber Launch-Updates statt Marketing-Lärm?",
+    headline: "Fortschritt statt Marketing-Lärm.",
     subline:
-      "Verfolgen Sie die Entwicklung auf GitHub, schreiben Sie uns direkt und schauen Sie wieder vorbei, wenn der erste Release-Meilenstein näher rückt.",
-    button: "Auf GitHub folgen",
+      "Auf GitHub ist der aktuelle Stand sichtbar. Für Fragen, Hinweise oder frühen Austausch erreichen Sie SecPal direkt.",
+    button: "GitHub ansehen",
     buttonSecondary: "Kontakt aufnehmen",
-    note: "SecPal ist noch im intensiven Aufbau. Öffentliches Onboarding startet erst, wenn der erste Launch-Meilenstein steht.",
+    note: "",
   },
   footer: {
     rights: "",
