@@ -61,7 +61,7 @@ export const de: Translations = {
     rights: "",
     links: {
       privacy: "Datenschutz",
-      terms: "AGB",
+      imprint: "Impressum",
       security: "Sicherheit",
       github: "GitHub",
     },

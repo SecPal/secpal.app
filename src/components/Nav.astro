@@ -17,6 +17,8 @@ const t = useTranslations(locale);
 
 const otherLocale: Locale = locale === "en" ? "de" : "en";
 const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
+const progressPath = `${getLocalizedPath("/", locale)}#progress`;
+const updatesPath = `${getLocalizedPath("/", locale)}#updates`;
 ---
 
 <!-- @tailwindplus/elements is loaded in Base.astro via script tag -->
@@ -46,12 +48,12 @@ const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
     <!-- Desktop nav links -->
     <div class="hidden lg:flex lg:gap-x-12">
       <a
-        href="#progress"
+        href={progressPath}
         class="text-sm/6 font-semibold text-gray-900 dark:text-white"
         >{t.nav.progress}</a
       >
       <a
-        href="#updates"
+        href={updatesPath}
         class="text-sm/6 font-semibold text-gray-900 dark:text-white"
         >{t.nav.updates}</a
       >
@@ -204,12 +206,12 @@ const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
         <div class="-my-6 divide-y divide-gray-500/10 dark:divide-white/10">
           <div class="space-y-2 py-6">
             <a
-              href="#progress"
+              href={progressPath}
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
               >{t.nav.progress}</a
             >
             <a
-              href="#updates"
+              href={updatesPath}
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
               >{t.nav.updates}</a
             >

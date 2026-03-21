@@ -1,0 +1,58 @@
+---
+// SPDX-FileCopyrightText: 2026 SecPal
+// SPDX-License-Identifier: AGPL-3.0-or-later
+import LegalPageShell from "../../components/LegalPageShell.astro";
+---
+
+<LegalPageShell
+  locale="de"
+  title="Impressum | SecPal"
+  description="Anbieterkennzeichnung und Kontaktangaben für secpal.app."
+  canonicalPath="/de/imprint/"
+  currentPath="/imprint"
+  eyebrow="Rechtliches"
+  headline="Impressum"
+  intro="Angaben gemäß § 5 DDG sowie ergänzende Kontaktinformationen für das Angebot unter secpal.app."
+  updatedLabel="Stand"
+  updatedAt="20. März 2026"
+>
+  <section class="space-y-10">
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        Diensteanbieter
+      </h2>
+      <div
+        class="mt-6 rounded-2xl border border-gray-200 p-6 dark:border-white/10"
+      >
+        <p class="font-semibold text-gray-900 dark:text-white">SecPal</p>
+        <p class="mt-2">Holger Schmermbeck</p>
+        <p class="mt-2">Enno-Arends-Str. 4</p>
+        <p class="mt-2">26571 Juist</p>
+      </div>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        Kontakt
+      </h2>
+      <p class="mt-6">
+        E-Mail: <a
+          href="mailto:hello@secpal.app"
+          class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+          >hello@secpal.app</a
+        >
+      </p>
+      <p class="mt-4">
+        Für Hinweise zu Sicherheitslücken: <a
+          href="mailto:security@secpal.app"
+          class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+          >security@secpal.app</a
+        >
+      </p>
+    </div>
+  </section>
+</LegalPageShell>

@@ -114,7 +114,31 @@ if [ -f package.json ] && command -v npm >/dev/null 2>&1; then
   }
 fi
 
-# 2) PR Size Check
+# 2) Commit Signature Check
+echo "Checking commit signatures..."
+UNSIGNED=0
+while IFS= read -r commit; do
+  # %G?: G=good, B=bad/revoked, U=good/unknown-trust, X=expired, Y=expired-key, E=key-not-found, N=not-signed
+  sig=$(git log --format="%G?" -1 "$commit" 2>/dev/null || echo "N")
+  if [[ "$sig" == "N" || "$sig" == "B" ]]; then
+    echo "  ❌ $(git log --format="%h %s" -1 "$commit") — not signed (status: $sig)" >&2
+    UNSIGNED=$((UNSIGNED + 1))
+  fi
+done < <(git rev-list "origin/$BASE"..HEAD 2>/dev/null || true)
+
+if [ "$UNSIGNED" -gt 0 ]; then
+  echo "" >&2
+  echo "❌ $UNSIGNED unsigned commit(s) found." >&2
+  echo "All commits must be signed (commit.gpgsign=true is required)." >&2
+  echo "" >&2
+  echo "To re-sign all commits on this branch:" >&2
+  echo "  git rebase --exec 'git commit --amend --no-edit -S' origin/$BASE" >&2
+  echo "" >&2
+  exit 1
+fi
+echo "✅ All commits are signed"
+
+# 3) PR Size Check
 DIFF_STAT=$(git diff --shortstat origin/"$BASE"...HEAD 2>/dev/null || echo "")
 if [ -n "$DIFF_STAT" ]; then
   LINES_CHANGED=$(git diff --stat origin/"$BASE"...HEAD 2>/dev/null | tail -1 | grep -oE '[0-9]+ insertion' | grep -oE '[0-9]+' || echo "0")

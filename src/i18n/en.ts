@@ -59,7 +59,7 @@ export const en = {
     rights: "",
     links: {
       privacy: "Privacy",
-      terms: "Terms",
+      imprint: "Legal Notice",
       security: "Security",
       github: "GitHub",
     },

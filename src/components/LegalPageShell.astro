@@ -1,0 +1,80 @@
+---
+// SPDX-FileCopyrightText: 2026 SecPal
+// SPDX-FileCopyrightText: Tailwind Labs Inc.
+// SPDX-License-Identifier: AGPL-3.0-or-later AND LicenseRef-TailwindPlus
+// Layout adapted from Tailwind Plus content sections and FAQ sections
+import Base from "../layouts/Base.astro";
+import Nav from "./Nav.astro";
+import Footer from "./Footer.astro";
+import type { Locale } from "../i18n/index.ts";
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  canonicalPath: string;
+  currentPath: string;
+  eyebrow: string;
+  headline: string;
+  intro: string;
+  updatedLabel: string;
+  updatedAt: string;
+  xDefaultPath?: string;
+}
+
+const {
+  locale,
+  title,
+  description,
+  canonicalPath,
+  currentPath,
+  eyebrow,
+  headline,
+  intro,
+  updatedLabel,
+  updatedAt,
+  xDefaultPath,
+} = Astro.props;
+const alternateEnPath = `/en${currentPath}/`;
+const alternateDePath = `/de${currentPath}/`;
+const resolvedXDefaultPath = xDefaultPath ?? alternateEnPath;
+---
+
+<Base
+  title={title}
+  description={description}
+  lang={locale}
+  canonicalPath={canonicalPath}
+  alternateEnPath={alternateEnPath}
+  alternateDePath={alternateDePath}
+  xDefaultPath={resolvedXDefaultPath}
+>
+  <Nav locale={locale} currentPath={currentPath} />
+  <main class="bg-white dark:bg-gray-900">
+    <section class="px-6 py-16 sm:py-24 lg:px-8 lg:py-32">
+      <div
+        class="mx-auto max-w-3xl text-base/7 text-gray-700 dark:text-gray-300"
+      >
+        <p
+          class="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400"
+        >
+          {eyebrow}
+        </p>
+        <h1
+          class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white"
+        >
+          {headline}
+        </h1>
+        <p class="mt-6 text-xl/8 text-gray-600 dark:text-gray-400">{intro}</p>
+        <p class="mt-4 text-sm/6 text-gray-500 dark:text-gray-500">
+          {updatedLabel}: {updatedAt}
+        </p>
+        <div class="mt-10 max-w-2xl text-gray-600 dark:text-gray-400">
+          <slot />
+        </div>
+      </div>
+    </section>
+    <slot name="afterContent" />
+  </main>
+  <Footer locale={locale} />
+</Base>
