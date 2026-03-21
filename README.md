@@ -65,6 +65,57 @@ Run the preflight script before every push:
 ./scripts/preflight.sh
 ```
 
+## Stable release workflow
+
+`dev.secpal.app` can continue to use the live repository checkout. `secpal.app`
+is deployed separately from `/home/secpal/www/secpal.app/current`, so the public
+site is independent from the working tree on the VPS.
+
+### Promote a stable release
+
+Build and publish the latest clean `main` state:
+
+```bash
+bash ./scripts/release-stable.sh origin/main
+```
+
+Build and publish a specific tag or commit:
+
+```bash
+bash ./scripts/release-stable.sh <git-ref>
+```
+
+The script builds from an isolated temporary git worktree, writes a new release
+under `/home/secpal/www/secpal.app/releases/`, updates `current`, preserves the
+old target in `previous`, validates Nginx, and reloads it.
+
+### Roll back the public site
+
+```bash
+bash ./scripts/rollback-stable.sh
+```
+
+The rollback helper swaps `current` and `previous`, validates Nginx, and reloads
+the web server.
+
+### Verify the public deployment
+
+```bash
+bash ./scripts/check-stable.sh
+```
+
+The health-check helper verifies the `current` and `previous` release links,
+checks that the localized static files and `RELEASE.txt` exist, validates the
+Nginx configuration, and confirms that `secpal.app`, `www.secpal.app`,
+`secpal.dev`, and `www.secpal.dev` behave as expected over HTTPS.
+
+If the shell session cannot read the live TLS material and also cannot use
+passwordless `sudo`, you can skip only the `nginx -t` step explicitly:
+
+```bash
+bash ./scripts/check-stable.sh --skip-nginx-validation
+```
+
 ## Project structure
 
 ```text

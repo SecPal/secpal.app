@@ -25,9 +25,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - An environment-aware `sitemap.xml` and `robots.txt` endpoint for the public site, so crawler discovery stays correct on both `secpal.app` and `secpal.dev`
 - Environment-aware `security.txt` endpoints for both `/.well-known/security.txt` and `/security.txt`, so disclosure metadata matches the active deployment domain
 - A neutral `/security/` policy URL plus hreflang alternates in `sitemap.xml`, so discovery and multilingual indexing stay aligned
+- A `scripts/release-stable.sh` helper that builds `secpal.app` from an isolated git worktree and publishes versioned stable releases outside the repository checkout
+- A `scripts/rollback-stable.sh` helper that swaps `current` and `previous` stable releases and reloads Nginx after validating the configuration
+- A `scripts/check-stable.sh` helper that verifies the stable release symlinks, static build artifacts, Nginx config, and the live HTTPS redirect behavior for the public domains
+- README guidance for the VPS stable release and rollback workflow, so `secpal.app` can be promoted from `origin/main` without serving directly from the repository checkout
 
 ### Fixed
 
+- German landing and legal pages now point social preview metadata at a dedicated German Open Graph image instead of reusing the English preview card
+- Social previews now use a dedicated `1200x630` Open Graph image and larger copied logo assets from the frontend repository, improving previews in WhatsApp, Signal, LinkedIn, and similar clients
+- Shared links now expose Open Graph and Twitter Card metadata on the localized pages, so preview crawlers that follow the root redirect still land on localized preview metadata
 - Landing page and legal pages now use tighter, aligned English and German copy, a release-ready claim, and more precise `title` and description metadata
 - Landing page wording now emphasizes less paperwork, fewer media breaks, and clearer handovers while reducing repeated phrasing across hero, features, CTA, and legal metadata
 
