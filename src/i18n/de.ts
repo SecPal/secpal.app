@@ -15,8 +15,7 @@ export const de: Translations = {
     badge: "Aus der Praxis · Open Source · Öffentlich entwickelt",
     tagline: "SecPal – A guard’s best friend",
     headline: "Weniger Reibung im Sicherheitsdienst.",
-    subline:
-      "Weniger Zettelwirtschaft, weniger Medienbrüche, klarere Übergaben.",
+    subline: "Weniger Zettelwirtschaft, weniger Medienbrüche, klarere Abläufe.",
     explanation:
       "SecPal ist für Sicherheitsdienste gebaut, die operative Arbeit in einem klaren Ablauf führen statt sie über Papier, Chats und Insellösungen zu verteilen.",
     highlights: [
@@ -34,7 +33,7 @@ export const de: Translations = {
       "SecPal konzentriert sich auf das, was im Sicherheitsdienst täglich funktionieren muss: klare Abläufe, verlässliche Dokumentation und Übersicht für Teams und Führung.",
     items: [
       {
-        name: "Ein System statt Stückwerk",
+        name: "Ein System statt verteilter Teillösungen",
         description:
           "SecPal bildet operative Arbeit in einem klaren Zusammenhang ab statt Einzelschritte auf getrennte Werkzeuge zu verteilen.",
       },

@@ -13,7 +13,7 @@ export const en = {
     badge: "From operational practice · Open source · Built in public",
     tagline: "SecPal – A guard’s best friend",
     headline: "Less friction in security operations.",
-    subline: "Less paperwork, fewer fragmented tools, clearer handovers.",
+    subline: "Less paperwork, fewer fragmented tools, clearer workflows.",
     explanation:
       "SecPal is built for security operations that run on one clear operational flow instead of spreading day-to-day work across paper notes, chats, and disconnected tools.",
     highlights: [
@@ -31,7 +31,7 @@ export const en = {
       "SecPal focuses on what needs to work every day in security operations: clear workflows, dependable documentation, and visibility for teams and leadership.",
     items: [
       {
-        name: "One system instead of patchwork",
+        name: "One system instead of scattered solutions",
         description:
           "SecPal brings operational work together as one connected whole instead of spreading it across separate tools and partial workflows.",
       },
