@@ -132,6 +132,24 @@ assert_http_ok() {
     log "Verified HTTP 200: $url"
 }
 
+assert_http_ok_on_host() {
+    local url="$1"
+    local expected_origin="$2"
+    local result status_code effective_url
+
+    result="$(curl --silent --show-error --connect-timeout 10 --max-time 30 \
+        --location --output /dev/null \
+        --write-out '%{http_code} %{url_effective}' "$url")" \
+        || fail "curl failed for $url: connection or timeout error"
+    status_code="${result%% *}"
+    effective_url="${result#* }"
+    [[ "$status_code" == "200" ]] || fail "Expected HTTP 200 for $url, got $status_code"
+    [[ "$effective_url" == "$expected_origin"* ]] \
+        || fail "Effective URL $effective_url is not under expected origin $expected_origin"
+
+    log "Verified HTTP 200: $url"
+}
+
 validate_nginx_config() {
     if [[ "$SKIP_NGINX_VALIDATION" == "1" ]]; then
         log "Skipping nginx validation because SECPAL_SKIP_NGINX_VALIDATION=1"
@@ -202,9 +220,9 @@ assert_locale_redirect "$PRIMARY_URL/" "en-US,en;q=0.9,de;q=0.8" "$PRIMARY_URL/e
 assert_http_ok "$PRIMARY_URL/en/"
 assert_http_ok "$PRIMARY_URL/de/"
 assert_redirect "$PRIMARY_WWW_URL/en/" "$PRIMARY_URL/en/"
-assert_http_ok "$DEV_URL/"
-assert_http_ok "$DEV_URL/en/"
-assert_http_ok "$DEV_URL/de/"
+assert_http_ok_on_host "$DEV_URL/" "$DEV_URL"
+assert_http_ok_on_host "$DEV_URL/en/" "$DEV_URL"
+assert_http_ok_on_host "$DEV_URL/de/" "$DEV_URL"
 
 if [[ -n "$DEV_WWW_URL" ]]; then
     assert_redirect "$DEV_WWW_URL/en/" "$DEV_URL/en/"
