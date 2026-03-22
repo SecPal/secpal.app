@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `package-lock.json` now resolves `flatted` to `3.4.2` and `h3` to `1.15.10`, removing the known npm audit findings without changing declared package ranges
 - Deployment checks and README guidance now point to the real live development host `dev.secpal.app` instead of the old `secpal.dev` assumption, while keeping server-side locale negotiation documented only for production
 - Shared links now emit complete Open Graph and Twitter Card metadata from the shared base layout, so localized pages consistently expose the correct title, description, locale, and `1200x630` preview image to messenger and social crawlers
 - The neutral `/` entry page now exposes the same preview metadata before redirecting to `/en/`, so root links still unfurl with the correct SecPal card when crawlers do not fully evaluate redirects
