@@ -11,6 +11,8 @@ interface Props {
   alternateEnPath?: string;
   alternateDePath?: string;
   xDefaultPath?: string;
+  socialImagePath?: string;
+  socialImageAlt?: string;
 }
 
 const {
@@ -21,6 +23,8 @@ const {
   alternateEnPath = "/en/",
   alternateDePath = "/de/",
   xDefaultPath,
+  socialImagePath,
+  socialImageAlt,
 } = Astro.props;
 const siteUrl = Astro.site ?? new URL("https://secpal.app");
 const canonicalUrl = canonicalPath
@@ -32,6 +36,18 @@ const xDefaultUrl = new URL(
   xDefaultPath ?? alternateEnPath,
   siteUrl
 ).toString();
+const socialImageUrl = new URL(
+  socialImagePath ?? (lang === "de" ? "/og-de.png" : "/og-default.png"),
+  siteUrl
+).toString();
+const ogLocale = lang === "de" ? "de_DE" : "en_US";
+const ogAlternateLocale = lang === "de" ? "en_US" : "de_DE";
+const socialAlt =
+  socialImageAlt ??
+  (lang === "de"
+    ? "SecPal Vorschaukarte mit Logo und dem Hinweis auf weniger Zettelwirtschaft und klarere Ablaufe im Sicherheitsdienst."
+    : "SecPal preview card with logo and the promise of less paperwork and clearer workflows in security operations.");
+const previewUrl = canonicalUrl ?? xDefaultUrl;
 ---
 
 <!doctype html>
@@ -41,6 +57,24 @@ const xDefaultUrl = new URL(
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta property="og:site_name" content="SecPal" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={previewUrl} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogAlternateLocale} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:secure_url" content={socialImageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={socialAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content={socialAlt} />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <link
       rel="icon"
@@ -54,9 +88,11 @@ const xDefaultUrl = new URL(
       href="/logo-dark-32.png"
       media="(prefers-color-scheme: dark)"
     />
+    <link rel="apple-touch-icon" href="/logo-light-512.png" />
     <link rel="alternate" hreflang="en" href={alternateEnUrl} />
     <link rel="alternate" hreflang="de" href={alternateDeUrl} />
     <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
+    <slot name="head" />
     <!-- Dark mode: runs before first paint to prevent flash -->
     <script is:inline>
       (function () {

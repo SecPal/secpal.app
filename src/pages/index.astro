@@ -1,5 +1,56 @@
 ---
 // SPDX-FileCopyrightText: 2026 SecPal
 // SPDX-License-Identifier: AGPL-3.0-or-later
-return Astro.redirect("/en/", 307);
+import Base from "../layouts/Base.astro";
 ---
+
+<Base
+  title="SecPal – A guard's best friend"
+  description="SecPal reduces paperwork, fragmented tools, and operational friction in security operations with one clear workflow."
+  lang="en"
+  canonicalPath="/"
+  alternateEnPath="/en/"
+  alternateDePath="/de/"
+  xDefaultPath="/"
+>
+  <Fragment slot="head">
+    <meta http-equiv="refresh" content="0;url=/en/" />
+    <meta name="robots" content="noindex" />
+  </Fragment>
+  <main
+    class="flex min-h-screen items-center justify-center bg-white px-6 text-slate-900 dark:bg-slate-900 dark:text-white"
+  >
+    <div class="max-w-xl text-center">
+      <p
+        class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400"
+      >
+        SecPal
+      </p>
+      <h1
+        class="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl"
+      >
+        Redirecting to the public site
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-300">
+        If your browser does not redirect automatically, continue to the English
+        or German public site.
+      </p>
+      <div
+        class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
+      >
+        <a
+          href="/en/"
+          class="rounded-md bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+        >
+          English
+        </a>
+        <a
+          href="/de/"
+          class="rounded-md border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-50 dark:border-white/20 dark:text-white dark:hover:bg-white/5"
+        >
+          Deutsch
+        </a>
+      </div>
+    </div>
+  </main>
+</Base>

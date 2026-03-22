@@ -41,6 +41,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Shared links now emit complete Open Graph and Twitter Card metadata from the shared base layout, so localized pages consistently expose the correct title, description, locale, and `1200x630` preview image to messenger and social crawlers
+- The neutral `/` entry page now exposes the same preview metadata before redirecting to `/en/`, so root links still unfurl with the correct SecPal card when crawlers do not fully evaluate redirects
 - German landing and legal pages now point social preview metadata at a dedicated German Open Graph image instead of reusing the English preview card
 - Social previews now use a dedicated `1200x630` Open Graph image and larger copied logo assets from the frontend repository, improving previews in WhatsApp, Signal, LinkedIn, and similar clients
 - Shared links now expose Open Graph and Twitter Card metadata on the localized pages, so preview crawlers that follow the root redirect still land on localized preview metadata
