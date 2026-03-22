@@ -79,7 +79,7 @@ Before any commit, PR, or merge, announce and verify at least:
 ## Site Rules
 
 - Preserve accessibility, semantic HTML, keyboard navigation, and responsive layouts.
-- Keep copy accurate to the current product and domains. Use only `secpal.app` and `secpal.dev`.
+- Keep copy accurate to the current product and domains. Use `secpal.app` for production content and all email addresses; use `secpal.dev` only for dev, staging, testing, and examples.
 - Prefer Astro built-ins and existing CSS patterns before introducing new dependencies or runtime code.
 - Run the smallest relevant validation for every change: formatting, lint, typecheck, and build for affected areas.
 
