@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - CodeQL analysis for the landing-page repository and corresponding branch protection hardening
+- HTTP-level locale redirect guidance for `/`, keeping `secpal.app` static while the web server routes German browsers to `/de/` and all other requests to `/en/`
 - Initial landing page with Astro 5, Tailwind CSS v4, and Tailwind Plus UI Blocks
 - Multilingual routing (`/en/`, `/de/`) with full English and German translations
 - Dark mode support (class-based, `localStorage`-persisted, flash-free)

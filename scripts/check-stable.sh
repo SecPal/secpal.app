@@ -102,24 +102,23 @@ assert_redirect() {
     log "Verified redirect: $source_url -> $redirect_url"
 }
 
-assert_final_destination() {
+assert_locale_redirect() {
     local source_url="$1"
+    local accept_language="$2"
+    local expected_location="$3"
     local response
     local status_code
-    local final_url
+    local redirect_url
 
-    response="$(curl --silent --show-error --connect-timeout 10 --max-time 30 --location --output /dev/null --max-redirs 10 --write-out '%{http_code} %{url_effective}' "$source_url")" \
-        || fail "curl failed for $source_url: connection or timeout error"
+    response="$(curl --silent --show-error --connect-timeout 10 --max-time 30 --output /dev/null --max-redirs 0 --header "Accept-Language: $accept_language" --write-out '%{http_code} %{redirect_url}' "$source_url")" \
+        || fail "curl failed for $source_url with Accept-Language '$accept_language': connection or timeout error"
     status_code="${response%% *}"
-    final_url="${response#* }"
+    redirect_url="${response#* }"
 
-    [[ "$status_code" == "200" ]] || fail "Expected HTTP 200 from $source_url, got $status_code"
+    [[ "$status_code" =~ ^30[1278]$ ]] || fail "Expected locale redirect from $source_url, got HTTP $status_code"
+    [[ "$redirect_url" == "$expected_location" ]] || fail "Unexpected locale redirect from $source_url for '$accept_language': $redirect_url"
 
-    if [[ "$final_url" != "$PRIMARY_URL/" && "$final_url" != "$PRIMARY_URL/en/" && "$final_url" != "$PRIMARY_URL/de/" ]]; then
-        fail "Unexpected final URL for $source_url: $final_url"
-    fi
-
-    log "Verified live page: $source_url -> $final_url"
+    log "Verified locale redirect: $source_url [$accept_language] -> $redirect_url"
 }
 
 assert_http_ok() {
@@ -198,7 +197,8 @@ log "Previous release: $PREVIOUS_TARGET"
 log "Validating nginx configuration"
 validate_nginx_config
 
-assert_final_destination "$PRIMARY_URL/"
+assert_locale_redirect "$PRIMARY_URL/" "de-DE,de;q=0.9,en;q=0.8" "$PRIMARY_URL/de/"
+assert_locale_redirect "$PRIMARY_URL/" "en-US,en;q=0.9,de;q=0.8" "$PRIMARY_URL/en/"
 assert_http_ok "$PRIMARY_URL/en/"
 assert_http_ok "$PRIMARY_URL/de/"
 assert_redirect "$PRIMARY_WWW_URL/en/" "$PRIMARY_URL/en/"
