@@ -137,10 +137,10 @@ public/
 
 All user-facing strings live in `src/i18n/en.ts` and `src/i18n/de.ts`. Both files export the same shape defined by the `Translations` type. Add a new locale by creating a new file and extending the locales array in `astro.config.mjs`.
 
-The root route `/` is redirected at the web-server layer. `Accept-Language`
-requests preferring German resolve to `/de/`, while all other requests fall
-back to `/en/`. The Astro site itself remains a static build with localized
-pages under `/en/` and `/de/`.
+In production, the root route `/` is redirected at the web-server (Nginx) layer. `Accept-Language`
+requests preferring German resolve to `/de/`, while all other requests fall back to `/en/`. For
+static builds and local development, `src/pages/index.astro` redirects `/` to `/en/` directly.
+Localized pages are always served under `/en/` and `/de/`.
 
 ## License
 

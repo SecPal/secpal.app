@@ -121,26 +121,6 @@ assert_locale_redirect() {
     log "Verified locale redirect: $source_url [$accept_language] -> $redirect_url"
 }
 
-assert_final_destination() {
-    local source_url="$1"
-    local response
-    local status_code
-    local final_url
-
-    response="$(curl --silent --show-error --connect-timeout 10 --max-time 30 --location --output /dev/null --max-redirs 10 --write-out '%{http_code} %{url_effective}' "$source_url")" \
-        || fail "curl failed for $source_url: connection or timeout error"
-    status_code="${response%% *}"
-    final_url="${response#* }"
-
-    [[ "$status_code" == "200" ]] || fail "Expected HTTP 200 from $source_url, got $status_code"
-
-    if [[ "$final_url" != "$PRIMARY_URL/" && "$final_url" != "$PRIMARY_URL/en/" && "$final_url" != "$PRIMARY_URL/de/" ]]; then
-        fail "Unexpected final URL for $source_url: $final_url"
-    fi
-
-    log "Verified live page: $source_url -> $final_url"
-}
-
 assert_http_ok() {
     local url="$1"
     local status_code

@@ -41,7 +41,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Removed stale SSR locale-routing files from the landing-page worktree so the static Astro build for `dev.secpal.app` is consistent again
 - German landing and legal pages now point social preview metadata at a dedicated German Open Graph image instead of reusing the English preview card
 - Social previews now use a dedicated `1200x630` Open Graph image and larger copied logo assets from the frontend repository, improving previews in WhatsApp, Signal, LinkedIn, and similar clients
 - Shared links now expose Open Graph and Twitter Card metadata on the localized pages, so preview crawlers that follow the root redirect still land on localized preview metadata
