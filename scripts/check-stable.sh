@@ -7,8 +7,8 @@ set -euo pipefail
 DEFAULT_DEPLOY_ROOT="/home/secpal/www/secpal.app"
 PRIMARY_URL="${SECPAL_PRIMARY_URL:-https://secpal.app}"
 PRIMARY_WWW_URL="${SECPAL_PRIMARY_WWW_URL:-https://www.secpal.app}"
-DEV_URL="${SECPAL_DEV_URL:-https://secpal.dev}"
-DEV_WWW_URL="${SECPAL_DEV_WWW_URL:-https://www.secpal.dev}"
+DEV_URL="${SECPAL_DEV_URL:-https://dev.secpal.app}"
+DEV_WWW_URL="${SECPAL_DEV_WWW_URL:-}"
 SKIP_NGINX_VALIDATION="${SECPAL_SKIP_NGINX_VALIDATION:-0}"
 NGINX_BIN="${NGINX_BIN:-$(command -v nginx 2>/dev/null || true)}"
 
@@ -32,8 +32,8 @@ Options:
 Environment overrides:
   SECPAL_PRIMARY_URL        Default: https://secpal.app
   SECPAL_PRIMARY_WWW_URL    Default: https://www.secpal.app
-  SECPAL_DEV_URL            Default: https://secpal.dev
-  SECPAL_DEV_WWW_URL        Default: https://www.secpal.dev
+  SECPAL_DEV_URL            Default: https://dev.secpal.app
+  SECPAL_DEV_WWW_URL        Optional dev alias to verify
     SECPAL_SKIP_NGINX_VALIDATION  Set to 1 to skip `nginx -t`
 
 Examples:
@@ -132,6 +132,24 @@ assert_http_ok() {
     log "Verified HTTP 200: $url"
 }
 
+assert_http_ok_on_host() {
+    local url="$1"
+    local expected_origin="$2"
+    local result status_code effective_url
+
+    result="$(curl --silent --show-error --connect-timeout 10 --max-time 30 \
+        --location --output /dev/null \
+        --write-out '%{http_code} %{url_effective}' "$url")" \
+        || fail "curl failed for $url: connection or timeout error"
+    status_code="${result%% *}"
+    effective_url="${result#* }"
+    [[ "$status_code" == "200" ]] || fail "Expected HTTP 200 for $url, got $status_code"
+    [[ "$effective_url" == "$expected_origin"* ]] \
+        || fail "Effective URL $effective_url is not under expected origin $expected_origin"
+
+    log "Verified HTTP 200: $url"
+}
+
 validate_nginx_config() {
     if [[ "$SKIP_NGINX_VALIDATION" == "1" ]]; then
         log "Skipping nginx validation because SECPAL_SKIP_NGINX_VALIDATION=1"
@@ -202,7 +220,12 @@ assert_locale_redirect "$PRIMARY_URL/" "en-US,en;q=0.9,de;q=0.8" "$PRIMARY_URL/e
 assert_http_ok "$PRIMARY_URL/en/"
 assert_http_ok "$PRIMARY_URL/de/"
 assert_redirect "$PRIMARY_WWW_URL/en/" "$PRIMARY_URL/en/"
-assert_redirect "$DEV_URL/en/" "$PRIMARY_URL/en/"
-assert_redirect "$DEV_WWW_URL/en/" "$PRIMARY_URL/en/"
+assert_http_ok_on_host "$DEV_URL/" "$DEV_URL"
+assert_http_ok_on_host "$DEV_URL/en/" "$DEV_URL"
+assert_http_ok_on_host "$DEV_URL/de/" "$DEV_URL"
+
+if [[ -n "$DEV_WWW_URL" ]]; then
+    assert_redirect "$DEV_WWW_URL/en/" "$DEV_URL/en/"
+fi
 
 log "Stable deployment health check passed"

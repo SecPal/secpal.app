@@ -107,9 +107,9 @@ bash ./scripts/check-stable.sh
 
 The health-check helper verifies the `current` and `previous` release links,
 checks that the localized static files and `RELEASE.txt` exist, validates the
-Nginx configuration, and confirms that `secpal.app`, `www.secpal.app`,
-`secpal.dev`, and `www.secpal.dev` behave as expected over HTTPS, including the
-language-based root redirect on `secpal.app`.
+Nginx configuration, and confirms that `secpal.app`, `www.secpal.app`, and the
+live development host `dev.secpal.app` behave as expected over HTTPS,
+including the language-based root redirect on `secpal.app`.
 
 If the shell session cannot read the live TLS material and also cannot use
 passwordless `sudo`, you can skip only the `nginx -t` step explicitly:
@@ -137,10 +137,14 @@ public/
 
 All user-facing strings live in `src/i18n/en.ts` and `src/i18n/de.ts`. Both files export the same shape defined by the `Translations` type. Add a new locale by creating a new file and extending the locales array in `astro.config.mjs`.
 
-In production, the root route `/` is redirected at the web-server (Nginx) layer. `Accept-Language`
-requests preferring German resolve to `/de/`, while all other requests fall back to `/en/`. For
-static builds and local development, `src/pages/index.astro` redirects `/` to `/en/` directly.
-Localized pages are always served under `/en/` and `/de/`.
+In production, the root route `/` is redirected at the web-server (Nginx)
+layer. `Accept-Language` requests preferring German resolve to `/de/`, while
+all other requests fall back to `/en/`.
+
+The live development host runs directly on `https://dev.secpal.app`. There, the
+localized pages are served under `/en/` and `/de/`, while `src/pages/index.astro`
+provides the neutral root entry page that redirects browsers to `/en/` and still
+exposes the correct social preview metadata.
 
 ## License
 
