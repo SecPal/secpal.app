@@ -32,8 +32,8 @@ Options:
 Environment overrides:
   SECPAL_PRIMARY_URL        Default: https://secpal.app
   SECPAL_PRIMARY_WWW_URL    Default: https://www.secpal.app
-    SECPAL_DEV_URL            Default: https://dev.secpal.app
-    SECPAL_DEV_WWW_URL        Optional dev alias to verify
+  SECPAL_DEV_URL            Default: https://dev.secpal.app
+  SECPAL_DEV_WWW_URL        Optional dev alias to verify
     SECPAL_SKIP_NGINX_VALIDATION  Set to 1 to skip `nginx -t`
 
 Examples:
