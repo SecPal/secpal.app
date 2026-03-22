@@ -13,24 +13,24 @@ const defaultWarn = viteLogger.warn.bind(viteLogger);
 const defaultWarnOnce = viteLogger.warnOnce.bind(viteLogger);
 
 function isKnownAstroWarning(message) {
-  return typeof message === "string" && message.includes(astroInternalHelpersWarning);
+  return (
+    typeof message === "string" && message.includes(astroInternalHelpersWarning)
+  );
 }
 
-viteLogger.warn = (message, options) => {
-  if (isKnownAstroWarning(message)) {
-    return;
-  }
+function createFilteredWarn(defaultWarnFn) {
+  return (message, options) => {
+    if (isKnownAstroWarning(message)) {
+      return;
+    }
 
-  defaultWarn(message, options);
-};
+    defaultWarnFn(message, options);
+  };
+}
 
-viteLogger.warnOnce = (message, options) => {
-  if (isKnownAstroWarning(message)) {
-    return;
-  }
+viteLogger.warn = createFilteredWarn(defaultWarn);
 
-  defaultWarnOnce(message, options);
-};
+viteLogger.warnOnce = createFilteredWarn(defaultWarnOnce);
 
 // https://astro.build/config
 export default defineConfig({
