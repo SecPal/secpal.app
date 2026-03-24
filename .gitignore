@@ -20,7 +20,6 @@ credentials/
 *.pem
 *.p12
 *.pfx
-.npmrc
 
 # IDE
 .idea/
