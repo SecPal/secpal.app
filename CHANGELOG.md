@@ -14,7 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- `astro.config.mjs` now filters Astro's known false-positive `UNUSED_EXTERNAL_IMPORT` warning for `@astrojs/internal-helpers/remote`, and the site now tracks `astro@6.0.8`, so local builds finish without upstream warning noise
+- `astro.config.mjs` now filters Astro's known false-positive `UNUSED_EXTERNAL_IMPORT` warning for `@astrojs/internal-helpers/remote`, and the site now tracks `astro@6.1.1`, so local builds finish without upstream warning noise
+- `package.json` now pins `typescript` to the `5.9.x` support range used by `@typescript-eslint`, and npm overrides now lift vulnerable transitive `brace-expansion`, `picomatch`, and `yaml` packages to patched releases so linting and `npm audit` both run cleanly
 
 ### Changed
 
