@@ -26,7 +26,7 @@ const {
   socialImagePath,
   socialImageAlt,
 } = Astro.props;
-const siteUrl = Astro.site ?? new URL("https://secpal.app");
+const siteUrl = Astro.site ?? new URL("https://dev.secpal.app");
 const canonicalUrl = canonicalPath
   ? new URL(canonicalPath, siteUrl).toString()
   : undefined;
@@ -36,10 +36,25 @@ const xDefaultUrl = new URL(
   xDefaultPath ?? alternateEnPath,
   siteUrl
 ).toString();
-const socialImageUrl = new URL(
-  socialImagePath ?? (lang === "de" ? "/og-de.png" : "/og-default.png"),
-  siteUrl
-).toString();
+const socialImageUrl = (() => {
+  const defaultPath = lang === "de" ? "/og-de.png" : "/og-default.png";
+  const trimmedPath = socialImagePath?.trim();
+  const imagePath =
+    trimmedPath && trimmedPath.length > 0 ? trimmedPath : defaultPath;
+
+  let url: URL;
+  try {
+    url = new URL(imagePath, siteUrl);
+  } catch {
+    return new URL(defaultPath, siteUrl).toString();
+  }
+
+  if (url.protocol === "http:" || url.protocol === "https:") {
+    return url.toString();
+  }
+
+  return new URL(defaultPath, siteUrl).toString();
+})();
 const ogLocale = lang === "de" ? "de_DE" : "en_US";
 const ogAlternateLocale = lang === "de" ? "en_US" : "de_DE";
 const socialAlt =
@@ -65,6 +80,7 @@ const previewUrl = canonicalUrl ?? xDefaultUrl;
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:locale:alternate" content={ogAlternateLocale} />
     <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:url" content={socialImageUrl} />
     <meta property="og:image:secure_url" content={socialImageUrl} />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />

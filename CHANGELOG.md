@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Social preview domain branding now sits inside the lower-left accent pill instead of floating beneath a thin bar, so the `secpal.app` label reads as an intentional brand tag rather than a visually shifted leftover element
+- The social preview generator now uses finalized German copy with proper umlauts and matching punctuation, so the generated OG card no longer looks like an ASCII-only draft asset
+- The social preview build step now relies on a declared local `sharp` dependency instead of an implicit transitive install, so `npm run build` remains stable when upstream package trees change
+- Social preview badge backgrounds in the top label now use a conservative per-locale text-width estimate including letter spacing and tuned padding, so both the English and German badge copy stay fully inside the tinted pill without the English badge growing unnecessarily long
+- Social preview logo placement is now slightly smaller and lower inside the circular stage, so the shield sits more naturally within the round frame instead of touching the upper visual boundary
+- Default website builds from the live repository checkout now derive canonical and social preview origins from `https://dev.secpal.app`, so the dev host no longer emits production `canonical`, `og:url`, or preview image URLs unless `SECPAL_SITE_URL` explicitly targets production
+- Social preview assets are now regenerated from the canonical `logo-dark-512.png` brand asset for dark preview cards before every build, so the final OG/Twitter cards use the original SecPal logo instead of a manually reconstructed or wrong-contrast variant while still emitting absolute image URLs from the active build domain
 - `astro.config.mjs` now filters Astro's known false-positive `UNUSED_EXTERNAL_IMPORT` warning for `@astrojs/internal-helpers/remote`, and the site now tracks `astro@6.1.1`, so local builds finish without upstream warning noise
 - `package.json` now pins `typescript` to the `5.9.x` support range used by `@typescript-eslint`, and npm overrides now lift vulnerable transitive `brace-expansion`, `picomatch`, and `yaml` packages to patched releases so linting and `npm audit` both run cleanly
 
