@@ -8,6 +8,10 @@ export const en = {
     github: "GitHub",
     contact: "Contact",
     followProgress: "Follow progress",
+    toggleDarkMode: "Toggle dark mode",
+    openMenu: "Open main menu",
+    mobileMenu: "Mobile navigation",
+    closeMenu: "Close menu",
   },
   hero: {
     badge: "From operational practice · Open source · Built in public",
@@ -31,19 +35,19 @@ export const en = {
       "SecPal focuses on what needs to work every day in security operations: clear workflows, dependable documentation, and visibility for teams and leadership.",
     items: [
       {
-        name: "One system instead of fragmented tools and partial workflows",
+        name: "One system, one operational flow",
         description:
-          "SecPal brings operational work together as one connected whole instead of spreading it across separate tools and partial workflows.",
+          "Forms, patrol records, and shift handovers work together in one continuous workflow.",
       },
       {
         name: "Documented in the workflow, not after the fact",
         description:
-          "Forms, patrol records, and shift handovers are captured in the workflow directly instead of being written up separately on paper or in disconnected apps.",
+          "Documented where the work happens — not added after the fact.",
       },
       {
-        name: "No guesswork for operations leads and dispatch",
+        name: "Clear status for operations leads and dispatch",
         description:
-          "Clearer status, less duplicate work, and visibility for teams, leadership, and dispatch.",
+          "Current status and visibility for teams, leadership, and dispatch.",
       },
     ],
   },
