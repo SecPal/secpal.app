@@ -38,13 +38,22 @@ const xDefaultUrl = new URL(
 ).toString();
 const socialImageUrl = (() => {
   const defaultPath = lang === "de" ? "/og-de.png" : "/og-default.png";
-  const imagePath = socialImagePath ?? defaultPath;
+  const trimmedPath = socialImagePath?.trim();
+  const imagePath =
+    trimmedPath && trimmedPath.length > 0 ? trimmedPath : defaultPath;
 
-  if (/^https?:\/\//.test(imagePath)) {
-    return new URL(imagePath).toString();
+  let url: URL;
+  try {
+    url = new URL(imagePath, siteUrl);
+  } catch {
+    return new URL(defaultPath, siteUrl).toString();
   }
 
-  return new URL(imagePath, siteUrl).toString();
+  if (url.protocol === "http:" || url.protocol === "https:") {
+    return url.toString();
+  }
+
+  return new URL(defaultPath, siteUrl).toString();
 })();
 const ogLocale = lang === "de" ? "de_DE" : "en_US";
 const ogAlternateLocale = lang === "de" ? "en_US" : "de_DE";
