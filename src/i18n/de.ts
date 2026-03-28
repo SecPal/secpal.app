@@ -33,19 +33,19 @@ export const de: Translations = {
       "SecPal konzentriert sich auf das, was im Sicherheitsdienst täglich funktionieren muss: klare Abläufe, verlässliche Dokumentation und Übersicht für Teams und Führung.",
     items: [
       {
-        name: "Ein System statt verteilter Teillösungen",
+        name: "Operative Abläufe in einem System",
         description:
-          "SecPal bildet operative Arbeit in einem klaren Zusammenhang ab statt Einzelschritte auf getrennte Werkzeuge zu verteilen.",
+          "Formulare, Kontrollgänge und Schichtübergaben greifen ineinander — als ein durchgängiger Ablauf.",
       },
       {
         name: "Dokumentiert im Ablauf, nicht im Nachhinein",
         description:
-          "Formulare, Kontrollgänge und Schichtübergaben entstehen direkt im Ablauf statt nachträglich auf Papier oder in separaten Apps.",
+          "Dokumentation entsteht dort, wo die Arbeit passiert — direkt im Ablauf.",
       },
       {
-        name: "Kein Statusrätsel für Einsatzleitung und Disposition",
+        name: "Klarer Status für Einsatzleitung und Disposition",
         description:
-          "Klare Statusbilder, weniger Doppelarbeit und Überblick für Teams, Führung und Disposition.",
+          "Aktuelle Statusbilder und Überblick für Teams, Führung und Disposition.",
       },
     ],
   },

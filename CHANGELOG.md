@@ -12,6 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Six hard-coded English accessibility strings in `Nav.astro` (`"Open main menu"`, `"Close menu"`, `"Toggle dark mode"`, `"Mobile navigation"`) are now locale-aware, so screen readers on `/de` no longer announce mixed-language labels
+- Feature card 2 description reworded in both `de.ts` and `en.ts` to break the identical sentence opening shared with card 1; the meaning is preserved while the three cards now read as clearly distinct items when scanned vertically
+
+### Added
+
+- `Hero.astro` and `Features.astro` promoted to the lean design: hero fills the first viewport (`min-h` svh minus nav), four layers on mobile, badge hidden on mobile; features section uses `bg-gray-50` with `border-t` overline label; former `HeroLean.astro`, `FeaturesLean.astro`, and the `/de/lean/` and `/en/lean/` test routes removed
+
 ### Fixed
 
 - Social preview domain branding now sits inside the lower-left accent pill instead of floating beneath a thin bar, so the `secpal.app` label reads as an intentional brand tag rather than a visually shifted leftover element
