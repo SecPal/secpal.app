@@ -8,6 +8,10 @@ export const en = {
     github: "GitHub",
     contact: "Contact",
     followProgress: "Follow progress",
+    toggleDarkMode: "Toggle dark mode",
+    openMenu: "Open main menu",
+    mobileMenu: "Mobile navigation",
+    closeMenu: "Close menu",
   },
   hero: {
     badge: "From operational practice · Open source · Built in public",

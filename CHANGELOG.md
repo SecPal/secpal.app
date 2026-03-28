@@ -14,12 +14,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Six hard-coded English accessibility strings in `Nav.astro` (`"Open main menu"`, `"Close menu"`, `"Toggle dark mode"`, `"Mobile navigation"`) are now locale-aware, so screen readers on `/de` no longer announce mixed-language labels
+- Six occurrences of four hard-coded English accessibility strings in `Nav.astro` (`"Open main menu"`, `"Close menu"`, `"Toggle dark mode"`, `"Mobile navigation"`) are now locale-aware via translation keys so screen readers on `/de` no longer announce mixed-language labels
 - Feature card 2 description reworded in both `de.ts` and `en.ts` to break the identical sentence opening shared with card 1; the meaning is preserved while the three cards now read as clearly distinct items when scanned vertically
+- `.github/copilot-instructions.md` now requires a branch hygiene check before any write action so website work never starts on local `main` and dirty non-`main` branches must be assessed before continuing
+- `.github/copilot-instructions.md` now requires stale `SPDX-FileCopyrightText` years in edited files and license sidecars to be normalized to `YYYY` or `YYYY-YYYY` without spaces
+- `.github/copilot-instructions.md` now clarifies that if an edited file has no inline SPDX header, its companion `.license` file must be checked and updated instead
+- repo-local website instructions and overlays now also restate Copilot review handling, signed-commit checks, EPIC/sub-issue requirements, REUSE checks, 4-pass review, and the `secpal.app` vs `secpal.dev` use-case split so project-wide governance is locally complete
+- repo-local website instructions and overlays now also require warning, audit, and deprecation notices from scripts and package managers to be reviewed and either fixed or tracked immediately
 
 ### Added
 
 - `Hero.astro` and `Features.astro` promoted to the lean design: hero fills the first viewport (`min-h` svh minus nav), four layers on mobile, badge hidden on mobile; features section uses `bg-gray-50` with `border-t` overline label; former `HeroLean.astro`, `FeaturesLean.astro`, and the `/de/lean/` and `/en/lean/` test routes removed
+- CodeQL analysis for the landing-page repository and corresponding branch protection hardening
+- HTTP-level locale redirect guidance for `/`, keeping `secpal.app` static while the web server routes German browsers to `/de/` and all other requests to `/en/`
+- Initial landing page with Astro 5, Tailwind CSS v4, and Tailwind Plus UI Blocks
+- Multilingual routing (`/en/`, `/de/`) with full English and German translations
+- Dark mode support (class-based, `localStorage`-persisted, flash-free)
+- Nav, Hero, Features, CTA, and Footer components adapted from Tailwind Plus HTML blocks
+- Repo-local GitHub instructions, workflow rules, and PR template aligned with the other SecPal repositories
+- Public legal pages for privacy, legal notice, and security in German and English, built from Tailwind Plus-inspired content and FAQ layouts
+- Discovery files for crawlers and security researchers via a minimal `robots.txt` and RFC 9116-compliant `security.txt` endpoints
+- An environment-aware `sitemap.xml` and `robots.txt` endpoint for the public site, so crawler discovery stays correct on both `secpal.app` and `secpal.dev`
 
 ### Fixed
 
@@ -32,33 +47,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Social preview assets are now regenerated from the canonical `logo-dark-512.png` brand asset for dark preview cards before every build, so the final OG/Twitter cards use the original SecPal logo instead of a manually reconstructed or wrong-contrast variant while still emitting absolute image URLs from the active build domain
 - `astro.config.mjs` now filters Astro's known false-positive `UNUSED_EXTERNAL_IMPORT` warning for `@astrojs/internal-helpers/remote`, and the site now tracks `astro@6.1.1`, so local builds finish without upstream warning noise
 - `package.json` now pins `typescript` to the `5.9.x` support range used by `@typescript-eslint`, and npm overrides now lift vulnerable transitive `brace-expansion`, `picomatch`, and `yaml` packages to patched releases so linting and `npm audit` both run cleanly
-
-### Changed
-
-- `.github/copilot-instructions.md` now requires a branch hygiene check before any write action so website work never starts on local `main` and dirty non-`main` branches must be assessed before continuing
-- `.github/copilot-instructions.md` now requires stale `SPDX-FileCopyrightText` years in edited files and license sidecars to be normalized to `YYYY` or `YYYY-YYYY` without spaces
-- `.github/copilot-instructions.md` now clarifies that if an edited file has no inline SPDX header, its companion `.license` file must be checked and updated instead
-- repo-local website instructions and overlays now also restate Copilot review handling, signed-commit checks, EPIC/sub-issue requirements, REUSE checks, 4-pass review, and the `secpal.app` vs `secpal.dev` use-case split so project-wide governance is locally complete
-- repo-local website instructions and overlays now also require warning, audit, and deprecation notices from scripts and package managers to be reviewed and either fixed or tracked immediately
-
-### Added
-
-- CodeQL analysis for the landing-page repository and corresponding branch protection hardening
-- HTTP-level locale redirect guidance for `/`, keeping `secpal.app` static while the web server routes German browsers to `/de/` and all other requests to `/en/`
-- Initial landing page with Astro 5, Tailwind CSS v4, and Tailwind Plus UI Blocks
-- Multilingual routing (`/en/`, `/de/`) with full English and German translations
-- Dark mode support (class-based, `localStorage`-persisted, flash-free)
-- Nav, Hero, Features, CTA, and Footer components adapted from Tailwind Plus HTML blocks
-- Repo-local GitHub instructions, workflow rules, and PR template aligned with the other SecPal repositories
-- Public legal pages for privacy, legal notice, and security in German and English, built from Tailwind Plus-inspired content and FAQ layouts
-- Discovery files for crawlers and security researchers via a minimal `robots.txt` and RFC 9116-compliant `security.txt` endpoints
-- An environment-aware `sitemap.xml` and `robots.txt` endpoint for the public site, so crawler discovery stays correct on both `secpal.app` and `secpal.dev`
-- Environment-aware `security.txt` endpoints for both `/.well-known/security.txt` and `/security.txt`, so disclosure metadata matches the active deployment domain
-- A neutral `/security/` policy URL plus hreflang alternates in `sitemap.xml`, so discovery and multilingual indexing stay aligned
-- A `scripts/release-stable.sh` helper that builds `secpal.app` from an isolated git worktree and publishes versioned stable releases outside the repository checkout
-- A `scripts/rollback-stable.sh` helper that swaps `current` and `previous` stable releases and reloads Nginx after validating the configuration
-- A `scripts/check-stable.sh` helper that verifies the stable release symlinks, static build artifacts, Nginx config, and the live HTTPS redirect behavior for the public domains
-- README guidance for the VPS stable release and rollback workflow, so `secpal.app` can be promoted from `origin/main` without serving directly from the repository checkout
 
 ### Fixed (stable release health checks)
 

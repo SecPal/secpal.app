@@ -10,6 +10,10 @@ export const de: Translations = {
     github: "GitHub",
     contact: "Kontakt",
     followProgress: "Fortschritt verfolgen",
+    toggleDarkMode: "Dunkelmodus umschalten",
+    openMenu: "Hauptmenü öffnen",
+    mobileMenu: "Mobile Navigation",
+    closeMenu: "Menü schließen",
   },
   hero: {
     badge: "Aus der Praxis · Open Source · Öffentlich entwickelt",
