@@ -13,8 +13,11 @@ This repository contains the public static site for [secpal.app](https://secpal.
 
 Use only the approved SecPal domains in content, configuration, and examples:
 
-- `secpal.app` for production-facing URLs and email addresses
-- `secpal.dev` for development, staging, and examples
+- `secpal.app` for the public website and real email addresses
+- `dev.secpal.app` as the live staging/development host for this repository (subdomain of `secpal.app`)
+- `api.secpal.dev` for the API and `app.secpal.dev` for the PWA/frontend
+- `secpal.dev` for development, staging, testing, and examples
+- `app.secpal.app` only as the Android application identifier
 
 ## Prerequisites
 

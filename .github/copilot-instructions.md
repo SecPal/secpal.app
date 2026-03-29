@@ -17,9 +17,13 @@ Do not assume instructions from sibling repositories or comment-based inheritanc
 - Before any commit, PR, or merge, announce and verify the required checklist. Stop on the first failed check.
 - Update `CHANGELOG.md` in the same change set for real fixes, features, or breaking changes.
 - Keep GitHub-facing communication in English.
-- Domain policy is strict: use `secpal.app` for production services and all
-  email addresses, and `secpal.dev` only for dev, staging, testing, and
-  examples.
+- Domain policy is strict: use `secpal.app` only for the public homepage and
+  real email addresses, `api.secpal.dev` for the API, `app.secpal.dev` for the
+  PWA/frontend, and `secpal.dev` for dev, staging, testing, and examples.
+  `dev.secpal.app` is the live staging/development host for this repository
+  (a subdomain of `secpal.app`). Treat `api.secpal.app` and `app.secpal.app`
+  as deprecated web hosts; `app.secpal.app` remains valid only as the Android
+  application identifier.
 - Never reply to Copilot review comments with GitHub comment tools. Fix the
   code, push, and resolve review threads through the approved non-comment
   workflow.
@@ -79,7 +83,7 @@ Before any commit, PR, or merge, announce and verify at least:
 ## Site Rules
 
 - Preserve accessibility, semantic HTML, keyboard navigation, and responsive layouts.
-- Keep copy accurate to the current product and domains. Use `secpal.app` for production content and all email addresses; use `secpal.dev` only for dev, staging, testing, and examples.
+- Keep copy accurate to the current product and domains. Use `secpal.app` for the public website and real email addresses, `app.secpal.dev` and `api.secpal.dev` for app/API hosts, and `secpal.dev` for dev, staging, testing, and examples. `app.secpal.app` is Android identifier-only.
 - Prefer Astro built-ins and existing CSS patterns before introducing new dependencies or runtime code.
 - Run the smallest relevant validation for every change: formatting, lint, typecheck, and build for affected areas.
 
