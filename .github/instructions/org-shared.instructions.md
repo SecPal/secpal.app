@@ -16,9 +16,11 @@ At runtime, this file now acts as the repo-local overlay for the `secpal.app` re
 - Enforce SecPal core rules while editing any file: fail fast, no bypass, one topic per change, immediate issue creation for out-of-scope findings, and `CHANGELOG.md` updates for real changes.
 - Use `secpal.app` only for the public homepage and real email addresses,
   `api.secpal.dev` for the API, `app.secpal.dev` for the PWA/frontend, and
-  `secpal.dev` for dev, staging, testing, and examples. Treat
-  `api.secpal.app` and `app.secpal.app` as deprecated web hosts;
-  `app.secpal.app` remains valid only as the Android application identifier.
+  `secpal.dev` for dev, staging, testing, and examples. `dev.secpal.app` is
+  the live staging/development host for this repository (a subdomain of
+  `secpal.app`). Treat `api.secpal.app` and `app.secpal.app` as deprecated
+  web hosts; `app.secpal.app` remains valid only as the Android application
+  identifier.
 - Never reply to Copilot review comments with GitHub comment tools; use the
   approved non-comment review workflow instead.
 - Keep commits GPG-signed, use file and line references instead of verbatim code

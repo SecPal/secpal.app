@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- corrected repo-local domain guidance and validation so `secpal.app` is described only as the public website and real-email domain, while `api.secpal.dev` and `app.secpal.dev` remain the active API/PWA hosts and `app.secpal.app` stays Android identifier-only
+- corrected repo-local domain guidance and validation so `secpal.app` is described only as the public website and real-email domain, while `api.secpal.dev` and `app.secpal.dev` remain the active API/PWA hosts and `app.secpal.app` stays Android identifier-only; explicitly documented `dev.secpal.app` as the live staging/development host for this repository (a subdomain of `secpal.app`)
 - Six occurrences of four hard-coded English accessibility strings in `Nav.astro` (`"Open main menu"`, `"Close menu"`, `"Toggle dark mode"`, `"Mobile navigation"`) are now locale-aware via translation keys so screen readers on `/de` no longer announce mixed-language labels
 - Feature card 2 description reworded in both `de.ts` and `en.ts` to break the identical sentence opening shared with card 1; the meaning is preserved while the three cards now read as clearly distinct items when scanned vertically
 - `.github/copilot-instructions.md` now requires a branch hygiene check before any write action so website work never starts on local `main` and dirty non-`main` branches must be assessed before continuing
