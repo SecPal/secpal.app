@@ -48,7 +48,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.2.2",
-    "typescript": "5.9.x"
+    "typescript": "6.0.x"
   },
   "overrides": {
     "anymatch": {
