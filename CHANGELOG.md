@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.1] - 2026-03-31
+
 ### Changed
 
 - corrected repo-local domain guidance and validation so `secpal.app` is described only as the public website and real-email domain, while `api.secpal.dev` and `app.secpal.dev` remain the active API/PWA hosts and `app.secpal.app` stays Android identifier-only; explicitly documented `dev.secpal.app` as the live staging/development host for this repository (a subdomain of `secpal.app`)
