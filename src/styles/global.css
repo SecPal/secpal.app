@@ -5,3 +5,18 @@
 
 /* Class-based dark mode — toggled via JS on <html> */
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Shared nav tokens keep the header spacing and hero viewport offset aligned. */
+:root {
+	--secpal-nav-logo-height: 2rem;
+	--secpal-nav-padding-y: 1rem;
+	--secpal-nav-height: calc(
+		var(--secpal-nav-logo-height) + (var(--secpal-nav-padding-y) * 2)
+	);
+}
+
+@media (min-width: 1024px) {
+	:root {
+		--secpal-nav-padding-y: 1.25rem;
+	}
+}

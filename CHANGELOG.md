@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Header spacing and hero first-viewport height now share the same CSS nav tokens, so future nav padding or logo-size changes no longer require duplicated rem offsets in `Hero.astro`
 - Social preview domain branding now sits inside the lower-left accent pill instead of floating beneath a thin bar, so the `secpal.app` label reads as an intentional brand tag rather than a visually shifted leftover element
 - The social preview generator now uses finalized German copy with proper umlauts and matching punctuation, so the generated OG card no longer looks like an ASCII-only draft asset
 - The social preview build step now relies on a declared local `sharp` dependency instead of an implicit transitive install, so `npm run build` remains stable when upstream package trees change
