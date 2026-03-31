@@ -13,8 +13,8 @@
 //   - Four layers on mobile: tagline eyebrow → H1 → subline → CTAs.
 //   - svh used instead of vh/dvh: subtracts visible browser chrome, giving
 //     the "first screen before scrolling" behaviour on iOS Safari.
-//   - Nav height offsets: py-4 + h-8 = 4 rem mobile; lg:py-5 + h-8 = 4.5 rem
-//     desktop (values match Nav.astro).
+//   - Nav height offset comes from shared CSS variables so header spacing and
+//     hero viewport math stay in sync.
 import type { Locale } from "../i18n/index.ts";
 import { useTranslations, getLocalizedPath } from "../i18n/index.ts";
 
@@ -28,7 +28,7 @@ const progressPath = `${getLocalizedPath("/", locale)}#progress`;
 ---
 
 <div
-  class="flex min-h-[calc(100svh-4rem)] flex-col bg-white lg:min-h-[calc(100svh-4.5rem)] dark:bg-gray-900"
+  class="flex min-h-[calc(100svh-var(--secpal-nav-height))] flex-col bg-white dark:bg-gray-900"
 >
   <div
     class="relative isolate flex flex-1 flex-col justify-center px-6 pt-0 lg:px-8"
