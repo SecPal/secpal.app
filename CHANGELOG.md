@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- added a repo-local `license/cla` workflow that replaces the flaky hosted CLA status with a deterministic GitHub Actions gate, stores signature metadata on the `cla-signatures` branch, and lets missing contributors sign by posting the documented pull-request comment
 - reduced the repo-local Copilot always-on context by replacing the long runtime baseline and removing the auto-loaded overlay fallback, which lowers request size in large VS Code workspaces without dropping the website-specific governance rules
 
 ## [0.0.1] - 2026-03-31
