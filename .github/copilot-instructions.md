@@ -11,7 +11,7 @@ Do not assume instructions from sibling repositories or comment-based inheritanc
 ## Always-On Rules
 
 - Run `git status --short --branch` before any write action. Never start implementation on local `main`, and stop if a dirty non-`main` branch contains unrelated work.
-- TDD is mandatory. Write or update the smallest relevant failing test FIRST, then implement, then refactor with tests green.
+- Validate-first: this repo has no test suite; confirm the smallest relevant check (lint, typecheck, or build) fails before implementing a change and passes after.
 - Quality first. Do not trade correctness, review depth, validation depth, or issue tracking for speed.
 - Keep one topic per change. 1 topic = 1 PR = 1 branch. Do not mix unrelated fixes, features, refactors, docs, or governance cleanup.
 - Never use bypasses such as `--no-verify` or force-push.
@@ -46,7 +46,6 @@ Before any commit, PR, or merge, announce the checklist you are executing and st
 At minimum verify:
 
 - the active branch and PR scope still address exactly one topic
-- TDD happened: the relevant test failed first and now passes
 - the smallest relevant validation passed for the touched area: formatting, lint, typecheck, and build when applicable
 - out-of-scope findings were turned into GitHub issues immediately
 - `CHANGELOG.md` was updated for real changes
