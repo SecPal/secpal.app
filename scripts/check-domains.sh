@@ -16,7 +16,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 echo -e "${BLUE}=== Domain Policy Check ===${NC}"
-echo "Allowed: secpal.app, www.secpal.app, secpal.dev"
+echo "Allowed: secpal.app, www.secpal.app, secpal.dev, dev.secpal.app"
 echo "Active web hosts: api.secpal.dev, app.secpal.dev"
 echo "Identifier-only: app.secpal (Android application ID)"
 echo "Deprecated web hosts: api.secpal.app"
@@ -48,10 +48,11 @@ matches=$(grep -r -n -E "secpal\.[A-Za-z0-9.-]+" \
     grep -v -- '^[[:space:]]*- \[' || true)
 
 # Allowlist approach: flag any secpal.* domain not matching an approved pattern.
-# Approved: secpal.app, www.secpal.app, secpal.dev, api.secpal.dev, app.secpal.dev, dev.secpal.app.
+# Approved or temporarily tolerated here: secpal.app, www.secpal.app, secpal.dev (including
+# api/app subdomains), dev.secpal.app, and deprecated-but-allowed api.secpal.app.
 # This catches unknown domains (e.g. secpal.xyz) that a denylist-only check would miss.
 violations=$(printf '%s\n' "$matches" | \
-    grep -Ev '(^|[^A-Za-z0-9.-])secpal\.app(\.[A-Za-z0-9_-]+)*($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])www\.secpal\.app(\.[A-Za-z0-9_-]+)*($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])(\*\.|\.)?([A-Za-z0-9-]+\.)*secpal\.dev(\.[A-Za-z0-9_-]+)*($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])dev\.secpal\.app(\.[A-Za-z0-9_-]+)*($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])api\.secpal\.app(\.[A-Za-z0-9_-]+)*($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)' | \
+    grep -Ev '(^|[^A-Za-z0-9.-])secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])secpal\.app\.git($|[^A-Za-z0-9._-]|\.$)|(^|[^A-Za-z0-9.-])www\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])(\*\.|\.)?([A-Za-z0-9-]+\.)*secpal\.dev($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])dev\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])api\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)' | \
     grep -E 'secpal\.' || true)
 
 deprecated_web_hosts=$(printf '%s\n' "$matches" | \
