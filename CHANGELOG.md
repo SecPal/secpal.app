@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- clarified the repo-local branch-start and post-merge readiness workflow so new website work must start from a clean, updated local `main`, and post-merge cleanup now explicitly returns the repo to `main`, refreshes dependencies with `npm ci` where applicable, runs `npm run build` when available, and confirms a clean working tree
 - restored explicit repo-local Copilot governance by making TDD-first, quality-first, one-topic-per-PR, immediate issue creation for out-of-scope findings, and EPIC-plus-sub-issue requirements always-on again; the website runtime overlay now auto-loads repo-wide so these rules remain present while working
 - clarified the repo-local PR workflow so finished website work must be self-reviewed, committed, and pushed before any PR exists, and the first PR state must always be draft until the final PR-view self-review is clean
 - aligned the repo-local domain guidance and validation with the renamed Android application identifier `app.secpal`, removing the old identifier-only exception from current website policy text
