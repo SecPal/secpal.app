@@ -4,6 +4,7 @@
 export const en = {
   nav: {
     progress: "Progress",
+    android: "Android",
     updates: "Follow",
     github: "GitHub",
     contact: "Contact",

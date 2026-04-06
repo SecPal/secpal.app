@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- added the public Android distribution surface on `secpal.app/android`, including localized human-facing landing pages, stable machine-readable channel and release-model JSON endpoints, navigation/sitemap discovery, and explicit `apk.secpal.app` host documentation for the single-package Android rollout architecture
+
 ### Changed
 
 - mandated `--body-file` for programmatic PR creation to prevent shell escaping issues in Copilot governance instructions

@@ -6,6 +6,7 @@ import type { Translations } from "./en.ts";
 export const de: Translations = {
   nav: {
     progress: "Fortschritt",
+    android: "Android",
     updates: "Folgen",
     github: "GitHub",
     contact: "Kontakt",
