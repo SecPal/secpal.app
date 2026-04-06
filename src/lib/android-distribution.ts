@@ -126,11 +126,6 @@ export const androidDistributionContent = {
       "apk.secpal.app stays the canonical technical host for APKs, checksums, and metadata.",
       "The same signed APK must remain available across GitHub and apk.secpal.app.",
     ],
-    machineModelTitle: "Machine-readable model",
-    machineModelBody:
-      "Clients and future release automation can start from the stable JSON surfaces below while the storage backend decision stays open.",
-    machineModelPrimary: "Channel metadata",
-    machineModelSecondary: "Release URL model",
   },
   de: {
     title: "SecPal Android-Verteilung",
