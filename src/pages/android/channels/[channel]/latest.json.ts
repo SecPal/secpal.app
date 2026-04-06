@@ -49,7 +49,7 @@ export const GET: APIRoute = ({ params, site }) => {
     notes: [
       "The URL structure is stable even before the first public Android release ships.",
       "Binary storage backing for apk.secpal.app remains an explicit release-time infrastructure decision.",
-      "Versioned releases are reserved under /android/releases/{version}/metadata.json, /app.secpal-{version}.apk, and /SHA256SUMS.txt.",
+      "Versioned releases are reserved under /android/releases/{version}/metadata.json, /android/releases/{version}/app.secpal-{version}.apk, and /android/releases/{version}/SHA256SUMS.txt.",
     ],
   };
 
