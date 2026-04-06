@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- added the public Android distribution surface on `secpal.app/android`, including localized human-facing landing pages, stable machine-readable channel and release-model JSON endpoints, navigation/sitemap discovery, and explicit `apk.secpal.app` host documentation for the single-package Android rollout architecture
 - mandated `--body-file` for programmatic PR creation to prevent shell escaping issues in Copilot governance instructions
 - clarified the repo-local branch-start and post-merge readiness workflow so new website work must start from a clean, updated local `main`, and post-merge cleanup now explicitly returns the repo to `main`, refreshes dependencies with `npm ci` where applicable, runs `npm run build` when available, and confirms a clean working tree
 - restored explicit repo-local Copilot governance by making TDD-first, quality-first, one-topic-per-PR, immediate issue creation for out-of-scope findings, and EPIC-plus-sub-issue requirements always-on again; the website runtime overlay now auto-loads repo-wide so these rules remain present while working

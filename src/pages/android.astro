@@ -1,0 +1,27 @@
+---
+// SPDX-FileCopyrightText: 2026 SecPal
+// SPDX-License-Identifier: AGPL-3.0-or-later
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import AndroidDistributionSurface from "../components/AndroidDistributionSurface.astro";
+import { getAndroidDistributionContent } from "../lib/android-distribution.ts";
+
+const content = getAndroidDistributionContent("en");
+---
+
+<Base
+  title={content.title}
+  description={content.description}
+  lang="en"
+  canonicalPath="/android/"
+  alternateEnPath="/en/android/"
+  alternateDePath="/de/android/"
+  xDefaultPath="/android/"
+>
+  <Nav locale="en" currentPath="/android" />
+  <main>
+    <AndroidDistributionSurface locale="en" />
+  </main>
+  <Footer locale="en" />
+</Base>

@@ -20,6 +20,30 @@ const pages = [
     },
   },
   {
+    path: "/android/",
+    alternates: {
+      en: "/en/android/",
+      de: "/de/android/",
+      "x-default": "/android/",
+    },
+  },
+  {
+    path: "/en/android/",
+    alternates: {
+      en: "/en/android/",
+      de: "/de/android/",
+      "x-default": "/android/",
+    },
+  },
+  {
+    path: "/de/android/",
+    alternates: {
+      en: "/en/android/",
+      de: "/de/android/",
+      "x-default": "/android/",
+    },
+  },
+  {
     path: "/en/privacy/",
     alternates: {
       en: "/en/privacy/",
