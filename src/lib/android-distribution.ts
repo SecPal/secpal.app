@@ -43,6 +43,43 @@ export function buildArtifactUrl(path: string): string {
   return new URL(path, androidArtifactHost).toString();
 }
 
+export interface AndroidVersionedReleaseMetadata {
+  version: string;
+  package_name: "app.secpal";
+  human_landing_url: string;
+  metadata_url: string;
+  versioned_apk_url: string;
+  checksum_url: string;
+  artifact_host: typeof androidArtifactHost;
+  release_available: false;
+  storage_backend_status: "pending_release_decision";
+  notes: string[];
+}
+
+export function buildVersionedMetadataDocument(
+  version: string,
+  siteUrl: URL
+): AndroidVersionedReleaseMetadata {
+  const metadataPath = buildVersionedMetadataPath(version);
+
+  return {
+    version,
+    package_name: "app.secpal",
+    human_landing_url: new URL(androidLandingPath, siteUrl).toString(),
+    metadata_url: buildArtifactUrl(metadataPath),
+    versioned_apk_url: buildArtifactUrl(buildVersionedArtifactPath(version)),
+    checksum_url: buildArtifactUrl(buildVersionedChecksumPath(version)),
+    artifact_host: androidArtifactHost,
+    release_available: false,
+    storage_backend_status: "pending_release_decision",
+    notes: [
+      "The URL structure is stable even before the first public Android release ships.",
+      "Binary storage backing for apk.secpal.app remains an explicit release-time infrastructure decision.",
+      "Channel latest endpoints remain available under /android/channels/{channel}/latest.json for rollout-specific clients.",
+    ],
+  };
+}
+
 export const androidDistributionContent = {
   en: {
     title: "SecPal Android distribution",
