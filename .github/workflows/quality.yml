@@ -49,3 +49,10 @@ jobs:
     with:
       node-version: "22"
       build-command: "npm run build"
+
+  test:
+    name: Node Tests
+    uses: SecPal/.github/.github/workflows/reusable-node-test.yml@main
+    with:
+      node-version: "22"
+      test-command: "npm test"
