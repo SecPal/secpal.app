@@ -43,6 +43,34 @@ export function buildArtifactUrl(path: string): string {
   return new URL(path, androidArtifactHost).toString();
 }
 
+export function isAndroidChannel(value: string): value is AndroidChannel {
+  return androidChannels.includes(value as AndroidChannel);
+}
+
+export function buildPendingAndroidAssetMessage(
+  requestedPath: string,
+  siteUrl: URL
+): string {
+  return [
+    `SecPal Android release artifacts are not published yet for ${requestedPath}.`,
+    "The stable URL exists before the first public release so clients can rely on the canonical endpoint model.",
+    `See ${new URL(androidLandingPath, siteUrl).toString()} for the current Android distribution status.`,
+  ].join("\n");
+}
+
+export function buildPendingAndroidAssetResponse(
+  requestedPath: string,
+  siteUrl: URL
+): Response {
+  return new Response(buildPendingAndroidAssetMessage(requestedPath, siteUrl), {
+    status: 404,
+    headers: {
+      "Cache-Control": "no-store",
+      "Content-Type": "text/plain; charset=utf-8",
+    },
+  });
+}
+
 export interface AndroidVersionedReleaseMetadata {
   version: string;
   package_name: "app.secpal";

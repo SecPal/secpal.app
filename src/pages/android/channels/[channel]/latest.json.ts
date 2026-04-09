@@ -9,6 +9,7 @@ import {
   buildLatestArtifactPath,
   buildLatestChecksumPath,
   buildLatestMetadataPath,
+  isAndroidChannel,
 } from "../../../../lib/android-distribution.ts";
 
 export const getStaticPaths = (() =>
@@ -19,10 +20,7 @@ export const getStaticPaths = (() =>
 export const GET: APIRoute = ({ params, site }) => {
   const channel = params.channel;
 
-  if (
-    !channel ||
-    !androidChannels.includes(channel as (typeof androidChannels)[number])
-  ) {
+  if (!channel || !isAndroidChannel(channel)) {
     return new Response(
       JSON.stringify({ message: "Unknown Android channel" }),
       {
@@ -32,7 +30,7 @@ export const GET: APIRoute = ({ params, site }) => {
     );
   }
 
-  const resolvedChannel = channel as AndroidChannel;
+  const resolvedChannel: AndroidChannel = channel;
 
   const siteUrl = site ?? new URL("https://secpal.app");
   const metadataPath = buildLatestMetadataPath(resolvedChannel);
