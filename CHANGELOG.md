@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - added the public Android distribution surface on `secpal.app/android`, including localized human-facing landing pages, stable machine-readable channel and release-model JSON endpoints, navigation/sitemap discovery, and explicit `apk.secpal.app` host documentation for the single-package Android rollout architecture
 - added a concrete Android release metadata template endpoint at `apk.secpal.app/android/releases/{version}/metadata.json` plus shared versioned metadata helpers, so release automation and documentation can reference one stable machine-readable contract before APK hosting is wired up
+- added stable placeholder routes for latest and versioned Android APK/checksum files on `apk.secpal.app`, so the public artifact URL model now resolves with explicit pre-release `404` responses instead of missing route definitions
 
 ### Changed
 
