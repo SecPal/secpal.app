@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- pinned vulnerable transitive `defu` and `vite` packages to patched releases through npm overrides so the website toolchain audit findings are remediated without broad dependency-range changes
+- overrode vulnerable transitive `defu` and `vite` packages to patched release ranges through npm overrides so the website toolchain audit findings are remediated without broad dependency-range changes
 
 ## [0.0.1] - 2026-03-31
 
