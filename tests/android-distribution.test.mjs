@@ -87,34 +87,40 @@ test("latest Android artifact routes stay stable before the first public release
   );
   assert.equal(artifactResponse.headers.get("Cache-Control"), "no-store");
   assert.equal(checksumResponse.headers.get("Cache-Control"), "no-store");
-  assert.match(
-    await artifactResponse.text(),
-    new RegExp(buildLatestArtifactPath("managed_device"), "u")
+  const artifactText = await artifactResponse.text();
+  const checksumText = await checksumResponse.text();
+  assert.ok(
+    artifactText.includes(buildLatestArtifactPath("managed_device")),
+    `expected artifact body to contain ${buildLatestArtifactPath("managed_device")}`
   );
-  assert.match(
-    await checksumResponse.text(),
-    new RegExp(buildLatestChecksumPath("managed_device"), "u")
+  assert.ok(
+    checksumText.includes(buildLatestChecksumPath("managed_device")),
+    `expected checksum body to contain ${buildLatestChecksumPath("managed_device")}`
   );
 });
 
 test("versioned Android artifact routes explain pending release availability", async () => {
+  // These handlers serve at literal /{version}/ paths (not dynamic Astro segments);
+  // they use a {version} string placeholder rather than reading params.version.
   const artifactResponse = await getVersionedArtifact({
-    params: { version: "1.2.3" },
+    params: {},
     site: new URL("https://secpal.app"),
   });
   const checksumResponse = await getVersionedChecksum({
-    params: { version: "1.2.3" },
+    params: {},
     site: new URL("https://secpal.app"),
   });
 
   assert.equal(artifactResponse.status, 404);
   assert.equal(checksumResponse.status, 404);
-  assert.match(
-    await artifactResponse.text(),
-    new RegExp(buildVersionedArtifactPath("1.2.3"), "u")
+  const artifactText = await artifactResponse.text();
+  const checksumText = await checksumResponse.text();
+  assert.ok(
+    artifactText.includes(buildVersionedArtifactPath("{version}")),
+    `expected artifact body to contain ${buildVersionedArtifactPath("{version}")}`
   );
-  assert.match(
-    await checksumResponse.text(),
-    new RegExp(buildVersionedChecksumPath("1.2.3"), "u")
+  assert.ok(
+    checksumText.includes(buildVersionedChecksumPath("{version}")),
+    `expected checksum body to contain ${buildVersionedChecksumPath("{version}")}`
   );
 });
