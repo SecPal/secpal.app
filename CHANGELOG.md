@@ -27,6 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - aligned the repo-local domain guidance and validation with the renamed Android application identifier `app.secpal`, removing the old identifier-only exception from current website policy text
 - reduced the repo-local Copilot always-on context by replacing the long runtime baseline and removing the auto-loaded overlay fallback, which lowers request size in large VS Code workspaces without dropping the website-specific governance rules
 
+### Fixed
+
+- overrode vulnerable transitive `defu` and `vite` packages to patched release ranges through npm overrides so the website toolchain audit findings are remediated without broad dependency-range changes
+
 ## [0.0.1] - 2026-03-31
 
 ### Changed
