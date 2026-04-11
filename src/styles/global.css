@@ -11,6 +11,13 @@
   --secpal-nav-logo-height: 2rem;
   --secpal-nav-padding-y: 1rem;
   --secpal-nav-height: calc(var(--secpal-nav-logo-height) + (var(--secpal-nav-padding-y) * 2));
+  --secpal-safe-area-padding-inline-start: max(0px, env(safe-area-inset-left));
+  --secpal-safe-area-padding-inline-end: max(0px, env(safe-area-inset-right));
+}
+
+body {
+  padding-inline: var(--secpal-safe-area-padding-inline-start)
+    var(--secpal-safe-area-padding-inline-end);
 }
 
 @media (min-width: 1024px) {
