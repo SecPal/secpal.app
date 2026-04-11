@@ -54,7 +54,7 @@ matches=$(grep -r -n -E "secpal\.[A-Za-z0-9.-]+" \
 # api/app subdomains), apk.secpal.app, dev.secpal.app, and deprecated-but-allowed api.secpal.app.
 # This catches unknown domains (e.g. secpal.xyz) that a denylist-only check would miss.
 violations=$(printf '%s\n' "$matches" | \
-    grep -Ev '(^|[^A-Za-z0-9.-])secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])secpal\.app\.git($|[^A-Za-z0-9._-]|\.$)|(^|[^A-Za-z0-9.-])www\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])changelog\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])apk\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])(\*\.|\.)?([ A-Za-z0-9-]+\.)*secpal\.dev($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])dev\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])api\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)' |
+    grep -Ev '(^|[^A-Za-z0-9.-])secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])secpal\.app\.git($|[^A-Za-z0-9._-]|\.$)|(^|[^A-Za-z0-9.-])www\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])changelog\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])apk\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])(\*\.|\.)?([A-Za-z0-9-]+\.)*secpal\.dev($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])dev\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])api\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)' |
     grep -E 'secpal\.' || true)
 
 deprecated_web_hosts=$(printf '%s\n' "$matches" | \
@@ -108,7 +108,9 @@ else
     echo "  - api.secpal.dev: live API host"
     echo "  - app.secpal.dev: live PWA/frontend host"
     echo "  - secpal.dev: development, staging, testing, examples"
-    echo "  - dev.secpal.app: live staging/development host for this repository"  echo "  - changelog.secpal.app: public changelog site"    echo "  - app.secpal: Android application identifier only"
+    echo "  - dev.secpal.app: live staging/development host for this repository"
+    echo "  - changelog.secpal.app: public changelog site"
+    echo "  - app.secpal: Android application identifier only"
     echo "  - DEPRECATED as web hosts: api.secpal.app"
     echo "  - FORBIDDEN: secpal.com, secpal.org, secpal.net, secpal.io, secpal.example"
     echo ""
