@@ -56,7 +56,8 @@ const {
         ?.getAttribute("content");
 
       if (!redirectPath) {
-        throw new Error("Missing neutral locale redirect path.");
+        // No redirect path meta found — the manual locale links below remain as fallback.
+        return;
       }
 
       redirectToPreferredLocale(redirectPath);

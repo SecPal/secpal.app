@@ -6,7 +6,7 @@ import {
   getLocalizedPath,
   locales,
   type Locale,
-} from "../i18n/index.ts";
+} from "../i18n/routing.ts";
 
 export function detectPreferredLocale(
   preferredLanguages?: readonly string[]
