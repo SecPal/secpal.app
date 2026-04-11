@@ -28,3 +28,27 @@ test("base layout opts into viewport-fit cover for mobile safe areas", () => {
 
   assert.match(layout, /viewport-fit=cover/);
 });
+
+test("android distribution cards wrap long visible machine paths on mobile", () => {
+  const component = readFileSync(
+    new URL(
+      "../src/components/AndroidDistributionSurface.astro",
+      import.meta.url
+    ),
+    "utf8"
+  );
+
+  assert.match(
+    component,
+    /<article class="min-w-0 rounded-2xl border border-gray-200 bg-white p-6 shadow-xs/
+  );
+  assert.match(
+    component,
+    /<p class="mt-4 break-all font-mono text-xs text-gray-500 dark:text-gray-400">/
+  );
+  assert.match(
+    component,
+    /<section class="min-w-0 overflow-hidden rounded-3xl border border-gray-200 bg-gray-950 shadow-xl/
+  );
+  assert.match(component, /<p class="break-all">\{line\}<\/p>/);
+});
