@@ -19,3 +19,12 @@ test("global layout accounts for mobile safe-area insets", () => {
   );
   assert.match(css, /var\(--secpal-safe-area-padding-inline-end\)/);
 });
+
+test("base layout opts into viewport-fit cover for mobile safe areas", () => {
+  const layout = readFileSync(
+    new URL("../src/layouts/Base.astro", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(layout, /viewport-fit=cover/);
+});

@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - overrode vulnerable transitive `defu` and `vite` packages to patched release ranges through npm overrides so the website toolchain audit findings are remediated without broad dependency-range changes
-- added safe-area-aware body padding so text and content blocks no longer sit too close to the mobile screen edge on devices with asymmetric viewport insets
+- added safe-area-aware body padding together with `viewport-fit=cover` so text and content blocks no longer sit too close to the mobile screen edge on devices with asymmetric viewport insets
 
 ## [0.0.1] - 2026-03-31
 
