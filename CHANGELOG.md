@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - overrode vulnerable transitive `defu` and `vite` packages to patched release ranges through npm overrides so the website toolchain audit findings are remediated without broad dependency-range changes
+- neutral locale entry routes on `/` and `/android` now redirect German browser locales to `/de/...` and all other locales to `/en/...`, so `secpal.app` and `dev.secpal.app` no longer force the English Android page when the browser prefers German
 
 ## [0.0.1] - 2026-03-31
 

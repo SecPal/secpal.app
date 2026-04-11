@@ -18,7 +18,7 @@ Built with [Astro](https://astro.build), [Tailwind CSS v4](https://tailwindcss.c
 ## Features
 
 - **Multilingual** — English and German (`/en/`, `/de/`)
-- **HTTP-level root locale redirect** — Nginx sends `/` to `/de/` for German browsers and `/en/` otherwise
+- **Locale-aware neutral entry routes** — `/` and `/android` resolve German browsers to `/de/...` and all other requests to `/en/...`
 - **Built in public** — product progress and release readiness instead of premature app onboarding
 - **Dark mode** — class-based, persisted in `localStorage`, flash-free
 - **Static** — minimal client-side JS with Astro-first rendering
@@ -142,9 +142,10 @@ layer. `Accept-Language` requests preferring German resolve to `/de/`, while
 all other requests fall back to `/en/`.
 
 The live development host runs directly on `https://dev.secpal.app`. There, the
-localized pages are served under `/en/` and `/de/`, while `src/pages/index.astro`
-provides the neutral root entry page that redirects browsers to `/en/` and still
-exposes the correct social preview metadata.
+localized pages are served under `/en/` and `/de/`, while the neutral entry
+routes under `/` and `/android` redirect browsers to the locale-specific pages
+based on the browser language and still expose the correct social preview
+metadata.
 
 ## License
 
