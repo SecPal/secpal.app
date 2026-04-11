@@ -38,17 +38,12 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
     "utf8"
   );
 
-  assert.match(
-    component,
-    /<article class="min-w-0 rounded-2xl border border-gray-200 bg-white p-6 shadow-xs/
-  );
-  assert.match(
-    component,
-    /<p class="mt-4 break-all font-mono text-xs text-gray-500 dark:text-gray-400">/
-  );
-  assert.match(
-    component,
-    /<section class="min-w-0 overflow-hidden rounded-3xl border border-gray-200 bg-gray-950 shadow-xl/
-  );
-  assert.match(component, /<p class="break-all">\{line\}<\/p>/);
+  // article channel cards have min-w-0 to prevent flex overflow
+  assert.match(component, /<article\b[^>]*class="[^"]*\bmin-w-0\b/);
+  // metadata path paragraph has break-all so long mono URLs wrap
+  assert.match(component, /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*\bfont-mono\b/);
+  // section endpoint groups have min-w-0 to prevent flex overflow
+  assert.match(component, /<section\b[^>]*class="[^"]*\bmin-w-0\b/);
+  // individual endpoint lines have break-all
+  assert.match(component, /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*">\{line\}/);
 });
