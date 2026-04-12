@@ -11,6 +11,6 @@ export const locales: Locale[] = ["en", "de"];
 export const defaultLocale: Locale = "en";
 
 export function getLocalizedPath(path: string, locale: Locale): string {
-    const normalized = path === "/" ? "/" : path.replace(/\/?$/, "/");
-    return `/${locale}${normalized}`;
+  const normalized = path === "/" ? "/" : path.replace(/\/?$/, "/");
+  return `/${locale}${normalized}`;
 }
