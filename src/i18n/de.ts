@@ -29,8 +29,8 @@ export const de: Translations = {
       "Informationen bleiben nachvollziehbar — nicht verstreut in Notizen, Kurznachrichten und verteilten Dateien.",
       "SecPal entsteht öffentlich, mit klarem Fokus und nachvollziehbaren Release-Schritten.",
     ],
-    cta: "Entwicklung auf GitHub verfolgen",
-    ctaSecondary: "Zu den Features",
+    cta: "Zur Roadmap",
+    ctaSecondary: "Entwicklung auf GitHub verfolgen",
     note: "Die öffentliche Website zeigt die Produktrichtung, Rechtsinformationen und Kontaktwege. Ein öffentlicher Zugang zur App ist derzeit noch nicht geöffnet.",
   },
   features: {
