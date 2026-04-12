@@ -66,67 +66,67 @@ export const de: Translations = {
   roadmap: {
     title: "Roadmap – SecPal",
     description:
-      "Wohin SecPal führt: Was aktuell gebaut wird, was als Nächstes kommt und die längerfristige Richtung.",
-    headline: "Wohin wir uns entwickeln.",
+      "Wohin SecPal sich entwickelt — aktueller Entwicklungsfokus, nächste geplante Schritte und längerfristige Richtung.",
+    headline: "Wohin SecPal sich entwickelt.",
     subline:
-      "SecPal entsteht öffentlich. Diese Seite zeigt den aktuellen Entwicklungsfokus, die nächsten geplanten Schritte und die längerfristige Richtung — ohne feste Daten, ohne Marketingversprechen.",
+      "SecPal entsteht öffentlich. Diese Seite zeigt den aktuellen Entwicklungsfokus, die nächsten geplanten Schritte und die längerfristige Richtung — ohne feste Termine und ohne Marketingversprechen.",
     now: {
       label: "Aktuell",
-      description: "In aktiver Entwicklung.",
+      description: "In aktiver Entwicklung",
       items: [
         {
           name: "Passkeys & WebAuthn",
           description:
-            "Passwortloser Login per Gerätebiometrie oder Security-Key (FIDO2/WebAuthn) — einfacher und sicherer als Passwörter.",
+            "Passwortloser Login per Gerätebiometrie oder Security-Key (FIDO2/WebAuthn) — sicherer und unkomplizierter als Passwörter.",
         },
         {
           name: "Mitarbeiter-Onboarding (BewachV §16)",
           description:
-            "Geführter Onboarding-Ablauf, der alle für die Bewacherregister-Anmeldung erforderlichen Felder erfasst — mit eigenem Token-basierten Einladungslink statt einem Passwort-Reset-Link.",
+            "Strukturiertes Onboarding, das alle für die Bewacherregister-Anmeldung erforderlichen Felder erfasst — mit eigenem Einladungslink statt einem Passwort-Reset als Behelf.",
         },
       ],
     },
     next: {
       label: "Als Nächstes",
-      description: "Für die nahe Zukunft geplant.",
+      description: "Für die nahe Zukunft geplant",
       items: [
         {
           name: "Android-App",
           description:
-            "Native Android-App auf Basis von Capacitor — gleicher Funktionsumfang wie die Web-App, nutzbar auf gemeinsam genutzten Geräten und im Außendienst.",
+            "Native Android-App auf Basis von Capacitor — gleicher Funktionsumfang wie die Web-App, geeignet für gemeinsam genutzte Geräte und den Außendienst.",
         },
       ],
     },
     later: {
       label: "Später",
-      description: "Längerfristige Richtung — ohne feste Termine.",
+      description: "Längerfristige Richtung — ohne feste Termine",
       items: [
         {
           name: "Dienstplanung",
           description:
-            "Dienstpläne, Schichtzuweisungen und Besetzungsplanung als Teil des operativen Ablaufs.",
+            "Dienstpläne, Schichtzuweisungen und Besetzungsplanung — eingebaut in den operativen Ablauf statt separat verwaltet.",
         },
         {
           name: "Wächter-Kontroll-System (WKS)",
           description:
-            "Checkpoint-basierte Kontrollgangerfassung per NFC oder QR — nachvollziehbare Kontrollgänge direkt im Betriebsprotokoll.",
+            "Checkpoint-basierte Kontrollgangerfassung per NFC oder QR — nachvollziehbare Kontrollgänge als natürlicher Teil des Betriebsprotokolls.",
         },
         {
           name: "Vertragsverwaltung & digitale Unterschrift",
           description:
-            "Kunden- und Arbeitsverträge an einem Ort verwalten, mit rechtskonformem digitalem Unterschriftenworkflow.",
+            "Kunden- und Arbeitsverträge an einem Ort — mit rechtskonformem Unterschriftenworkflow direkt im System.",
         },
         {
           name: "Dienstanweisungskonfigurator",
           description:
-            "Objektbezogene Dienstanweisungen strukturiert erstellen und verwalten — versioniert und direkt mit Objekten und Schichten verknüpft.",
+            "Objektbezogene Dienstanweisungen erstellen und pflegen — strukturiert, versioniert und direkt mit Objekten und Schichten verknüpft.",
         },
       ],
     },
     changelog: {
-      label: "Zuletzt ausgeliefert",
+      label: "Was ausgeliefert wurde",
       description:
-        "Die vollständige Release-Historie mit jedem ausgelieferten Feature und Fix ist auf changelog.secpal.app veröffentlicht.",
+        "Jedes ausgelieferte Feature und jeden Fix dokumentiert changelog.secpal.app — die vollständige Versionshistorie über API, Web-App und Android.",
       link: "Zum Changelog",
       href: "https://changelog.secpal.app",
     },

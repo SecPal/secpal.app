@@ -64,68 +64,68 @@ export const en = {
   roadmap: {
     title: "Roadmap – SecPal",
     description:
-      "Where SecPal is headed: what we are building now, what comes next, and the longer-term direction.",
-    headline: "Where we are headed.",
+      "Where SecPal is headed — current development focus, next planned steps, and longer-term direction.",
+    headline: "Where SecPal is headed.",
     subline:
-      "SecPal is built in the open. This page shows the current development focus, the next planned steps, and the longer-term direction — no hard deadlines, no marketing promises.",
+      "SecPal is built in the open. This page shows the current development focus, the next planned steps, and the longer-term direction — with no fixed dates and no marketing promises.",
     now: {
       label: "Now",
-      description: "Actively in development.",
+      description: "Actively in development",
       items: [
         {
           name: "Passkeys & WebAuthn",
           description:
-            "Password-free login via device biometrics or security keys (FIDO2/WebAuthn) — simpler and more secure than passwords.",
+            "Password-free login via device biometrics or security keys (FIDO2/WebAuthn) — more secure and easier to use than passwords.",
         },
         {
           name: "Employee onboarding (BewachV §16)",
           description:
-            "Guided onboarding flow that captures all fields required for Bewacherregister registration, with a dedicated token-based invite instead of a password-reset link.",
+            "Structured onboarding that collects all fields required for Bewacherregister registration — with a dedicated invite link instead of a password-reset workaround.",
         },
       ],
     },
     next: {
       label: "Next",
-      description: "Planned for the near term.",
+      description: "Planned for the near term",
       items: [
         {
           name: "Android app",
           description:
-            "Native Android app built with Capacitor — same feature set as the web app, usable on shared devices and in the field.",
+            "Native Android app built on Capacitor — same capabilities as the web app, suitable for shared devices and field use.",
         },
       ],
     },
     later: {
       label: "Later",
-      description: "Longer-term direction — no dates attached.",
+      description: "Longer-term direction — no dates attached",
       items: [
         {
           name: "Shift planning",
           description:
-            "Duty rosters, shift assignments, and coverage planning as part of the operational workflow.",
+            "Duty rosters, shift assignments, and coverage planning — integrated into the operational workflow rather than managed separately.",
         },
         {
           name: "Guard tour system (WKS)",
           description:
-            "Checkpoint-based patrol recording with NFC or QR — traceable guard tours directly in the operational log.",
+            "Checkpoint-based patrol recording via NFC or QR — traceable guard tours as a natural part of the operational log.",
         },
         {
           name: "Contract management & digital signatures",
           description:
-            "Manage customer and employment contracts in one place, with a legally binding digital signature workflow.",
+            "Customer and employment contracts in one place, with a legally compliant digital signature workflow.",
         },
         {
           name: "Service instruction configurator",
           description:
-            "Build and manage site-specific service instructions — structured, versioned, and linked directly to the relevant objects and shifts.",
+            "Create and maintain site-specific service instructions — structured, versioned, and linked to the relevant objects and shifts.",
         },
       ],
     },
     changelog: {
-      label: "Recently shipped",
+      label: "What has shipped",
       description:
-        "The full release history with every shipped feature and fix is published at changelog.secpal.app.",
-      link: "View the changelog",
+        "Every released feature and fix is documented at changelog.secpal.app — the full history of what has shipped across API, web app, and Android.",
+      link: "Read the changelog",
       href: "https://changelog.secpal.app",
     },
   },
