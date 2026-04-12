@@ -18,7 +18,8 @@ export const en = {
   hero: {
     badge: "From operational practice · Open source · Built in public",
     tagline: "SecPal – A guard’s best friend",
-    headline: "Less paperwork, fewer disconnected tools, clearer security operations.",
+    headline:
+      "Less paperwork, fewer disconnected tools, clearer security operations.",
     subline: "SecPal brings operational work into one connected system.",
     explanation:
       "SecPal is built for security operations that need one clear operational flow instead of spreading day-to-day work across paper notes, chats, and disconnected tools.",
@@ -142,9 +143,9 @@ export const en = {
 
 type DeepLoosen<T> =
   T extends ReadonlyArray<infer U>
-  ? DeepLoosen<U>[]
-  : T extends Record<string, unknown>
-  ? { [K in keyof T]: DeepLoosen<T[K]> }
-  : string;
+    ? DeepLoosen<U>[]
+    : T extends Record<string, unknown>
+      ? { [K in keyof T]: DeepLoosen<T[K]> }
+      : string;
 
 export type Translations = DeepLoosen<typeof en>;
