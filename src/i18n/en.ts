@@ -19,7 +19,7 @@ export const en = {
     badge: "From operational practice · Open source · Built in public",
     tagline: "SecPal – A guard’s best friend",
     headline: "Less friction in security operations.",
-    subline: "Less paperwork, fewer fragmented tools, clearer workflows.",
+    subline: "Less paperwork, fewer disconnected tools, clearer workflows.",
     explanation:
       "SecPal is built for security operations that need one clear operational flow instead of spreading day-to-day work across paper notes, chats, and disconnected tools.",
     highlights: [
@@ -105,7 +105,7 @@ export const en = {
             "Duty rosters, shift assignments, and coverage planning — integrated into the operational workflow rather than managed separately.",
         },
         {
-          name: "Online guard tour system (OWKS)",
+          name: "Online guard tour system",
           description:
             "Checkpoint-based patrol recording via NFC or QR — traceable guard tours as a natural part of the operational log.",
         },

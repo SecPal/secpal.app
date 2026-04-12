@@ -107,7 +107,7 @@ export const de: Translations = {
             "Dienstpläne, Schichtzuweisungen und Besetzungsplanung — eingebaut in den operativen Ablauf statt separat verwaltet.",
         },
         {
-          name: "Online-Wächter-Kontroll-System (OWKS)",
+          name: "Online-Wächterkontrollsystem (OWKS)",
           description:
             "Checkpoint-basierte Kontrollgangerfassung per NFC oder QR — nachvollziehbare Kontrollgänge als natürlicher Teil des Betriebsprotokolls.",
         },
