@@ -93,7 +93,7 @@ export const de: Translations = {
         {
           name: "Android-App",
           description:
-            "Native Android-App auf Basis von Capacitor — gleicher Funktionsumfang wie die Web-App, geeignet für gemeinsam genutzte Geräte und den Außendienst.",
+            "Native Android-App — gleicher Funktionsumfang wie die Web-App, geeignet für gemeinsam genutzte Geräte und den Außendienst.",
         },
       ],
     },

@@ -27,8 +27,8 @@ export const en = {
       "Information stays traceable instead of disappearing into notes, messages, and scattered files.",
       "SecPal is taking shape in public, with a focused scope and clear release steps.",
     ],
-    cta: "Follow development on GitHub",
-    ctaSecondary: "See the features",
+    cta: "View roadmap",
+    ctaSecondary: "Follow development on GitHub",
     note: "The public website shows the product direction, legal information, and contact paths. Public access to the app is not open yet.",
   },
   features: {
@@ -91,7 +91,7 @@ export const en = {
         {
           name: "Android app",
           description:
-            "Native Android app built on Capacitor — same capabilities as the web app, suitable for shared devices and field use.",
+            "Native Android app — same capabilities as the web app, suitable for shared devices and field use.",
         },
       ],
     },
