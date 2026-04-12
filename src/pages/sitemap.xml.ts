@@ -28,6 +28,14 @@ const pages = [
     },
   },
   {
+    path: "/roadmap/",
+    alternates: {
+      en: "/en/roadmap/",
+      de: "/de/roadmap/",
+      "x-default": "/roadmap/",
+    },
+  },
+  {
     path: "/en/android/",
     alternates: {
       en: "/en/android/",
@@ -41,6 +49,22 @@ const pages = [
       en: "/en/android/",
       de: "/de/android/",
       "x-default": "/android/",
+    },
+  },
+  {
+    path: "/en/roadmap/",
+    alternates: {
+      en: "/en/roadmap/",
+      de: "/de/roadmap/",
+      "x-default": "/roadmap/",
+    },
+  },
+  {
+    path: "/de/roadmap/",
+    alternates: {
+      en: "/en/roadmap/",
+      de: "/de/roadmap/",
+      "x-default": "/roadmap/",
     },
   },
   {
