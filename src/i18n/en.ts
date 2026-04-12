@@ -105,7 +105,7 @@ export const en = {
             "Duty rosters, shift assignments, and coverage planning — integrated into the operational workflow rather than managed separately.",
         },
         {
-          name: "Guard tour system (WKS)",
+          name: "Online guard tour system (OWKS)",
           description:
             "Checkpoint-based patrol recording via NFC or QR — traceable guard tours as a natural part of the operational log.",
         },
