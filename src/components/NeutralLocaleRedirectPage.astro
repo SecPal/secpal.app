@@ -1,0 +1,99 @@
+---
+// SPDX-FileCopyrightText: 2026 SecPal
+// SPDX-License-Identifier: AGPL-3.0-or-later
+import Base from "../layouts/Base.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  alternateEnPath: string;
+  alternateDePath: string;
+  xDefaultPath: string;
+  redirectPath: string;
+  eyebrow: string;
+  headline: string;
+  body: string;
+  englishLabel?: string;
+  germanLabel?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  alternateEnPath,
+  alternateDePath,
+  xDefaultPath,
+  redirectPath,
+  eyebrow,
+  headline,
+  body,
+  englishLabel = "English",
+  germanLabel = "Deutsch",
+  noindex = false,
+} = Astro.props;
+---
+
+<Base
+  title={title}
+  description={description}
+  lang="en"
+  canonicalPath={canonicalPath}
+  alternateEnPath={alternateEnPath}
+  alternateDePath={alternateDePath}
+  xDefaultPath={xDefaultPath}
+>
+  <Fragment slot="head">
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="secpal-neutral-redirect-path" content={redirectPath} />
+    <script>
+      import { redirectToPreferredLocale } from "../lib/locale-redirect.ts";
+
+      const redirectPath = document
+        .querySelector('meta[name="secpal-neutral-redirect-path"]')
+        ?.getAttribute("content");
+
+      if (redirectPath) {
+        redirectToPreferredLocale(redirectPath);
+      }
+      // No redirect path meta found — the manual locale links below remain as fallback.
+    </script>
+  </Fragment>
+  <main
+    class="flex min-h-screen items-center justify-center bg-white px-6 text-slate-900 dark:bg-slate-900 dark:text-white"
+  >
+    <div class="max-w-xl text-center">
+      <p
+        class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400"
+      >
+        {eyebrow}
+      </p>
+      <h1
+        class="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl"
+      >
+        {headline}
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-300">
+        {body}
+      </p>
+      <div
+        class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
+      >
+        <a
+          href={alternateEnPath}
+          class="rounded-md bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+        >
+          {englishLabel}
+        </a>
+        <a
+          href={alternateDePath}
+          class="rounded-md border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-50 dark:border-white/20 dark:text-white dark:hover:bg-white/5"
+        >
+          {germanLabel}
+        </a>
+      </div>
+    </div>
+  </main>
+</Base>

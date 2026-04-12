@@ -1,27 +1,18 @@
 ---
 // SPDX-FileCopyrightText: 2026 SecPal
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import Base from "../layouts/Base.astro";
-import Nav from "../components/Nav.astro";
-import Footer from "../components/Footer.astro";
-import AndroidDistributionSurface from "../components/AndroidDistributionSurface.astro";
-import { getAndroidDistributionContent } from "../lib/android-distribution.ts";
-
-const content = getAndroidDistributionContent("en");
+import NeutralLocaleRedirectPage from "../components/NeutralLocaleRedirectPage.astro";
 ---
 
-<Base
-  title={content.title}
-  description={content.description}
-  lang="en"
+<NeutralLocaleRedirectPage
+  title="SecPal Android distribution"
+  description="Neutral Android entry point on secpal.app with links to the English and German SecPal Android distribution pages."
   canonicalPath="/android/"
   alternateEnPath="/en/android/"
   alternateDePath="/de/android/"
   xDefaultPath="/android/"
->
-  <Nav locale="en" currentPath="/android" />
-  <main>
-    <AndroidDistributionSurface locale="en" />
-  </main>
-  <Footer locale="en" />
-</Base>
+  redirectPath="/android"
+  eyebrow="SecPal Android"
+  headline="Redirecting to the Android page"
+  body="If your browser does not redirect automatically, continue to the English or German SecPal Android distribution page."
+/>

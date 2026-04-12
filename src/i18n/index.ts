@@ -3,17 +3,13 @@
 
 import { en } from "./en.ts";
 import { de } from "./de.ts";
+import type { Locale } from "./routing.ts";
+
+export type { Locale } from "./routing.ts";
+export { locales, defaultLocale, getLocalizedPath } from "./routing.ts";
 
 export const translations = { en, de } as const;
-export type Locale = keyof typeof translations;
-export const locales: Locale[] = ["en", "de"];
-export const defaultLocale: Locale = "en";
 
 export function useTranslations(locale: Locale) {
   return translations[locale];
-}
-
-export function getLocalizedPath(path: string, locale: Locale): string {
-  const normalized = path === "/" ? "/" : path.replace(/\/?$/, "/");
-  return `/${locale}${normalized}`;
 }
