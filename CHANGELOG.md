@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- hero section in `src/components/Hero.astro` no longer overflows on narrow mobile viewports: the H1 mobile font size steps down from `text-5xl` to `text-4xl` with an intermediate `sm:text-5xl` tier so German compound words like "Sicherheitsdienst" fit within `px-6` padding, `overflow-x-clip` prevents decorative gradient blobs from widening the page, and the CTA row uses a tighter mobile gap while keeping both actions side-by-side — fixing the visual right-shift of headline, subline, and CTA text on devices such as iPhone 13 Pro and iPhone SE
 - overrode vulnerable transitive `defu` and `vite` packages to patched release ranges through npm overrides so the website toolchain audit findings are remediated without broad dependency-range changes
 - neutral locale entry routes on `/` and `/android` now redirect German browser locales to `/de/...` and all other locales to `/en/...`, so `secpal.app` and `dev.secpal.app` no longer force the English Android page when the browser prefers German
 - added safe-area-aware body padding together with `viewport-fit=cover` and wrapping rules for Android machine-readable cards so text and content blocks no longer sit too close to the mobile screen edge or overflow on devices with asymmetric viewport insets
