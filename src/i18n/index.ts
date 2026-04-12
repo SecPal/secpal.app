@@ -13,5 +13,3 @@ export const translations = { en, de } as const;
 export function useTranslations(locale: Locale) {
   return translations[locale];
 }
-
-
