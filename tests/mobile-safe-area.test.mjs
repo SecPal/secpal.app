@@ -48,5 +48,5 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   // section endpoint groups have min-w-0 to prevent flex overflow
   assert.match(component, /<section\b[^>]*class="[^"]*\bmin-w-0\b/);
   // individual endpoint lines have break-all
-  assert.match(component, /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*">\{line\}/);
+  assert.match(component, /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*">\s*\{\s*line\s*\}/);
 });
