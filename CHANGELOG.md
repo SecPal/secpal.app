@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - mandated `--body-file` for programmatic PR creation to prevent shell escaping issues in Copilot governance instructions
 - strengthened repo-local Copilot governance for AI findings: website work now requires proof of defect before merging AI-generated fix PRs and treats green CI alone as insufficient evidence for content, accessibility, or static-build refactors
+- wired the central Copilot-instructions validator into `quality.yml` so website pull requests now fail automatically when known static-rendering or accessibility AI-risk guardrails are missing from the runtime baseline
 - clarified the repo-local branch-start and post-merge readiness workflow so new website work must start from a clean, updated local `main`, and post-merge cleanup now explicitly returns the repo to `main`, refreshes dependencies with `npm ci` where applicable, runs `npm run build` when available, and confirms a clean working tree
 - restored explicit repo-local Copilot governance by making TDD-first, quality-first, one-topic-per-PR, immediate issue creation for out-of-scope findings, and EPIC-plus-sub-issue requirements always-on again; the website runtime overlay now auto-loads repo-wide so these rules remain present while working
 - clarified the repo-local PR workflow so finished website work must be self-reviewed, committed, and pushed before any PR exists, and the first PR state must always be draft until the final PR-view self-review is clean
