@@ -11,8 +11,8 @@ test("global layout accounts for mobile safe-area insets", () => {
     "utf8"
   );
 
-  assert.match(css, /safe-area-inset-inline-start/);
-  assert.match(css, /safe-area-inset-inline-end/);
+  assert.match(css, /safe-area-inset-left/);
+  assert.match(css, /safe-area-inset-right/);
   assert.match(
     css,
     /padding-inline:\s*var\(--secpal-safe-area-padding-inline-start\)/
