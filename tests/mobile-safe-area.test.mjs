@@ -39,7 +39,7 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   );
 
   // article channel cards have min-w-0 to prevent flex overflow
-  assert.match(component, /<article\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"/);
+  assert.match(component, /<article\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/);
   // metadata path paragraph keeps both break-all and font-mono on the same
   // element so long machine-readable paths wrap without losing mono styling.
   assert.match(
@@ -47,7 +47,7 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
     /<p\b(?=[^>]*class="[^"]*\bbreak-all\b)(?=[^>]*class="[^"]*\bfont-mono\b)[^>]*>/
   );
   // section endpoint groups have min-w-0 to prevent flex overflow
-  assert.match(component, /<section\b[^>]*class="[^"]*\bmin-w-0\b/);
+  assert.match(component, /<section\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/);
   // individual endpoint lines have break-all
   assert.match(component, /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*">\s*\{\s*line\s*\}/);
 });
