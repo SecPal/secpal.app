@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- clarified the repo-local pre-`1.0.0` policy in Copilot governance so website work explicitly prefers removing insecure or obsolete compatibility layers over preserving them without a proven live caller
 - mandated `--body-file` for programmatic PR creation to prevent shell escaping issues in Copilot governance instructions
 - strengthened repo-local Copilot governance for AI findings: website work now requires proof of defect before merging AI-generated fix PRs and treats green CI alone as insufficient evidence for content, accessibility, or static-build refactors
 - wired the central Copilot-instructions validator into `quality.yml` so website pull requests now fail automatically when known static-rendering or accessibility AI-risk guardrails are missing from the runtime baseline
