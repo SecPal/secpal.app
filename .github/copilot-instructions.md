@@ -71,6 +71,7 @@ At minimum verify:
 - Green CI alone is not enough for AI-generated changes, especially test, lifecycle, shell, regex, or refactor diffs; review the semantic risk explicitly.
 - Reject AI-generated content or styling cleanups that only look simpler in the diff but weaken HTML validity, accessibility, or static-build guarantees.
 - Reject AI-generated content or build refactors that move critical routes or semantics behind client-only code; prove static output, accessibility, and semantic structure stay intact after the change.
+- Reject AI-generated compatibility keep-alives that preserve obsolete content contracts, storage/input aliases, or legacy frontend behavior without a proven live caller. Because the SecPal project is still under `1.x`, prefer removing unnecessary compatibility paths over carrying them forward when they add risk or maintenance burden.
 
 ## Repository Conventions
 
@@ -83,3 +84,4 @@ At minimum verify:
 ## Scope Notes
 
 - Do not add dependencies or create documentation files unless the task requires them.
+- Because the SecPal project is still under `1.x`, breaking changes are acceptable when they remove insecure or obsolete compatibility layers. When taking that route, update validation and `CHANGELOG.md` in the same change set instead of keeping a legacy path alive by default.
