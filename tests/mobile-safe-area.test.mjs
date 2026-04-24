@@ -38,8 +38,12 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
     "utf8"
   );
 
+  // Matches an <article> element whose class attribute contains the min-w-0 utility.
+  const articleWithMinW0Pattern =
+    /<article\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/;
+
   // article channel cards have min-w-0 to prevent flex overflow
-  assert.match(component, /<article\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/);
+  assert.match(component, articleWithMinW0Pattern);
   // metadata path paragraph keeps both break-all and font-mono on the same
   // element so long machine-readable paths wrap without losing mono styling.
   assert.match(
