@@ -48,6 +48,8 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   );
   // section endpoint groups have min-w-0 to prevent flex overflow
   assert.match(component, /<section\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/);
-  // individual endpoint lines have break-all
-  assert.match(component, /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*">\s*\{\s*line\s*\}/);
+  // individual endpoint lines use break-all on the paragraph element
+  assert.match(component, /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*"[^>]*>/);
+  // and render the machine path line token as paragraph content
+  assert.match(component, /<p\b[^>]*>\s*\{\s*line\s*\}\s*<\/p>/);
 });
