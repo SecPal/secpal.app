@@ -43,7 +43,10 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
     /<article\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/;
   const OPENING_PARAGRAPH_TAG_WITH_BREAK_ALL_AND_FONT_MONO =
     /<p\b(?=[^>]*class="[^"]*\bbreak-all\b)(?=[^>]*class="[^"]*\bfont-mono\b)[^>]*>/;
-  const PARAGRAPH_WITH_LINE_TOKEN_PATTERN = /<p\b[^>]*>\s*\{\s*line\s*\}\s*<\/p>/;
+  // Matches a <p> that carries break-all AND renders the {line} token as its content,
+  // ensuring both the class and the content land on the same element.
+  const ENDPOINT_LINE_PARAGRAPH_PATTERN =
+    /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*"[^>]*>\s*\{\s*line\s*\}\s*<\/p>/;
 
   // article channel cards have min-w-0 to prevent flex overflow
   assert.match(component, ARTICLE_WITH_MIN_W_0_PATTERN);
@@ -52,8 +55,6 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   assert.match(component, OPENING_PARAGRAPH_TAG_WITH_BREAK_ALL_AND_FONT_MONO);
   // section endpoint groups have min-w-0 to prevent flex overflow
   assert.match(component, /<section\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/);
-  // individual endpoint lines use break-all on the paragraph element
-  assert.match(component, /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*"[^>]*>/);
-  // and render the machine path line token as paragraph content
-  assert.match(component, PARAGRAPH_WITH_LINE_TOKEN_PATTERN);
+  // individual endpoint lines have break-all on the same element that renders the line token
+  assert.match(component, ENDPOINT_LINE_PARAGRAPH_PATTERN);
 });
