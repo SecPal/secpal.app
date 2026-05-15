@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 
-const PARAGRAPH_WITH_BREAK_ALL_AND_FONT_MONO =
+const OPENING_PARAGRAPH_TAG_WITH_BREAK_ALL_AND_FONT_MONO =
   /<p\b(?=[^>]*class="[^"]*\bbreak-all\b)(?=[^>]*class="[^"]*\bfont-mono\b)[^>]*>/;
 
 test("global layout accounts for mobile safe-area insets", () => {
@@ -42,14 +42,14 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   );
 
   // Matches an <article> element whose class attribute contains the min-w-0 utility.
-  const articleWithMinW0Pattern =
+  const ARTICLE_WITH_MIN_W_0_PATTERN =
     /<article\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/;
 
   // article channel cards have min-w-0 to prevent flex overflow
-  assert.match(component, articleWithMinW0Pattern);
+  assert.match(component, ARTICLE_WITH_MIN_W_0_PATTERN);
   // metadata path paragraph keeps both break-all and font-mono on the same
   // element so long machine-readable paths wrap without losing mono styling.
-  assert.match(component, PARAGRAPH_WITH_BREAK_ALL_AND_FONT_MONO);
+  assert.match(component, OPENING_PARAGRAPH_TAG_WITH_BREAK_ALL_AND_FONT_MONO);
   // section endpoint groups have min-w-0 to prevent flex overflow
   assert.match(component, /<section\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/);
   // individual endpoint lines use break-all on the paragraph element
