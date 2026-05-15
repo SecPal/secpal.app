@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- refactored `mobile-safe-area` test assertions: extracted complex inline regex literals to named constants and restored the coupled `break-all`+`{line}` assertion so endpoint-line paragraph failures remain diagnosable without weakening test coverage
 - clarified the repo-local pre-`1.0.0` policy in Copilot governance so website work explicitly prefers removing insecure or obsolete compatibility layers over preserving them without a proven live caller
 - mandated `--body-file` for programmatic PR creation to prevent shell escaping issues in Copilot governance instructions
 - strengthened repo-local Copilot governance for AI findings: website work now requires proof of defect before merging AI-generated fix PRs and treats green CI alone as insufficient evidence for content, accessibility, or static-build refactors

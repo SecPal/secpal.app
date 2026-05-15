@@ -38,16 +38,23 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
     "utf8"
   );
 
+  // Matches an <article> element whose class attribute contains the min-w-0 utility.
+  const ARTICLE_WITH_MIN_W_0_PATTERN =
+    /<article\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/;
+  const OPENING_PARAGRAPH_TAG_WITH_BREAK_ALL_AND_FONT_MONO =
+    /<p\b(?=[^>]*class="[^"]*\bbreak-all\b)(?=[^>]*class="[^"]*\bfont-mono\b)[^>]*>/;
+  // Matches a <p> that carries break-all AND renders the {line} token as its content,
+  // ensuring both the class and the content land on the same element.
+  const ENDPOINT_LINE_PARAGRAPH_PATTERN =
+    /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*"[^>]*>\s*\{\s*line\s*\}\s*<\/p>/;
+
   // article channel cards have min-w-0 to prevent flex overflow
-  assert.match(component, /<article\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/);
+  assert.match(component, ARTICLE_WITH_MIN_W_0_PATTERN);
   // metadata path paragraph keeps both break-all and font-mono on the same
   // element so long machine-readable paths wrap without losing mono styling.
-  assert.match(
-    component,
-    /<p\b(?=[^>]*class="[^"]*\bbreak-all\b)(?=[^>]*class="[^"]*\bfont-mono\b)[^>]*>/
-  );
+  assert.match(component, OPENING_PARAGRAPH_TAG_WITH_BREAK_ALL_AND_FONT_MONO);
   // section endpoint groups have min-w-0 to prevent flex overflow
   assert.match(component, /<section\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/);
-  // individual endpoint lines have break-all
-  assert.match(component, /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*">\s*\{\s*line\s*\}/);
+  // individual endpoint lines have break-all on the same element that renders the line token
+  assert.match(component, ENDPOINT_LINE_PARAGRAPH_PATTERN);
 });
