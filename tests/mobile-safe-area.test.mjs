@@ -5,9 +5,6 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 
-const OPENING_PARAGRAPH_TAG_WITH_BREAK_ALL_AND_FONT_MONO =
-  /<p\b(?=[^>]*class="[^"]*\bbreak-all\b)(?=[^>]*class="[^"]*\bfont-mono\b)[^>]*>/;
-
 test("global layout accounts for mobile safe-area insets", () => {
   const css = readFileSync(
     new URL("../src/styles/global.css", import.meta.url),
@@ -44,6 +41,9 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   // Matches an <article> element whose class attribute contains the min-w-0 utility.
   const ARTICLE_WITH_MIN_W_0_PATTERN =
     /<article\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/;
+  const OPENING_PARAGRAPH_TAG_WITH_BREAK_ALL_AND_FONT_MONO =
+    /<p\b(?=[^>]*class="[^"]*\bbreak-all\b)(?=[^>]*class="[^"]*\bfont-mono\b)[^>]*>/;
+  const PARAGRAPH_WITH_LINE_TOKEN_PATTERN = /<p\b[^>]*>\s*\{\s*line\s*\}\s*<\/p>/;
 
   // article channel cards have min-w-0 to prevent flex overflow
   assert.match(component, ARTICLE_WITH_MIN_W_0_PATTERN);
@@ -55,5 +55,5 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   // individual endpoint lines use break-all on the paragraph element
   assert.match(component, /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*"[^>]*>/);
   // and render the machine path line token as paragraph content
-  assert.match(component, /<p\b[^>]*>\s*\{\s*line\s*\}\s*<\/p>/);
+  assert.match(component, PARAGRAPH_WITH_LINE_TOKEN_PATTERN);
 });
