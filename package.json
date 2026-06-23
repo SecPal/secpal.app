@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@tailwindplus/elements": "^1.0.0",
-    "astro": "^6.4.8"
+    "astro": "^7.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
@@ -55,13 +55,12 @@
     "anymatch": {
       "picomatch": "^2.3.2"
     },
-    "brace-expansion": "^5.0.5",
+    "brace-expansion": "^5.0.6",
     "defu": "^6.1.7",
     "micromatch": {
       "picomatch": "^2.3.2"
     },
     "picomatch": "^4.0.4",
-    "vite": "^7.3.2",
     "yaml": "^2.8.3"
   }
 }

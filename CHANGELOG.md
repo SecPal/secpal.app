@@ -38,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - fixed mobile overflow and right-shift in `src/components/Hero.astro` so the hero headline, subline, and CTAs remain properly aligned on narrow viewports
-- overrode vulnerable transitive `defu` and `vite` packages to patched release ranges through npm overrides so the website toolchain audit findings are remediated without broad dependency-range changes
+- upgraded `astro` to the first major release that officially carries patched `esbuild` support and kept the remaining npm audit remediations aligned through the lockfile plus targeted overrides (`brace-expansion`, `defu`), so the website toolchain findings no longer require out-of-range transitive overrides
 - neutral locale entry routes on `/` and `/android` now redirect German browser locales to `/de/...` and all other locales to `/en/...`, so `secpal.app` and `dev.secpal.app` no longer force the English Android page when the browser prefers German
 - added safe-area-aware body padding together with `viewport-fit=cover` and wrapping rules for Android machine-readable cards so text and content blocks no longer sit too close to the mobile screen edge or overflow on devices with asymmetric viewport insets
 
