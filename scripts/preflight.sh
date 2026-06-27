@@ -46,7 +46,7 @@ if command -v npx >/dev/null 2>&1; then
 
   # Only run markdownlint if .md files changed
   if echo "$CHANGED_FILES" | grep -q '\.md$'; then
-    npx --yes markdownlint-cli2 '**/*.md' '#node_modules' '#dist' '#.astro' || FORMAT_EXIT=1
+    npx --yes --package markdownlint-cli@0.49.0 markdownlint --config .markdownlint.json --dot '**/*.md' --ignore node_modules --ignore dist --ignore .astro --ignore .git || FORMAT_EXIT=1
   else
     echo "ℹ️  No markdown files changed, skipping markdownlint"
   fi

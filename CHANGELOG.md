@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- replaced the repo-local `markdownlint-cli2` pre-commit and preflight path with pinned `markdownlint-cli@0.49.0` usage and removed the stale `cli2` file references from export/licensing metadata
 - corrected the provider-neutral governance baseline so `AGENTS.md` and the Copilot mirror now advertise the workflow overlay, describe the existing `npm test` suite accurately, track Astro 7 instead of Astro 6, and pin the shared reusable quality workflows plus their `governance-ref` inputs to the reviewed `.github` SHA for reproducible validation
 - refactored `mobile-safe-area` test assertions: extracted complex inline regex literals to named constants and restored the coupled `break-all`+`{line}` assertion so endpoint-line paragraph failures remain diagnosable without weakening test coverage
 - clarified the repo-local pre-`1.0.0` policy in Copilot governance so website work explicitly prefers removing insecure or obsolete compatibility layers over preserving them without a proven live caller
