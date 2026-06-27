@@ -38,7 +38,6 @@ path = [
   ".nvmrc",
   ".yamllint.yml",
   ".markdownlint.json",
-  ".markdownlint-cli2.yaml",
   ".pre-commit-config.yaml",
   "package.json",
   "package-lock.json",
