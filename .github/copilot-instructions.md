@@ -14,6 +14,7 @@ for path-specific or stack-specific rules.
 
 - `AGENTS.md`
 - `.github/instructions/org-shared.instructions.md`
+- `.github/instructions/github-workflows.instructions.md`
 - `.github/instructions/astro-static.instructions.md`
 
 ## Core Runtime Baseline
@@ -29,7 +30,10 @@ Do not assume instructions from sibling repositories or comment-based inheritanc
   branch. When continuing existing work in a dirty worktree, first identify the
   existing changes, keep the current topic scope, and never overwrite changes
   you did not make.
-- Validate-first: this repo has no test suite; confirm the smallest relevant check (lint, typecheck, or build) fails before implementing a change and passes after.
+- Validate-first: confirm the smallest relevant check fails before implementing
+  a change and passes after. Use `npm test` when the touched area is covered by
+  the existing Node test suite; otherwise use the smallest relevant lint,
+  typecheck, or build validation.
 - Quality first. Do not trade correctness, review depth, validation depth, or issue tracking for speed.
 - Keep one topic per change. 1 topic = 1 PR = 1 branch. Do not mix unrelated fixes, features, refactors, docs, or governance cleanup.
 - Never use bypasses such as `--no-verify` or force-push.
@@ -108,7 +112,7 @@ At minimum verify:
 
 ## Repository Conventions
 
-- Stack: Node 22, Astro 6, Tailwind CSS v4, and TypeScript strict mode.
+- Stack: Node 22, Astro 7, Tailwind CSS v4, and TypeScript strict mode.
 - This repository is the public SecPal landing page and static marketing site.
 - Keep content and presentation close to the page or component that uses them.
 - Favor static rendering, minimal client-side JavaScript, semantic HTML, accessibility, and responsive layouts.
