@@ -7,6 +7,11 @@ set -euo pipefail
 ROOT_DIR="$(git rev-parse --show-toplevel)"
 cd "$ROOT_DIR"
 
+HAS_NODE_PROJECT=0
+if [ -f package.json ] && command -v npm >/dev/null 2>&1; then
+  HAS_NODE_PROJECT=1
+fi
+
 # Check if pushing from a protected branch
 CURRENT_BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null || echo "detached")
 PROTECTED_BRANCHES=("main" "master" "production")
@@ -39,14 +44,19 @@ git fetch origin "$BASE" 2>/dev/null || true
 # Get list of changed files for conditional checks
 CHANGED_FILES=$(git diff --name-only --cached 2>/dev/null || git diff --name-only HEAD 2>/dev/null || echo "")
 
+if [ "$HAS_NODE_PROJECT" -eq 1 ]; then
+  echo "Installing dependencies..."
+  npm ci --silent
+fi
+
 # 0) Formatting & Compliance
 FORMAT_EXIT=0
 if command -v npx >/dev/null 2>&1; then
-  npx --yes prettier --check --cache '**/*.{md,yml,yaml,json,ts,tsx,js,mjs,astro}' || FORMAT_EXIT=1
+  npx --no-install prettier --check --cache '**/*.{md,yml,yaml,json,ts,tsx,js,mjs,astro}' || FORMAT_EXIT=1
 
   # Only run markdownlint if .md files changed
   if echo "$CHANGED_FILES" | grep -q '\.md$'; then
-    npx --yes markdownlint --config .markdownlint.json --dot '**/*.md' --ignore node_modules --ignore dist --ignore .astro --ignore .git || FORMAT_EXIT=1
+    npx --no-install markdownlint --config .markdownlint.json --dot '**/*.md' --ignore node_modules --ignore dist --ignore .astro --ignore .git || FORMAT_EXIT=1
   else
     echo "ℹ️  No markdown files changed, skipping markdownlint"
   fi
@@ -91,10 +101,7 @@ if [ -f scripts/check-domains.sh ]; then
 fi
 
 # 1) Node.js / Astro
-if [ -f package.json ] && command -v npm >/dev/null 2>&1; then
-  echo "Installing dependencies..."
-  npm ci --silent
-
+if [ "$HAS_NODE_PROJECT" -eq 1 ]; then
   echo "Running Astro TypeScript check..."
   npm run check || {
     echo "❌ Astro check failed. Fix type errors above." >&2
