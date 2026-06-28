@@ -46,19 +46,11 @@ test("roadmap reflects the current shift-planning and OWKS priorities", () => {
     "expected completed German onboarding work to be removed from Aktuell"
   );
   assert.ok(
-    !englishNowNames.includes("Android distribution"),
-    "expected English Android distribution work to be removed from Now"
+    !englishNextNames.includes("Android app"),
+    "expected English Android app work to be removed from Next"
   );
   assert.ok(
-    !germanNowNames.includes("Android-Verteilung"),
-    "expected German Android distribution work to be removed from Aktuell"
-  );
-  assert.ok(
-    !englishNextNames.includes("Direct download & beta distribution"),
-    "expected English Android rollout follow-up to be removed from Next"
-  );
-  assert.ok(
-    !germanNextNames.includes("Direktdownload & Beta-Verteilung"),
-    "expected German Android rollout follow-up to be removed from Next"
+    !germanNextNames.includes("Android-App"),
+    "expected German Android app work to be removed from Als Nächstes"
   );
 });
