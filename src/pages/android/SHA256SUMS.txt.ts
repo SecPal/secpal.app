@@ -4,15 +4,12 @@
 import type { APIRoute } from "astro";
 
 import {
-  buildTrackChecksumPath,
+  buildLatestChecksumPath,
   buildPendingAndroidAssetResponse,
 } from "../../lib/android-distribution.ts";
 
 export const GET: APIRoute = ({ site }) => {
   const siteUrl = site ?? new URL("https://secpal.app");
 
-  return buildPendingAndroidAssetResponse(
-    buildTrackChecksumPath("stable"),
-    siteUrl
-  );
+  return buildPendingAndroidAssetResponse(buildLatestChecksumPath(), siteUrl);
 };

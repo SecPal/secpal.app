@@ -7,6 +7,8 @@ import test from "node:test";
 import {
   androidArtifactHost,
   buildChannelAliasMetadataPath,
+  buildLatestArtifactPath,
+  buildLatestChecksumPath,
   buildTrackArtifactPath,
   buildTrackChecksumPath,
   buildTrackMetadataPath,
@@ -150,12 +152,12 @@ test("stable alias artifact endpoints explain pending release availability", asy
   const artifactText = await artifactResponse.text();
   const checksumText = await checksumResponse.text();
   assert.ok(
-    artifactText.includes(buildTrackArtifactPath("stable")),
-    `expected artifact body to contain ${buildTrackArtifactPath("stable")}`
+    artifactText.includes(buildLatestArtifactPath()),
+    `expected artifact body to contain ${buildLatestArtifactPath()}`
   );
   assert.ok(
-    checksumText.includes(buildTrackChecksumPath("stable")),
-    `expected checksum body to contain ${buildTrackChecksumPath("stable")}`
+    checksumText.includes(buildLatestChecksumPath()),
+    `expected checksum body to contain ${buildLatestChecksumPath()}`
   );
 });
 
