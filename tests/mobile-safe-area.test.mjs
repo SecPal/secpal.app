@@ -44,6 +44,10 @@ test("mobile navigation avoids inline click handlers and is wired from script", 
   assert.match(layout, /mobile-menu-open/);
   assert.match(layout, /mobile-menu-close/);
   assert.match(layout, /mobile-menu/);
+  assert.match(
+    layout,
+    /try\s*\{\s*stored = localStorage\.getItem\("theme"\);\s*\}\s*catch/
+  );
   assert.match(layout, /classList\.toggle\("hidden", !isOpen\)/);
   assert.match(
     layout,
@@ -77,6 +81,11 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   assert.match(component, TECHNICAL_DETAILS_HEADING_PATTERN);
   // individual endpoint links keep long machine paths wrapped on the rendered href element
   assert.match(component, ENDPOINT_LINK_PARAGRAPH_PATTERN);
+  // verification items keep correct definition-list semantics for label/value pairs.
+  assert.match(
+    component,
+    /<dl\b[^>]*class="[^"]*\bgrid\b[^"]*\bsm:grid-cols-2\b[^"]*"[^>]*>[\s\S]*<dt\b[\s\S]*<dd\b[\s\S]*<\/dl>/
+  );
   // verification items also keep machine-readable values on break-all mono elements.
   assert.match(
     component,

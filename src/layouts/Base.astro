@@ -115,7 +115,10 @@ const previewUrl = canonicalUrl ?? xDefaultUrl;
     <!-- Dark mode: runs before first paint to prevent flash -->
     <script is:inline>
       (function () {
-        var stored = localStorage.getItem("theme");
+        var stored = null;
+        try {
+          stored = localStorage.getItem("theme");
+        } catch {}
         var prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)"
         ).matches;
@@ -130,7 +133,9 @@ const previewUrl = canonicalUrl ?? xDefaultUrl;
           if (btn) {
             btn.addEventListener("click", function () {
               var isDark = document.documentElement.classList.toggle("dark");
-              localStorage.setItem("theme", isDark ? "dark" : "light");
+              try {
+                localStorage.setItem("theme", isDark ? "dark" : "light");
+              } catch {}
             });
           }
           if (mobileMenu && mobileMenuOpen && mobileMenuClose) {

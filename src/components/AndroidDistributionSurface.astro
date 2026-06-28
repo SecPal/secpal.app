@@ -203,7 +203,7 @@ const content = getAndroidDistributionContent(locale);
             {content.verificationTitle}
           </h3>
         </div>
-        <div class="grid gap-6 px-6 py-5 sm:grid-cols-2">
+        <dl class="grid gap-6 px-6 py-5 sm:grid-cols-2">
           {
             content.verificationItems.map((item) => (
               <div class="min-w-0">
@@ -216,7 +216,7 @@ const content = getAndroidDistributionContent(locale);
               </div>
             ))
           }
-        </div>
+        </dl>
       </div>
 
       <section
