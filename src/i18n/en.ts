@@ -74,14 +74,9 @@ export const en = {
       description: "Actively in development",
       items: [
         {
-          name: "Passkeys & WebAuthn",
+          name: "Shift planning",
           description:
-            "Password-free login via device biometrics or security keys (FIDO2/WebAuthn) — more secure and easier to use than passwords.",
-        },
-        {
-          name: "Employee onboarding (BewachV §16)",
-          description:
-            "Structured onboarding that collects all fields required for Bewacherregister registration — with a dedicated invite link instead of a password-reset workaround.",
+            "Duty rosters, shift assignments, and coverage planning — integrated into the operational workflow rather than managed separately.",
         },
       ],
     },
@@ -90,9 +85,9 @@ export const en = {
       description: "Planned for the near term",
       items: [
         {
-          name: "Android app",
+          name: "Online guard tour system",
           description:
-            "Native Android app — same capabilities as the web app, suitable for shared devices and field use.",
+            "Checkpoint-based patrol recording via NFC or QR — traceable guard tours as a natural part of the operational log.",
         },
       ],
     },
@@ -100,16 +95,6 @@ export const en = {
       label: "Later",
       description: "Longer-term direction — no dates attached",
       items: [
-        {
-          name: "Shift planning",
-          description:
-            "Duty rosters, shift assignments, and coverage planning — integrated into the operational workflow rather than managed separately.",
-        },
-        {
-          name: "Online guard tour system",
-          description:
-            "Checkpoint-based patrol recording via NFC or QR — traceable guard tours as a natural part of the operational log.",
-        },
         {
           name: "Contract management & digital signatures",
           description:

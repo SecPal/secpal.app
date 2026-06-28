@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - added a public roadmap page at `/roadmap/`, localized as `/en/roadmap/` and `/de/roadmap/`
-- documented current roadmap focus (Passkeys, employee onboarding), next planned step (Android app), and longer-term direction (shift planning, guard tour system, contract management, service instruction configurator)
+- documented current roadmap focus (shift planning), the next planned step (online guard tour system), and longer-term direction (contract management and service instruction configurator)
+- added a Node regression test that keeps the English and German roadmap copy aligned with the current shift-planning focus and the next OWKS milestone
 - linked the roadmap page to the full changelog at `changelog.secpal.app`
 - added roadmap navigation link to desktop and mobile menus, and roadmap paths to the sitemap
 - added the public Android distribution surface on `secpal.app/android`, including localized human-facing landing pages, stable machine-readable latest and versioned release JSON endpoints, navigation/sitemap discovery, and explicit `apk.secpal.app` host documentation for the single-package Android rollout architecture
@@ -24,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- refreshed the English and German roadmap copy so shift planning is the current focus, OWKS is the next milestone, and completed passkey, onboarding, and Android distribution work is no longer shown as in progress
 - replaced the stub `LICENSES/LicenseRef-TailwindPlus.txt` summary with the
   published Tailwind Plus license text and clarified that
   `LicenseRef-TailwindPlus` is the repo's SPDX reference for Tailwind

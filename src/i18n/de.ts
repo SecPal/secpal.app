@@ -76,14 +76,9 @@ export const de: Translations = {
       description: "In aktiver Entwicklung",
       items: [
         {
-          name: "Passkeys & WebAuthn",
+          name: "Dienstplanung",
           description:
-            "Passwortloser Login per Gerätebiometrie oder Security-Key (FIDO2/WebAuthn) — sicherer und unkomplizierter als Passwörter.",
-        },
-        {
-          name: "Mitarbeiter-Onboarding (BewachV §16)",
-          description:
-            "Strukturiertes Onboarding, das alle für die Bewacherregister-Anmeldung erforderlichen Felder erfasst — mit eigenem Einladungslink statt einem Passwort-Reset als Behelf.",
+            "Dienstpläne, Schichtzuweisungen und Besetzungsplanung — eingebaut in den operativen Ablauf statt separat verwaltet.",
         },
       ],
     },
@@ -92,9 +87,9 @@ export const de: Translations = {
       description: "Für die nahe Zukunft geplant",
       items: [
         {
-          name: "Android-App",
+          name: "Online-Wächterkontrollsystem (OWKS)",
           description:
-            "Native Android-App — gleicher Funktionsumfang wie die Web-App, geeignet für gemeinsam genutzte Geräte und den Außendienst.",
+            "Checkpoint-basierte Kontrollgangerfassung per NFC oder QR — nachvollziehbare Kontrollgänge als natürlicher Teil des Betriebsprotokolls.",
         },
       ],
     },
@@ -102,16 +97,6 @@ export const de: Translations = {
       label: "Später",
       description: "Längerfristige Richtung — ohne feste Termine",
       items: [
-        {
-          name: "Dienstplanung",
-          description:
-            "Dienstpläne, Schichtzuweisungen und Besetzungsplanung — eingebaut in den operativen Ablauf statt separat verwaltet.",
-        },
-        {
-          name: "Online-Wächterkontrollsystem (OWKS)",
-          description:
-            "Checkpoint-basierte Kontrollgangerfassung per NFC oder QR — nachvollziehbare Kontrollgänge als natürlicher Teil des Betriebsprotokolls.",
-        },
         {
           name: "Vertragsverwaltung & digitale Unterschrift",
           description:
