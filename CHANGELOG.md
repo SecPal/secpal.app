@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- reviewed and approved the pinned `sharp` and `esbuild` install scripts in `package.json`, so `npm ci` no longer reports pending `allowScripts` warnings for the website toolchain
 - fixed mobile overflow and right-shift in `src/components/Hero.astro` so the hero headline, subline, and CTAs remain properly aligned on narrow viewports
 - upgraded `astro` to the first major release that officially carries patched `esbuild` support and kept the remaining npm audit remediations aligned through the lockfile plus targeted overrides (`brace-expansion`, `defu`), so the website toolchain findings no longer require out-of-range transitive overrides
 - neutral locale entry routes on `/` and `/android` now redirect German browser locales to `/de/...` and all other locales to `/en/...`, so `secpal.app` and `dev.secpal.app` no longer force the English Android page when the browser prefers German
