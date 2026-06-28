@@ -151,4 +151,7 @@ metadata.
 
 AGPL-3.0-or-later — see [LICENSE](LICENSE).
 
-UI blocks are adapted from [Tailwind Plus](https://tailwindcss.com/plus) and licensed under the Tailwind Plus License — see [LICENSES/LicenseRef-TailwindPlus.txt](LICENSES/LicenseRef-TailwindPlus.txt).
+Tailwind Plus-derived components use `LicenseRef-TailwindPlus`; the repository
+vendors the published Tailwind Plus license text, including the Personal and
+Team sections published by Tailwind Labs, in
+[LICENSES/LicenseRef-TailwindPlus.txt](LICENSES/LicenseRef-TailwindPlus.txt).
