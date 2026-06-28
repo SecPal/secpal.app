@@ -24,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- replaced the stub `LICENSES/LicenseRef-TailwindPlus.txt` summary with the
+  published Tailwind Plus license text and clarified that
+  `LicenseRef-TailwindPlus` is the repo's SPDX reference for Tailwind
+  Plus-derived components
 - replaced the repo-local `markdownlint-cli2` pre-commit and preflight path with pinned `markdownlint-cli@0.49.0` usage and removed the stale `cli2` file references from export/licensing metadata
 - expanded the public privacy notice so it now covers the SecPal Android app, beta distribution, Google Play / third-party store context, and app-data deletion contact paths in addition to the website itself
 - refocused the public Android landing page on end users: stable and beta are now presented as simple download choices, rollout methods are explained without pretending to be separate APK channels, and the deeper machine-readable endpoints are tucked behind secondary technical details
