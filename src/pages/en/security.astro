@@ -23,7 +23,7 @@ const faqItems = [
   {
     question: "Are tracking or advertising services already in use?",
     answer:
-      "Not at the moment. The public website intentionally stays lean and currently avoids marketing trackers or ad networks.",
+      "Not at the moment. The public website intentionally stays lean and avoids marketing trackers or ad networks.",
   },
 ];
 ---
@@ -35,9 +35,9 @@ const faqItems = [
   canonicalPath="/en/security/"
   currentPath="/security"
   xDefaultPath="/security/"
-  eyebrow="Trust & Security"
+  eyebrow="SecPal"
   headline="Security"
-  intro="This page gives the reporting path for security issues and summarizes the currently verifiable public security posture of secpal.app."
+  intro="This page gives the reporting path for security issues and summarizes the publicly verifiable security posture of secpal.app."
   updatedLabel="Last updated"
   updatedAt="March 21, 2026"
 >
@@ -50,6 +50,7 @@ const faqItems = [
       </h2>
       <p class="mt-6">
         If you discover a vulnerability, please report it confidentially to
+        {" "}
         <a
           href="mailto:security@secpal.app"
           class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
@@ -66,10 +67,10 @@ const faqItems = [
         Current status
       </h2>
       <p class="mt-6">
-        SecPal is not yet a live production platform. The public website is a
-        deliberately lean website focused on landing content, legal information,
-        and contact routes. This page therefore focuses on vulnerability
-        reporting and the current public state.
+        SecPal is not yet a live production platform. The public website stays
+        deliberately lean and focuses on landing content, legal information, and
+        contact routes. This page therefore focuses on vulnerability reporting
+        and the current public state.
       </p>
     </div>
 
@@ -101,8 +102,7 @@ const faqItems = [
           <span
             ><strong class="font-semibold text-gray-900 dark:text-white"
               >Data minimization:</strong
-            > the landing page currently avoids unnecessary tracking and marketing
-            services.</span
+            > the landing page avoids tracking and marketing services.</span
           >
         </li>
         <li class="flex gap-x-3">

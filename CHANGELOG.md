@@ -18,13 +18,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - documented current roadmap focus (Passkeys, employee onboarding), next planned step (Android app), and longer-term direction (shift planning, guard tour system, contract management, service instruction configurator)
 - linked the roadmap page to the full changelog at `changelog.secpal.app`
 - added roadmap navigation link to desktop and mobile menus, and roadmap paths to the sitemap
-- added the public Android distribution surface on `secpal.app/android`, including localized human-facing landing pages, stable machine-readable channel and release-model JSON endpoints, navigation/sitemap discovery, and explicit `apk.secpal.app` host documentation for the single-package Android rollout architecture
-- added a concrete Android release metadata template endpoint at `apk.secpal.app/android/releases/{version}/metadata.json` plus shared versioned metadata helpers, so release automation and documentation can reference one stable machine-readable contract before APK hosting is wired up
+- added the public Android distribution surface on `secpal.app/android`, including localized human-facing landing pages, stable machine-readable latest and versioned release JSON endpoints, navigation/sitemap discovery, and explicit `apk.secpal.app` host documentation for the single-package Android rollout architecture
+- added a concrete Android release metadata template endpoint at `apk.secpal.app/android/releases/{versionCode}/metadata.json` plus shared versioned metadata helpers, so release automation and documentation can reference one stable machine-readable contract before APK hosting is wired up
 - added stable placeholder routes for latest and versioned Android APK/checksum files on `apk.secpal.app`, so the public artifact URL model now resolves with explicit pre-release `404` responses instead of missing route definitions
 
 ### Changed
 
 - replaced the repo-local `markdownlint-cli2` pre-commit and preflight path with pinned `markdownlint-cli@0.49.0` usage and removed the stale `cli2` file references from export/licensing metadata
+- expanded the public privacy notice so it now covers the SecPal Android app, beta distribution, Google Play / third-party store context, and app-data deletion contact paths in addition to the website itself
+- refocused the public Android landing page on end users: stable and beta are now presented as simple download choices, rollout methods are explained without pretending to be separate APK channels, and the deeper machine-readable endpoints are tucked behind secondary technical details
 - corrected the provider-neutral governance baseline so `AGENTS.md` and the Copilot mirror now advertise the workflow overlay, describe the existing `npm test` suite accurately, track Astro 7 instead of Astro 6, and pin the shared reusable quality workflows plus their `governance-ref` inputs to the reviewed `.github` SHA for reproducible validation
 - refactored `mobile-safe-area` test assertions: extracted complex inline regex literals to named constants and restored the coupled `break-all`+`{line}` assertion so endpoint-line paragraph failures remain diagnosable without weakening test coverage
 - clarified the repo-local pre-`1.0.0` policy in Copilot governance so website work explicitly prefers removing insecure or obsolete compatibility layers over preserving them without a proven live caller
@@ -36,6 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - clarified the repo-local PR workflow so finished website work must be self-reviewed, committed, and pushed before any PR exists, and the first PR state must always be draft until the final PR-view self-review is clean
 - aligned the repo-local domain guidance and validation with the renamed Android application identifier `app.secpal`, removing the old identifier-only exception from current website policy text
 - reduced the repo-local Copilot always-on context by replacing the long runtime baseline and removing the auto-loaded overlay fallback, which lowers request size in large VS Code workspaces without dropping the website-specific governance rules
+- simplified the Android distribution contract so `stable` and optional `beta` are the only APK release stages, `apk.secpal.app/android/latest.json` is only a stable alias, and all human or tooling integration paths reuse those canonical manifests instead of pretending to be separate APK channels
+- published the Android app-signing SHA-256 fingerprint on the `/android` distribution surface and in the machine-readable latest metadata so users can verify that direct SecPal downloads and Google Play releases share the same signing identity
 
 ### Fixed
 

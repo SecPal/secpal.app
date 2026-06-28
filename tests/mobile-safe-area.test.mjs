@@ -29,6 +29,32 @@ test("base layout opts into viewport-fit cover for mobile safe areas", () => {
   assert.match(layout, /viewport-fit=cover/);
 });
 
+test("mobile navigation avoids inline click handlers and is wired from script", () => {
+  const nav = readFileSync(
+    new URL("../src/components/Nav.astro", import.meta.url),
+    "utf8"
+  );
+  const layout = readFileSync(
+    new URL("../src/layouts/Base.astro", import.meta.url),
+    "utf8"
+  );
+
+  assert.doesNotMatch(nav, /\bonclick=/);
+  assert.doesNotMatch(nav, /class:list\(/);
+  assert.match(layout, /mobile-menu-open/);
+  assert.match(layout, /mobile-menu-close/);
+  assert.match(layout, /mobile-menu/);
+  assert.match(
+    layout,
+    /try\s*\{\s*stored = localStorage\.getItem\("theme"\);\s*\}\s*catch/
+  );
+  assert.match(layout, /classList\.toggle\("hidden", !isOpen\)/);
+  assert.match(
+    layout,
+    /setAttribute\(\s*"aria-expanded",\s*isOpen \? "true" : "false"\s*\)/
+  );
+});
+
 test("android distribution cards wrap long visible machine paths on mobile", () => {
   const component = readFileSync(
     new URL(
@@ -41,20 +67,28 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   // Matches an <article> element whose class attribute contains the min-w-0 utility.
   const ARTICLE_WITH_MIN_W_0_PATTERN =
     /<article\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/;
-  const OPENING_PARAGRAPH_TAG_WITH_BREAK_ALL_AND_FONT_MONO =
-    /<p\b(?=[^>]*class="[^"]*\bbreak-all\b)(?=[^>]*class="[^"]*\bfont-mono\b)[^>]*>/;
-  // Matches a <p> that carries break-all AND renders the {line} token as its content,
-  // ensuring both the class and the content land on the same element.
-  const ENDPOINT_LINE_PARAGRAPH_PATTERN =
-    /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*"[^>]*>\s*\{\s*line\s*\}\s*<\/p>/;
+  // Matches a <p> that carries break-all and renders the entry href token.
+  const ENDPOINT_LINK_PARAGRAPH_PATTERN =
+    /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*\bfont-mono\b[^"]*"[^>]*>\s*\{\s*entry\.href\s*\}\s*<\/p>/;
+  const TECHNICAL_DETAILS_HEADING_PATTERN =
+    /<h3\b[^>]*>\s*\{content\.technicalDetailsTitle\}\s*<\/h3>/;
 
-  // article channel cards have min-w-0 to prevent flex overflow
+  // download and rollout cards keep min-w-0 to prevent overflow
   assert.match(component, ARTICLE_WITH_MIN_W_0_PATTERN);
-  // metadata path paragraph keeps both break-all and font-mono on the same
-  // element so long machine-readable paths wrap without losing mono styling.
-  assert.match(component, OPENING_PARAGRAPH_TAG_WITH_BREAK_ALL_AND_FONT_MONO);
   // section endpoint groups have min-w-0 to prevent flex overflow
   assert.match(component, /<section\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/);
-  // individual endpoint lines have break-all on the same element that renders the line token
-  assert.match(component, ENDPOINT_LINE_PARAGRAPH_PATTERN);
+  // technical endpoints stay at the bottom of the page but remain visible by default.
+  assert.match(component, TECHNICAL_DETAILS_HEADING_PATTERN);
+  // individual endpoint links keep long machine paths wrapped on the rendered href element
+  assert.match(component, ENDPOINT_LINK_PARAGRAPH_PATTERN);
+  // verification items keep correct definition-list semantics for label/value pairs.
+  assert.match(
+    component,
+    /<dl\b[^>]*class="[^"]*\bgrid\b[^"]*\bsm:grid-cols-2\b[^"]*"[^>]*>[\s\S]*<dt\b[\s\S]*<dd\b[\s\S]*<\/dl>/
+  );
+  // verification items also keep machine-readable values on break-all mono elements.
+  assert.match(
+    component,
+    /<dd\b[^>]*class="[^"]*\bbreak-all\b[^"]*\bfont-mono\b[^"]*"[^>]*>\s*\{\s*item\.value\s*\}\s*<\/dd>/
+  );
 });

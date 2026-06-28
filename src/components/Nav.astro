@@ -10,19 +10,52 @@ import { useTranslations, getLocalizedPath } from "../i18n/index.ts";
 interface Props {
   locale: Locale;
   currentPath?: string;
+  transparent?: boolean;
+  tone?: "default" | "androidHero";
+  overlay?: boolean;
 }
 
-const { locale, currentPath = "/" } = Astro.props;
+const {
+  locale,
+  currentPath = "/",
+  transparent = false,
+  tone = "default",
+  overlay = false,
+} = Astro.props;
 const t = useTranslations(locale);
 
 const otherLocale: Locale = locale === "en" ? "de" : "en";
 const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
+const androidPath = getLocalizedPath("/android", locale);
 const progressPath = `${getLocalizedPath("/", locale)}#progress`;
 const updatesPath = `${getLocalizedPath("/", locale)}#updates`;
+const heroTone = tone === "androidHero";
+const headerBackgroundClass = heroTone
+  ? "bg-transparent"
+  : transparent
+    ? "bg-transparent"
+    : "bg-white dark:bg-gray-900";
+const utilityControlClass =
+  transparent || heroTone
+    ? "text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+    : "text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white";
+const mobileMenuToggleClass =
+  transparent || heroTone
+    ? "-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-900 dark:text-white"
+    : "-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-400";
+const mobileMenuCloseClass =
+  transparent || heroTone
+    ? "-m-2.5 rounded-md p-2.5 text-gray-900 dark:text-white"
+    : "-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-400";
 ---
 
 <!-- @tailwindplus/elements is loaded in Base.astro via script tag -->
-<header class="bg-white dark:bg-gray-900">
+<header
+  class:list={[
+    overlay ? "absolute inset-x-0 top-0 z-20" : "relative z-20",
+    headerBackgroundClass,
+  ]}
+>
   <nav
     aria-label="Global"
     class="mx-auto flex max-w-7xl items-center justify-between gap-x-6 px-6 py-[var(--secpal-nav-padding-y)] lg:px-8"
@@ -58,6 +91,11 @@ const updatesPath = `${getLocalizedPath("/", locale)}#updates`;
         >{t.nav.roadmap}</a
       >
       <a
+        href={androidPath}
+        class="text-sm/6 font-semibold text-gray-900 dark:text-white"
+        >{t.nav.android}</a
+      >
+      <a
         href={updatesPath}
         class="text-sm/6 font-semibold text-gray-900 dark:text-white"
         >{t.nav.updates}</a
@@ -74,7 +112,10 @@ const updatesPath = `${getLocalizedPath("/", locale)}#updates`;
       <!-- Language switcher -->
       <a
         href={otherLocalePath}
-        class="hidden text-xs font-semibold uppercase tracking-wide text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white lg:block"
+        class:list={[
+          "hidden text-xs font-semibold uppercase tracking-wide lg:block",
+          utilityControlClass,
+        ]}
         aria-label={otherLocale === "de"
           ? "Auf Deutsch wechseln"
           : "Switch to English"}
@@ -87,7 +128,7 @@ const updatesPath = `${getLocalizedPath("/", locale)}#updates`;
         id="dark-toggle"
         type="button"
         aria-label={t.nav.toggleDarkMode}
-        class="rounded-md p-1.5 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+        class:list={["rounded-md p-1.5", utilityControlClass]}
       >
         <!-- Sun — shown in dark mode -->
         <svg
@@ -131,10 +172,12 @@ const updatesPath = `${getLocalizedPath("/", locale)}#updates`;
     <!-- Mobile menu button -->
     <div class="flex lg:hidden">
       <button
+        id="mobile-menu-open"
         type="button"
-        onclick="document.getElementById('mobile-menu').classList.remove('hidden')"
-        class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-400"
+        class={mobileMenuToggleClass}
         aria-label={t.nav.openMenu}
+        aria-controls="mobile-menu"
+        aria-expanded="false"
       >
         <span class="sr-only">{t.nav.openMenu}</span>
         <svg
@@ -186,9 +229,9 @@ const updatesPath = `${getLocalizedPath("/", locale)}#updates`;
           >{t.nav.followProgress}</a
         >
         <button
+          id="mobile-menu-close"
           type="button"
-          onclick="document.getElementById('mobile-menu').classList.add('hidden')"
-          class="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-400"
+          class={mobileMenuCloseClass}
           aria-label={t.nav.closeMenu}
         >
           <span class="sr-only">{t.nav.closeMenu}</span>
@@ -219,6 +262,11 @@ const updatesPath = `${getLocalizedPath("/", locale)}#updates`;
               href={getLocalizedPath("/roadmap", locale)}
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
               >{t.nav.roadmap}</a
+            >
+            <a
+              href={androidPath}
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
+              >{t.nav.android}</a
             >
             <a
               href={updatesPath}
