@@ -6,6 +6,8 @@ import test from "node:test";
 
 import {
   androidArtifactHost,
+  androidPlayStoreUrl,
+  buildArtifactUrl,
   buildChannelAliasMetadataPath,
   buildLatestArtifactPath,
   buildLatestChecksumPath,
@@ -57,6 +59,13 @@ test("buildVersionedMetadataDocument returns stable versioned Android release UR
     "C3:E9:FD:07:69:F3:34:9B:B0:B0:56:BA:E6:69:47:23:40:E1:CB:28:66:26:DE:30:C9:C9:FA:F9:5F:1E:47:B5"
   );
   assert.equal(metadata.signing_key_shared_with_google_play, true);
+});
+
+test("buildArtifactUrl preserves literal template placeholders", () => {
+  assert.equal(
+    buildArtifactUrl(buildVersionedMetadataPath("{versionCode}")),
+    `https://apk.secpal.app${buildVersionedMetadataPath("{versionCode}")}`
+  );
 });
 
 test("stable alias metadata points to the canonical stable manifest", async () => {
@@ -184,5 +193,27 @@ test("versioned Android artifact routes explain pending release availability", a
   assert.ok(
     checksumText.includes(buildVersionedChecksumPath("{versionCode}")),
     `expected checksum body to contain ${buildVersionedChecksumPath("{versionCode}")}`
+  );
+});
+
+test("android distribution content points Play Store CTAs at the app listing", async () => {
+  const { androidDistributionContent } =
+    await import("../src/lib/android-distribution.ts");
+
+  assert.equal(
+    androidDistributionContent.en.heroPrimary.href,
+    androidPlayStoreUrl
+  );
+  assert.equal(
+    androidDistributionContent.de.heroPrimary.href,
+    androidPlayStoreUrl
+  );
+  assert.equal(
+    androidDistributionContent.en.downloadOptions[0]?.href,
+    androidPlayStoreUrl
+  );
+  assert.equal(
+    androidDistributionContent.de.downloadOptions[0]?.href,
+    androidPlayStoreUrl
   );
 });

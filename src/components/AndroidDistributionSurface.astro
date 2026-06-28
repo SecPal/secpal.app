@@ -19,7 +19,7 @@ const {
 const content = getAndroidDistributionContent(locale);
 ---
 
-<div class="bg-white dark:bg-gray-900">
+<div class:list={[inheritHeroBackground ? null : "bg-white dark:bg-gray-900"]}>
   <section
     class:list={[
       "relative isolate flex items-center overflow-hidden border-b border-gray-200 dark:border-white/10",
@@ -71,12 +71,23 @@ const content = getAndroidDistributionContent(locale);
           >
             {content.heroPrimary.label}
           </a>
-          <a
-            href={content.heroSecondary.href}
-            class="rounded-md bg-white px-4 py-2.5 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 dark:bg-white/5 dark:text-white dark:ring-white/15 dark:hover:bg-white/10"
-          >
-            {content.heroSecondary.label}
-          </a>
+          {
+            content.heroSecondary.href ? (
+              <a
+                href={content.heroSecondary.href}
+                class="rounded-md bg-white px-4 py-2.5 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 dark:bg-white/5 dark:text-white dark:ring-white/15 dark:hover:bg-white/10"
+              >
+                {content.heroSecondary.label}
+              </a>
+            ) : (
+              <span
+                aria-disabled="true"
+                class="rounded-md bg-white px-4 py-2.5 text-sm font-semibold text-gray-400 ring-1 ring-gray-200 ring-inset dark:bg-white/5 dark:text-gray-500 dark:ring-white/10"
+              >
+                {content.heroSecondary.label}
+              </span>
+            )
+          }
         </div>
       </div>
 
@@ -133,17 +144,26 @@ const content = getAndroidDistributionContent(locale);
                 {option.description}
               </p>
               <div class="mt-auto pt-5">
-                <a
-                  href={option.href}
-                  class:list={[
-                    "inline-flex rounded-full px-4 py-2 text-sm font-semibold",
-                    option.kind === "primary"
-                      ? "bg-indigo-600 text-white hover:bg-indigo-500"
-                      : "bg-gray-900 text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200",
-                  ]}
-                >
-                  {option.cta}
-                </a>
+                {option.href ? (
+                  <a
+                    href={option.href}
+                    class:list={[
+                      "inline-flex rounded-full px-4 py-2 text-sm font-semibold",
+                      option.kind === "primary"
+                        ? "bg-indigo-600 text-white hover:bg-indigo-500"
+                        : "bg-gray-900 text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200",
+                    ]}
+                  >
+                    {option.cta}
+                  </a>
+                ) : (
+                  <span
+                    aria-disabled="true"
+                    class="inline-flex rounded-full bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-400 dark:bg-white/5 dark:text-gray-500"
+                  >
+                    {option.cta}
+                  </span>
+                )}
                 <div class="mt-3 min-h-[1.5rem]">
                   {"secondaryLink" in option ? (
                     <p class="text-sm/6 text-gray-500 dark:text-gray-400">
