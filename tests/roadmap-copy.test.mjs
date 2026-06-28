@@ -12,6 +12,18 @@ test("roadmap reflects the current shift-planning and OWKS priorities", () => {
   const germanNowNames = de.roadmap.now.items.map((item) => item.name);
   const englishNextNames = en.roadmap.next.items.map((item) => item.name);
   const germanNextNames = de.roadmap.next.items.map((item) => item.name);
+  const englishLaterNames = en.roadmap.later.items.map((item) => item.name);
+  const germanLaterNames = de.roadmap.later.items.map((item) => item.name);
+  const englishActiveNames = [
+    ...englishNowNames,
+    ...englishNextNames,
+    ...englishLaterNames,
+  ];
+  const germanActiveNames = [
+    ...germanNowNames,
+    ...germanNextNames,
+    ...germanLaterNames,
+  ];
 
   assert.ok(
     englishNowNames.includes("Shift planning"),
@@ -30,27 +42,35 @@ test("roadmap reflects the current shift-planning and OWKS priorities", () => {
     "expected German roadmap to reserve the next milestone for the OWKS"
   );
   assert.ok(
-    !englishNowNames.includes("Passkeys & WebAuthn"),
-    "expected shipped English passkeys work to be removed from Now"
+    !englishActiveNames.includes("Passkeys & WebAuthn"),
+    "expected shipped English passkeys work to be removed from the active roadmap phases"
   );
   assert.ok(
-    !germanNowNames.includes("Passkeys & WebAuthn"),
-    "expected shipped German passkeys work to be removed from Aktuell"
+    !germanActiveNames.includes("Passkeys & WebAuthn"),
+    "expected shipped German passkeys work to be removed from the active roadmap phases"
   );
   assert.ok(
-    !englishNowNames.includes("Employee onboarding (BewachV §16)"),
-    "expected completed English onboarding work to be removed from Now"
+    !englishActiveNames.includes("Employee onboarding (BewachV §16)"),
+    "expected completed English onboarding work to be removed from the active roadmap phases"
   );
   assert.ok(
-    !germanNowNames.includes("Mitarbeiter-Onboarding (BewachV §16)"),
-    "expected completed German onboarding work to be removed from Aktuell"
+    !germanActiveNames.includes("Mitarbeiter-Onboarding (BewachV §16)"),
+    "expected completed German onboarding work to be removed from the active roadmap phases"
   );
   assert.ok(
-    !englishNextNames.includes("Android app"),
-    "expected English Android app work to be removed from Next"
+    !englishActiveNames.includes("Android distribution"),
+    "expected English Android distribution work to be removed from the active roadmap phases"
   );
   assert.ok(
-    !germanNextNames.includes("Android-App"),
-    "expected German Android app work to be removed from Als Nächstes"
+    !germanActiveNames.includes("Android-Verteilung"),
+    "expected German Android distribution work to be removed from the active roadmap phases"
+  );
+  assert.ok(
+    !englishActiveNames.includes("Android app"),
+    "expected English Android app work to be removed from the active roadmap phases"
+  );
+  assert.ok(
+    !germanActiveNames.includes("Android-App"),
+    "expected German Android app work to be removed from the active roadmap phases"
   );
 });
