@@ -3,48 +3,67 @@
 
 import type { Locale } from "../i18n/index.ts";
 
-export const androidChannels = [
-  "managed_device",
-  "direct_apk",
-  "github_release",
+export const androidReleaseTracks = ["stable", "beta"] as const;
+
+export type AndroidReleaseTrack = (typeof androidReleaseTracks)[number];
+
+export const androidIntegrationPaths = [
+  "play_store",
+  "direct_download",
+  "github_releases",
   "obtainium",
+  "managed_device",
 ] as const;
 
-export type AndroidChannel = (typeof androidChannels)[number];
+export type AndroidIntegrationPath = (typeof androidIntegrationPaths)[number];
 
 export const androidArtifactHost = "https://apk.secpal.app";
 export const androidLandingPath = "/android/";
+export const androidAppSigningCertificateSha256 =
+  "C3:E9:FD:07:69:F3:34:9B:B0:B0:56:BA:E6:69:47:23:40:E1:CB:28:66:26:DE:30:C9:C9:FA:F9:5F:1E:47:B5";
 
-export function buildLatestMetadataPath(channel: AndroidChannel): string {
-  return `/android/channels/${channel}/latest.json`;
+export function buildTrackMetadataPath(track: AndroidReleaseTrack): string {
+  return `/android/${track}/latest.json`;
 }
 
-export function buildLatestArtifactPath(channel: AndroidChannel): string {
-  return `/android/channels/${channel}/app.secpal-latest.apk`;
+export function buildTrackArtifactPath(track: AndroidReleaseTrack): string {
+  return `/android/${track}/app.secpal-latest.apk`;
 }
 
-export function buildLatestChecksumPath(channel: AndroidChannel): string {
-  return `/android/channels/${channel}/SHA256SUMS.txt`;
+export function buildTrackChecksumPath(track: AndroidReleaseTrack): string {
+  return `/android/${track}/SHA256SUMS.txt`;
 }
 
-export function buildVersionedMetadataPath(version: string): string {
-  return `/android/releases/${version}/metadata.json`;
+export function buildChannelAliasMetadataPath(): string {
+  return "/android/latest.json";
 }
 
-export function buildVersionedArtifactPath(version: string): string {
-  return `/android/releases/${version}/app.secpal-${version}.apk`;
+export function buildLatestMetadataPath(): string {
+  return buildChannelAliasMetadataPath();
 }
 
-export function buildVersionedChecksumPath(version: string): string {
-  return `/android/releases/${version}/SHA256SUMS.txt`;
+export function buildLatestArtifactPath(): string {
+  return "/android/app.secpal-latest.apk";
+}
+
+export function buildLatestChecksumPath(): string {
+  return "/android/SHA256SUMS.txt";
+}
+
+export function buildVersionedMetadataPath(versionCode: string): string {
+  return `/android/releases/${versionCode}/metadata.json`;
+}
+
+export function buildVersionedArtifactPath(versionCode: string): string {
+  return `/android/releases/${versionCode}/app.secpal-${versionCode}.apk`;
+}
+
+export function buildVersionedChecksumPath(versionCode: string): string {
+  return `/android/releases/${versionCode}/SHA256SUMS.txt`;
 }
 
 export function buildArtifactUrl(path: string): string {
   return new URL(path, androidArtifactHost).toString();
-}
-
-export function isAndroidChannel(value: string): value is AndroidChannel {
-  return androidChannels.includes(value as AndroidChannel);
 }
 
 export function buildPendingAndroidAssetMessage(
@@ -53,7 +72,7 @@ export function buildPendingAndroidAssetMessage(
 ): string {
   return [
     `SecPal Android release artifacts are not published yet for ${requestedPath}.`,
-    "The stable URL exists before the first public release so clients can rely on the canonical endpoint model.",
+    "Stable and beta release manifests stay reserved in advance so clients can keep the canonical endpoint model.",
     `See ${new URL(androidLandingPath, siteUrl).toString()} for the current Android distribution status.`,
   ].join("\n");
 }
@@ -71,40 +90,104 @@ export function buildPendingAndroidAssetResponse(
   });
 }
 
+export interface AndroidTrackLatestMetadata {
+  package_name: "app.secpal";
+  update_channel: AndroidReleaseTrack;
+  release_available: false;
+  version: null;
+  version_name: null;
+  version_code: null;
+  published_at: null;
+  artifact_host: typeof androidArtifactHost;
+  human_landing_url: string;
+  metadata_url: string;
+  alias_url: string | null;
+  latest_apk_url: string;
+  checksum_url: string;
+  versioned_metadata_url: null;
+  versioned_apk_url: null;
+  versioned_checksum_url: null;
+  app_signing_certificate_sha256: typeof androidAppSigningCertificateSha256;
+  signing_key_shared_with_google_play: true;
+}
+
 export interface AndroidVersionedReleaseMetadata {
   version: string;
+  version_name: null;
+  version_code: string;
   package_name: "app.secpal";
+  update_channel: null;
+  release_available: false;
+  published_at: null;
+  artifact_host: typeof androidArtifactHost;
   human_landing_url: string;
   metadata_url: string;
   versioned_apk_url: string;
-  checksum_url: string;
-  artifact_host: typeof androidArtifactHost;
-  release_available: false;
-  storage_backend_status: "pending_release_decision";
-  notes: string[];
+  versioned_checksum_url: string;
+  app_signing_certificate_sha256: typeof androidAppSigningCertificateSha256;
+  signing_key_shared_with_google_play: true;
+}
+
+export function buildTrackLatestMetadataDocument(
+  track: AndroidReleaseTrack,
+  siteUrl: URL,
+  aliasPath?: string
+): AndroidTrackLatestMetadata {
+  return {
+    package_name: "app.secpal",
+    update_channel: track,
+    release_available: false,
+    version: null,
+    version_name: null,
+    version_code: null,
+    published_at: null,
+    artifact_host: androidArtifactHost,
+    human_landing_url: new URL(androidLandingPath, siteUrl).toString(),
+    metadata_url: buildArtifactUrl(buildTrackMetadataPath(track)),
+    alias_url: aliasPath ? buildArtifactUrl(aliasPath) : null,
+    latest_apk_url: buildArtifactUrl(buildTrackArtifactPath(track)),
+    checksum_url: buildArtifactUrl(buildTrackChecksumPath(track)),
+    versioned_metadata_url: null,
+    versioned_apk_url: null,
+    versioned_checksum_url: null,
+    app_signing_certificate_sha256: androidAppSigningCertificateSha256,
+    signing_key_shared_with_google_play: true,
+  };
+}
+
+export function buildLatestMetadataDocument(
+  siteUrl: URL
+): AndroidTrackLatestMetadata {
+  return buildTrackLatestMetadataDocument(
+    "stable",
+    siteUrl,
+    buildChannelAliasMetadataPath()
+  );
 }
 
 export function buildVersionedMetadataDocument(
-  version: string,
+  versionCode: string,
   siteUrl: URL
 ): AndroidVersionedReleaseMetadata {
-  const metadataPath = buildVersionedMetadataPath(version);
-
   return {
-    version,
+    version: versionCode,
+    version_name: null,
+    version_code: versionCode,
     package_name: "app.secpal",
-    human_landing_url: new URL(androidLandingPath, siteUrl).toString(),
-    metadata_url: buildArtifactUrl(metadataPath),
-    versioned_apk_url: buildArtifactUrl(buildVersionedArtifactPath(version)),
-    checksum_url: buildArtifactUrl(buildVersionedChecksumPath(version)),
-    artifact_host: androidArtifactHost,
+    update_channel: null,
     release_available: false,
-    storage_backend_status: "pending_release_decision",
-    notes: [
-      "The URL structure is stable even before the first public Android release ships.",
-      "Binary storage backing for apk.secpal.app remains an explicit release-time infrastructure decision.",
-      "Channel latest endpoints remain available under /android/channels/{channel}/latest.json for rollout-specific clients.",
-    ],
+    published_at: null,
+    artifact_host: androidArtifactHost,
+    human_landing_url: new URL(androidLandingPath, siteUrl).toString(),
+    metadata_url: buildArtifactUrl(buildVersionedMetadataPath(versionCode)),
+    versioned_apk_url: buildArtifactUrl(
+      buildVersionedArtifactPath(versionCode)
+    ),
+    versioned_checksum_url: buildArtifactUrl(
+      buildVersionedChecksumPath(versionCode)
+    ),
+    app_signing_certificate_sha256: androidAppSigningCertificateSha256,
+    signing_key_shared_with_google_play: true,
   };
 }
 
@@ -112,167 +195,304 @@ export const androidDistributionContent = {
   en: {
     title: "SecPal Android distribution",
     description:
-      "Human-facing Android landing flow on secpal.app with stable machine-facing apk.secpal.app endpoint patterns for latest and versioned SecPal releases.",
-    eyebrow: "Android distribution surface",
-    headline:
-      "One Android package, channel-aware distribution, and stable public URLs.",
+      "SecPal is also available as an Android app, with Play Store and direct download options on secpal.app.",
+    eyebrow: "SecPal for Android",
+    headline: "SecPal in your pocket.",
     subline:
-      "SecPal keeps Device Owner provisioning, direct APK delivery, GitHub releases, and Obtainium compatibility on the same signed app package: app.secpal.",
-    badge: "Tailored for the single-app Android distribution architecture",
-    primaryCta: "View endpoint model",
-    secondaryCta: "Follow Android work on GitHub",
-    summaryTitle: "Canonical surfaces",
+      "Get SecPal from the Play Store or download the app directly from SecPal.",
+    badge: "Play Store or direct download",
+    heroPrimary: {
+      label: "Open Play Store",
+      href: "https://play.google.com/store",
+    },
+    heroSecondary: {
+      label: "Download APK",
+      href: "https://apk.secpal.app/android/app.secpal-latest.apk",
+    },
+    summaryTitle: "At a glance",
     summaryItems: [
       {
-        label: "Human landing",
-        value: "https://secpal.app/android",
+        label: "App",
+        value: "SecPal for Android",
       },
       {
-        label: "Artifact host",
-        value: "https://apk.secpal.app",
+        label: "Recommended",
+        value: "Play Store",
       },
       {
-        label: "App package",
-        value: "app.secpal",
+        label: "Alternative",
+        value: "Direct download from SecPal",
+      },
+      {
+        label: "Also available",
+        value: "Beta version",
       },
     ],
-    channelsTitle: "Channels without a second app flavor",
-    channelsIntro:
-      "The APK stays identical. Channel metadata, provisioning context, and rollout policy decide how the same package is delivered and updated.",
-    channels: {
-      managed_device: {
-        name: "Managed device",
+    downloadTitle: "Download options",
+    downloadIntro:
+      "SecPal is available in the Play Store and as a direct download. Use the beta version if you want to try new features earlier.",
+    downloadOptions: [
+      {
+        badge: "Recommended",
+        name: "Play Store",
         description:
-          "Private provisioning QR flows for Device Owner enrollment. The machine-facing metadata stays stable while the tenant-bound bootstrap token remains short-lived.",
+          "The simplest way to install SecPal and receive updates through the Play Store.",
+        href: "https://play.google.com/store",
+        cta: "Open Play Store",
+        kind: "primary",
       },
-      direct_apk: {
-        name: "Direct APK",
-        description:
-          "Human-driven installs that should always resolve to a latest APK URL, checksum, and metadata document under apk.secpal.app.",
+      {
+        badge: "Direct",
+        name: "Direct Download",
+        description: "Download the current APK directly from SecPal.",
+        href: "https://apk.secpal.app/android/app.secpal-latest.apk",
+        cta: "Download APK",
+        secondaryLink: {
+          eyebrow: "Update manifest",
+          label: "Open Stable Manifest",
+          href: "https://apk.secpal.app/android/latest.json",
+        },
+        kind: "secondary",
       },
-      github_release: {
-        name: "GitHub release",
-        description:
-          "Public release notes can continue to live on GitHub Releases while the canonical machine endpoints stay anchored on apk.secpal.app.",
+      {
+        badge: "Optional",
+        name: "Beta version",
+        description: "Try new features before they reach the regular download.",
+        href: "https://apk.secpal.app/android/beta/app.secpal-latest.apk",
+        cta: "Download Beta APK",
+        secondaryLink: {
+          eyebrow: "Update manifest",
+          label: "Open Beta Manifest",
+          href: "https://apk.secpal.app/android/beta/latest.json",
+        },
+        kind: "secondary",
       },
-      obtainium: {
-        name: "Obtainium",
-        description:
-          "Update tooling can poll a stable JSON endpoint instead of scraping HTML or guessing release filenames.",
-      },
-    },
-    endpointsTitle: "Stable endpoints for humans and machines",
-    endpointsIntro:
-      "The landing route stays human-readable on secpal.app. All machine-facing URLs are defined against apk.secpal.app so later release automation can switch storage backends without changing clients.",
+    ],
+    betaNoticeTitle: "About the beta version",
+    betaNoticeBody:
+      "The beta version includes new features earlier, but it may still contain issues and can change before the regular release.",
+    technicalDetailsTitle: "Technical links",
+    technicalDetailsIntro:
+      "For direct downloads, verification, and automated updates.",
     endpointGroups: [
       {
-        title: "Latest channel metadata",
-        lines: [
-          "https://apk.secpal.app/android/channels/{channel}/latest.json",
-          "https://apk.secpal.app/android/channels/{channel}/app.secpal-latest.apk",
-          "https://apk.secpal.app/android/channels/{channel}/SHA256SUMS.txt",
+        title: "Stable",
+        entries: [
+          {
+            label: "Manifest",
+            href: "https://apk.secpal.app/android/stable/latest.json",
+          },
+          {
+            label: "APK",
+            href: "https://apk.secpal.app/android/stable/app.secpal-latest.apk",
+          },
+          {
+            label: "Checksums",
+            href: "https://apk.secpal.app/android/stable/SHA256SUMS.txt",
+          },
+          {
+            label: "Stable alias",
+            href: "https://apk.secpal.app/android/latest.json",
+          },
         ],
       },
       {
-        title: "Versioned release assets",
-        lines: [
-          "https://apk.secpal.app/android/releases/{version}/metadata.json",
-          "https://apk.secpal.app/android/releases/{version}/app.secpal-{version}.apk",
-          "https://apk.secpal.app/android/releases/{version}/SHA256SUMS.txt",
+        title: "Beta",
+        entries: [
+          {
+            label: "Manifest",
+            href: "https://apk.secpal.app/android/beta/latest.json",
+          },
+          {
+            label: "APK",
+            href: "https://apk.secpal.app/android/beta/app.secpal-latest.apk",
+          },
+          {
+            label: "Checksums",
+            href: "https://apk.secpal.app/android/beta/SHA256SUMS.txt",
+          },
+        ],
+      },
+      {
+        title: "Versioned releases",
+        entries: [
+          {
+            label: "Metadata",
+            href: "https://apk.secpal.app/android/releases/{versionCode}/metadata.json",
+          },
+          {
+            label: "APK",
+            href: "https://apk.secpal.app/android/releases/{versionCode}/app.secpal-{versionCode}.apk",
+          },
+          {
+            label: "Checksums",
+            href: "https://apk.secpal.app/android/releases/{versionCode}/SHA256SUMS.txt",
+          },
         ],
       },
     ],
-    infrastructureTitle:
-      "Hosting is defined. Binary storage is still an explicit release decision.",
-    infrastructureBody:
-      "This repository now defines the public route structure and metadata contract. The backing APK storage choice, such as GitHub Releases, object storage, or a CDN, still needs an explicit release-time decision before automation is wired up.",
-    infrastructurePoints: [
-      "secpal.app/android stays the human-facing entry point.",
-      "apk.secpal.app stays the canonical technical host for APKs, checksums, and metadata.",
-      "The same signed APK must remain available across GitHub and apk.secpal.app.",
+    verificationTitle: "Technical summary",
+    verificationItems: [
+      {
+        label: "Android package",
+        value: "app.secpal",
+      },
+      {
+        label: "Signing SHA-256",
+        value: androidAppSigningCertificateSha256,
+      },
     ],
   },
   de: {
     title: "SecPal Android-Verteilung",
     description:
-      "Öffentlicher Android-Einstieg auf secpal.app mit stabilen maschinenlesbaren URL-Modellen auf apk.secpal.app für aktuelle und versionierte SecPal-Releases.",
-    eyebrow: "Android-Verteilungsfläche",
-    headline:
-      "Ein Android-Paket, kanalbewusste Verteilung und stabile öffentliche URLs.",
+      "SecPal gibt es auch als Android-App, mit Play Store und Direktdownload auf secpal.app.",
+    eyebrow: "SecPal für Android",
+    headline: "SecPal. Immer dabei.",
     subline:
-      "SecPal hält Device-Owner-Provisioning, direkte APK-Verteilung, GitHub-Releases und Obtainium-Kompatibilität auf demselben signierten App-Paket: app.secpal.",
-    badge: "Abgeleitet aus der Single-App-Android-Architektur",
-    primaryCta: "Endpoint-Modell ansehen",
-    secondaryCta: "Android-Entwicklung auf GitHub verfolgen",
-    summaryTitle: "Kanonische Flächen",
+      "Laden Sie SecPal aus dem Play Store oder direkt von SecPal herunter.",
+    badge: "Play Store oder Direktdownload",
+    heroPrimary: {
+      label: "Play Store öffnen",
+      href: "https://play.google.com/store",
+    },
+    heroSecondary: {
+      label: "APK herunterladen",
+      href: "https://apk.secpal.app/android/app.secpal-latest.apk",
+    },
+    summaryTitle: "Kurzüberblick",
     summaryItems: [
       {
-        label: "Öffentlicher Einstieg",
-        value: "https://secpal.app/android",
+        label: "App",
+        value: "SecPal für Android",
       },
       {
-        label: "Artefakt-Host",
-        value: "https://apk.secpal.app",
+        label: "Empfohlen",
+        value: "Play Store",
       },
       {
-        label: "App-Paket",
-        value: "app.secpal",
+        label: "Alternative",
+        value: "Direktdownload von SecPal",
+      },
+      {
+        label: "Außerdem verfügbar",
+        value: "Beta-Version",
       },
     ],
-    channelsTitle: "Kanäle ohne zweite App-Variante",
-    channelsIntro:
-      "Die APK bleibt identisch. Kanal-Metadaten, Provisioning-Kontext und Rollout-Regeln entscheiden, wie dasselbe Paket verteilt und aktualisiert wird.",
-    channels: {
-      managed_device: {
-        name: "Managed Device",
+    downloadTitle: "Download-Möglichkeiten",
+    downloadIntro:
+      "SecPal ist im Play Store und als Direktdownload verfügbar. Nutzen Sie die Beta-Version, wenn Sie neue Funktionen früher ausprobieren möchten.",
+    downloadOptions: [
+      {
+        badge: "Empfohlen",
+        name: "Play Store",
         description:
-          "Private Provisioning-QR-Flows für Device-Owner-Einschreibung. Die maschinenlesbaren Metadaten bleiben stabil, während der tenantgebundene Bootstrap-Token kurzlebig bleibt.",
+          "Der einfachste Weg, SecPal zu installieren und Updates über den Play Store zu erhalten.",
+        href: "https://play.google.com/store",
+        cta: "Play Store öffnen",
+        kind: "primary",
       },
-      direct_apk: {
-        name: "Direkte APK",
+      {
+        badge: "Direkt",
+        name: "Direktdownload",
+        description: "Laden Sie die aktuelle APK direkt von SecPal herunter.",
+        href: "https://apk.secpal.app/android/app.secpal-latest.apk",
+        cta: "APK herunterladen",
+        secondaryLink: {
+          eyebrow: "Update-Manifest",
+          label: "Stable-Manifest öffnen",
+          href: "https://apk.secpal.app/android/latest.json",
+        },
+        kind: "secondary",
+      },
+      {
+        badge: "Optional",
+        name: "Beta-Version",
         description:
-          "Menschlich ausgelöste Installationen sollen immer auf eine stabile Latest-APK-URL, Prüfsumme und Metadaten-Datei unter apk.secpal.app zeigen.",
+          "Probieren Sie neue Funktionen aus, bevor sie im regulären Download erscheinen.",
+        href: "https://apk.secpal.app/android/beta/app.secpal-latest.apk",
+        cta: "Beta-APK herunterladen",
+        secondaryLink: {
+          eyebrow: "Update-Manifest",
+          label: "Beta-Manifest öffnen",
+          href: "https://apk.secpal.app/android/beta/latest.json",
+        },
+        kind: "secondary",
       },
-      github_release: {
-        name: "GitHub Release",
-        description:
-          "Öffentliche Release Notes können weiter auf GitHub Releases liegen, während die kanonischen Maschinen-Endpunkte auf apk.secpal.app verankert bleiben.",
-      },
-      obtainium: {
-        name: "Obtainium",
-        description:
-          "Update-Werkzeuge können einen stabilen JSON-Endpunkt abfragen, statt HTML zu scrapen oder Dateinamen zu erraten.",
-      },
-    },
-    endpointsTitle: "Stabile Endpunkte für Menschen und Maschinen",
-    endpointsIntro:
-      "Der Einstiegsweg für Menschen bleibt auf secpal.app lesbar. Alle technischen URLs werden gegen apk.secpal.app definiert, damit spätere Release-Automation das Storage-Backend wechseln kann, ohne Clients anzupassen.",
+    ],
+    betaNoticeTitle: "Hinweis zur Beta-Version",
+    betaNoticeBody:
+      "Die Beta-Version enthält neue Funktionen früher, kann aber noch Fehler enthalten und sich bis zur regulären Veröffentlichung noch ändern.",
+    technicalDetailsTitle: "Technische Links",
+    technicalDetailsIntro:
+      "Für Direktdownloads, Verifikation und automatische Updates.",
     endpointGroups: [
       {
-        title: "Aktuelle Kanal-Metadaten",
-        lines: [
-          "https://apk.secpal.app/android/channels/{channel}/latest.json",
-          "https://apk.secpal.app/android/channels/{channel}/app.secpal-latest.apk",
-          "https://apk.secpal.app/android/channels/{channel}/SHA256SUMS.txt",
+        title: "Stable",
+        entries: [
+          {
+            label: "Manifest",
+            href: "https://apk.secpal.app/android/stable/latest.json",
+          },
+          {
+            label: "APK",
+            href: "https://apk.secpal.app/android/stable/app.secpal-latest.apk",
+          },
+          {
+            label: "Checksummen",
+            href: "https://apk.secpal.app/android/stable/SHA256SUMS.txt",
+          },
+          {
+            label: "Stable-Alias",
+            href: "https://apk.secpal.app/android/latest.json",
+          },
         ],
       },
       {
-        title: "Versionierte Release-Artefakte",
-        lines: [
-          "https://apk.secpal.app/android/releases/{version}/metadata.json",
-          "https://apk.secpal.app/android/releases/{version}/app.secpal-{version}.apk",
-          "https://apk.secpal.app/android/releases/{version}/SHA256SUMS.txt",
+        title: "Beta",
+        entries: [
+          {
+            label: "Manifest",
+            href: "https://apk.secpal.app/android/beta/latest.json",
+          },
+          {
+            label: "APK",
+            href: "https://apk.secpal.app/android/beta/app.secpal-latest.apk",
+          },
+          {
+            label: "Checksummen",
+            href: "https://apk.secpal.app/android/beta/SHA256SUMS.txt",
+          },
+        ],
+      },
+      {
+        title: "Versionierte Releases",
+        entries: [
+          {
+            label: "Metadata",
+            href: "https://apk.secpal.app/android/releases/{versionCode}/metadata.json",
+          },
+          {
+            label: "APK",
+            href: "https://apk.secpal.app/android/releases/{versionCode}/app.secpal-{versionCode}.apk",
+          },
+          {
+            label: "Checksummen",
+            href: "https://apk.secpal.app/android/releases/{versionCode}/SHA256SUMS.txt",
+          },
         ],
       },
     ],
-    infrastructureTitle:
-      "Hosting ist definiert. Binäre Ablage bleibt eine explizite Release-Entscheidung.",
-    infrastructureBody:
-      "Dieses Repository definiert jetzt die öffentliche Routenstruktur und den Metadaten-Vertrag. Die eigentliche APK-Ablage, etwa GitHub Releases, Object Storage oder CDN, braucht vor Release-Automation weiterhin eine explizite Entscheidung.",
-    infrastructurePoints: [
-      "secpal.app/android bleibt der menschliche Einstiegspunkt.",
-      "apk.secpal.app bleibt der kanonische technische Host für APKs, Prüfsummen und Metadaten.",
-      "Dieselbe signierte APK muss auf GitHub und apk.secpal.app verfügbar bleiben.",
+    verificationTitle: "Technische Eckdaten",
+    verificationItems: [
+      {
+        label: "Android-Paketname",
+        value: "app.secpal",
+      },
+      {
+        label: "Signing SHA-256",
+        value: androidAppSigningCertificateSha256,
+      },
     ],
   },
 } as const satisfies Record<Locale, unknown>;

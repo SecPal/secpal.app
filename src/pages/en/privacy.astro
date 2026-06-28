@@ -7,14 +7,14 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
 <LegalPageShell
   locale="en"
   title="Privacy Notice | SecPal"
-  description="Privacy notice for secpal.app and direct email contact with SecPal."
+  description="Privacy notice for secpal.app, the SecPal Android app, beta distribution, and direct email contact with SecPal."
   canonicalPath="/en/privacy/"
   currentPath="/privacy"
   eyebrow="Legal"
   headline="Privacy Notice"
-  intro="This privacy notice briefly explains which personal data may be processed when you visit secpal.app or contact SecPal by email."
+  intro="This privacy notice explains which personal data may be processed when you visit secpal.app, use the SecPal Android app, take part in Android beta distribution, or contact SecPal by email."
   updatedLabel="Last updated"
-  updatedAt="March 21, 2026"
+  updatedAt="June 28, 2026"
 >
   <section class="space-y-8">
     <div>
@@ -36,7 +36,8 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
         <p class="mt-2">Germany</p>
       </div>
       <p class="mt-4">
-        Contact by email: <a
+        Contact by email:{" "}
+        <a
           href="mailto:hello@secpal.app"
           class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
           >hello@secpal.app</a
@@ -99,7 +100,97 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        3. Contact by email
+        3. Android app, beta distribution, and update delivery
+      </h2>
+      <p class="mt-6">
+        SecPal is also provided as a native Android app with the package name
+        {" "}
+        <strong class="font-semibold text-gray-900 dark:text-white"
+          >app.secpal</strong
+        >.{" "}
+        Distribution takes place through the Google Play Store or through SecPal download
+        URLs. The signed app package remains the same regardless of the distribution
+        path.
+      </p>
+      <ul
+        role="list"
+        class="mt-8 max-w-3xl space-y-6 text-gray-600 dark:text-gray-400"
+      >
+        <li class="flex gap-x-3">
+          <span
+            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
+          ></span>
+          <span
+            ><strong class="font-semibold text-gray-900 dark:text-white"
+              >Processed data:</strong
+            > depending on use, this may include account data, operations and organizational
+            data entered by users, technical device and app data, log data, version
+            and update information, and, for managed-device or Device Owner scenarios,
+            required provisioning or bootstrap information.</span
+          >
+        </li>
+        <li class="flex gap-x-3">
+          <span
+            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
+          ></span>
+          <span
+            ><strong class="font-semibold text-gray-900 dark:text-white"
+              >Purpose:</strong
+            > app delivery, authentication, provision of app features, secure technical
+            delivery of installation and update information, error analysis, abuse
+            detection, and system security.</span
+          >
+        </li>
+        <li class="flex gap-x-3">
+          <span
+            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
+          ></span>
+          <span
+            ><strong class="font-semibold text-gray-900 dark:text-white"
+              >Legal bases:</strong
+            > Art. 6(1)(b) GDPR for providing agreed app functionality and pre-contractual
+            or contractual services; Art. 6(1)(f) GDPR for secure operation, abuse
+            prevention, distribution integrity, and the stability of connected systems.</span
+          >
+        </li>
+      </ul>
+      <p class="mt-8">
+        The same principles apply to closed and open beta phases. Beta versions
+        may additionally process technical diagnostic data and error context
+        where this is required to stabilize and securely provide the pre-release
+        version.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        4. Google Play Store and third-party platforms
+      </h2>
+      <p class="mt-6">
+        If the SecPal Android app is distributed through the Google Play Store
+        or other third-party platforms, those platforms may process personal
+        data in connection with listing, download, installation, licensing,
+        billing, update delivery, or abuse prevention.
+      </p>
+      <p class="mt-4">
+        Such processing is generally carried out under the responsibility of the
+        respective platform operator. For Google's processing, Google's own
+        privacy and terms documents also apply.
+      </p>
+      <p class="mt-4">
+        Where we organize beta or release programs through such platforms, we
+        only process the information required there for release management,
+        support, release communication, or security to the extent necessary.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        5. Contact by email
       </h2>
       <p class="mt-6">
         If you contact us by email, we process the information you send so we
@@ -116,7 +207,7 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        4. No cookies and no tracking
+        6. No cookies and no tracking on this website
       </h2>
       <p class="mt-6">
         This website currently does not use analytics, tracking, or marketing
@@ -129,7 +220,7 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        5. Storage duration
+        7. Storage duration
       </h2>
       <p class="mt-6">
         Server log data is stored only for as long as necessary for technical
@@ -139,13 +230,19 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
         Data from emails is deleted once the relevant request has been
         completed, unless statutory retention obligations require otherwise.
       </p>
+      <p class="mt-4">
+        Data from use of the Android app or beta distribution is stored only as
+        long as necessary for the relevant feature, security monitoring,
+        support, error analysis, release management, or statutory retention
+        duties.
+      </p>
     </div>
 
     <div>
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        6. Data subject rights
+        8. Data subject rights
       </h2>
       <p class="mt-6">
         Under the GDPR, you may have rights of access, rectification, erasure,
@@ -156,17 +253,27 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
         You also have the right to lodge a complaint with a supervisory
         authority.
       </p>
+      <p class="mt-4">
+        If you use a SecPal account or want personal data associated with the
+        app to be deleted, you can contact us at{" "}
+        <a
+          href="mailto:hello@secpal.app"
+          class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+          >hello@secpal.app</a
+        >.
+      </p>
     </div>
 
     <div>
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        7. Changes to this notice
+        9. Changes to this notice
       </h2>
       <p class="mt-6">
-        We update this privacy notice whenever the website, the actual data
-        processing activities, or the legal requirements change.
+        We update this privacy notice whenever the website, the Android app, the
+        actual data processing activities, the beta or release processes, or the
+        legal requirements change.
       </p>
     </div>
   </section>

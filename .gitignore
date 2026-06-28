@@ -46,6 +46,7 @@ yarn-error.log*
 *.tmp
 *.temp
 .cache/
+.context/
 
 # Tool caches
 .eslintcache

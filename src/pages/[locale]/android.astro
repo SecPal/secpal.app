@@ -25,9 +25,17 @@ const content = getAndroidDistributionContent(locale);
   alternateDePath="/de/android/"
   xDefaultPath="/android/"
 >
-  <Nav locale={locale} currentPath="/android" />
-  <main>
-    <AndroidDistributionSurface locale={locale} />
-  </main>
+  <div
+    class="relative bg-linear-to-br from-sky-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-slate-900"
+  >
+    <Nav locale={locale} currentPath="/android" transparent overlay />
+    <main>
+      <AndroidDistributionSurface
+        locale={locale}
+        inheritHeroBackground
+        overlayHeader
+      />
+    </main>
+  </div>
   <Footer locale={locale} />
 </Base>
