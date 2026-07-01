@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2026 SecPal
+# SPDX-License-Identifier: CC0-1.0
+
+# Preflight PR Size Check - Excluded Files
+# ==========================================
+# Files matching these patterns are excluded from the PR size check.
+# Each line is a grep-compatible regex pattern.
+
+# This file should match the exclusions consumed by the shared PR size workflow.
+
+# Dependency lock files (auto-generated)
+package-lock\.json$
+
+# License files (boilerplate)
+LICENSES/.*\.txt$
