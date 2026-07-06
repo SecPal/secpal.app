@@ -42,7 +42,7 @@ jobs:
 
   eslint:
     name: ESLint
-    uses: SecPal/.github/.github/workflows/reusable-node-lint.yml@084b2ab764a6e6b0a865f66853e7421ff4c02434
+    uses: SecPal/.github/.github/workflows/reusable-node-lint.yml@2cc65df6215af0c4238d2d463869cfebfdc246ba
     with:
       node-version: "22"
 
