@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- restored GitHub's default Dependabot PR title and branch naming behavior by removing the repo-local commit-message, target-branch, and branch-separator overrides, so dependency update PRs no longer collapse into long opaque slugs like `dependabot-github_actions-main-...`
+- grouped GitHub Actions Dependabot updates under the stable `github-actions` identifier, so future workflow bump PRs use a predictable group-based title/branch instead of opaque reusable-workflow path slugs
 - refreshed the English and German roadmap copy so shift planning is the current focus, OWKS is the next milestone, and completed passkey, onboarding, and Android distribution work is no longer shown as in progress
 - replaced the stub `LICENSES/LicenseRef-TailwindPlus.txt` summary with the
   published Tailwind Plus license text and clarified that
