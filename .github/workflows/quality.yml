@@ -62,7 +62,7 @@ jobs:
 
   test:
     name: Node Tests
-    uses: SecPal/.github/.github/workflows/reusable-node-test.yml@f9c5276c9fd9a6965a4ddd641c9fae10184e03df
+    uses: SecPal/.github/.github/workflows/reusable-node-test.yml@3505a1da91e8b5cca4e34a024f1d35a7a792149e
     with:
       node-version: "22"
       test-command: "npm test"
