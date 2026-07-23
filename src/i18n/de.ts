@@ -18,11 +18,11 @@ export const de: Translations = {
     closeMenu: "Menü schließen",
   },
   hero: {
-    badge: "Aus der Praxis · Open Source · Öffentlich entwickelt",
+    badge: "Aus langjähriger Praxis im Sicherheitsdienst",
     tagline: "SecPal – A guard’s best friend",
-    headline: "Klarere Abläufe im Sicherheitsdienst.",
+    headline: "Mehr Übersicht im Sicherheits\u00addienst.",
     subline:
-      "Weniger Zettelwirtschaft, weniger Medienbrüche — operative Arbeit in einem durchgängigen System.",
+      "SecPal entsteht für Sicherheitsdienste in Deutschland. Dienstplanung, Informationen zum Einsatz und Dokumentation sollen übersichtlich zusammenkommen – statt auf Papier, in Tabellen und einzelnen Programmen verteilt zu sein.",
     explanation:
       "SecPal ist für Sicherheitsdienste gebaut, die operative Arbeit in einem klaren Ablauf organisieren statt sie über Papier, Chats und Insellösungen zu verteilen.",
     highlights: [
@@ -30,9 +30,9 @@ export const de: Translations = {
       "Informationen bleiben nachvollziehbar — nicht verstreut in Notizen, Kurznachrichten und verteilten Dateien.",
       "SecPal entsteht öffentlich, mit klarem Fokus und nachvollziehbaren Release-Schritten.",
     ],
-    cta: "Zur Roadmap",
+    cta: "Mehr über SecPal erfahren",
     ctaSecondary: "Entwicklung auf GitHub verfolgen",
-    note: "Die öffentliche Website zeigt die Produktrichtung, Rechtsinformationen und Kontaktwege. Ein öffentlicher Zugang zur App ist derzeit noch nicht geöffnet.",
+    note: "SecPal befindet sich derzeit im Aufbau.",
   },
   features: {
     headline: "Für die operative Realität gebaut.",

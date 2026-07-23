@@ -55,6 +55,52 @@ test("mobile navigation avoids inline click handlers and is wired from script", 
   );
 });
 
+test("homepage primary actions preserve readable dark-mode hover contrast", () => {
+  const hero = readFileSync(
+    new URL("../src/components/Hero.astro", import.meta.url),
+    "utf8"
+  );
+  const nav = readFileSync(
+    new URL("../src/components/Nav.astro", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(hero, /dark:hover:bg-indigo-600/);
+  assert.doesNotMatch(hero, /dark:hover:bg-indigo-400/);
+  assert.doesNotMatch(nav, /dark:hover:bg-indigo-400/);
+});
+
+test("narrow navigation and footer can contract without page overflow", () => {
+  const nav = readFileSync(
+    new URL("../src/components/Nav.astro", import.meta.url),
+    "utf8"
+  );
+  const footer = readFileSync(
+    new URL("../src/components/Footer.astro", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(
+    nav,
+    /hidden\s+min-\[360px\]:inline-flex[^"]*dark:hover:bg-indigo-600/
+  );
+  assert.match(footer, /\bflex\b[^"]*\bflex-wrap\b/);
+});
+
+test("German hero heading provides a readable manual compound-word break", () => {
+  const hero = readFileSync(
+    new URL("../src/components/Hero.astro", import.meta.url),
+    "utf8"
+  );
+  const translations = readFileSync(
+    new URL("../src/i18n/de.ts", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(hero, /\bhyphens-manual\b/);
+  assert.match(translations, /Sicherheits\\u00addienst/);
+});
+
 test("android distribution cards wrap long visible machine paths on mobile", () => {
   const component = readFileSync(
     new URL(

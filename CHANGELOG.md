@@ -25,6 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- refocused the localized homepage hero on clear, practice-led language for
+  German security service providers, with one in-page action and a concise
+  development status
 - grouped GitHub Actions Dependabot updates under the stable `github-actions` identifier, so future workflow bump PRs use a predictable group-based title/branch instead of opaque reusable-workflow path slugs
 - refreshed the English and German roadmap copy so shift planning is the current focus, OWKS is the next milestone, and completed passkey, onboarding, and Android distribution work is no longer shown as in progress
 - replaced the stub `LICENSES/LicenseRef-TailwindPlus.txt` summary with the
@@ -50,6 +53,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- corrected narrow-screen wrapping in the homepage heading, navigation, and
+  footer, and kept primary-action hover contrast readable in dark mode
 - reviewed and approved the pinned `sharp` and `esbuild` install scripts in `package.json`, so `npm ci` no longer reports pending `allowScripts` warnings for the website toolchain
 - added a repo-local `.preflight-exclude` baseline for generated lockfiles and license texts, so dependency bump PRs no longer fail the shared PR size check on `package-lock.json` churn alone
 - fixed mobile overflow and right-shift in `src/components/Hero.astro` so the hero headline, subline, and CTAs remain properly aligned on narrow viewports

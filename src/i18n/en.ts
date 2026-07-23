@@ -16,11 +16,11 @@ export const en = {
     closeMenu: "Close menu",
   },
   hero: {
-    badge: "From operational practice · Open source · Built in public",
+    badge: "Built on years of experience in the security industry",
     tagline: "SecPal – A guard’s best friend",
-    headline:
-      "Less paperwork, fewer disconnected tools, clearer security operations.",
-    subline: "SecPal brings operational work into one connected system.",
+    headline: "More clarity in security operations.",
+    subline:
+      "SecPal is being built for security service providers in Germany. Duty scheduling, assignment information, and documentation should come together clearly—instead of being scattered across paper, spreadsheets, and separate applications.",
     explanation:
       "SecPal is built for security operations that need one clear operational flow instead of spreading day-to-day work across paper notes, chats, and disconnected tools.",
     highlights: [
@@ -28,9 +28,9 @@ export const en = {
       "Information stays traceable instead of disappearing into notes, messages, and scattered files.",
       "SecPal is taking shape in public, with a focused scope and clear release steps.",
     ],
-    cta: "View roadmap",
+    cta: "Learn more about SecPal",
     ctaSecondary: "Follow development on GitHub",
-    note: "The public website shows the product direction, legal information, and contact paths. Public access to the app is not open yet.",
+    note: "SecPal is currently under development.",
   },
   features: {
     headline: "Built around operational reality.",
