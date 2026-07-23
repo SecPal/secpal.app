@@ -8,7 +8,6 @@ export const de: Translations = {
     progress: "Fortschritt",
     roadmap: "Roadmap",
     android: "Android",
-    updates: "Folgen",
     github: "GitHub",
     contact: "Kontakt",
     followProgress: "Fortschritt verfolgen",
@@ -148,11 +147,11 @@ export const de: Translations = {
     link: "Roadmap im Detail ansehen",
   },
   cta: {
-    headline: "Fortschritt statt Marketing-Lärm.",
+    headline: "SecPal soll sich im Arbeitsalltag bewähren.",
     subline:
-      "Auf GitHub ist der aktuelle Stand sichtbar. Für Fragen, Hinweise oder frühen Austausch erreichen Sie SecPal direkt.",
-    button: "GitHub ansehen",
-    buttonSecondary: "Kontakt aufnehmen",
+      "Für die weitere Entwicklung von SecPal sind Erfahrungen, Anforderungen und Hinweise aus dem Arbeitsalltag von Sicherheitsdiensten besonders wertvoll.",
+    button: "Kontakt aufnehmen",
+    buttonSecondary: "Entwicklung auf GitHub ansehen",
     note: "",
   },
   roadmap: {

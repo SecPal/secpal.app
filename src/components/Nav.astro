@@ -28,7 +28,7 @@ const otherLocale: Locale = locale === "en" ? "de" : "en";
 const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
 const androidPath = getLocalizedPath("/android", locale);
 const progressPath = `${getLocalizedPath("/", locale)}#progress`;
-const updatesPath = `${getLocalizedPath("/", locale)}#updates`;
+const contactPath = `${getLocalizedPath("/", locale)}#contact`;
 const heroTone = tone === "androidHero";
 const headerBackgroundClass = heroTone
   ? "bg-transparent"
@@ -96,9 +96,9 @@ const mobileMenuCloseClass =
         >{t.nav.android}</a
       >
       <a
-        href={updatesPath}
+        href={contactPath}
         class="text-sm/6 font-semibold text-gray-900 dark:text-white"
-        >{t.nav.updates}</a
+        >{t.nav.contact}</a
       >
       <a
         href="https://github.com/SecPal"
@@ -269,19 +269,14 @@ const mobileMenuCloseClass =
               >{t.nav.android}</a
             >
             <a
-              href={updatesPath}
+              href={contactPath}
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-              >{t.nav.updates}</a
+              >{t.nav.contact}</a
             >
             <a
               href="https://github.com/SecPal"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
               >{t.nav.github}</a
-            >
-            <a
-              href="mailto:hello@secpal.app"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-              >{t.nav.contact}</a
             >
             <!-- Language switcher in mobile menu -->
             <a

@@ -6,7 +6,6 @@ export const en = {
     progress: "Progress",
     roadmap: "Roadmap",
     android: "Android",
-    updates: "Follow",
     github: "GitHub",
     contact: "Contact",
     followProgress: "Follow progress",
@@ -146,11 +145,11 @@ export const en = {
     link: "View the detailed roadmap",
   },
   cta: {
-    headline: "Progress, not marketing noise.",
+    headline: "SecPal should work in day-to-day operations.",
     subline:
-      "GitHub shows the current state. For questions, feedback, or early contact, you can reach SecPal directly.",
-    button: "View GitHub",
-    buttonSecondary: "Get in touch",
+      "Experience, requirements, and feedback from day-to-day operations at security service providers are particularly valuable for SecPal's further development.",
+    button: "Get in touch",
+    buttonSecondary: "View development on GitHub",
     note: "",
   },
   roadmap: {

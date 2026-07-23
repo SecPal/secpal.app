@@ -13,13 +13,18 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 ---
 
-<div id="updates" class="bg-white py-16 sm:py-24 dark:bg-gray-900">
+<section
+  id="contact"
+  aria-labelledby="home-contact-heading"
+  class="bg-white py-16 sm:py-24 dark:bg-gray-900"
+>
   <div class="mx-auto max-w-7xl px-6 sm:px-6 lg:px-8">
     <div
       class="relative isolate overflow-hidden bg-slate-950 px-6 py-20 shadow-2xl sm:rounded-3xl sm:px-12 xl:px-24 dark:shadow-none dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:inset-ring dark:after:inset-ring-white/15 dark:after:sm:rounded-3xl"
     >
       <div class="mx-auto max-w-3xl text-center">
         <h2
+          id="home-contact-heading"
           class="text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl"
         >
           {t.cta.headline}
@@ -29,13 +34,13 @@ const t = useTranslations(locale);
         </p>
         <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
-            href="https://github.com/SecPal"
+            href="mailto:hello@secpal.app"
             class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-xs hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white dark:shadow-none"
             >{t.cta.button}</a
           >
           <a
-            href="mailto:hello@secpal.app"
-            class="text-sm/6 font-semibold text-white hover:text-gray-200"
+            href="https://github.com/SecPal"
+            class="rounded-sm text-sm/6 font-semibold text-white hover:text-gray-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >{t.cta.buttonSecondary} <span aria-hidden="true">→</span></a
           >
         </div>
@@ -74,4 +79,4 @@ const t = useTranslations(locale);
       </svg>
     </div>
   </div>
-</div>
+</section>

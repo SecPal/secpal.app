@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- refocused the homepage closing action on professional contact as the primary
+  next step, with GitHub retained as secondary technical insight
 - refocused the localized homepage hero on clear, practice-led language for
   German security service providers, with one in-page action and a concise
   development status
