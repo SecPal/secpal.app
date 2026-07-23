@@ -10,7 +10,7 @@ import { en } from "../src/i18n/en.ts";
 
 test("homepage CTA presents contact before technical insight in both locales", () => {
   assert.deepEqual(de.cta, {
-    headline: "Was zählt, ist der Arbeitsalltag.",
+    headline: "Was zählt, ist der Arbeits\u00adalltag.",
     subline:
       "Erfahrungen, Anforderungen und Hinweise aus dem Alltag von Sicherheitsdiensten sind für die weitere Entwicklung von SecPal besonders wertvoll.",
     button: "Kontakt aufnehmen",
@@ -84,6 +84,10 @@ test("CTA uses semantic contact markup and contact-first action hierarchy", () =
   );
   assert.equal(component.match(/<h2\b/g)?.length, 1);
   assert.match(component, /<h2\s+id="home-contact-heading"/);
+  assert.match(
+    component,
+    /<h2[^>]*class="[^"]*\btext-2xl\b[^"]*\bmin-\[360px\]:text-3xl\b[^"]*\bmin-\[430px\]:text-4xl\b[^"]*\bhyphens-manual\b[^"]*"/
+  );
   assert.equal(component.match(/<a\b/g)?.length, 2);
   assert.doesNotMatch(component, /<button\b/);
   assert.equal(component.match(/mailto:hello@secpal\.app/g)?.length, 1);

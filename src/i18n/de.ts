@@ -147,7 +147,7 @@ export const de: Translations = {
     link: "Roadmap im Detail ansehen",
   },
   cta: {
-    headline: "Was zählt, ist der Arbeitsalltag.",
+    headline: "Was zählt, ist der Arbeits\u00adalltag.",
     subline:
       "Erfahrungen, Anforderungen und Hinweise aus dem Alltag von Sicherheitsdiensten sind für die weitere Entwicklung von SecPal besonders wertvoll.",
     button: "Kontakt aufnehmen",

@@ -65,6 +65,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- prevented the German homepage closing heading from being clipped on narrow
+  screens with enlarged text
 - corrected narrow-screen wrapping in the homepage heading, navigation, and
   footer, and kept primary-action hover contrast readable in dark mode
 - updated the transitive `fast-uri`, `js-yaml`, and `svgo` packages to their patched releases, removing the reported high-severity npm audit findings
