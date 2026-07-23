@@ -16,25 +16,14 @@ export const en = {
   },
   hero: {
     badge: "Built on years of experience in the security industry",
-    tagline: "SecPal – A guard’s best friend",
     headline: "More clarity in security operations.",
     subline:
       "SecPal is being built for security service providers in Germany: duty scheduling, assignment information, and documentation in one place—instead of being scattered across paper, spreadsheets, and separate applications.",
-    explanation:
-      "SecPal is built for security operations that need one clear operational flow instead of spreading day-to-day work across paper notes, chats, and disconnected tools.",
-    highlights: [
-      "Operational work belongs in one connected system instead of isolated tools.",
-      "Information stays traceable instead of disappearing into notes, messages, and scattered files.",
-      "SecPal is taking shape in public, with a focused scope and clear release steps.",
-    ],
     cta: "Learn about SecPal",
-    ctaSecondary: "Follow development on GitHub",
     note: "SecPal is currently under development.",
   },
   features: {
     headline: "Important information. Too many separate places.",
-    subline:
-      "SecPal focuses on clear workflows, dependable documentation, and visibility in day-to-day operations.",
     items: [
       {
         name: "Duty scheduling",

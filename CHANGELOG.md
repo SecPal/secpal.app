@@ -67,8 +67,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - prevented the German homepage closing heading from being clipped on narrow
   screens with enlarged text
-- corrected narrow-screen wrapping in the homepage heading, navigation, and
-  footer, and kept primary-action hover contrast readable in dark mode
+- corrected narrow-screen wrapping in the homepage heading, navigation, mobile
+  menu, and footer; kept mobile menu controls reachable with enlarged text;
+  dismissed the menu when a destination is chosen; and kept primary-action
+  hover contrast readable in dark mode
 - updated the transitive `fast-uri`, `js-yaml`, and `svgo` packages to their patched releases, removing the reported high-severity npm audit findings
 - reviewed and approved the pinned `sharp` and `esbuild` install scripts in `package.json`, so `npm ci` no longer reports pending `allowScripts` warnings for the website toolchain
 - added a repo-local `.preflight-exclude` baseline for generated lockfiles and license texts, so dependency bump PRs no longer fail the shared PR size check on `package-lock.json` churn alone

@@ -18,25 +18,14 @@ export const de: Translations = {
   },
   hero: {
     badge: "Aus langjähriger Praxis im Sicherheitsdienst",
-    tagline: "SecPal – A guard’s best friend",
     headline: "Mehr Übersicht im Sicherheits\u00addienst.",
     subline:
       "SecPal entsteht für Sicherheitsdienste in Deutschland: Dienstplanung, Einsatzinformationen und Dokumentation an einem Ort – statt verteilt auf Papier, Tabellen und einzelne Programme.",
-    explanation:
-      "SecPal ist für Sicherheitsdienste gebaut, die operative Arbeit in einem klaren Ablauf organisieren statt sie über Papier, Chats und Insellösungen zu verteilen.",
-    highlights: [
-      "Operative Abläufe gehören in ein durchgängiges System statt in einzelne Teillösungen.",
-      "Informationen bleiben nachvollziehbar — nicht verstreut in Notizen, Kurznachrichten und verteilten Dateien.",
-      "SecPal entsteht öffentlich, mit klarem Fokus und nachvollziehbaren Release-Schritten.",
-    ],
     cta: "SecPal kennenlernen",
-    ctaSecondary: "Entwicklung auf GitHub verfolgen",
     note: "SecPal befindet sich derzeit im Aufbau.",
   },
   features: {
     headline: "Viele Informationen. Zu viele Wege.",
-    subline:
-      "SecPal konzentriert sich auf klare Abläufe, verlässliche Dokumentation und Übersicht im täglichen Betrieb.",
     items: [
       {
         name: "Dienstplanung",

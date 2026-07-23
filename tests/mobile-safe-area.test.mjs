@@ -56,6 +56,10 @@ test("mobile navigation avoids inline click handlers and is wired from script", 
     layout,
     /setAttribute\(\s*"aria-expanded",\s*isOpen \? "true" : "false"\s*\)/
   );
+  assert.match(
+    layout,
+    /mobileMenu\.querySelectorAll\("a"\)[\s\S]*link\.addEventListener\("click"[\s\S]*setMobileMenuOpen\(false\)/
+  );
 });
 
 test("homepage primary actions preserve readable dark-mode hover contrast", () => {
@@ -127,6 +131,14 @@ test("homepage hero keeps the localized status and progress target with tighter 
     JSON.stringify({ de: de.hero, en: en.hero }),
     /Mehr über SecPal erfahren|Learn more about SecPal/
   );
+  assert.ok(!("tagline" in de.hero));
+  assert.ok(!("tagline" in en.hero));
+  assert.ok(!("explanation" in de.hero));
+  assert.ok(!("explanation" in en.hero));
+  assert.ok(!("highlights" in de.hero));
+  assert.ok(!("highlights" in en.hero));
+  assert.ok(!("ctaSecondary" in de.hero));
+  assert.ok(!("ctaSecondary" in en.hero));
 });
 
 test("android distribution cards wrap long visible machine paths on mobile", () => {

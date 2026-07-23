@@ -127,8 +127,22 @@ test("desktop and mobile navigation point to the localized contact section", () 
   assert.equal(nav.match(/\{t\.nav\.contact\}/g)?.length, 2);
   assert.doesNotMatch(nav, /updatesPath|t\.nav\.updates|#updates/);
   assert.equal(headerCtaAnchors.length, 2);
-  assert.ok(
-    headerCtaAnchors.every((anchor) => /\bwhitespace-nowrap\b/.test(anchor))
+  assert.match(
+    headerCtaAnchors[0],
+    /\bhidden\b[^"]*\bmin-\[360px\]:inline-flex\b[^"]*\bwhitespace-nowrap\b/
+  );
+  assert.match(
+    headerCtaAnchors[1],
+    /\border-last\b[^"]*\bw-full\b[^"]*\bbreak-words\b/
+  );
+  assert.doesNotMatch(headerCtaAnchors[1], /\bwhitespace-nowrap\b/);
+  assert.match(
+    nav,
+    /<div class="flex flex-wrap items-center gap-x-6 gap-y-4">/
+  );
+  assert.match(
+    nav,
+    /id="mobile-menu-close"[\s\S]*class:list=\{\[mobileMenuCloseClass, "ml-auto"\]\}/
   );
   assert.equal(nav.match(/href="https:\/\/github\.com\/SecPal"/g)?.length, 2);
   assert.equal(nav.match(/\{t\.nav\.github\}/g)?.length, 2);
