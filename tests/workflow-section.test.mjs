@@ -69,17 +69,17 @@ test("workflow translations describe exactly five ordered steps in both locales"
     overline: "Ein durchgängiger Ablauf",
     headline: "Vom Dienstplan bis zur Auswertung.",
     introduction:
-      "SecPal soll Informationen nicht in voneinander getrennten Anwendungen festhalten, sondern entlang der tatsächlichen Arbeit im Sicherheitsdienst miteinander verbinden.",
+      "SecPal soll Informationen entlang der tatsächlichen Arbeit im Sicherheitsdienst miteinander verbinden – statt sie in voneinander getrennten Anwendungen festzuhalten.",
     steps: expectedGermanSteps,
     closing:
-      "Informationen sollen einmal entstehen und anschließend dort verfügbar sein, wo sie benötigt werden.",
+      "Informationen sollen einmal erfasst werden und anschließend dort verfügbar sein, wo sie benötigt werden.",
   });
 
   assert.deepEqual(en.workflow, {
     overline: "One connected workflow",
     headline: "From duty scheduling to reporting.",
     introduction:
-      "SecPal aims to connect information along the actual work carried out by security service providers, instead of keeping it in separate applications.",
+      "SecPal aims to connect information throughout the actual workflow of security service providers—instead of keeping it in separate applications.",
     steps: expectedEnglishSteps,
     closing:
       "Information should be recorded once and then be available wherever it is needed.",

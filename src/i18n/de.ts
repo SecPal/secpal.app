@@ -62,7 +62,7 @@ export const de: Translations = {
     overline: "Ein durchgängiger Ablauf",
     headline: "Vom Dienstplan bis zur Auswertung.",
     introduction:
-      "SecPal soll Informationen nicht in voneinander getrennten Anwendungen festhalten, sondern entlang der tatsächlichen Arbeit im Sicherheitsdienst miteinander verbinden.",
+      "SecPal soll Informationen entlang der tatsächlichen Arbeit im Sicherheitsdienst miteinander verbinden – statt sie in voneinander getrennten Anwendungen festzuhalten.",
     steps: [
       {
         name: "Planen",
@@ -91,7 +91,7 @@ export const de: Translations = {
       },
     ],
     closing:
-      "Informationen sollen einmal entstehen und anschließend dort verfügbar sein, wo sie benötigt werden.",
+      "Informationen sollen einmal erfasst werden und anschließend dort verfügbar sein, wo sie benötigt werden.",
   },
   cta: {
     headline: "Fortschritt statt Marketing-Lärm.",

@@ -60,7 +60,7 @@ export const en = {
     overline: "One connected workflow",
     headline: "From duty scheduling to reporting.",
     introduction:
-      "SecPal aims to connect information along the actual work carried out by security service providers, instead of keeping it in separate applications.",
+      "SecPal aims to connect information throughout the actual workflow of security service providers—instead of keeping it in separate applications.",
     steps: [
       {
         name: "Plan",
