@@ -58,8 +58,21 @@ test("mobile navigation avoids inline click handlers and is wired from script", 
   );
   assert.match(
     layout,
-    /mobileMenu\.querySelectorAll\("a"\)[\s\S]*link\.addEventListener\("click"[\s\S]*setMobileMenuOpen\(false, false\)/
+    /mobileMenu\.querySelectorAll\("a"\)[\s\S]*link\.addEventListener\("click"[\s\S]*focusSamePageTarget\(link\)[\s\S]*setMobileMenuOpen\(false\)/
   );
+  assert.match(layout, /new URL\(link\.href, window\.location\.href\)/);
+  assert.match(
+    layout,
+    /url\.origin !== window\.location\.origin[\s\S]*url\.pathname !== window\.location\.pathname[\s\S]*url\.search !== window\.location\.search/
+  );
+  assert.match(
+    layout,
+    /document\.getElementById\([\s\S]*decodeURIComponent\(url\.hash\.slice\(1\)\)[\s\S]*\)/
+  );
+  assert.match(layout, /target\.setAttribute\("tabindex", "-1"\)/);
+  assert.match(layout, /target\.focus\(\{ preventScroll: true \}\)/);
+  assert.match(layout, /target\.removeAttribute\("tabindex"\)/);
+  assert.match(layout, /window\.requestAnimationFrame/);
   assert.match(
     layout,
     /backgroundElements[\s\S]*toggleAttribute\("inert", isOpen\)/

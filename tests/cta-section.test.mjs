@@ -132,12 +132,14 @@ test("desktop and mobile navigation point to the localized contact section", () 
     /\bhidden\b[^"]*\bmin-\[360px\]:inline-flex\b[^"]*\bwhitespace-nowrap\b/
   );
   assert.match(headerCtaAnchors[0], /min-h-\[44px\]/);
-  assert.match(
-    headerCtaAnchors[1],
-    /\border-last\b[^"]*\bw-full\b[^"]*\bbreak-words\b/
-  );
+  assert.match(headerCtaAnchors[1], /\bw-full\b[^"]*\bbreak-words\b/);
+  assert.doesNotMatch(headerCtaAnchors[1], /\border-last\b/);
   assert.match(headerCtaAnchors[1], /min-h-\[44px\]/);
   assert.doesNotMatch(headerCtaAnchors[1], /\bwhitespace-nowrap\b/);
+  assert.ok(
+    nav.indexOf('id="mobile-menu-close"') < nav.indexOf(headerCtaAnchors[1]),
+    "Mobile close control should precede the visually lower CTA in DOM order"
+  );
   assert.match(
     nav,
     /<div class="flex flex-wrap items-center gap-x-6 gap-y-4">/

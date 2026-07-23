@@ -65,6 +65,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- aligned the mobile menu's visual and keyboard order and moved focus to
+  same-page destinations when dialog links are activated
 - completed mobile navigation keyboard behavior with focus containment, Escape
   dismissal, background isolation, scroll locking, and 44-pixel touch targets
 - restored the localized introduction above the homepage operational problem
