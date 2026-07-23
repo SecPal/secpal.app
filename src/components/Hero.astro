@@ -9,14 +9,14 @@
 //   - Fills the full first viewport (100svh minus in-flow nav height) so the
 //     next section only appears after the first scroll on both mobile and
 //     desktop.
-//   - Badge hidden on mobile (metadata, not the primary hook; visible sm+).
-//   - Four layers on mobile: tagline eyebrow → H1 → subline → CTAs.
+//   - Five quiet content layers: overline → H1 → description → CTA → status.
+//   - The overline remains visible at every viewport size.
 //   - svh used instead of vh/dvh: subtracts visible browser chrome, giving
 //     the "first screen before scrolling" behaviour on iOS Safari.
 //   - Nav height offset comes from shared CSS variables so header spacing and
 //     hero viewport math stay in sync.
 import type { Locale } from "../i18n/index.ts";
-import { useTranslations, getLocalizedPath } from "../i18n/index.ts";
+import { useTranslations } from "../i18n/index.ts";
 
 interface Props {
   locale: Locale;
@@ -26,11 +26,12 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 ---
 
-<div
+<section
+  aria-labelledby="home-hero-title"
   class="flex min-h-[calc(100svh-var(--secpal-nav-height))] flex-col overflow-x-clip bg-white dark:bg-gray-900"
 >
   <div
-    class="relative isolate flex flex-1 flex-col justify-center px-6 pt-0 lg:px-8"
+    class="relative isolate flex flex-1 flex-col justify-center px-5 pt-0 sm:px-6 lg:px-8"
   >
     <div
       aria-hidden="true"
@@ -43,48 +44,37 @@ const t = useTranslations(locale);
       </div>
     </div>
 
-    <div class="mx-auto max-w-4xl py-10 sm:py-12">
-      <!-- Badge: hidden on mobile, visible sm+ (metadata, not the primary hook) -->
-      <div class="hidden sm:mb-6 sm:flex sm:justify-center">
-        <div
-          class="rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 dark:text-gray-400 dark:ring-white/10"
-        >
-          {t.hero.badge}
-        </div>
-      </div>
-
-      <!-- Tagline → H1 → subline → CTAs (4 layers on mobile) -->
+    <div class="mx-auto w-full max-w-5xl py-10 sm:py-12">
       <div class="text-center">
         <p
-          class="text-sm/6 font-semibold tracking-[0.18em] text-gray-500 uppercase dark:text-gray-400"
+          class="mx-auto max-w-2xl text-sm/6 font-semibold text-indigo-600 dark:text-indigo-400"
         >
-          {t.hero.tagline}
+          {t.hero.badge}
         </p>
         <h1
-          class="mt-4 text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl lg:text-7xl dark:text-white"
+          id="home-hero-title"
+          class="mx-auto mt-4 max-w-4xl text-[1.75rem]/9 font-semibold tracking-tight break-words text-balance hyphens-manual text-gray-900 sm:text-5xl lg:text-7xl dark:text-white"
         >
           {t.hero.headline}
         </h1>
         <p
-          class="mx-auto mt-6 max-w-2xl text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400"
+          class="mx-auto mt-6 max-w-3xl text-base/7 text-pretty text-gray-600 sm:text-lg/8 dark:text-gray-300"
         >
           {t.hero.subline}
         </p>
-        <div class="mt-8 flex items-center justify-center gap-x-4 sm:gap-x-6">
+        <div class="mt-8 flex justify-center">
           <a
-            href={getLocalizedPath("/roadmap", locale)}
-            class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+            href="#progress"
+            class="inline-flex min-h-11 items-center justify-center rounded-md bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus-visible:outline-indigo-500"
           >
             {t.hero.cta}
           </a>
-          <a
-            href="https://github.com/SecPal"
-            class="text-sm/6 font-semibold text-gray-900 dark:text-white"
-          >
-            {t.hero.ctaSecondary}
-            <span aria-hidden="true">→</span>
-          </a>
         </div>
+        <p
+          class="mx-auto mt-4 max-w-2xl text-sm/6 text-gray-500 dark:text-gray-400"
+        >
+          {t.hero.note}
+        </p>
       </div>
     </div>
 
@@ -99,4 +89,4 @@ const t = useTranslations(locale);
       </div>
     </div>
   </div>
-</div>
+</section>

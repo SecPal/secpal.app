@@ -5,6 +5,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 
+import { de } from "../src/i18n/de.ts";
+import { en } from "../src/i18n/en.ts";
+
 test("global layout accounts for mobile safe-area insets", () => {
   const css = readFileSync(
     new URL("../src/styles/global.css", import.meta.url),
@@ -53,6 +56,123 @@ test("mobile navigation avoids inline click handlers and is wired from script", 
     layout,
     /setAttribute\(\s*"aria-expanded",\s*isOpen \? "true" : "false"\s*\)/
   );
+  assert.match(
+    layout,
+    /mobileMenu\.querySelectorAll\("a"\)[\s\S]*link\.addEventListener\("click"[\s\S]*focusSamePageTarget\(link\)[\s\S]*setMobileMenuOpen\(false\)/
+  );
+  assert.match(layout, /new URL\(link\.href, window\.location\.href\)/);
+  assert.match(
+    layout,
+    /url\.origin !== window\.location\.origin[\s\S]*url\.pathname !== window\.location\.pathname[\s\S]*url\.search !== window\.location\.search/
+  );
+  assert.match(
+    layout,
+    /document\.getElementById\([\s\S]*decodeURIComponent\(url\.hash\.slice\(1\)\)[\s\S]*\)/
+  );
+  assert.match(layout, /target\.setAttribute\("tabindex", "-1"\)/);
+  assert.match(layout, /target\.focus\(\{ preventScroll: true \}\)/);
+  assert.match(layout, /target\.removeAttribute\("tabindex"\)/);
+  assert.match(layout, /window\.requestAnimationFrame/);
+  assert.match(
+    layout,
+    /backgroundElements[\s\S]*toggleAttribute\("inert", isOpen\)/
+  );
+  assert.match(layout, /document\.body\.style\.overflow = "hidden"/);
+  assert.match(
+    layout,
+    /document\.body\.style\.overflow = previousBodyOverflow/
+  );
+  assert.match(layout, /returnFocus = document\.activeElement/);
+  assert.match(layout, /mobileMenuClose\.focus\(\)/);
+  assert.match(layout, /returnFocus\.focus\(\)/);
+  assert.match(layout, /event\.key === "Escape"/);
+  assert.match(layout, /event\.key !== "Tab"/);
+  assert.match(layout, /lastFocusable\.focus\(\)/);
+  assert.match(layout, /firstFocusable\.focus\(\)/);
+});
+
+test("homepage primary actions preserve readable dark-mode hover contrast", () => {
+  const hero = readFileSync(
+    new URL("../src/components/Hero.astro", import.meta.url),
+    "utf8"
+  );
+  const nav = readFileSync(
+    new URL("../src/components/Nav.astro", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(hero, /dark:hover:bg-indigo-600/);
+  assert.doesNotMatch(hero, /dark:hover:bg-indigo-400/);
+  assert.doesNotMatch(nav, /dark:hover:bg-indigo-400/);
+});
+
+test("narrow navigation and footer can contract without page overflow", () => {
+  const nav = readFileSync(
+    new URL("../src/components/Nav.astro", import.meta.url),
+    "utf8"
+  );
+  const footer = readFileSync(
+    new URL("../src/components/Footer.astro", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(
+    nav,
+    /hidden[^"]*min-\[360px\]:inline-flex[^"]*dark:hover:bg-indigo-600/
+  );
+  assert.match(
+    nav,
+    /class="[^"]*\bgap-x-3\b[^"]*\bpx-4\b[^"]*\bsm:gap-x-6\b[^"]*\bsm:px-6\b[^"]*\blg:px-8\b[^"]*"/
+  );
+  assert.match(nav, /class="[^"]*\bgap-x-1\b[^"]*\bsm:gap-x-4\b[^"]*"/);
+  assert.match(footer, /\bflex\b[^"]*\bflex-wrap\b/);
+});
+
+test("German hero heading provides a readable manual compound-word break", () => {
+  const hero = readFileSync(
+    new URL("../src/components/Hero.astro", import.meta.url),
+    "utf8"
+  );
+  const translations = readFileSync(
+    new URL("../src/i18n/de.ts", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(hero, /\bhyphens-manual\b/);
+  assert.match(translations, /Sicherheits\\u00addienst/);
+});
+
+test("homepage hero keeps the localized status and progress target with tighter copy", () => {
+  const hero = readFileSync(
+    new URL("../src/components/Hero.astro", import.meta.url),
+    "utf8"
+  );
+
+  assert.equal(
+    de.hero.subline,
+    "SecPal entsteht für Sicherheitsdienste in Deutschland: Dienstplanung, Einsatzinformationen und Dokumentation an einem Ort – statt verteilt auf Papier, Tabellen und einzelne Programme."
+  );
+  assert.equal(de.hero.cta, "SecPal kennenlernen");
+  assert.equal(de.hero.note, "SecPal befindet sich derzeit im Aufbau.");
+  assert.equal(
+    en.hero.subline,
+    "SecPal is being built for security service providers in Germany: duty scheduling, assignment information, and documentation in one place—instead of being scattered across paper, spreadsheets, and separate applications."
+  );
+  assert.equal(en.hero.cta, "Learn about SecPal");
+  assert.equal(en.hero.note, "SecPal is currently under development.");
+  assert.match(hero, /href="#progress"/);
+  assert.doesNotMatch(
+    JSON.stringify({ de: de.hero, en: en.hero }),
+    /Mehr über SecPal erfahren|Learn more about SecPal/
+  );
+  assert.ok(!("tagline" in de.hero));
+  assert.ok(!("tagline" in en.hero));
+  assert.ok(!("explanation" in de.hero));
+  assert.ok(!("explanation" in en.hero));
+  assert.ok(!("highlights" in de.hero));
+  assert.ok(!("highlights" in en.hero));
+  assert.ok(!("ctaSecondary" in de.hero));
+  assert.ok(!("ctaSecondary" in en.hero));
 });
 
 test("android distribution cards wrap long visible machine paths on mobile", () => {

@@ -1,0 +1,97 @@
+---
+// SPDX-FileCopyrightText: 2026 SecPal
+// SPDX-FileCopyrightText: Tailwind Labs Inc.
+// SPDX-License-Identifier: AGPL-3.0-or-later AND LicenseRef-TailwindPlus
+// Adapted from Tailwind Plus Marketing → Content Sections → Split with image
+// Local source: ~/code/tailwind-plus-components/html/marketing/page-sections/content-sections/split-with-image.html
+// Status-row dividers reference Tailwind Plus Application UI → List Containers → Simple with dividers
+// Local source: ~/code/tailwind-plus-components/html/application-ui/layout/list-containers/simple-with-dividers.html
+//
+// Design notes:
+//   - The source block's responsive split becomes explanatory copy on the left
+//     and a restrained ordered status list on the right.
+//   - The image, long-form body copy, and additional headings are removed.
+//   - Mobile follows one document order: introduction, phases, note, then link.
+import {
+  getLocalizedPath,
+  type Locale,
+  useTranslations,
+} from "../i18n/index.ts";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const roadmapHref = getLocalizedPath("/roadmap", locale);
+---
+
+<section
+  aria-labelledby="development-status-heading"
+  class="border-b border-gray-200 bg-white py-20 sm:py-24 dark:border-white/10 dark:bg-gray-900"
+>
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div
+      class="grid grid-cols-1 gap-y-12 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-10"
+    >
+      <div class="max-w-2xl">
+        <p
+          class="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400"
+        >
+          {t.developmentStatus.overline}
+        </p>
+        <h2
+          id="development-status-heading"
+          class="mt-2 break-words text-3xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-4xl dark:text-white"
+        >
+          {t.developmentStatus.headline}
+        </h2>
+        <p class="mt-6 text-base/7 text-gray-600 dark:text-gray-300">
+          {t.developmentStatus.introduction}
+        </p>
+      </div>
+
+      <ol
+        class="divide-y divide-gray-200 lg:col-start-2 lg:row-span-2 lg:row-start-1 dark:divide-white/10"
+      >
+        {
+          t.developmentStatus.phases.map((phase) => (
+            <li class="grid min-w-0 grid-cols-1 gap-y-3 py-7 first:pt-0 last:pb-0 sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:gap-x-6">
+              <span class="inline-flex w-fit self-start items-center gap-x-2 rounded-md bg-gray-100 px-2.5 py-1 text-xs/5 font-semibold text-gray-700 sm:mt-0.5 dark:bg-white/10 dark:text-gray-300">
+                <span
+                  aria-hidden="true"
+                  class="size-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400"
+                />
+                {phase.status}
+              </span>
+              <div class="min-w-0 break-words">
+                <h3 class="text-lg/8 font-semibold text-gray-900 dark:text-white">
+                  {phase.name}
+                </h3>
+                <p class="mt-2 text-base/7 text-gray-600 dark:text-gray-400">
+                  {phase.description}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="max-w-2xl lg:col-start-1">
+        <p class="text-sm/6 text-gray-500 dark:text-gray-400">
+          {t.developmentStatus.closing}
+        </p>
+        <p class="mt-5">
+          <a
+            href={roadmapHref}
+            class="inline-flex items-center gap-x-2 rounded-sm text-sm/6 font-semibold text-indigo-600 hover:text-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300 dark:focus-visible:outline-indigo-400"
+          >
+            {t.developmentStatus.link}
+            <span aria-hidden="true">→</span>
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

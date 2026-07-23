@@ -8,60 +8,141 @@ export const de: Translations = {
     progress: "Fortschritt",
     roadmap: "Roadmap",
     android: "Android",
-    updates: "Folgen",
     github: "GitHub",
     contact: "Kontakt",
-    followProgress: "Fortschritt verfolgen",
+    headerCta: "Kontakt aufnehmen",
     toggleDarkMode: "Dunkelmodus umschalten",
     openMenu: "Hauptmenü öffnen",
     mobileMenu: "Mobile Navigation",
     closeMenu: "Menü schließen",
   },
   hero: {
-    badge: "Aus der Praxis · Open Source · Öffentlich entwickelt",
-    tagline: "SecPal – A guard’s best friend",
-    headline: "Klarere Abläufe im Sicherheitsdienst.",
+    badge: "Aus langjähriger Praxis im Sicherheitsdienst",
+    headline: "Mehr Übersicht im Sicherheits\u00addienst.",
     subline:
-      "Weniger Zettelwirtschaft, weniger Medienbrüche — operative Arbeit in einem durchgängigen System.",
-    explanation:
-      "SecPal ist für Sicherheitsdienste gebaut, die operative Arbeit in einem klaren Ablauf organisieren statt sie über Papier, Chats und Insellösungen zu verteilen.",
-    highlights: [
-      "Operative Abläufe gehören in ein durchgängiges System statt in einzelne Teillösungen.",
-      "Informationen bleiben nachvollziehbar — nicht verstreut in Notizen, Kurznachrichten und verteilten Dateien.",
-      "SecPal entsteht öffentlich, mit klarem Fokus und nachvollziehbaren Release-Schritten.",
-    ],
-    cta: "Zur Roadmap",
-    ctaSecondary: "Entwicklung auf GitHub verfolgen",
-    note: "Die öffentliche Website zeigt die Produktrichtung, Rechtsinformationen und Kontaktwege. Ein öffentlicher Zugang zur App ist derzeit noch nicht geöffnet.",
+      "SecPal entsteht für Sicherheitsdienste in Deutschland: Dienstplanung, Einsatzinformationen und Dokumentation an einem Ort – statt verteilt auf Papier, Tabellen und einzelne Programme.",
+    cta: "SecPal kennenlernen",
+    note: "SecPal befindet sich derzeit im Aufbau.",
   },
   features: {
-    headline: "Für die operative Realität gebaut.",
+    headline: "Viele Informationen. Zu viele Wege.",
     subline:
-      "SecPal konzentriert sich auf das, was im Sicherheitsdienst täglich funktionieren muss: klare Abläufe, verlässliche Dokumentation und Übersicht für Teams und Führung.",
+      "SecPal konzentriert sich auf klare Abläufe, verlässliche Dokumentation und Übersicht im täglichen Betrieb.",
     items: [
       {
-        name: "Operative Abläufe in einem System",
+        name: "Dienstplanung",
         description:
-          "Formulare, Kontrollgänge und Schichtübergaben greifen ineinander — als ein durchgängiger Ablauf.",
+          "Ausfälle, Vertretungen und kurzfristige Änderungen müssen alle erreichen – ohne unterschiedliche Planstände und unnötige Rückfragen.",
       },
       {
-        name: "Dokumentiert im Ablauf, nicht im Nachhinein",
+        name: "Informationen zum Einsatz",
         description:
-          "Dokumentation entsteht dort, wo die Arbeit passiert — direkt im Ablauf.",
+          "Dienstanweisungen, Ansprechpartner und aktuelle Hinweise müssen dort verfügbar sein, wo sie gebraucht werden.",
       },
       {
-        name: "Klarer Status für Einsatzleitung und Disposition",
+        name: "Wachbuch und Auswertung",
         description:
-          "Aktuelle Statusbilder und Überblick für Teams, Führung und Disposition.",
+          "Wachbucheinträge, Kontrollgänge und Vorkommnisse müssen nachvollziehbar erfasst und für Betrieb und Auftraggeber verständlich aufbereitet werden.",
       },
     ],
+    closing:
+      "SecPal verbindet diese Bereiche in einem gemeinsamen, verständlichen Ablauf.",
+  },
+  workflow: {
+    overline: "Ein durchgängiger Ablauf",
+    headline: "Vom Dienstplan bis zur Auswertung.",
+    introduction:
+      "SecPal verbindet Informationen entlang der tatsächlichen Arbeit im Sicherheitsdienst – statt sie in getrennten Anwendungen festzuhalten.",
+    steps: [
+      {
+        name: "Planen",
+        description:
+          "Dienste besetzen, Zuständigkeiten festlegen und kurzfristige Änderungen nachvollziehbar halten.",
+      },
+      {
+        name: "Informieren",
+        description:
+          "Mitarbeitern die aktuellen Informationen, Dienstanweisungen und Besonderheiten zum jeweiligen Einsatz bereitstellen.",
+      },
+      {
+        name: "Durchführen",
+        description:
+          "Aufgaben, Kontrollgänge und besondere Vorkommnisse dort erfassen, wo die Arbeit stattfindet.",
+      },
+      {
+        name: "Übergeben",
+        description:
+          "Ereignisse, offene Punkte und wichtige Informationen verständlich an die nächste Schicht weitergeben.",
+      },
+      {
+        name: "Auswerten",
+        description:
+          "Erbrachte Leistungen und dokumentierte Ereignisse für den eigenen Betrieb und den Auftraggeber nachvollziehbar zusammenfassen.",
+      },
+    ],
+    closing:
+      "Das Prinzip: Informationen einmal erfassen und anschließend dort bereitstellen, wo sie benötigt werden.",
+  },
+  outcomes: {
+    overline: "Nachvollziehbare Sicherheitsdienstleistung",
+    headline: "Was im Einsatz geleistet wird, sollte nachvollziehbar sein.",
+    introduction:
+      "Sicherheitsdienstleistungen sind für Auftraggeber oft schwer sichtbar – gerade dann, wenn sie zuverlässig und ohne besondere Vorkommnisse erbracht werden. Strukturierte Dokumentation macht sichtbar, welche Leistungen erbracht und welche Ereignisse während eines Einsatzes festgehalten wurden.",
+    items: [
+      {
+        name: "Leistung nachvollziehen",
+        description:
+          "Besetzungen, Kontrollgänge, Ereignisse und Übergaben in einem verständlichen Gesamtbild zusammenführen.",
+      },
+      {
+        name: "Zeiträume überblicken",
+        description:
+          "Dokumentierte Leistungen und Ereignisse für ausgewählte Objekte und Zeiträume übersichtlich zusammenfassen.",
+      },
+      {
+        name: "Auftraggeber informieren",
+        description:
+          "Relevante Informationen verständlich aufbereiten, ohne Berichte nachträglich aus Papier, Tabellen und einzelnen Dateien zusammenzustellen.",
+      },
+    ],
+    closing:
+      "SecPal schafft aus operativer Dokumentation einen klaren Überblick für den eigenen Betrieb und den Auftraggeber.",
+  },
+  developmentStatus: {
+    overline: "Aktueller Entwicklungsstand",
+    headline: "SecPal entsteht Schritt für Schritt.",
+    introduction:
+      "Der aktuelle Schwerpunkt liegt auf der Dienstplanung. Weitere betriebliche Bereiche sind für spätere Entwicklungsschritte vorgesehen – ohne feste Termine.",
+    phases: [
+      {
+        status: "Aktuell",
+        name: "Dienstplanung",
+        description:
+          "Im Mittelpunkt stehen Dienstpläne, Schichtzuweisungen und eine nachvollziehbare Besetzungsplanung.",
+      },
+      {
+        status: "Als Nächstes",
+        name: "Online-Wächterkontrollsystem",
+        description:
+          "Kontrollgänge sollen strukturiert erfasst und mit Wachbuch und Einsatzdokumentation verbunden werden.",
+      },
+      {
+        status: "Später",
+        name: "Weitere betriebliche Bereiche",
+        description:
+          "Vertragsverwaltung und strukturierte Dienstanweisungen gehören zur längerfristigen Richtung von SecPal.",
+      },
+    ],
+    closing:
+      "Diese Reihenfolge beschreibt den aktuellen Planungsstand. Sie kann sich mit den Erkenntnissen aus Entwicklung und Praxis verändern.",
+    link: "Roadmap im Detail ansehen",
   },
   cta: {
-    headline: "Fortschritt statt Marketing-Lärm.",
+    headline: "Was zählt, ist der Arbeits\u00adalltag.",
     subline:
-      "Auf GitHub ist der aktuelle Stand sichtbar. Für Fragen, Hinweise oder frühen Austausch erreichen Sie SecPal direkt.",
-    button: "GitHub ansehen",
-    buttonSecondary: "Kontakt aufnehmen",
+      "Erfahrungen, Anforderungen und Hinweise aus dem Alltag von Sicherheitsdiensten sind für die weitere Entwicklung von SecPal besonders wertvoll.",
+    button: "Kontakt aufnehmen",
+    buttonSecondary: "Entwicklung auf GitHub ansehen",
     note: "",
   },
   roadmap: {
@@ -89,7 +170,7 @@ export const de: Translations = {
         {
           name: "Online-Wächterkontrollsystem (OWKS)",
           description:
-            "Checkpoint-basierte Kontrollgangerfassung per NFC oder QR — nachvollziehbare Kontrollgänge als natürlicher Teil des Betriebsprotokolls.",
+            "Kontrollgänge strukturiert erfassen und nachvollziehbar mit Wachbuch und Einsatzdokumentation verbinden.",
         },
       ],
     },
@@ -100,7 +181,7 @@ export const de: Translations = {
         {
           name: "Vertragsverwaltung & digitale Unterschrift",
           description:
-            "Kunden- und Arbeitsverträge an einem Ort — mit rechtskonformem Unterschriftenworkflow direkt im System.",
+            "Kunden- und Arbeitsverträge an einem Ort verwalten und digitale Unterschriften in die vorgesehenen betrieblichen Abläufe einbinden.",
         },
         {
           name: "Dienstanweisungskonfigurator",

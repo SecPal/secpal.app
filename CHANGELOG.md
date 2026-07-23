@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- added a localized homepage development-status section that distinguishes
+  the current focus, next planned area, and longer-term direction, with a
+  technology-neutral description of the planned online guard tour system
+- added a localized homepage outcomes section that connects operational
+  documentation with service visibility for security providers and clients
+- added a localized homepage workflow that presents the intended operational
+  sequence from duty planning through reporting
 - added a public roadmap page at `/roadmap/`, localized as `/en/roadmap/` and `/de/roadmap/`
 - documented current roadmap focus (shift planning), the next planned step (online guard tour system), and longer-term direction (contract management and service instruction configurator)
 - added a Node regression test that keeps the English and German roadmap copy aligned with the current shift-planning focus and the next OWKS milestone
@@ -25,6 +32,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- tightened the localized homepage copy to separate product direction from
+  development status, with professional contact now also the primary header
+  action
+- refocused the homepage closing action on professional contact as the primary
+  next step, with GitHub retained as secondary technical insight
+- refocused the localized homepage hero on clear, practice-led language for
+  German security service providers, with one in-page action and a concise
+  development status
 - grouped GitHub Actions Dependabot updates under the stable `github-actions` identifier, so future workflow bump PRs use a predictable group-based title/branch instead of opaque reusable-workflow path slugs
 - refreshed the English and German roadmap copy so shift planning is the current focus, OWKS is the next milestone, and completed passkey, onboarding, and Android distribution work is no longer shown as in progress
 - replaced the stub `LICENSES/LicenseRef-TailwindPlus.txt` summary with the
@@ -50,6 +65,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- aligned the mobile menu's visual and keyboard order and moved focus to
+  same-page destinations when dialog links are activated
+- completed mobile navigation keyboard behavior with focus containment, Escape
+  dismissal, background isolation, scroll locking, and 44-pixel touch targets
+- restored the localized introduction above the homepage operational problem
+  cards
+- prevented the German homepage closing heading from being clipped on narrow
+  screens with enlarged text
+- corrected narrow-screen wrapping in the homepage heading, navigation, mobile
+  menu, and footer; kept mobile menu controls reachable with enlarged text;
+  dismissed the menu when a destination is chosen; and kept primary-action
+  hover contrast readable in dark mode
 - updated the transitive `fast-uri`, `js-yaml`, and `svgo` packages to their patched releases, removing the reported high-severity npm audit findings
 - reviewed and approved the pinned `sharp` and `esbuild` install scripts in `package.json`, so `npm ci` no longer reports pending `allowScripts` warnings for the website toolchain
 - added a repo-local `.preflight-exclude` baseline for generated lockfiles and license texts, so dependency bump PRs no longer fail the shared PR size check on `package-lock.json` churn alone
