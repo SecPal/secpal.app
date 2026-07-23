@@ -94,10 +94,10 @@ export const de: Translations = {
       "Informationen sollen einmal erfasst werden und anschließend dort verfügbar sein, wo sie benötigt werden.",
   },
   outcomes: {
-    overline: "Nachvollziehbare Sicherheitsleistung",
+    overline: "Nachvollziehbare Sicherheitsdienstleistung",
     headline: "Was im Einsatz geleistet wird, sollte nachvollziehbar sein.",
     introduction:
-      "Sicherheitsarbeit bleibt oft gerade dann unsichtbar, wenn sie zuverlässig funktioniert. Strukturierte Dokumentation soll zeigen, welche Leistungen erbracht wurden, welche Ereignisse aufgetreten sind und wo sich wiederkehrende Entwicklungen erkennen lassen.",
+      "Sicherheitsdienstleistungen sind für Auftraggeber oft schwer sichtbar – gerade dann, wenn sie zuverlässig und ohne besondere Vorkommnisse erbracht werden. Strukturierte Dokumentation soll verständlich zeigen, welche Leistungen erbracht und welche Ereignisse während eines Einsatzes festgehalten wurden.",
     items: [
       {
         name: "Leistung nachvollziehen",
@@ -105,9 +105,9 @@ export const de: Translations = {
           "Besetzungen, Kontrollgänge, Ereignisse und Übergaben in einem verständlichen Gesamtbild zusammenführen.",
       },
       {
-        name: "Entwicklungen erkennen",
+        name: "Zeiträume überblicken",
         description:
-          "Wiederkehrende Auffälligkeiten, Schwerpunkte und Veränderungen über Zeiträume erkennen und einordnen.",
+          "Dokumentierte Leistungen und Ereignisse für ausgewählte Objekte und Zeiträume übersichtlich zusammenfassen.",
       },
       {
         name: "Auftraggeber informieren",

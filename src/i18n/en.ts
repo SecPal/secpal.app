@@ -95,7 +95,7 @@ export const en = {
     overline: "Traceable security services",
     headline: "What is delivered during an assignment should be traceable.",
     introduction:
-      "Security work often remains unnoticed precisely when it is performed reliably. Structured documentation should show which services were delivered, which incidents occurred, and where recurring developments can be identified.",
+      "Security services can be difficult for clients to see—especially when they are delivered reliably and without notable incidents. Structured documentation should clearly show which services were delivered and which events were recorded during an assignment.",
     items: [
       {
         name: "Understand delivered services",
@@ -103,9 +103,9 @@ export const en = {
           "Bring staffing, patrols, incidents, and shift handovers together in one clear overview.",
       },
       {
-        name: "Recognize developments",
+        name: "Review selected periods",
         description:
-          "Identify and assess recurring issues, areas of focus, and changes over time.",
+          "Summarize documented services and events clearly for selected sites and time periods.",
       },
       {
         name: "Keep clients informed",
