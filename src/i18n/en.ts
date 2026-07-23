@@ -33,26 +33,28 @@ export const en = {
     note: "SecPal is currently under development.",
   },
   features: {
-    headline: "Built around operational reality.",
+    headline: "Important information. Too many separate places.",
     subline:
       "SecPal focuses on what needs to work every day in security operations: clear workflows, dependable documentation, and visibility for teams and leadership.",
     items: [
       {
-        name: "One system, one operational flow",
+        name: "Duty scheduling",
         description:
-          "Forms, patrol records, and shift handovers work together in one continuous workflow.",
+          "Absences, replacements, and short-notice changes need to reach everyone quickly—without conflicting schedules or unnecessary follow-up.",
       },
       {
-        name: "Documented in the workflow, not after the fact",
+        name: "Assignment information",
         description:
-          "Documented where the work happens — not added after the fact.",
+          "Post instructions, contacts, special requirements, and current notices need to be available where they are needed.",
       },
       {
-        name: "Clear status for operations leads and dispatch",
+        name: "Logbook and reporting",
         description:
-          "Current status and visibility for teams, leadership, and dispatch.",
+          "Logbook entries, patrols, incidents, and shift handovers should be recorded traceably and made available for clear internal and client-facing reporting.",
       },
     ],
+    closing:
+      "SecPal aims to bring these areas together in one clear and understandable workflow.",
   },
   cta: {
     headline: "Progress, not marketing noise.",

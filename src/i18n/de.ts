@@ -35,26 +35,28 @@ export const de: Translations = {
     note: "SecPal befindet sich derzeit im Aufbau.",
   },
   features: {
-    headline: "Für die operative Realität gebaut.",
+    headline: "Viele Informationen. Zu viele Wege.",
     subline:
       "SecPal konzentriert sich auf das, was im Sicherheitsdienst täglich funktionieren muss: klare Abläufe, verlässliche Dokumentation und Übersicht für Teams und Führung.",
     items: [
       {
-        name: "Operative Abläufe in einem System",
+        name: "Dienstplanung",
         description:
-          "Formulare, Kontrollgänge und Schichtübergaben greifen ineinander — als ein durchgängiger Ablauf.",
+          "Ausfälle, Vertretungen und kurzfristige Änderungen müssen schnell alle erreichen – ohne unterschiedliche Planstände und unnötige Rückfragen.",
       },
       {
-        name: "Dokumentiert im Ablauf, nicht im Nachhinein",
+        name: "Informationen zum Einsatz",
         description:
-          "Dokumentation entsteht dort, wo die Arbeit passiert — direkt im Ablauf.",
+          "Dienstanweisungen, Ansprechpartner, Besonderheiten und aktuelle Hinweise müssen dort verfügbar sein, wo sie gebraucht werden.",
       },
       {
-        name: "Klarer Status für Einsatzleitung und Disposition",
+        name: "Wachbuch und Auswertung",
         description:
-          "Aktuelle Statusbilder und Überblick für Teams, Führung und Disposition.",
+          "Wachbucheinträge, Kontrollgänge, besondere Vorkommnisse und Übergaben sollen nachvollziehbar erfasst und für den eigenen Betrieb sowie für den Auftraggeber verständlich ausgewertet werden können.",
       },
     ],
+    closing:
+      "SecPal soll diese Bereiche in einem gemeinsamen, verständlichen Ablauf zusammenführen.",
   },
   cta: {
     headline: "Fortschritt statt Marketing-Lärm.",
