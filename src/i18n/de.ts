@@ -93,6 +93,31 @@ export const de: Translations = {
     closing:
       "Informationen sollen einmal erfasst werden und anschließend dort verfügbar sein, wo sie benötigt werden.",
   },
+  outcomes: {
+    overline: "Nachvollziehbare Sicherheitsleistung",
+    headline: "Was im Einsatz geleistet wird, sollte nachvollziehbar sein.",
+    introduction:
+      "Sicherheitsarbeit bleibt oft gerade dann unsichtbar, wenn sie zuverlässig funktioniert. Strukturierte Dokumentation soll zeigen, welche Leistungen erbracht wurden, welche Ereignisse aufgetreten sind und wo sich wiederkehrende Entwicklungen erkennen lassen.",
+    items: [
+      {
+        name: "Leistung nachvollziehen",
+        description:
+          "Besetzungen, Kontrollgänge, Ereignisse und Übergaben in einem verständlichen Gesamtbild zusammenführen.",
+      },
+      {
+        name: "Entwicklungen erkennen",
+        description:
+          "Wiederkehrende Auffälligkeiten, Schwerpunkte und Veränderungen über Zeiträume erkennen und einordnen.",
+      },
+      {
+        name: "Auftraggeber informieren",
+        description:
+          "Relevante Informationen verständlich aufbereiten, ohne Berichte nachträglich aus Papier, Tabellen und einzelnen Dateien zusammenzustellen.",
+      },
+    ],
+    closing:
+      "SecPal soll aus operativer Dokumentation einen klaren Überblick für den eigenen Betrieb und den Auftraggeber schaffen.",
+  },
   cta: {
     headline: "Fortschritt statt Marketing-Lärm.",
     subline:

@@ -1,0 +1,98 @@
+---
+// SPDX-FileCopyrightText: 2026 SecPal
+// SPDX-FileCopyrightText: Tailwind Labs Inc.
+// SPDX-License-Identifier: AGPL-3.0-or-later AND LicenseRef-TailwindPlus
+// Adapted from Tailwind Plus Marketing → Feature Sections → Offset with feature list
+// Local source: ~/code/tailwind-plus-components/html/marketing/page-sections/feature-sections/offset-with-feature-list.html
+//
+// Design notes:
+//   - The source block's offset text/list layout becomes one linear reading
+//     order on mobile and a two-column split at lg.
+//   - Three vertical benefits with dividers replace the source block's dense
+//     two-column feature grid, avoiding another card or process treatment.
+//   - The closing statement follows the list in the document order and moves
+//     below the introduction in the left column on larger screens.
+import type { Locale } from "../i18n/index.ts";
+import { useTranslations } from "../i18n/index.ts";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const iconPaths = [
+  "M9 6.75h6M9 12h6m-6 5.25h6M5.25 6.75h.008v.008H5.25V6.75Zm0 5.25h.008v.008H5.25V12Zm0 5.25h.008v.008H5.25v-.008Z",
+  "m21 21-4.35-4.35m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z",
+  "M3.75 6.75 12 12l8.25-5.25M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z",
+];
+---
+
+<section
+  aria-labelledby="outcomes-heading"
+  class="border-y border-gray-200 bg-gray-50 py-20 sm:py-24 dark:border-white/10 dark:bg-gray-800/50"
+>
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div
+      class="grid grid-cols-1 gap-y-12 lg:grid-cols-5 lg:gap-x-16 lg:gap-y-10"
+    >
+      <div class="max-w-2xl lg:col-span-2">
+        <p
+          class="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400"
+        >
+          {t.outcomes.overline}
+        </p>
+        <h2
+          id="outcomes-heading"
+          class="mt-2 break-words text-3xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-4xl dark:text-white"
+        >
+          {t.outcomes.headline}
+        </h2>
+        <p class="mt-6 text-base/7 text-gray-600 dark:text-gray-300">
+          {t.outcomes.introduction}
+        </p>
+      </div>
+
+      <ul
+        class="divide-y divide-gray-200 lg:col-span-3 lg:row-span-2 dark:divide-white/10"
+      >
+        {
+          t.outcomes.items.map((item, index) => (
+            <li class="grid min-w-0 grid-cols-[1.5rem_minmax(0,1fr)] gap-x-4 py-7 first:pt-0 last:pb-0 sm:grid-cols-[2rem_minmax(0,1fr)] sm:gap-x-5">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                data-slot="icon"
+                aria-hidden="true"
+                class="mt-1 size-6 text-indigo-600 sm:size-7 dark:text-indigo-400"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d={iconPaths[index]}
+                />
+              </svg>
+              <div class="min-w-0 break-words">
+                <h3 class="text-lg/8 font-semibold text-gray-900 dark:text-white">
+                  {item.name}
+                </h3>
+                <p class="mt-2 text-base/7 text-gray-600 dark:text-gray-400">
+                  {item.description}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p
+        class="max-w-2xl text-sm/6 text-gray-500 lg:col-span-2 dark:text-gray-400"
+      >
+        {t.outcomes.closing}
+      </p>
+    </div>
+  </div>
+</section>

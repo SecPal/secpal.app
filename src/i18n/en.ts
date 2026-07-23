@@ -91,6 +91,31 @@ export const en = {
     closing:
       "Information should be recorded once and then be available wherever it is needed.",
   },
+  outcomes: {
+    overline: "Traceable security services",
+    headline: "What is delivered during an assignment should be traceable.",
+    introduction:
+      "Security work often remains unnoticed precisely when it is performed reliably. Structured documentation should show which services were delivered, which incidents occurred, and where recurring developments can be identified.",
+    items: [
+      {
+        name: "Understand delivered services",
+        description:
+          "Bring staffing, patrols, incidents, and shift handovers together in one clear overview.",
+      },
+      {
+        name: "Recognize developments",
+        description:
+          "Identify and assess recurring issues, areas of focus, and changes over time.",
+      },
+      {
+        name: "Keep clients informed",
+        description:
+          "Prepare relevant information clearly without reconstructing reports later from paper, spreadsheets, and separate files.",
+      },
+    ],
+    closing:
+      "SecPal aims to turn operational documentation into a clear overview for the security provider and the client.",
+  },
   cta: {
     headline: "Progress, not marketing noise.",
     subline:

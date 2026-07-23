@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- added a localized homepage outcomes section that connects operational
+  documentation with service visibility for security providers and clients
 - added a localized homepage workflow that presents the intended operational
   sequence from duty planning through reporting
 - added a public roadmap page at `/roadmap/`, localized as `/en/roadmap/` and `/de/roadmap/`
