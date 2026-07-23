@@ -32,7 +32,7 @@ const expectedGermanSteps = [
   {
     name: "Auswerten",
     description:
-      "Erbrachte Leistungen, Auffälligkeiten und Entwicklungen für den eigenen Betrieb und den Auftraggeber nachvollziehbar darstellen.",
+      "Erbrachte Leistungen und dokumentierte Ereignisse für den eigenen Betrieb und den Auftraggeber nachvollziehbar zusammenfassen.",
   },
 ];
 
@@ -60,7 +60,7 @@ const expectedEnglishSteps = [
   {
     name: "Review",
     description:
-      "Present delivered services, notable events, and developments clearly for internal use and for the client.",
+      "Summarize delivered services and documented events clearly for internal use and for the client.",
   },
 ];
 
@@ -69,21 +69,25 @@ test("workflow translations describe exactly five ordered steps in both locales"
     overline: "Ein durchgängiger Ablauf",
     headline: "Vom Dienstplan bis zur Auswertung.",
     introduction:
-      "SecPal soll Informationen entlang der tatsächlichen Arbeit im Sicherheitsdienst miteinander verbinden – statt sie in voneinander getrennten Anwendungen festzuhalten.",
+      "SecPal verbindet Informationen entlang der tatsächlichen Arbeit im Sicherheitsdienst – statt sie in getrennten Anwendungen festzuhalten.",
     steps: expectedGermanSteps,
     closing:
-      "Informationen sollen einmal erfasst werden und anschließend dort verfügbar sein, wo sie benötigt werden.",
+      "Das Prinzip: Informationen einmal erfassen und anschließend dort bereitstellen, wo sie benötigt werden.",
   });
 
   assert.deepEqual(en.workflow, {
     overline: "One connected workflow",
     headline: "From duty scheduling to reporting.",
     introduction:
-      "SecPal aims to connect information throughout the actual workflow of security service providers—instead of keeping it in separate applications.",
+      "SecPal connects information throughout day-to-day security operations—instead of keeping it in separate applications.",
     steps: expectedEnglishSteps,
     closing:
-      "Information should be recorded once and then be available wherever it is needed.",
+      "The principle: record information once and make it available wherever it is needed.",
   });
+  assert.doesNotMatch(
+    JSON.stringify({ de: de.workflow, en: en.workflow }),
+    /SecPal soll Informationen|Auffälligkeiten und Entwicklungen|Informationen sollen einmal erfasst|SecPal aims to connect|notable events, and developments|Information should be recorded once/
+  );
 });
 
 test("workflow component keeps the process semantic, responsive, and text-free", () => {

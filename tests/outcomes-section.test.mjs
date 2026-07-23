@@ -49,20 +49,20 @@ test("outcomes translations present exactly three ordered benefits in both local
     overline: "Nachvollziehbare Sicherheitsdienstleistung",
     headline: "Was im Einsatz geleistet wird, sollte nachvollziehbar sein.",
     introduction:
-      "Sicherheitsdienstleistungen sind für Auftraggeber oft schwer sichtbar – gerade dann, wenn sie zuverlässig und ohne besondere Vorkommnisse erbracht werden. Strukturierte Dokumentation soll verständlich zeigen, welche Leistungen erbracht und welche Ereignisse während eines Einsatzes festgehalten wurden.",
+      "Sicherheitsdienstleistungen sind für Auftraggeber oft schwer sichtbar – gerade dann, wenn sie zuverlässig und ohne besondere Vorkommnisse erbracht werden. Strukturierte Dokumentation macht sichtbar, welche Leistungen erbracht und welche Ereignisse während eines Einsatzes festgehalten wurden.",
     items: expectedGermanItems,
     closing:
-      "SecPal soll aus operativer Dokumentation einen klaren Überblick für den eigenen Betrieb und den Auftraggeber schaffen.",
+      "SecPal schafft aus operativer Dokumentation einen klaren Überblick für den eigenen Betrieb und den Auftraggeber.",
   });
 
   assert.deepEqual(en.outcomes, {
     overline: "Traceable security services",
     headline: "What is delivered during an assignment should be traceable.",
     introduction:
-      "Security services can be difficult for clients to see—especially when they are delivered reliably and without notable incidents. Structured documentation should clearly show which services were delivered and which events were recorded during an assignment.",
+      "Security services can be difficult for clients to see—especially when they are delivered reliably and without notable incidents. Structured documentation shows which services were delivered and which events were recorded during an assignment.",
     items: expectedEnglishItems,
     closing:
-      "SecPal aims to turn operational documentation into a clear overview for the security provider and the client.",
+      "SecPal turns operational documentation into a clear overview for the security provider and the client.",
   });
 
   assert.deepEqual(Object.keys(de.outcomes), Object.keys(en.outcomes));
@@ -77,11 +77,15 @@ test("outcomes copy avoids unsupported pattern-analysis language", () => {
     "Entwicklungen erkennen",
     "wiederkehrende Entwicklungen",
     "wiederkehrende Auffälligkeiten",
+    "Strukturierte Dokumentation soll zeigen",
+    "SecPal soll aus operativer Dokumentation",
   ];
   const forbiddenEnglishTerms = [
     "Recognize developments",
     "recurring developments",
     "recurring issues",
+    "Structured documentation should show",
+    "SecPal aims to turn operational documentation",
   ];
   const germanOutcomes = JSON.stringify(de.outcomes).toLocaleLowerCase("de-DE");
   const englishOutcomes = JSON.stringify(en.outcomes).toLocaleLowerCase("en");

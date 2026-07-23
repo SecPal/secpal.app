@@ -10,7 +10,7 @@ export const de: Translations = {
     android: "Android",
     github: "GitHub",
     contact: "Kontakt",
-    followProgress: "Fortschritt verfolgen",
+    headerCta: "Kontakt aufnehmen",
     toggleDarkMode: "Dunkelmodus umschalten",
     openMenu: "Hauptmenü öffnen",
     mobileMenu: "Mobile Navigation",
@@ -21,7 +21,7 @@ export const de: Translations = {
     tagline: "SecPal – A guard’s best friend",
     headline: "Mehr Übersicht im Sicherheits\u00addienst.",
     subline:
-      "SecPal entsteht für Sicherheitsdienste in Deutschland. Dienstplanung, Informationen zum Einsatz und Dokumentation sollen übersichtlich zusammenkommen – statt auf Papier, in Tabellen und einzelnen Programmen verteilt zu sein.",
+      "SecPal entsteht für Sicherheitsdienste in Deutschland: Dienstplanung, Einsatzinformationen und Dokumentation an einem Ort – statt verteilt auf Papier, Tabellen und einzelne Programme.",
     explanation:
       "SecPal ist für Sicherheitsdienste gebaut, die operative Arbeit in einem klaren Ablauf organisieren statt sie über Papier, Chats und Insellösungen zu verteilen.",
     highlights: [
@@ -29,39 +29,39 @@ export const de: Translations = {
       "Informationen bleiben nachvollziehbar — nicht verstreut in Notizen, Kurznachrichten und verteilten Dateien.",
       "SecPal entsteht öffentlich, mit klarem Fokus und nachvollziehbaren Release-Schritten.",
     ],
-    cta: "Mehr über SecPal erfahren",
+    cta: "SecPal kennenlernen",
     ctaSecondary: "Entwicklung auf GitHub verfolgen",
     note: "SecPal befindet sich derzeit im Aufbau.",
   },
   features: {
     headline: "Viele Informationen. Zu viele Wege.",
     subline:
-      "SecPal konzentriert sich auf das, was im Sicherheitsdienst täglich funktionieren muss: klare Abläufe, verlässliche Dokumentation und Übersicht für Teams und Führung.",
+      "SecPal konzentriert sich auf klare Abläufe, verlässliche Dokumentation und Übersicht im täglichen Betrieb.",
     items: [
       {
         name: "Dienstplanung",
         description:
-          "Ausfälle, Vertretungen und kurzfristige Änderungen müssen schnell alle erreichen – ohne unterschiedliche Planstände und unnötige Rückfragen.",
+          "Ausfälle, Vertretungen und kurzfristige Änderungen müssen alle erreichen – ohne unterschiedliche Planstände und unnötige Rückfragen.",
       },
       {
         name: "Informationen zum Einsatz",
         description:
-          "Dienstanweisungen, Ansprechpartner, Besonderheiten und aktuelle Hinweise müssen dort verfügbar sein, wo sie gebraucht werden.",
+          "Dienstanweisungen, Ansprechpartner und aktuelle Hinweise müssen dort verfügbar sein, wo sie gebraucht werden.",
       },
       {
         name: "Wachbuch und Auswertung",
         description:
-          "Wachbucheinträge, Kontrollgänge, besondere Vorkommnisse und Übergaben sollen nachvollziehbar erfasst und für den eigenen Betrieb sowie für den Auftraggeber verständlich ausgewertet werden können.",
+          "Wachbucheinträge, Kontrollgänge und Vorkommnisse müssen nachvollziehbar erfasst und für Betrieb und Auftraggeber verständlich aufbereitet werden.",
       },
     ],
     closing:
-      "SecPal soll diese Bereiche in einem gemeinsamen, verständlichen Ablauf zusammenführen.",
+      "SecPal verbindet diese Bereiche in einem gemeinsamen, verständlichen Ablauf.",
   },
   workflow: {
     overline: "Ein durchgängiger Ablauf",
     headline: "Vom Dienstplan bis zur Auswertung.",
     introduction:
-      "SecPal soll Informationen entlang der tatsächlichen Arbeit im Sicherheitsdienst miteinander verbinden – statt sie in voneinander getrennten Anwendungen festzuhalten.",
+      "SecPal verbindet Informationen entlang der tatsächlichen Arbeit im Sicherheitsdienst – statt sie in getrennten Anwendungen festzuhalten.",
     steps: [
       {
         name: "Planen",
@@ -86,17 +86,17 @@ export const de: Translations = {
       {
         name: "Auswerten",
         description:
-          "Erbrachte Leistungen, Auffälligkeiten und Entwicklungen für den eigenen Betrieb und den Auftraggeber nachvollziehbar darstellen.",
+          "Erbrachte Leistungen und dokumentierte Ereignisse für den eigenen Betrieb und den Auftraggeber nachvollziehbar zusammenfassen.",
       },
     ],
     closing:
-      "Informationen sollen einmal erfasst werden und anschließend dort verfügbar sein, wo sie benötigt werden.",
+      "Das Prinzip: Informationen einmal erfassen und anschließend dort bereitstellen, wo sie benötigt werden.",
   },
   outcomes: {
     overline: "Nachvollziehbare Sicherheitsdienstleistung",
     headline: "Was im Einsatz geleistet wird, sollte nachvollziehbar sein.",
     introduction:
-      "Sicherheitsdienstleistungen sind für Auftraggeber oft schwer sichtbar – gerade dann, wenn sie zuverlässig und ohne besondere Vorkommnisse erbracht werden. Strukturierte Dokumentation soll verständlich zeigen, welche Leistungen erbracht und welche Ereignisse während eines Einsatzes festgehalten wurden.",
+      "Sicherheitsdienstleistungen sind für Auftraggeber oft schwer sichtbar – gerade dann, wenn sie zuverlässig und ohne besondere Vorkommnisse erbracht werden. Strukturierte Dokumentation macht sichtbar, welche Leistungen erbracht und welche Ereignisse während eines Einsatzes festgehalten wurden.",
     items: [
       {
         name: "Leistung nachvollziehen",
@@ -115,7 +115,7 @@ export const de: Translations = {
       },
     ],
     closing:
-      "SecPal soll aus operativer Dokumentation einen klaren Überblick für den eigenen Betrieb und den Auftraggeber schaffen.",
+      "SecPal schafft aus operativer Dokumentation einen klaren Überblick für den eigenen Betrieb und den Auftraggeber.",
   },
   developmentStatus: {
     overline: "Aktueller Entwicklungsstand",
@@ -147,9 +147,9 @@ export const de: Translations = {
     link: "Roadmap im Detail ansehen",
   },
   cta: {
-    headline: "SecPal soll sich im Arbeitsalltag bewähren.",
+    headline: "Was zählt, ist der Arbeitsalltag.",
     subline:
-      "Für die weitere Entwicklung von SecPal sind Erfahrungen, Anforderungen und Hinweise aus dem Arbeitsalltag von Sicherheitsdiensten besonders wertvoll.",
+      "Erfahrungen, Anforderungen und Hinweise aus dem Alltag von Sicherheitsdiensten sind für die weitere Entwicklung von SecPal besonders wertvoll.",
     button: "Kontakt aufnehmen",
     buttonSecondary: "Entwicklung auf GitHub ansehen",
     note: "",

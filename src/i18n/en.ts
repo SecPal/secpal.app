@@ -8,7 +8,7 @@ export const en = {
     android: "Android",
     github: "GitHub",
     contact: "Contact",
-    followProgress: "Follow progress",
+    headerCta: "Get in touch",
     toggleDarkMode: "Toggle dark mode",
     openMenu: "Open main menu",
     mobileMenu: "Mobile navigation",
@@ -19,7 +19,7 @@ export const en = {
     tagline: "SecPal – A guard’s best friend",
     headline: "More clarity in security operations.",
     subline:
-      "SecPal is being built for security service providers in Germany. Duty scheduling, assignment information, and documentation should come together clearly—instead of being scattered across paper, spreadsheets, and separate applications.",
+      "SecPal is being built for security service providers in Germany: duty scheduling, assignment information, and documentation in one place—instead of being scattered across paper, spreadsheets, and separate applications.",
     explanation:
       "SecPal is built for security operations that need one clear operational flow instead of spreading day-to-day work across paper notes, chats, and disconnected tools.",
     highlights: [
@@ -27,39 +27,39 @@ export const en = {
       "Information stays traceable instead of disappearing into notes, messages, and scattered files.",
       "SecPal is taking shape in public, with a focused scope and clear release steps.",
     ],
-    cta: "Learn more about SecPal",
+    cta: "Learn about SecPal",
     ctaSecondary: "Follow development on GitHub",
     note: "SecPal is currently under development.",
   },
   features: {
     headline: "Important information. Too many separate places.",
     subline:
-      "SecPal focuses on what needs to work every day in security operations: clear workflows, dependable documentation, and visibility for teams and leadership.",
+      "SecPal focuses on clear workflows, dependable documentation, and visibility in day-to-day operations.",
     items: [
       {
         name: "Duty scheduling",
         description:
-          "Absences, replacements, and short-notice changes need to reach everyone quickly—without conflicting schedules or unnecessary follow-up.",
+          "Absences, replacements, and short-notice changes need to reach everyone—without conflicting schedules or unnecessary follow-up.",
       },
       {
         name: "Assignment information",
         description:
-          "Post instructions, contacts, special requirements, and current notices need to be available where they are needed.",
+          "Post instructions, contacts, and current notices need to be available where they are needed.",
       },
       {
         name: "Logbook and reporting",
         description:
-          "Logbook entries, patrols, incidents, and shift handovers should be recorded traceably and made available for clear internal and client-facing reporting.",
+          "Logbook entries, patrols, and incidents need to be recorded traceably and presented clearly for internal use and for clients.",
       },
     ],
     closing:
-      "SecPal aims to bring these areas together in one clear and understandable workflow.",
+      "SecPal connects these areas in one clear, understandable workflow.",
   },
   workflow: {
     overline: "One connected workflow",
     headline: "From duty scheduling to reporting.",
     introduction:
-      "SecPal aims to connect information throughout the actual workflow of security service providers—instead of keeping it in separate applications.",
+      "SecPal connects information throughout day-to-day security operations—instead of keeping it in separate applications.",
     steps: [
       {
         name: "Plan",
@@ -84,17 +84,17 @@ export const en = {
       {
         name: "Review",
         description:
-          "Present delivered services, notable events, and developments clearly for internal use and for the client.",
+          "Summarize delivered services and documented events clearly for internal use and for the client.",
       },
     ],
     closing:
-      "Information should be recorded once and then be available wherever it is needed.",
+      "The principle: record information once and make it available wherever it is needed.",
   },
   outcomes: {
     overline: "Traceable security services",
     headline: "What is delivered during an assignment should be traceable.",
     introduction:
-      "Security services can be difficult for clients to see—especially when they are delivered reliably and without notable incidents. Structured documentation should clearly show which services were delivered and which events were recorded during an assignment.",
+      "Security services can be difficult for clients to see—especially when they are delivered reliably and without notable incidents. Structured documentation shows which services were delivered and which events were recorded during an assignment.",
     items: [
       {
         name: "Understand delivered services",
@@ -113,7 +113,7 @@ export const en = {
       },
     ],
     closing:
-      "SecPal aims to turn operational documentation into a clear overview for the security provider and the client.",
+      "SecPal turns operational documentation into a clear overview for the security provider and the client.",
   },
   developmentStatus: {
     overline: "Current development status",
@@ -145,7 +145,7 @@ export const en = {
     link: "View the detailed roadmap",
   },
   cta: {
-    headline: "SecPal should work in day-to-day operations.",
+    headline: "What matters is day-to-day operations.",
     subline:
       "Experience, requirements, and feedback from day-to-day operations at security service providers are particularly valuable for SecPal's further development.",
     button: "Get in touch",

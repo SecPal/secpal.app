@@ -32,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- tightened the localized homepage copy to separate product direction from
+  development status, with professional contact now also the primary header
+  action
 - refocused the homepage closing action on professional contact as the primary
   next step, with GitHub retained as secondary technical insight
 - refocused the localized homepage hero on clear, practice-led language for

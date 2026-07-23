@@ -12,17 +12,17 @@ const expectedGermanItems = [
   {
     name: "Dienstplanung",
     description:
-      "Ausfälle, Vertretungen und kurzfristige Änderungen müssen schnell alle erreichen – ohne unterschiedliche Planstände und unnötige Rückfragen.",
+      "Ausfälle, Vertretungen und kurzfristige Änderungen müssen alle erreichen – ohne unterschiedliche Planstände und unnötige Rückfragen.",
   },
   {
     name: "Informationen zum Einsatz",
     description:
-      "Dienstanweisungen, Ansprechpartner, Besonderheiten und aktuelle Hinweise müssen dort verfügbar sein, wo sie gebraucht werden.",
+      "Dienstanweisungen, Ansprechpartner und aktuelle Hinweise müssen dort verfügbar sein, wo sie gebraucht werden.",
   },
   {
     name: "Wachbuch und Auswertung",
     description:
-      "Wachbucheinträge, Kontrollgänge, besondere Vorkommnisse und Übergaben sollen nachvollziehbar erfasst und für den eigenen Betrieb sowie für den Auftraggeber verständlich ausgewertet werden können.",
+      "Wachbucheinträge, Kontrollgänge und Vorkommnisse müssen nachvollziehbar erfasst und für Betrieb und Auftraggeber verständlich aufbereitet werden.",
   },
 ];
 
@@ -30,36 +30,48 @@ const expectedEnglishItems = [
   {
     name: "Duty scheduling",
     description:
-      "Absences, replacements, and short-notice changes need to reach everyone quickly—without conflicting schedules or unnecessary follow-up.",
+      "Absences, replacements, and short-notice changes need to reach everyone—without conflicting schedules or unnecessary follow-up.",
   },
   {
     name: "Assignment information",
     description:
-      "Post instructions, contacts, special requirements, and current notices need to be available where they are needed.",
+      "Post instructions, contacts, and current notices need to be available where they are needed.",
   },
   {
     name: "Logbook and reporting",
     description:
-      "Logbook entries, patrols, incidents, and shift handovers should be recorded traceably and made available for clear internal and client-facing reporting.",
+      "Logbook entries, patrols, and incidents need to be recorded traceably and presented clearly for internal use and for clients.",
   },
 ];
 
 test("second homepage view presents exactly the three localized operational situations", () => {
   assert.equal(de.features.headline, "Viele Informationen. Zu viele Wege.");
+  assert.equal(
+    de.features.subline,
+    "SecPal konzentriert sich auf klare Abläufe, verlässliche Dokumentation und Übersicht im täglichen Betrieb."
+  );
   assert.deepEqual(de.features.items, expectedGermanItems);
   assert.equal(
     de.features.closing,
-    "SecPal soll diese Bereiche in einem gemeinsamen, verständlichen Ablauf zusammenführen."
+    "SecPal verbindet diese Bereiche in einem gemeinsamen, verständlichen Ablauf."
   );
 
   assert.equal(
     en.features.headline,
     "Important information. Too many separate places."
   );
+  assert.equal(
+    en.features.subline,
+    "SecPal focuses on clear workflows, dependable documentation, and visibility in day-to-day operations."
+  );
   assert.deepEqual(en.features.items, expectedEnglishItems);
   assert.equal(
     en.features.closing,
-    "SecPal aims to bring these areas together in one clear and understandable workflow."
+    "SecPal connects these areas in one clear, understandable workflow."
+  );
+  assert.doesNotMatch(
+    JSON.stringify({ de: de.features, en: en.features }),
+    /SecPal soll diese Bereiche|SecPal aims to bring these areas/
   );
 });
 
