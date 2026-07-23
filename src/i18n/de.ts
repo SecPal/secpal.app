@@ -118,6 +118,35 @@ export const de: Translations = {
     closing:
       "SecPal soll aus operativer Dokumentation einen klaren Überblick für den eigenen Betrieb und den Auftraggeber schaffen.",
   },
+  developmentStatus: {
+    overline: "Aktueller Entwicklungsstand",
+    headline: "SecPal entsteht Schritt für Schritt.",
+    introduction:
+      "Der aktuelle Schwerpunkt liegt auf der Dienstplanung. Weitere betriebliche Bereiche sind für spätere Entwicklungsschritte vorgesehen – ohne feste Termine.",
+    phases: [
+      {
+        status: "Aktuell",
+        name: "Dienstplanung",
+        description:
+          "Im Mittelpunkt stehen Dienstpläne, Schichtzuweisungen und eine nachvollziehbare Besetzungsplanung.",
+      },
+      {
+        status: "Als Nächstes",
+        name: "Online-Wächterkontrollsystem",
+        description:
+          "Kontrollgänge sollen strukturiert erfasst und mit Wachbuch und Einsatzdokumentation verbunden werden.",
+      },
+      {
+        status: "Später",
+        name: "Weitere betriebliche Bereiche",
+        description:
+          "Vertragsverwaltung und strukturierte Dienstanweisungen gehören zur längerfristigen Richtung von SecPal.",
+      },
+    ],
+    closing:
+      "Diese Reihenfolge beschreibt den aktuellen Planungsstand. Sie kann sich mit den Erkenntnissen aus Entwicklung und Praxis verändern.",
+    link: "Roadmap im Detail ansehen",
+  },
   cta: {
     headline: "Fortschritt statt Marketing-Lärm.",
     subline:
@@ -151,7 +180,7 @@ export const de: Translations = {
         {
           name: "Online-Wächterkontrollsystem (OWKS)",
           description:
-            "Checkpoint-basierte Kontrollgangerfassung per NFC oder QR — nachvollziehbare Kontrollgänge als natürlicher Teil des Betriebsprotokolls.",
+            "Kontrollgänge strukturiert erfassen und nachvollziehbar mit Wachbuch und Einsatzdokumentation verbinden.",
         },
       ],
     },
@@ -162,7 +191,7 @@ export const de: Translations = {
         {
           name: "Vertragsverwaltung & digitale Unterschrift",
           description:
-            "Kunden- und Arbeitsverträge an einem Ort — mit rechtskonformem Unterschriftenworkflow direkt im System.",
+            "Kunden- und Arbeitsverträge an einem Ort verwalten und digitale Unterschriften in die vorgesehenen betrieblichen Abläufe einbinden.",
         },
         {
           name: "Dienstanweisungskonfigurator",

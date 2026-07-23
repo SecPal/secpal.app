@@ -116,6 +116,35 @@ export const en = {
     closing:
       "SecPal aims to turn operational documentation into a clear overview for the security provider and the client.",
   },
+  developmentStatus: {
+    overline: "Current development status",
+    headline: "SecPal is being built step by step.",
+    introduction:
+      "The current focus is duty scheduling. Further operational areas are planned for later development stages, without fixed delivery dates.",
+    phases: [
+      {
+        status: "Current focus",
+        name: "Duty scheduling",
+        description:
+          "The focus is on duty rosters, shift assignments, and clear staffing planning.",
+      },
+      {
+        status: "Next",
+        name: "Online guard tour system",
+        description:
+          "Guard tours are intended to be recorded in a structured way and connected with the logbook and assignment documentation.",
+      },
+      {
+        status: "Later",
+        name: "Further operational areas",
+        description:
+          "Contract management and structured service instructions are part of SecPal's longer-term direction.",
+      },
+    ],
+    closing:
+      "This sequence reflects the current planning status and may change as development progresses and practical experience provides new insights.",
+    link: "View the detailed roadmap",
+  },
   cta: {
     headline: "Progress, not marketing noise.",
     subline:
@@ -149,7 +178,7 @@ export const en = {
         {
           name: "Online guard tour system",
           description:
-            "Checkpoint-based patrol recording via NFC or QR — traceable guard tours as a natural part of the operational log.",
+            "Record guard tours in a structured way and connect them clearly with the logbook and assignment documentation.",
         },
       ],
     },
@@ -160,7 +189,7 @@ export const en = {
         {
           name: "Contract management & digital signatures",
           description:
-            "Customer and employment contracts in one place, with a legally compliant digital signature workflow.",
+            "Manage customer and employment contracts in one place and integrate digital signatures into the intended operational workflows.",
         },
         {
           name: "Service instruction configurator",

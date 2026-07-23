@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- added a localized homepage development-status section that distinguishes
+  the current focus, next planned area, and longer-term direction, with a
+  technology-neutral description of the planned online guard tour system
 - added a localized homepage outcomes section that connects operational
   documentation with service visibility for security providers and clients
 - added a localized homepage workflow that presents the intended operational
