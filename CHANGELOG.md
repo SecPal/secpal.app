@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- added a localized homepage workflow that presents the intended operational
+  sequence from duty planning through reporting
 - added a public roadmap page at `/roadmap/`, localized as `/en/roadmap/` and `/de/roadmap/`
 - documented current roadmap focus (shift planning), the next planned step (online guard tour system), and longer-term direction (contract management and service instruction configurator)
 - added a Node regression test that keeps the English and German roadmap copy aligned with the current shift-planning focus and the next OWKS milestone

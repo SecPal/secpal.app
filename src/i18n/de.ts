@@ -58,6 +58,41 @@ export const de: Translations = {
     closing:
       "SecPal soll diese Bereiche in einem gemeinsamen, verständlichen Ablauf zusammenführen.",
   },
+  workflow: {
+    overline: "Ein durchgängiger Ablauf",
+    headline: "Vom Dienstplan bis zur Auswertung.",
+    introduction:
+      "SecPal soll Informationen nicht in voneinander getrennten Anwendungen festhalten, sondern entlang der tatsächlichen Arbeit im Sicherheitsdienst miteinander verbinden.",
+    steps: [
+      {
+        name: "Planen",
+        description:
+          "Dienste besetzen, Zuständigkeiten festlegen und kurzfristige Änderungen nachvollziehbar halten.",
+      },
+      {
+        name: "Informieren",
+        description:
+          "Mitarbeitern die aktuellen Informationen, Dienstanweisungen und Besonderheiten zum jeweiligen Einsatz bereitstellen.",
+      },
+      {
+        name: "Durchführen",
+        description:
+          "Aufgaben, Kontrollgänge und besondere Vorkommnisse dort erfassen, wo die Arbeit stattfindet.",
+      },
+      {
+        name: "Übergeben",
+        description:
+          "Ereignisse, offene Punkte und wichtige Informationen verständlich an die nächste Schicht weitergeben.",
+      },
+      {
+        name: "Auswerten",
+        description:
+          "Erbrachte Leistungen, Auffälligkeiten und Entwicklungen für den eigenen Betrieb und den Auftraggeber nachvollziehbar darstellen.",
+      },
+    ],
+    closing:
+      "Informationen sollen einmal entstehen und anschließend dort verfügbar sein, wo sie benötigt werden.",
+  },
   cta: {
     headline: "Fortschritt statt Marketing-Lärm.",
     subline:

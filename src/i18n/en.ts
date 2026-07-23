@@ -56,6 +56,41 @@ export const en = {
     closing:
       "SecPal aims to bring these areas together in one clear and understandable workflow.",
   },
+  workflow: {
+    overline: "One connected workflow",
+    headline: "From duty scheduling to reporting.",
+    introduction:
+      "SecPal aims to connect information along the actual work carried out by security service providers, instead of keeping it in separate applications.",
+    steps: [
+      {
+        name: "Plan",
+        description:
+          "Assign duties, define responsibilities, and keep short-notice changes traceable.",
+      },
+      {
+        name: "Inform",
+        description:
+          "Provide employees with current information, post instructions, and assignment-specific details.",
+      },
+      {
+        name: "Carry out",
+        description:
+          "Record tasks, patrols, and incidents where the work takes place.",
+      },
+      {
+        name: "Hand over",
+        description:
+          "Pass events, open matters, and important information clearly to the next shift.",
+      },
+      {
+        name: "Review",
+        description:
+          "Present delivered services, notable events, and developments clearly for internal use and for the client.",
+      },
+    ],
+    closing:
+      "Information should be recorded once and then be available wherever it is needed.",
+  },
   cta: {
     headline: "Progress, not marketing noise.",
     subline:
