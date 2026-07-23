@@ -139,12 +139,48 @@ const previewUrl = canonicalUrl ?? xDefaultUrl;
             });
           }
           if (mobileMenu && mobileMenuOpen && mobileMenuClose) {
-            var setMobileMenuOpen = function (isOpen) {
+            var returnFocus = null;
+            var previousBodyOverflow = "";
+            var backgroundElements = [
+              document.querySelector("header > nav"),
+              document.querySelector("main"),
+              document.querySelector("footer"),
+            ].filter(function (element) {
+              return element !== null;
+            });
+            var getFocusableElements = function () {
+              return Array.from(
+                mobileMenu.querySelectorAll(
+                  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+                )
+              ).filter(function (element) {
+                return element.getClientRects().length > 0;
+              });
+            };
+            var setMobileMenuOpen = function (isOpen, restoreFocus) {
               mobileMenu.classList.toggle("hidden", !isOpen);
               mobileMenuOpen.setAttribute(
                 "aria-expanded",
                 isOpen ? "true" : "false"
               );
+              backgroundElements.forEach(function (element) {
+                element.toggleAttribute("inert", isOpen);
+              });
+
+              if (isOpen) {
+                returnFocus = document.activeElement;
+                previousBodyOverflow = document.body.style.overflow;
+                document.body.style.overflow = "hidden";
+                mobileMenuClose.focus();
+              } else {
+                document.body.style.overflow = previousBodyOverflow;
+                if (
+                  restoreFocus !== false &&
+                  returnFocus instanceof HTMLElement
+                ) {
+                  returnFocus.focus();
+                }
+              }
             };
 
             mobileMenuOpen.addEventListener("click", function () {
@@ -155,8 +191,37 @@ const previewUrl = canonicalUrl ?? xDefaultUrl;
             });
             mobileMenu.querySelectorAll("a").forEach(function (link) {
               link.addEventListener("click", function () {
-                setMobileMenuOpen(false);
+                setMobileMenuOpen(false, false);
               });
+            });
+            mobileMenu.addEventListener("keydown", function (event) {
+              if (event.key === "Escape") {
+                event.preventDefault();
+                setMobileMenuOpen(false);
+                return;
+              }
+              if (event.key !== "Tab") {
+                return;
+              }
+
+              var focusableElements = getFocusableElements();
+              var firstFocusable = focusableElements[0];
+              var lastFocusable =
+                focusableElements[focusableElements.length - 1];
+              if (!firstFocusable || !lastFocusable) {
+                event.preventDefault();
+                return;
+              }
+              if (event.shiftKey && document.activeElement === firstFocusable) {
+                event.preventDefault();
+                lastFocusable.focus();
+              } else if (
+                !event.shiftKey &&
+                document.activeElement === lastFocusable
+              ) {
+                event.preventDefault();
+                firstFocusable.focus();
+              }
             });
           }
         });

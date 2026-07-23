@@ -26,6 +26,8 @@ export const de: Translations = {
   },
   features: {
     headline: "Viele Informationen. Zu viele Wege.",
+    subline:
+      "SecPal konzentriert sich auf klare Abläufe, verlässliche Dokumentation und Übersicht im täglichen Betrieb.",
     items: [
       {
         name: "Dienstplanung",

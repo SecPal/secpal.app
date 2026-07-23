@@ -58,7 +58,7 @@ const mobileMenuCloseClass =
 >
   <nav
     aria-label="Global"
-    class="mx-auto flex max-w-7xl items-center justify-between gap-x-4 px-6 py-[var(--secpal-nav-padding-y)] sm:gap-x-6 lg:px-8"
+    class="mx-auto flex max-w-7xl items-center justify-between gap-x-3 px-4 py-[var(--secpal-nav-padding-y)] sm:gap-x-6 sm:px-6 lg:px-8"
   >
     <!-- Logo -->
     <div class="flex lg:flex-1">
@@ -108,7 +108,7 @@ const mobileMenuCloseClass =
     </div>
 
     <!-- Right-side: language switcher + dark toggle + CTA -->
-    <div class="flex flex-1 items-center justify-end gap-x-2 sm:gap-x-4">
+    <div class="flex flex-1 items-center justify-end gap-x-1 sm:gap-x-4">
       <!-- Language switcher -->
       <a
         href={otherLocalePath}
@@ -128,7 +128,10 @@ const mobileMenuCloseClass =
         id="dark-toggle"
         type="button"
         aria-label={t.nav.toggleDarkMode}
-        class:list={["rounded-md p-1.5", utilityControlClass]}
+        class:list={[
+          "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md p-1.5",
+          utilityControlClass,
+        ]}
       >
         <!-- Sun — shown in dark mode -->
         <svg
@@ -164,7 +167,7 @@ const mobileMenuCloseClass =
 
       <a
         href={contactPath}
-        class="hidden min-[360px]:inline-flex rounded-md bg-indigo-600 px-2 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:px-3 sm:text-sm dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus-visible:outline-indigo-500"
+        class="hidden min-h-[44px] min-[360px]:inline-flex items-center justify-center rounded-md bg-indigo-600 px-1 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:px-3 sm:text-sm dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus-visible:outline-indigo-500"
         >{t.nav.headerCta}</a
       >
     </div>
@@ -225,7 +228,7 @@ const mobileMenuCloseClass =
         </a>
         <a
           href={contactPath}
-          class="order-last w-full break-words rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-600"
+          class="order-last inline-flex min-h-[44px] w-full items-center justify-center break-words rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-600"
           >{t.nav.headerCta}</a
         >
         <button

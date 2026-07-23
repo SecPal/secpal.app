@@ -24,6 +24,8 @@ export const en = {
   },
   features: {
     headline: "Important information. Too many separate places.",
+    subline:
+      "SecPal focuses on clear workflows, dependable documentation, and visibility in day-to-day operations.",
     items: [
       {
         name: "Duty scheduling",

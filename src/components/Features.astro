@@ -10,8 +10,8 @@
 //     hero, so the eye registers "new section" before reading any text.
 //   - h2 uses the overline pattern (text-base, indigo) rather than a large
 //     centered heading to avoid a competing headline event after the hero.
-//   - Subline removed: it restated hero vocabulary and created a second-hero
-//     effect. The three cards carry the argument directly.
+//   - The compact subline frames the operational problem before the three
+//     cards without creating a second-hero effect.
 //   - py-14 sm:py-20: reduced from py-24 sm:py-32; the section reaches the
 //     cards faster and stays proportionate to the now-shorter hero.
 import type { Locale } from "../i18n/index.ts";
@@ -40,10 +40,15 @@ const iconPaths = [
     <!-- Overline label — section anchor, not a competing headline event -->
     <h2
       id="features-heading"
-      class="mb-10 text-base/7 font-semibold text-indigo-600 sm:mb-12 dark:text-indigo-400"
+      class="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400"
     >
       {t.features.headline}
     </h2>
+    <p
+      class="mt-3 mb-10 max-w-2xl text-base/7 text-gray-600 sm:mb-12 dark:text-gray-400"
+    >
+      {t.features.subline}
+    </p>
     <dl class="grid grid-cols-1 gap-6 lg:grid-cols-3">
       {
         t.features.items.map((feature, i) => (

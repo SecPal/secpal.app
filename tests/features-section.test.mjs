@@ -46,6 +46,10 @@ const expectedEnglishItems = [
 
 test("second homepage view presents exactly the three localized operational situations", () => {
   assert.equal(de.features.headline, "Viele Informationen. Zu viele Wege.");
+  assert.equal(
+    de.features.subline,
+    "SecPal konzentriert sich auf klare Abläufe, verlässliche Dokumentation und Übersicht im täglichen Betrieb."
+  );
   assert.deepEqual(de.features.items, expectedGermanItems);
   assert.equal(
     de.features.closing,
@@ -56,6 +60,10 @@ test("second homepage view presents exactly the three localized operational situ
     en.features.headline,
     "Important information. Too many separate places."
   );
+  assert.equal(
+    en.features.subline,
+    "SecPal focuses on clear workflows, dependable documentation, and visibility in day-to-day operations."
+  );
   assert.deepEqual(en.features.items, expectedEnglishItems);
   assert.equal(
     en.features.closing,
@@ -65,8 +73,6 @@ test("second homepage view presents exactly the three localized operational situ
     JSON.stringify({ de: de.features, en: en.features }),
     /SecPal soll diese Bereiche|SecPal aims to bring these areas/
   );
-  assert.ok(!("subline" in de.features));
-  assert.ok(!("subline" in en.features));
 });
 
 test("second homepage view keeps one semantic heading, three cards, and a quiet closing statement", () => {
@@ -91,6 +97,7 @@ test("second homepage view keeps one semantic heading, three cards, and a quiet 
     /<section\s+id="progress"\s+aria-labelledby="features-heading"/
   );
   assert.match(component, /<h2\s+id="features-heading"/);
+  assert.match(component, /<\/h2>[\s\S]*\{t\.features\.subline\}[\s\S]*<dl\b/);
   assert.match(component, /t\.features\.items\.map/);
   assert.match(component, /\blg:grid-cols-3\b/);
   assert.match(component, /<\/dl>[\s\S]*\{t\.features\.closing\}/);
@@ -98,6 +105,6 @@ test("second homepage view keeps one semantic heading, three cards, and a quiet 
   assert.doesNotMatch(component, /<a\b|<button\b/);
   assert.doesNotMatch(
     component,
-    /Viele Informationen|Important information|Dienstplanung|Duty scheduling/
+    /Viele Informationen|Important information|SecPal konzentriert|SecPal focuses|Dienstplanung|Duty scheduling/
   );
 });

@@ -65,6 +65,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- completed mobile navigation keyboard behavior with focus containment, Escape
+  dismissal, background isolation, scroll locking, and 44-pixel touch targets
+- restored the localized introduction above the homepage operational problem
+  cards
 - prevented the German homepage closing heading from being clipped on narrow
   screens with enlarged text
 - corrected narrow-screen wrapping in the homepage heading, navigation, mobile

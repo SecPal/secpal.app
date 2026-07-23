@@ -131,10 +131,12 @@ test("desktop and mobile navigation point to the localized contact section", () 
     headerCtaAnchors[0],
     /\bhidden\b[^"]*\bmin-\[360px\]:inline-flex\b[^"]*\bwhitespace-nowrap\b/
   );
+  assert.match(headerCtaAnchors[0], /min-h-\[44px\]/);
   assert.match(
     headerCtaAnchors[1],
     /\border-last\b[^"]*\bw-full\b[^"]*\bbreak-words\b/
   );
+  assert.match(headerCtaAnchors[1], /min-h-\[44px\]/);
   assert.doesNotMatch(headerCtaAnchors[1], /\bwhitespace-nowrap\b/);
   assert.match(
     nav,
@@ -143,6 +145,10 @@ test("desktop and mobile navigation point to the localized contact section", () 
   assert.match(
     nav,
     /id="mobile-menu-close"[\s\S]*class:list=\{\[mobileMenuCloseClass, "ml-auto"\]\}/
+  );
+  assert.match(
+    nav,
+    /id="dark-toggle"[\s\S]*?class:list=\{\[[\s\S]*?"[^"]*min-h-\[44px\][^"]*min-w-\[44px\][^"]*"[\s\S]*?utilityControlClass[\s\S]*?\]\}/
   );
   assert.equal(nav.match(/href="https:\/\/github\.com\/SecPal"/g)?.length, 2);
   assert.equal(nav.match(/\{t\.nav\.github\}/g)?.length, 2);

@@ -58,8 +58,24 @@ test("mobile navigation avoids inline click handlers and is wired from script", 
   );
   assert.match(
     layout,
-    /mobileMenu\.querySelectorAll\("a"\)[\s\S]*link\.addEventListener\("click"[\s\S]*setMobileMenuOpen\(false\)/
+    /mobileMenu\.querySelectorAll\("a"\)[\s\S]*link\.addEventListener\("click"[\s\S]*setMobileMenuOpen\(false, false\)/
   );
+  assert.match(
+    layout,
+    /backgroundElements[\s\S]*toggleAttribute\("inert", isOpen\)/
+  );
+  assert.match(layout, /document\.body\.style\.overflow = "hidden"/);
+  assert.match(
+    layout,
+    /document\.body\.style\.overflow = previousBodyOverflow/
+  );
+  assert.match(layout, /returnFocus = document\.activeElement/);
+  assert.match(layout, /mobileMenuClose\.focus\(\)/);
+  assert.match(layout, /returnFocus\.focus\(\)/);
+  assert.match(layout, /event\.key === "Escape"/);
+  assert.match(layout, /event\.key !== "Tab"/);
+  assert.match(layout, /lastFocusable\.focus\(\)/);
+  assert.match(layout, /firstFocusable\.focus\(\)/);
 });
 
 test("homepage primary actions preserve readable dark-mode hover contrast", () => {
@@ -89,8 +105,13 @@ test("narrow navigation and footer can contract without page overflow", () => {
 
   assert.match(
     nav,
-    /hidden\s+min-\[360px\]:inline-flex[^"]*dark:hover:bg-indigo-600/
+    /hidden[^"]*min-\[360px\]:inline-flex[^"]*dark:hover:bg-indigo-600/
   );
+  assert.match(
+    nav,
+    /class="[^"]*\bgap-x-3\b[^"]*\bpx-4\b[^"]*\bsm:gap-x-6\b[^"]*\bsm:px-6\b[^"]*\blg:px-8\b[^"]*"/
+  );
+  assert.match(nav, /class="[^"]*\bgap-x-1\b[^"]*\bsm:gap-x-4\b[^"]*"/);
   assert.match(footer, /\bflex\b[^"]*\bflex-wrap\b/);
 });
 
