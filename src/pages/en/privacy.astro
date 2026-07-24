@@ -7,25 +7,42 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
 <LegalPageShell
   locale="en"
   title="Privacy Notice | SecPal"
-  description="Privacy notice for secpal.app, the SecPal Android app, beta distribution, and direct email contact with SecPal."
+  description="Privacy notice for secpal.app, apk.secpal.app, and direct contact with SecPal."
   canonicalPath="/en/privacy/"
   currentPath="/privacy"
   eyebrow="Legal"
   headline="Privacy Notice"
-  intro="This privacy notice explains which personal data may be processed when you visit secpal.app, use the SecPal Android app, take part in Android beta distribution, or contact SecPal by email."
+  intro="This privacy notice concerns the public secpal.app website, download resources provided through apk.secpal.app, the domain and DNS infrastructure, and direct contact by email."
   updatedLabel="Last updated"
-  updatedAt="June 28, 2026"
+  updatedAt="July 24, 2026"
 >
   <section class="space-y-8">
     <div>
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        1. Controller
+        1. Scope
       </h2>
       <p class="mt-6">
-        The controller responsible for data processing on this website is:
+        This privacy notice applies to the public secpal.app website, download
+        resources provided through apk.secpal.app, and direct contact with
+        SecPal.
       </p>
+      <p class="mt-4">
+        It does not describe the processing of personal data within an installed
+        or operated SecPal instance. Such processing is the responsibility of
+        the entity that determines the operation and purposes of the respective
+        instance.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        2. Controller
+      </h2>
+      <p class="mt-6">The controller within the meaning of the GDPR is:</p>
       <div
         class="mt-4 rounded-2xl border border-gray-200 p-6 dark:border-white/10"
       >
@@ -49,116 +66,226 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        2. Access data and hosting
+        3. Technical delivery and hosting
       </h2>
       <p class="mt-6">
-        When you visit this website, technically necessary data is processed so
-        the site can be delivered and operated securely.
+        When the website or a download resource is requested, the browser sends
+        technically necessary connection and request data. This includes, in
+        particular, the IP address, the requested host and resource, connection
+        and protocol data, and technically transmitted HTTP headers.
       </p>
-      <ul
-        role="list"
-        class="mt-8 max-w-xl space-y-6 text-gray-600 dark:text-gray-400"
-      >
-        <li class="flex gap-x-3">
-          <span
-            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
-          ></span>
-          <span
-            ><strong class="font-semibold text-gray-900 dark:text-white"
-              >Processed data:</strong
-            > IP address, date and time of access, requested URL, referrer, browser
-            type, and operating system.</span
-          >
-        </li>
-        <li class="flex gap-x-3">
-          <span
-            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
-          ></span>
-          <span
-            ><strong class="font-semibold text-gray-900 dark:text-white"
-              >Purpose:</strong
-            > delivery of the website, error analysis, abuse detection, and safeguarding
-            technical operations.</span
-          >
-        </li>
-        <li class="flex gap-x-3">
-          <span
-            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
-          ></span>
-          <span
-            ><strong class="font-semibold text-gray-900 dark:text-white"
-              >Legal basis:</strong
-            > Art. 6(1)(f) GDPR based on the legitimate interest in operating a secure
-            and functional website.</span
-          >
-        </li>
-      </ul>
-      <p class="mt-8">This website is hosted by Hetzner.</p>
+      <p class="mt-4">
+        This data is processed transiently for the duration of the connection so
+        that the requested website or file can be transmitted. secpal.app and
+        apk.secpal.app are hosted through Hetzner Online GmbH.
+      </p>
+      <p class="mt-4">
+        The purposes are to deliver the requested content, provide stable and
+        secure transport, and operate the hosting infrastructure. The legal
+        basis is Article 6(1)(f) GDPR. The legitimate interest is the secure and
+        functional provision of this content.
+      </p>
     </div>
 
     <div>
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        3. Android app, beta distribution, and update delivery
+        4. No regular access logging
       </h2>
       <p class="mt-6">
-        SecPal is also provided as a native Android app with the package name
-        {" "}
-        <strong class="font-semibold text-gray-900 dark:text-white"
-          >app.secpal</strong
-        >.{" "}
-        Distribution takes place through the Google Play Store or through SecPal download
-        URLs. The signed app package remains the same regardless of the distribution
-        path.
+        SecPal keeps no regular web server access or error logs for secpal.app
+        and apk.secpal.app. Individual page and download requests are not
+        permanently logged by SecPal.
       </p>
+      <p class="mt-4">
+        SecPal does not store individual IP addresses, user agents, or crawler
+        information and does not use such requests to produce visitor, referrer,
+        country, device, or download statistics. This does not affect the
+        transient technical processing during the connection. Infrastructure
+        operators may process technically necessary operational or security data
+        under their own responsibility.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        5. Domain management and DNS
+      </h2>
+      <p class="mt-6">
+        Domain management and authoritative DNS services are provided through
+        Cloudflare. The web DNS records are DNS-only and answer DNS queries with
+        the actual Hetzner origin IP address. Regular HTTP and HTTPS traffic
+        goes directly to Hetzner.
+      </p>
+      <p class="mt-4">
+        Cloudflare is not used for these hosts as a Reverse Proxy, CDN, WAF, or
+        HTTP analytics platform. Cloudflare therefore does not receive regular
+        page or download traffic.
+      </p>
+      <p class="mt-4">
+        Cloudflare may process technically necessary DNS query data as part of
+        DNS resolution. The purpose is reliable and secure domain availability.
+        The legal basis is Article 6(1)(f) GDPR; the legitimate interest is
+        stable and secure domain resolution.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        6. Public download resources
+      </h2>
+      <p class="mt-6">
+        apk.secpal.app may provide APK files, manifests, release metadata, and
+        checksums. A request requires the same transient technical connection
+        processing as a regular website request.
+      </p>
+      <p class="mt-4">
+        SecPal keeps no download logs or individual download counters. A request
+        does not provide secpal.app with information about the later
+        installation or use of the downloaded software.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        7. Local display preference
+      </h2>
+      <p class="mt-6">
+        If a person manually selects light or dark mode, the website stores the
+        value <code class="break-all">light</code> or{" "}
+        <code class="break-all">dark</code> under the key{" "}
+        <code class="break-all">theme</code> in the browser's local storage. Without
+        a manual selection, the display follows the operating-system preference.
+      </p>
+      <p class="mt-4">
+        The setting remains in the browser and is not transmitted to SecPal or
+        an external provider. It remains stored until it is changed or the
+        browser's local storage is cleared.
+      </p>
+      <p class="mt-4">
+        The storage is necessary to provide the display mode expressly selected
+        by the user. It is based on Section 25(2)(2) TDDDG and does not require
+        consent.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        8. No web analytics or visitor profiling
+      </h2>
+      <p class="mt-6">
+        SecPal does not use web analytics, marketing, or user-tracking services
+        on secpal.app or apk.secpal.app. No visitor profiles are created, and no
+        optional analytics or marketing cookies are set.
+      </p>
+      <p class="mt-4">
+        Because no optional tracking technologies are used, no consent banner
+        for these purposes is included.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        9. Contact by email
+      </h2>
+      <p class="mt-6">
+        Email communication is technically provided through Uberspace. Uberspace
+        is operated by Jonas Pasche in Mainz, Germany.
+      </p>
+      <p class="mt-4">
+        The data processed may include the sender address, name if provided,
+        subject, message content, time of communication, attachments, and
+        technically necessary email metadata. The sole purpose is to process the
+        request and conduct the communication required for it.
+      </p>
+      <p class="mt-4">
+        Article 6(1)(b) GDPR applies when a person requests pre-contractual
+        steps through their inquiry or when the communication concerns a
+        contract. In all other cases, Article 6(1)(f) GDPR applies. The
+        legitimate interest is processing incoming inquiries and security
+        reports.
+      </p>
+      <p class="mt-4">
+        SecPal deletes the message after the request has been finally processed.
+        It is not reused for marketing, newsletters, visitor analytics, or CRM
+        profiles. Mandatory statutory retention obligations remain unaffected.
+        Technically necessary processes in the email provider's backup,
+        delivery, or queue systems may differ.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        10. External links
+      </h2>
+      <p class="mt-6">
+        This website contains links to external services, especially GitHub.
+        Content from these providers is not embedded in secpal.app. Merely
+        visiting the website therefore does not establish a connection to
+        GitHub.
+      </p>
+      <p class="mt-4">
+        Only when a person selects an external link do they leave secpal.app and
+        the browser establishes a connection to the respective provider. The
+        respective provider is responsible for processing on the external
+        service.
+      </p>
+      <p class="mt-4">
+        For links to SecPal's presence on GitHub, SecPal suppresses transmission
+        of the previously visited page as the HTTP referrer.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        11. Recipients and service providers
+      </h2>
       <ul
         role="list"
         class="mt-8 max-w-3xl space-y-6 text-gray-600 dark:text-gray-400"
       >
-        <li class="flex gap-x-3">
-          <span
-            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
-          ></span>
-          <span
-            ><strong class="font-semibold text-gray-900 dark:text-white"
-              >Processed data:</strong
-            > depending on use, this may include account data, operations and organizational
-            data entered by users, technical device and app data, log data, version
-            and update information, and, for managed-device or Device Owner scenarios,
-            required provisioning or bootstrap information.</span
+        <li>
+          <strong class="font-semibold text-gray-900 dark:text-white"
+            >Hetzner Online GmbH:</strong
           >
+          {" "}
+          hosting and delivery of the website and download resources.
         </li>
-        <li class="flex gap-x-3">
-          <span
-            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
-          ></span>
-          <span
-            ><strong class="font-semibold text-gray-900 dark:text-white"
-              >Purpose:</strong
-            > app delivery, authentication, provision of app features, secure technical
-            delivery of installation and update information, error analysis, abuse
-            detection, and system security.</span
+        <li>
+          <strong class="font-semibold text-gray-900 dark:text-white"
+            >Cloudflare, Inc.:</strong
           >
+          {" "}
+          domain management and authoritative DNS services. Because the configuration
+          is DNS-only, Cloudflare does not receive regular HTTP or HTTPS traffic.
         </li>
-        <li class="flex gap-x-3">
-          <span
-            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
-          ></span>
-          <span
-            ><strong class="font-semibold text-gray-900 dark:text-white"
-              >Legal bases:</strong
-            > Art. 6(1)(b) GDPR for providing agreed app functionality and pre-contractual
-            or contractual services; Art. 6(1)(f) GDPR for secure operation, abuse
-            prevention, distribution integrity, and the stability of connected systems.</span
+        <li>
+          <strong class="font-semibold text-gray-900 dark:text-white"
+            >Uberspace, operated by Jonas Pasche:</strong
           >
+          {" "}
+          technical email communication.
         </li>
       </ul>
-      <p class="mt-8">
-        The same principles apply to closed and open beta phases. Beta versions
-        may additionally process technical diagnostic data and error context
-        where this is required to stabilize and securely provide the pre-release
-        version.
+      <p class="mt-6">
+        GitHub is not a recipient of personal data merely because a person
+        visits the website. A connection is only established when an external
+        GitHub link is selected.
       </p>
     </div>
 
@@ -166,23 +293,18 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        4. Google Play Store and third-party platforms
+        12. International transfers involving Cloudflare
       </h2>
       <p class="mt-6">
-        If the SecPal Android app is distributed through the Google Play Store
-        or other third-party platforms, those platforms may process personal
-        data in connection with listing, download, installation, licensing,
-        billing, update delivery, or abuse prevention.
+        Cloudflare is a provider based in the United States with global
+        infrastructure. Processing outside the European Economic Area cannot be
+        completely ruled out in connection with the DNS services.
       </p>
       <p class="mt-4">
-        Such processing is generally carried out under the responsibility of the
-        respective platform operator. For Google's processing, Google's own
-        privacy and terms documents also apply.
-      </p>
-      <p class="mt-4">
-        Where we organize beta or release programs through such platforms, we
-        only process the information required there for release management,
-        support, release communication, or security to the extent necessary.
+        The EU-US Data Privacy Framework may be used for transfers to the United
+        States for as long as the certification remains effective. In addition,
+        or for other relevant international transfers, Cloudflare provides for
+        Standard Contractual Clauses.
       </p>
     </div>
 
@@ -190,16 +312,16 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        5. Contact by email
+        13. Provision of data
       </h2>
       <p class="mt-6">
-        If you contact us by email, we process the information you send so we
-        can answer your request and document the related communication.
+        Processing connection data is technically necessary to deliver the
+        website or download resources. Without this processing, the requested
+        content cannot be transmitted.
       </p>
       <p class="mt-4">
-        The legal basis is Art. 6(1)(b) GDPR where your request relates to
-        pre-contractual steps or a specific inquiry, otherwise Art. 6(1)(f)
-        GDPR.
+        Contact by email is voluntary. Without a reachable sender address and
+        sufficient information, it may not be possible to answer an inquiry.
       </p>
     </div>
 
@@ -207,12 +329,19 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        6. No cookies and no tracking on this website
+        14. Storage periods
       </h2>
       <p class="mt-6">
-        This website currently does not use analytics, tracking, or marketing
-        cookies. There is also no consent banner for optional tracking at this
-        time.
+        SecPal does not store individual website or download requests in regular
+        web server logs. The theme setting remains solely in the browser until
+        it is changed or the browser's local storage is cleared.
+      </p>
+      <p class="mt-4">
+        Emails are deleted after final processing unless a statutory obligation
+        or a specific legal reason requires longer retention. The service
+        providers' respective operational and legal requirements apply to
+        technically necessary processing; SecPal does not state an unsupported
+        fixed period for such processing.
       </p>
     </div>
 
@@ -220,47 +349,35 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        7. Storage duration
+        15. Data subject rights
       </h2>
       <p class="mt-6">
-        Server log data is stored only for as long as necessary for technical
-        delivery, error analysis, and security monitoring.
+        Where the relevant statutory requirements are met, data subjects have
+        rights of access, rectification, erasure, restriction of processing, and
+        data portability. They also have a right to object to processing based
+        on Article 6(1)(f) GDPR.
       </p>
       <p class="mt-4">
-        Data from emails is deleted once the relevant request has been
-        completed, unless statutory retention obligations require otherwise.
+        Data subjects may also lodge a complaint with a data protection
+        supervisory authority. The competent authority includes:
       </p>
-      <p class="mt-4">
-        Data from use of the Android app or beta distribution is stored only as
-        long as necessary for the relevant feature, security monitoring,
-        support, error analysis, release management, or statutory retention
-        duties.
-      </p>
-    </div>
-
-    <div>
-      <h2
-        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      <div
+        class="mt-4 rounded-2xl border border-gray-200 p-6 dark:border-white/10"
       >
-        8. Data subject rights
-      </h2>
-      <p class="mt-6">
-        Under the GDPR, you may have rights of access, rectification, erasure,
-        restriction of processing, data portability, and objection to
-        processing.
-      </p>
+        <p class="font-semibold text-gray-900 dark:text-white">
+          The State Commissioner for Data Protection of Lower Saxony
+        </p>
+        <p class="mt-2">Prinzenstraße 5</p>
+        <p class="mt-2">30159 Hannover</p>
+        <p class="mt-2">Germany</p>
+      </div>
       <p class="mt-4">
-        You also have the right to lodge a complaint with a supervisory
-        authority.
-      </p>
-      <p class="mt-4">
-        If you use a SecPal account or want personal data associated with the
-        app to be deleted, you can contact us at{" "}
+        Requests concerning data subject rights may be sent to{" "}
         <a
           href="mailto:hello@secpal.app"
           class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
           >hello@secpal.app</a
-        >.
+        >{"."}
       </p>
     </div>
 
@@ -268,12 +385,11 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        9. Changes to this notice
+        16. Changes to this privacy notice
       </h2>
       <p class="mt-6">
-        We update this privacy notice whenever the website, the Android app, the
-        actual data processing activities, the beta or release processes, or the
-        legal requirements change.
+        SecPal updates this privacy notice when the website, download
+        infrastructure, service providers, or legal requirements change.
       </p>
     </div>
   </section>
