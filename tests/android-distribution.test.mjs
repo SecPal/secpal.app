@@ -245,11 +245,15 @@ test("unavailable public Android content does not expose public download or stor
   assert.ok(!publicContent.includes(androidPlayStoreUrl));
 });
 
-test("available direct downloads reuse the canonical latest alias builders", () => {
+test("direct distribution names SecPal while links use the canonical artifact host", () => {
   for (const locale of ["en", "de"]) {
     const content = buildAndroidDistributionContent(locale, true, false);
     const directDownload = content.downloadOptions[0];
 
+    assert.equal(
+      content.summaryItems[1]?.value,
+      locale === "de" ? "Direkt über secpal.app" : "Direct from secpal.app"
+    );
     assert.equal(
       content.heroPrimary?.href,
       buildArtifactUrl(buildLatestArtifactPath())
