@@ -102,6 +102,17 @@ test("localized privacy pages retain their shell metadata and aligned sections",
   assert.deepEqual(extractSectionNames(pages.en), expectedSections.en);
 });
 
+test("the formal scope includes authoritative DNS services", () => {
+  assert.match(
+    compactPages.de,
+    /<h2[^>]*> 1\. Geltungsbereich <\/h2> <p class="mt-6"> [^<]*autoritativen DNS-Dienste[^<]*<\/p>/
+  );
+  assert.match(
+    compactPages.en,
+    /<h2[^>]*> 1\. Scope <\/h2> <p class="mt-6"> [^<]*authoritative DNS services[^<]*<\/p>/
+  );
+});
+
 test("section extraction rejects headings that contain markup", () => {
   const headingWithMarkup = "<h2>1. Scope <em>note</em></h2>";
 
