@@ -198,8 +198,10 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   assert.match(component, ARTICLE_WITH_MIN_W_0_PATTERN);
   // section endpoint groups have min-w-0 to prevent flex overflow
   assert.match(component, /<section\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/);
-  // technical endpoints stay at the bottom of the page but remain visible by default.
+  // technical endpoints stay at the bottom of the page when a public download exists.
   assert.match(component, TECHNICAL_DETAILS_HEADING_PATTERN);
+  assert.match(component, /content\.endpointGroups\.length\s*>\s*0/);
+  assert.doesNotMatch(component, /androidDirectDownloadAvailable/);
   // individual endpoint links keep long machine paths wrapped on the rendered href element
   assert.match(component, ENDPOINT_LINK_PARAGRAPH_PATTERN);
   // verification items keep correct definition-list semantics for label/value pairs.
@@ -234,7 +236,7 @@ test("long German roadmap and Android labels wrap without changing English typog
   );
   assert.ok(
     androidDistributionContent.de.downloadOptions.some(
-      (option) => option.name === "Direktdownload"
+      (option) => option.name === "Direkter Download"
     )
   );
   assert.match(

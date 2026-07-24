@@ -136,25 +136,60 @@ export interface AndroidVersionedReleaseMetadata {
 
 interface AndroidDistributionCallToAction {
   label: string;
-  href: string | null;
+  href: string;
 }
 
 interface AndroidDistributionOption {
   badge: string;
   name: string;
   description: string;
-  href: string | null;
-  cta: string;
   kind: "primary" | "secondary";
+  action?: AndroidDistributionCallToAction;
   secondaryLink?: {
-    eyebrow: string;
     label: string;
     href: string;
   };
 }
 
-const androidStableDownloadAvailable = false;
-const androidBetaDownloadAvailable = false;
+interface AndroidDistributionEndpointGroup {
+  title: string;
+  entries: {
+    label: string;
+    href: string;
+  }[];
+}
+
+interface AndroidDistributionContent {
+  title: string;
+  description: string;
+  eyebrow: string;
+  headline: string;
+  subline: string;
+  badge: string;
+  heroPrimary: AndroidDistributionCallToAction | null;
+  heroSecondary: AndroidDistributionCallToAction | null;
+  summaryTitle: string;
+  summaryItems: {
+    label: string;
+    value: string;
+  }[];
+  downloadTitle: string;
+  downloadIntro: string;
+  downloadOptions: AndroidDistributionOption[];
+  releaseNoticeTitle: string;
+  releaseNoticeBody: string;
+  technicalDetailsTitle: string;
+  technicalDetailsIntro: string;
+  endpointGroups: AndroidDistributionEndpointGroup[];
+  verificationTitle: string;
+  verificationItems: {
+    label: string;
+    value: string;
+  }[];
+}
+
+export const androidDirectDownloadAvailable = false;
+export const androidPublicPlayStoreAvailable = false;
 
 export function buildTrackLatestMetadataDocument(
   track: AndroidReleaseTrack,
@@ -219,28 +254,197 @@ export function buildVersionedMetadataDocument(
   };
 }
 
-export const androidDistributionContent = {
-  en: {
-    title: "SecPal Android distribution",
-    description:
-      "SecPal is also available as an Android app, with Play Store and direct download options on secpal.app.",
+export function buildAndroidDistributionContent(
+  locale: Locale,
+  directDownloadAvailable: boolean,
+  publicPlayStoreAvailable: boolean
+): AndroidDistributionContent {
+  const endpointGroups: AndroidDistributionEndpointGroup[] =
+    directDownloadAvailable
+      ? [
+          {
+            title: locale === "de" ? "Aktuelle Version" : "Current release",
+            entries: [
+              {
+                label: "Manifest",
+                href: buildArtifactUrl(buildLatestMetadataPath()),
+              },
+              {
+                label: "APK",
+                href: buildArtifactUrl(buildLatestArtifactPath()),
+              },
+              {
+                label: locale === "de" ? "Checksummen" : "Checksums",
+                href: buildArtifactUrl(buildLatestChecksumPath()),
+              },
+            ],
+          },
+          {
+            title:
+              locale === "de" ? "Versionierte Releases" : "Versioned releases",
+            entries: [
+              {
+                label: locale === "de" ? "Metadaten" : "Metadata",
+                href: buildArtifactUrl(
+                  buildVersionedMetadataPath("{versionCode}")
+                ),
+              },
+              {
+                label: "APK",
+                href: buildArtifactUrl(
+                  buildVersionedArtifactPath("{versionCode}")
+                ),
+              },
+              {
+                label: locale === "de" ? "Checksummen" : "Checksums",
+                href: buildArtifactUrl(
+                  buildVersionedChecksumPath("{versionCode}")
+                ),
+              },
+            ],
+          },
+        ]
+      : [];
+
+  if (locale === "de") {
+    return {
+      title: "SecPal für Android",
+      description: publicPlayStoreAvailable
+        ? "Informationen zur Android-Version von SecPal, zum direkten Download über secpal.app und zur öffentlichen Verfügbarkeit im Play Store."
+        : "Informationen zur Android-Version von SecPal, zum direkten Download über secpal.app und zur späteren öffentlichen Veröffentlichung im Play Store.",
+      eyebrow: "SecPal für Android",
+      headline: "SecPal. Immer dabei.",
+      subline: [
+        directDownloadAvailable
+          ? "Die aktuelle Android-Version von SecPal steht direkt über secpal.app zum Download bereit."
+          : "Die erste Android-Version von SecPal wird für den direkten Download über secpal.app vorbereitet.",
+        directDownloadAvailable
+          ? "SecPal befindet sich weiterhin in einer frühen 0.x-Entwicklungsphase."
+          : "SecPal befindet sich in einer frühen 0.x-Entwicklungsphase.",
+      ].join(" "),
+      badge: directDownloadAvailable
+        ? "Direkter Download verfügbar"
+        : "Direkter Download in Vorbereitung",
+      heroPrimary: directDownloadAvailable
+        ? {
+            label: "Android-Version herunterladen",
+            href: buildArtifactUrl(buildLatestArtifactPath()),
+          }
+        : null,
+      heroSecondary: publicPlayStoreAvailable
+        ? {
+            label: "Im Play Store öffnen",
+            href: androidPlayStoreUrl,
+          }
+        : null,
+      summaryTitle: "Kurzüberblick",
+      summaryItems: [
+        {
+          label: "App",
+          value: "SecPal für Android",
+        },
+        {
+          label: "Bereitstellung",
+          value: "Direkt über secpal.app",
+        },
+        {
+          label: "Entwicklungsphase",
+          value: "Frühe 0.x-Versionen",
+        },
+        {
+          label: "Play Store",
+          value: publicPlayStoreAvailable ? "Verfügbar" : "Geplant",
+        },
+      ],
+      downloadTitle: "Bezugswege",
+      downloadIntro: "Aktuelle und geplante Bezugswege für SecPal auf Android.",
+      downloadOptions: [
+        {
+          badge: directDownloadAvailable ? "Verfügbar" : "In Vorbereitung",
+          name: "Direkter Download",
+          description: directDownloadAvailable
+            ? "Die aktuelle Android-Version steht direkt über secpal.app bereit. Signatur und Prüfsumme ermöglichen die Überprüfung des Pakets."
+            : "Die erste öffentliche Android-Version wird über secpal.app bereitgestellt.",
+          kind: "primary",
+          ...(directDownloadAvailable
+            ? {
+                action: {
+                  label: "APK herunterladen",
+                  href: buildArtifactUrl(buildLatestArtifactPath()),
+                },
+                secondaryLink: {
+                  label: "Manifest öffnen",
+                  href: buildArtifactUrl(buildLatestMetadataPath()),
+                },
+              }
+            : {}),
+        },
+        {
+          badge: publicPlayStoreAvailable ? "Verfügbar" : "Geplant",
+          name: "Play Store",
+          description: publicPlayStoreAvailable
+            ? "SecPal ist zusätzlich öffentlich im Play Store verfügbar."
+            : "Eine öffentliche Veröffentlichung im Play Store ist als zusätzlicher Bezugsweg vorgesehen.",
+          kind: "secondary",
+          ...(publicPlayStoreAvailable
+            ? {
+                action: {
+                  label: "Im Play Store öffnen",
+                  href: androidPlayStoreUrl,
+                },
+              }
+            : {}),
+        },
+      ],
+      releaseNoticeTitle: "Hinweis zu frühen 0.x-Versionen",
+      releaseNoticeBody:
+        "Frühe 0.x-Versionen befinden sich in aktiver Entwicklung. Funktionen und Abläufe können sich mit weiteren Versionen verändern.",
+      technicalDetailsTitle: "Technische Links",
+      technicalDetailsIntro:
+        "Für Direktdownloads, Verifikation und automatische Updates.",
+      endpointGroups,
+      verificationTitle: "Technische Eckdaten",
+      verificationItems: [
+        {
+          label: "Android-Paketname",
+          value: "app.secpal",
+        },
+        {
+          label: "Signing SHA-256",
+          value: androidAppSigningCertificateSha256,
+        },
+      ],
+    };
+  }
+
+  return {
+    title: "SecPal for Android",
+    description: publicPlayStoreAvailable
+      ? "Information about the SecPal Android release, direct downloads from secpal.app, and public availability on Google Play."
+      : "Information about the SecPal Android release, direct downloads from secpal.app, and the later public release on Google Play.",
     eyebrow: "SecPal for Android",
     headline: "SecPal in your pocket.",
-    subline:
-      "Get SecPal from the Play Store. Direct download will also be available on secpal.app.",
-    badge: "Play Store or direct download",
-    heroPrimary: {
-      label: "Open Play Store",
-      href: androidPlayStoreUrl,
-    } satisfies AndroidDistributionCallToAction,
-    heroSecondary: {
-      label: androidStableDownloadAvailable
-        ? "Download APK"
-        : "Direct download soon",
-      href: androidStableDownloadAvailable
-        ? "https://apk.secpal.app/android/app.secpal-latest.apk"
-        : null,
-    } satisfies AndroidDistributionCallToAction,
+    subline: [
+      directDownloadAvailable
+        ? "The current SecPal Android release is available for direct download from secpal.app."
+        : "The first SecPal Android release is being prepared for direct download from secpal.app.",
+      "SecPal remains in an early 0.x development phase.",
+    ].join(" "),
+    badge: directDownloadAvailable
+      ? "Direct download available"
+      : "Direct download in preparation",
+    heroPrimary: directDownloadAvailable
+      ? {
+          label: "Download Android release",
+          href: buildArtifactUrl(buildLatestArtifactPath()),
+        }
+      : null,
+    heroSecondary: publicPlayStoreAvailable
+      ? {
+          label: "Open Google Play",
+          href: androidPlayStoreUrl,
+        }
+      : null,
     summaryTitle: "At a glance",
     summaryItems: [
       {
@@ -248,130 +452,66 @@ export const androidDistributionContent = {
         value: "SecPal for Android",
       },
       {
-        label: "Recommended",
-        value: "Play Store",
+        label: "Distribution",
+        value: "Direct from secpal.app",
       },
       {
-        label: "Alternative",
-        value: "Direct download from SecPal",
+        label: "Development phase",
+        value: "Early 0.x releases",
       },
       {
-        label: "Also available",
-        value: "Beta version",
+        label: "Google Play",
+        value: publicPlayStoreAvailable ? "Available" : "Planned",
       },
     ],
-    downloadTitle: "Download options",
+    downloadTitle: "Distribution",
     downloadIntro:
-      "SecPal is available in the Play Store. Direct download and beta will also be published on secpal.app.",
+      "Current and planned distribution paths for SecPal on Android.",
     downloadOptions: [
       {
-        badge: "Recommended",
-        name: "Play Store",
-        description:
-          "The simplest way to install SecPal and receive updates through the Play Store.",
-        href: androidPlayStoreUrl,
-        cta: "Open Play Store",
+        badge: directDownloadAvailable ? "Available" : "In preparation",
+        name: "Direct download",
+        description: directDownloadAvailable
+          ? "The current Android release is available directly through secpal.app. Its signature and checksum can be used to verify the package."
+          : "The first public Android release will be provided through secpal.app.",
         kind: "primary",
-      } satisfies AndroidDistributionOption,
+        ...(directDownloadAvailable
+          ? {
+              action: {
+                label: "Download APK",
+                href: buildArtifactUrl(buildLatestArtifactPath()),
+              },
+              secondaryLink: {
+                label: "Open manifest",
+                href: buildArtifactUrl(buildLatestMetadataPath()),
+              },
+            }
+          : {}),
+      },
       {
-        badge: "Direct",
-        name: "Direct Download",
-        description: "The direct APK download on secpal.app will follow.",
-        href: androidStableDownloadAvailable
-          ? "https://apk.secpal.app/android/app.secpal-latest.apk"
-          : null,
-        cta: androidStableDownloadAvailable
-          ? "Download APK"
-          : "Direct download soon",
-        secondaryLink: {
-          eyebrow: "Update manifest",
-          label: "Open Stable Manifest",
-          href: "https://apk.secpal.app/android/latest.json",
-        },
+        badge: publicPlayStoreAvailable ? "Available" : "Planned",
+        name: "Google Play",
+        description: publicPlayStoreAvailable
+          ? "SecPal is also publicly available on Google Play."
+          : "A public release on Google Play is planned as an additional distribution path.",
         kind: "secondary",
-      } satisfies AndroidDistributionOption,
-      {
-        badge: "Optional",
-        name: "Beta version",
-        description:
-          "The beta track will be published separately on secpal.app.",
-        href: androidBetaDownloadAvailable
-          ? "https://apk.secpal.app/android/beta/app.secpal-latest.apk"
-          : null,
-        cta: androidBetaDownloadAvailable
-          ? "Download Beta APK"
-          : "Beta coming soon",
-        secondaryLink: {
-          eyebrow: "Update manifest",
-          label: "Open Beta Manifest",
-          href: "https://apk.secpal.app/android/beta/latest.json",
-        },
-        kind: "secondary",
-      } satisfies AndroidDistributionOption,
+        ...(publicPlayStoreAvailable
+          ? {
+              action: {
+                label: "Open Google Play",
+                href: androidPlayStoreUrl,
+              },
+            }
+          : {}),
+      },
     ],
-    betaNoticeTitle: "About the beta version",
-    betaNoticeBody:
-      "The beta version includes new features earlier, but it may still contain issues and can change before the regular release.",
+    releaseNoticeTitle: "About early 0.x releases",
+    releaseNoticeBody:
+      "Early 0.x releases are under active development. Features and workflows may change in later releases.",
     technicalDetailsTitle: "Technical links",
     technicalDetailsIntro:
       "For direct downloads, verification, and automated updates.",
-    endpointGroups: [
-      {
-        title: "Stable",
-        entries: [
-          {
-            label: "Manifest",
-            href: "https://apk.secpal.app/android/stable/latest.json",
-          },
-          {
-            label: "APK",
-            href: "https://apk.secpal.app/android/stable/app.secpal-latest.apk",
-          },
-          {
-            label: "Checksums",
-            href: "https://apk.secpal.app/android/stable/SHA256SUMS.txt",
-          },
-          {
-            label: "Stable alias",
-            href: "https://apk.secpal.app/android/latest.json",
-          },
-        ],
-      },
-      {
-        title: "Beta",
-        entries: [
-          {
-            label: "Manifest",
-            href: "https://apk.secpal.app/android/beta/latest.json",
-          },
-          {
-            label: "APK",
-            href: "https://apk.secpal.app/android/beta/app.secpal-latest.apk",
-          },
-          {
-            label: "Checksums",
-            href: "https://apk.secpal.app/android/beta/SHA256SUMS.txt",
-          },
-        ],
-      },
-      {
-        title: "Versioned releases",
-        entries: [
-          {
-            label: "Metadata",
-            href: "https://apk.secpal.app/android/releases/{versionCode}/metadata.json",
-          },
-          {
-            label: "APK",
-            href: "https://apk.secpal.app/android/releases/{versionCode}/app.secpal-{versionCode}.apk",
-          },
-          {
-            label: "Checksums",
-            href: "https://apk.secpal.app/android/releases/{versionCode}/SHA256SUMS.txt",
-          },
-        ],
-      },
-    ],
+    endpointGroups,
     verificationTitle: "Technical summary",
     verificationItems: [
       {
@@ -383,171 +523,21 @@ export const androidDistributionContent = {
         value: androidAppSigningCertificateSha256,
       },
     ],
-  },
-  de: {
-    title: "SecPal Android-Verteilung",
-    description:
-      "SecPal gibt es auch als Android-App, mit Play Store und Direktdownload auf secpal.app.",
-    eyebrow: "SecPal für Android",
-    headline: "SecPal. Immer dabei.",
-    subline:
-      "Laden Sie SecPal aus dem Play Store. Der Direktdownload wird zusätzlich auf secpal.app bereitgestellt.",
-    badge: "Play Store oder Direktdownload",
-    heroPrimary: {
-      label: "Play Store öffnen",
-      href: androidPlayStoreUrl,
-    } satisfies AndroidDistributionCallToAction,
-    heroSecondary: {
-      label: androidStableDownloadAvailable
-        ? "APK herunterladen"
-        : "Direktdownload folgt",
-      href: androidStableDownloadAvailable
-        ? "https://apk.secpal.app/android/app.secpal-latest.apk"
-        : null,
-    } satisfies AndroidDistributionCallToAction,
-    summaryTitle: "Kurzüberblick",
-    summaryItems: [
-      {
-        label: "App",
-        value: "SecPal für Android",
-      },
-      {
-        label: "Empfohlen",
-        value: "Play Store",
-      },
-      {
-        label: "Alternative",
-        value: "Direktdownload von SecPal",
-      },
-      {
-        label: "Außerdem verfügbar",
-        value: "Beta-Version",
-      },
-    ],
-    downloadTitle: "Download-Möglichkeiten",
-    downloadIntro:
-      "SecPal ist im Play Store verfügbar. Direktdownload und Beta werden zusätzlich auf secpal.app bereitgestellt.",
-    downloadOptions: [
-      {
-        badge: "Empfohlen",
-        name: "Play Store",
-        description:
-          "Der einfachste Weg, SecPal zu installieren und Updates über den Play Store zu erhalten.",
-        href: androidPlayStoreUrl,
-        cta: "Play Store öffnen",
-        kind: "primary",
-      } satisfies AndroidDistributionOption,
-      {
-        badge: "Direkt",
-        name: "Direktdownload",
-        description: "Der direkte APK-Download auf secpal.app folgt.",
-        href: androidStableDownloadAvailable
-          ? "https://apk.secpal.app/android/app.secpal-latest.apk"
-          : null,
-        cta: androidStableDownloadAvailable
-          ? "APK herunterladen"
-          : "Direktdownload folgt",
-        secondaryLink: {
-          eyebrow: "Update-Manifest",
-          label: "Stable-Manifest öffnen",
-          href: "https://apk.secpal.app/android/latest.json",
-        },
-        kind: "secondary",
-      } satisfies AndroidDistributionOption,
-      {
-        badge: "Optional",
-        name: "Beta-Version",
-        description: "Die Beta wird separat auf secpal.app bereitgestellt.",
-        href: androidBetaDownloadAvailable
-          ? "https://apk.secpal.app/android/beta/app.secpal-latest.apk"
-          : null,
-        cta: androidBetaDownloadAvailable
-          ? "Beta-APK herunterladen"
-          : "Beta folgt",
-        secondaryLink: {
-          eyebrow: "Update-Manifest",
-          label: "Beta-Manifest öffnen",
-          href: "https://apk.secpal.app/android/beta/latest.json",
-        },
-        kind: "secondary",
-      } satisfies AndroidDistributionOption,
-    ],
-    betaNoticeTitle: "Hinweis zur Beta-Version",
-    betaNoticeBody:
-      "Die Beta-Version enthält neue Funktionen früher, kann aber noch Fehler enthalten und sich bis zur regulären Veröffentlichung noch ändern.",
-    technicalDetailsTitle: "Technische Links",
-    technicalDetailsIntro:
-      "Für Direktdownloads, Verifikation und automatische Updates.",
-    endpointGroups: [
-      {
-        title: "Stable",
-        entries: [
-          {
-            label: "Manifest",
-            href: "https://apk.secpal.app/android/stable/latest.json",
-          },
-          {
-            label: "APK",
-            href: "https://apk.secpal.app/android/stable/app.secpal-latest.apk",
-          },
-          {
-            label: "Checksummen",
-            href: "https://apk.secpal.app/android/stable/SHA256SUMS.txt",
-          },
-          {
-            label: "Stable-Alias",
-            href: "https://apk.secpal.app/android/latest.json",
-          },
-        ],
-      },
-      {
-        title: "Beta",
-        entries: [
-          {
-            label: "Manifest",
-            href: "https://apk.secpal.app/android/beta/latest.json",
-          },
-          {
-            label: "APK",
-            href: "https://apk.secpal.app/android/beta/app.secpal-latest.apk",
-          },
-          {
-            label: "Checksummen",
-            href: "https://apk.secpal.app/android/beta/SHA256SUMS.txt",
-          },
-        ],
-      },
-      {
-        title: "Versionierte Releases",
-        entries: [
-          {
-            label: "Metadata",
-            href: "https://apk.secpal.app/android/releases/{versionCode}/metadata.json",
-          },
-          {
-            label: "APK",
-            href: "https://apk.secpal.app/android/releases/{versionCode}/app.secpal-{versionCode}.apk",
-          },
-          {
-            label: "Checksummen",
-            href: "https://apk.secpal.app/android/releases/{versionCode}/SHA256SUMS.txt",
-          },
-        ],
-      },
-    ],
-    verificationTitle: "Technische Eckdaten",
-    verificationItems: [
-      {
-        label: "Android-Paketname",
-        value: "app.secpal",
-      },
-      {
-        label: "Signing SHA-256",
-        value: androidAppSigningCertificateSha256,
-      },
-    ],
-  },
-} as const satisfies Record<Locale, unknown>;
+  };
+}
+
+export const androidDistributionContent = {
+  en: buildAndroidDistributionContent(
+    "en",
+    androidDirectDownloadAvailable,
+    androidPublicPlayStoreAvailable
+  ),
+  de: buildAndroidDistributionContent(
+    "de",
+    androidDirectDownloadAvailable,
+    androidPublicPlayStoreAvailable
+  ),
+} satisfies Record<Locale, AndroidDistributionContent>;
 
 export function getAndroidDistributionContent(locale: Locale) {
   return androidDistributionContent[locale];
