@@ -7,6 +7,7 @@ import { readFileSync } from "node:fs";
 
 import { de } from "../src/i18n/de.ts";
 import { en } from "../src/i18n/en.ts";
+import { androidDistributionContent } from "../src/lib/android-distribution.ts";
 
 test("global layout accounts for mobile safe-area insets", () => {
   const css = readFileSync(
@@ -210,5 +211,38 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   assert.match(
     component,
     /<dd\b[^>]*class="[^"]*\bbreak-all\b[^"]*\bfont-mono\b[^"]*"[^>]*>\s*\{\s*item\.value\s*\}\s*<\/dd>/
+  );
+});
+
+test("long German roadmap and Android labels wrap without changing English typography", () => {
+  const roadmap = readFileSync(
+    new URL("../src/components/Roadmap.astro", import.meta.url),
+    "utf8"
+  );
+  const androidDistribution = readFileSync(
+    new URL(
+      "../src/components/AndroidDistributionSurface.astro",
+      import.meta.url
+    ),
+    "utf8"
+  );
+
+  assert.ok(
+    de.roadmap.later.items.some(
+      (item) => item.name === "Dienstanweisungskonfigurator"
+    )
+  );
+  assert.ok(
+    androidDistributionContent.de.downloadOptions.some(
+      (option) => option.name === "Direktdownload"
+    )
+  );
+  assert.match(
+    roadmap,
+    /<p\s+class:list=\{\[\s*"font-semibold text-gray-900 dark:text-white",\s*locale === "de" \? "break-words" : null,\s*\]\}/
+  );
+  assert.match(
+    androidDistribution,
+    /<h3\s+class:list=\{\[\s*"mt-2\.5 text-2xl font-semibold text-gray-900 dark:text-white",\s*locale === "de" \? "break-words" : null,\s*\]\}/
   );
 });

@@ -137,7 +137,12 @@ const content = getAndroidDistributionContent(locale);
               <p class="min-h-4 text-xs font-semibold tracking-[0.18em] text-gray-500 uppercase dark:text-gray-400">
                 {option.badge}
               </p>
-              <h3 class="mt-2.5 text-2xl font-semibold text-gray-900 dark:text-white">
+              <h3
+                class:list={[
+                  "mt-2.5 text-2xl font-semibold text-gray-900 dark:text-white",
+                  locale === "de" ? "break-words" : null,
+                ]}
+              >
                 {option.name}
               </h3>
               <p class="mt-2.5 text-base/7 text-gray-600 dark:text-gray-300">

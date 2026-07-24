@@ -141,7 +141,12 @@ const phases: { key: Phase; accent: string; badge: string; dot: string }[] = [
                     {phase.items.map(
                       (item: { name: string; description: string }) => (
                         <li>
-                          <p class="font-semibold text-gray-900 dark:text-white">
+                          <p
+                            class:list={[
+                              "font-semibold text-gray-900 dark:text-white",
+                              locale === "de" ? "break-words" : null,
+                            ]}
+                          >
                             {item.name}
                           </p>
                           <p class="mt-1 text-sm/6">{item.description}</p>
