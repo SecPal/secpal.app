@@ -3,7 +3,10 @@
 // SPDX-FileCopyrightText: Tailwind Labs Inc.
 // SPDX-License-Identifier: AGPL-3.0-or-later AND LicenseRef-TailwindPlus
 import type { Locale } from "../i18n/index.ts";
-import { getAndroidDistributionContent } from "../lib/android-distribution.ts";
+import {
+  androidDirectDownloadAvailable,
+  getAndroidDistributionContent,
+} from "../lib/android-distribution.ts";
 
 interface Props {
   locale: Locale;
@@ -65,17 +68,28 @@ const content = getAndroidDistributionContent(locale);
           {content.subline}
         </p>
         <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-          <a
-            href={content.heroPrimary.href}
-            class="rounded-md bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400"
-          >
-            {content.heroPrimary.label}
-          </a>
+          {
+            content.heroPrimary.href ? (
+              <a
+                href={content.heroPrimary.href}
+                class="rounded-md bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400"
+              >
+                {content.heroPrimary.label}
+              </a>
+            ) : (
+              <span
+                aria-disabled="true"
+                class="rounded-md bg-indigo-200 px-4 py-2.5 text-sm font-semibold text-indigo-400 shadow-xs dark:bg-indigo-500/10 dark:text-indigo-300/40"
+              >
+                {content.heroPrimary.label}
+              </span>
+            )
+          }
           {
             content.heroSecondary.href ? (
               <a
                 href={content.heroSecondary.href}
-                class="rounded-md bg-white px-4 py-2.5 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 dark:bg-white/5 dark:text-white dark:ring-white/15 dark:hover:bg-white/10"
+                class="rounded-md bg-white px-4 py-2.5 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-white/5 dark:text-white dark:ring-white/15 dark:hover:bg-white/10"
               >
                 {content.heroSecondary.label}
               </a>
@@ -130,7 +144,7 @@ const content = getAndroidDistributionContent(locale);
           {content.downloadIntro}
         </p>
       </div>
-      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
         {
           content.downloadOptions.map((option) => (
             <article class="flex h-full min-w-0 flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-xs dark:border-white/10 dark:bg-white/5">
@@ -153,7 +167,7 @@ const content = getAndroidDistributionContent(locale);
                   <a
                     href={option.href}
                     class:list={[
-                      "inline-flex rounded-full px-4 py-2 text-sm font-semibold",
+                      "inline-flex rounded-full px-4 py-2 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
                       option.kind === "primary"
                         ? "bg-indigo-600 text-white hover:bg-indigo-500"
                         : "bg-gray-900 text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200",
@@ -170,14 +184,11 @@ const content = getAndroidDistributionContent(locale);
                   </span>
                 )}
                 <div class="mt-3 min-h-[1.5rem]">
-                  {"secondaryLink" in option ? (
+                  {option.secondaryLink ? (
                     <p class="text-sm/6 text-gray-500 dark:text-gray-400">
-                      <span class="font-medium">
-                        {option.secondaryLink.eyebrow}:{" "}
-                      </span>
                       <a
                         href={option.secondaryLink.href}
-                        class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+                        class="font-semibold text-indigo-600 hover:text-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300"
                       >
                         {option.secondaryLink.label}
                       </a>
@@ -192,8 +203,8 @@ const content = getAndroidDistributionContent(locale);
       <div
         class="mt-8 rounded-3xl border border-amber-200 bg-amber-50 px-6 py-5 text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-100"
       >
-        <p class="text-sm font-semibold">{content.betaNoticeTitle}</p>
-        <p class="mt-2 text-sm/7">{content.betaNoticeBody}</p>
+        <p class="text-sm font-semibold">{content.releaseNoticeTitle}</p>
+        <p class="mt-2 text-sm/7">{content.releaseNoticeBody}</p>
       </div>
     </div>
   </section>
@@ -224,45 +235,45 @@ const content = getAndroidDistributionContent(locale);
         </dl>
       </div>
 
-      <section
-        class="mt-10 overflow-hidden rounded-3xl border border-gray-200 bg-gray-950 shadow-xl ring-1 ring-gray-900/10 dark:border-white/10 dark:ring-white/10"
-      >
-        <div class="border-b border-white/10 px-6 py-4">
-          <h3 class="text-base font-semibold text-white">
-            {content.technicalDetailsTitle}
-          </h3>
-        </div>
-        <div class="px-6 py-5">
-          <p class="mb-5 text-sm/7 text-cyan-100/85">
-            {content.technicalDetailsIntro}
-          </p>
-          <div class="grid gap-6 xl:grid-cols-2">
-            {
-              content.endpointGroups.map((group) => (
-                <section class="min-w-0 overflow-hidden rounded-3xl border border-white/10 bg-black/20">
-                  <div class="border-b border-white/10 px-6 py-4">
-                    <h3 class="text-base font-semibold text-white">
-                      {group.title}
-                    </h3>
-                  </div>
-                  <div class="space-y-3 px-6 py-5 text-sm">
-                    {group.entries.map((entry) => (
-                      <div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-                        <p class="text-xs font-semibold tracking-[0.18em] text-cyan-100/70 uppercase">
-                          {entry.label}
-                        </p>
-                        <p class="mt-2 break-all font-mono text-cyan-200">
-                          {entry.href}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              ))
-            }
-          </div>
-        </div>
-      </section>
+      {
+        androidDirectDownloadAvailable ? (
+          <section class="mt-10 overflow-hidden rounded-3xl border border-gray-200 bg-gray-950 shadow-xl ring-1 ring-gray-900/10 dark:border-white/10 dark:ring-white/10">
+            <div class="border-b border-white/10 px-6 py-4">
+              <h3 class="text-base font-semibold text-white">
+                {content.technicalDetailsTitle}
+              </h3>
+            </div>
+            <div class="px-6 py-5">
+              <p class="mb-5 text-sm/7 text-cyan-100/85">
+                {content.technicalDetailsIntro}
+              </p>
+              <div class="grid gap-6 xl:grid-cols-2">
+                {content.endpointGroups.map((group) => (
+                  <section class="min-w-0 overflow-hidden rounded-3xl border border-white/10 bg-black/20">
+                    <div class="border-b border-white/10 px-6 py-4">
+                      <h3 class="text-base font-semibold text-white">
+                        {group.title}
+                      </h3>
+                    </div>
+                    <div class="space-y-3 px-6 py-5 text-sm">
+                      {group.entries.map((entry) => (
+                        <div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+                          <p class="text-xs font-semibold tracking-[0.18em] text-cyan-100/70 uppercase">
+                            {entry.label}
+                          </p>
+                          <p class="mt-2 break-all font-mono text-cyan-200">
+                            {entry.href}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null
+      }
     </div>
   </section>
 </div>

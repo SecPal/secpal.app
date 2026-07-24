@@ -32,6 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- made direct SecPal downloads the primary public Android distribution path,
+  positioned the public Google Play release as a later step, removed visible
+  beta distribution while retaining the internal track infrastructure, and
+  limited public technical endpoints to available direct downloads
 - reduced the localized main navigation to Workflow, Roadmap, and Android;
   kept contact solely as the primary header action and GitHub as a secondary
   technical path in the closing CTA and footer; added active states for

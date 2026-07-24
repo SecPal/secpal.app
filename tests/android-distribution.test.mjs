@@ -2,15 +2,22 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import {
+  androidDirectDownloadAvailable,
   androidArtifactHost,
+  androidDistributionContent,
   androidPlayStoreUrl,
+  androidPublicPlayStoreAvailable,
+  androidReleaseTracks,
   buildArtifactUrl,
+  buildAndroidDistributionContent,
   buildChannelAliasMetadataPath,
   buildLatestArtifactPath,
   buildLatestChecksumPath,
+  buildLatestMetadataPath,
   buildTrackArtifactPath,
   buildTrackChecksumPath,
   buildTrackMetadataPath,
@@ -196,24 +203,127 @@ test("versioned Android artifact routes explain pending release availability", a
   );
 });
 
-test("android distribution content points Play Store CTAs at the app listing", async () => {
-  const { androidDistributionContent } =
-    await import("../src/lib/android-distribution.ts");
+test("public Android status is independent from internal release tracks", () => {
+  const source = readFileSync(
+    new URL("../src/lib/android-distribution.ts", import.meta.url),
+    "utf8"
+  );
 
-  assert.equal(
-    androidDistributionContent.en.heroPrimary.href,
-    androidPlayStoreUrl
+  assert.equal(androidDirectDownloadAvailable, false);
+  assert.equal(androidPublicPlayStoreAvailable, false);
+  assert.deepEqual(androidReleaseTracks, ["stable", "beta"]);
+  assert.doesNotMatch(source, /androidStableDownloadAvailable/);
+  assert.doesNotMatch(source, /androidBetaDownloadAvailable/);
+});
+
+test("public Android content exposes exactly direct download and public Google Play", () => {
+  for (const locale of ["en", "de"]) {
+    const content = androidDistributionContent[locale];
+
+    assert.equal(content.summaryItems.length, 4);
+    assert.equal(content.downloadOptions.length, 2);
+    assert.equal(
+      content.downloadOptions[0]?.name,
+      locale === "de" ? "Direkter Download" : "Direct download"
+    );
+    assert.equal(
+      content.downloadOptions[1]?.name,
+      locale === "de" ? "Play Store" : "Google Play"
+    );
+    assert.equal(content.heroPrimary.href, null);
+    assert.equal(content.heroSecondary.href, null);
+    assert.equal(content.downloadOptions[0]?.href, null);
+    assert.equal(content.downloadOptions[1]?.href, null);
+    assert.ok(!("secondaryLink" in content.downloadOptions[0]));
+  }
+});
+
+test("unavailable public Android content does not expose public download or store URLs", () => {
+  const publicContent = JSON.stringify(androidDistributionContent);
+
+  assert.doesNotMatch(publicContent, /https:\/\/apk\.secpal\.app/);
+  assert.doesNotMatch(publicContent, new RegExp(androidPlayStoreUrl));
+});
+
+test("available direct downloads reuse the canonical latest alias builders", () => {
+  for (const locale of ["en", "de"]) {
+    const content = buildAndroidDistributionContent(locale, true, false);
+    const directDownload = content.downloadOptions[0];
+
+    assert.equal(
+      content.heroPrimary.href,
+      buildArtifactUrl(buildLatestArtifactPath())
+    );
+    assert.equal(
+      directDownload.href,
+      buildArtifactUrl(buildLatestArtifactPath())
+    );
+    assert.equal(
+      directDownload.secondaryLink?.href,
+      buildArtifactUrl(buildLatestMetadataPath())
+    );
+    assert.deepEqual(
+      content.endpointGroups[0]?.entries.map((entry) => entry.href),
+      [
+        buildArtifactUrl(buildLatestMetadataPath()),
+        buildArtifactUrl(buildLatestArtifactPath()),
+        buildArtifactUrl(buildLatestChecksumPath()),
+      ]
+    );
+    assert.equal(content.heroSecondary.href, null);
+  }
+});
+
+test("public Google Play links are emitted only for public availability", () => {
+  for (const locale of ["en", "de"]) {
+    const unavailable = buildAndroidDistributionContent(locale, false, false);
+    const available = buildAndroidDistributionContent(locale, false, true);
+
+    assert.equal(unavailable.heroSecondary.href, null);
+    assert.equal(unavailable.downloadOptions[1]?.href, null);
+    assert.equal(available.heroSecondary.href, androidPlayStoreUrl);
+    assert.equal(available.downloadOptions[1]?.href, androidPlayStoreUrl);
+  }
+});
+
+test("public Android content contains no beta or restricted-testing language", () => {
+  const publicContent = JSON.stringify(androidDistributionContent);
+  const forbiddenPhrases = [
+    "Beta-Version",
+    "Beta-Kanal",
+    "Beta-Download",
+    "Beta folgt",
+    "Beta verfügbar",
+    "Beta version",
+    "Beta channel",
+    "Beta download",
+    "Internal Testing",
+    "interner Test",
+    "closed testing",
+    "geschlossener Test",
+  ];
+
+  for (const phrase of forbiddenPhrases) {
+    assert.ok(
+      !publicContent.includes(phrase),
+      `public Android content must not contain ${phrase}`
+    );
+  }
+});
+
+test("Android distribution surface conditionally renders accessible public actions", () => {
+  const component = readFileSync(
+    new URL(
+      "../src/components/AndroidDistributionSurface.astro",
+      import.meta.url
+    ),
+    "utf8"
   );
-  assert.equal(
-    androidDistributionContent.de.heroPrimary.href,
-    androidPlayStoreUrl
-  );
-  assert.equal(
-    androidDistributionContent.en.downloadOptions[0]?.href,
-    androidPlayStoreUrl
-  );
-  assert.equal(
-    androidDistributionContent.de.downloadOptions[0]?.href,
-    androidPlayStoreUrl
-  );
+
+  assert.match(component, /\blg:grid-cols-2\b/);
+  assert.match(component, /aria-disabled="true"/);
+  assert.match(component, /content\.heroPrimary\.href\s*\?/);
+  assert.match(component, /content\.heroSecondary\.href\s*\?/);
+  assert.match(component, /androidDirectDownloadAvailable\s*\?/);
+  assert.doesNotMatch(component, /content\.betaNotice/);
 });
