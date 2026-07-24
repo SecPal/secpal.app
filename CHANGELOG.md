@@ -82,6 +82,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- made the retired-domain regression scan tolerate tracked files deleted from
+  the working tree, so local validation no longer fails with an unrelated
+  missing-file error before deletions are staged
 - prevented long German roadmap and Android download labels from causing
   horizontal page overflow when the browser base font size is enlarged
 - aligned the mobile menu's visual and keyboard order and moved focus to

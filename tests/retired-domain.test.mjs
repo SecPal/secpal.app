@@ -3,27 +3,63 @@
 
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
+import { pathToFileURL } from "node:url";
 
 const repositoryRoot = new URL("../", import.meta.url);
 const retiredDomain = ["dev", "secpal", "app"].join(".");
 
-const repositoryFiles = execFileSync(
-  "git",
-  ["ls-files", "--cached", "--others", "--exclude-standard", "-z"],
-  {
-    cwd: repositoryRoot,
-    encoding: "utf8",
-  }
-)
-  .split("\0")
-  .filter(Boolean);
+function findMatchingFiles(root) {
+  const repositoryFiles = execFileSync(
+    "git",
+    ["ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+    {
+      cwd: root,
+      encoding: "utf8",
+    }
+  )
+    .split("\0")
+    .filter(Boolean);
+
+  return repositoryFiles.filter((path) => {
+    try {
+      return readFileSync(new URL(path, root)).includes(retiredDomain);
+    } catch (error) {
+      if (
+        error &&
+        typeof error === "object" &&
+        "code" in error &&
+        error.code === "ENOENT"
+      ) {
+        return false;
+      }
+
+      throw error;
+    }
+  });
+}
 
 test("the retired development domain is absent from the repository", () => {
-  const matchingFiles = repositoryFiles.filter((path) =>
-    readFileSync(new URL(path, repositoryRoot)).includes(retiredDomain)
-  );
+  const matchingFiles = findMatchingFiles(repositoryRoot);
 
   assert.deepEqual(matchingFiles, []);
+});
+
+test("the repository scan ignores tracked files deleted from the worktree", (t) => {
+  const temporaryRepository = mkdtempSync(
+    join(tmpdir(), "secpal-retired-domain-")
+  );
+  t.after(() => rmSync(temporaryRepository, { recursive: true, force: true }));
+
+  execFileSync("git", ["init", "--quiet"], { cwd: temporaryRepository });
+  const deletedPath = join(temporaryRepository, "deleted.txt");
+  writeFileSync(deletedPath, "temporary test fixture");
+  execFileSync("git", ["add", "deleted.txt"], { cwd: temporaryRepository });
+  rmSync(deletedPath);
+
+  const temporaryRoot = pathToFileURL(`${temporaryRepository}/`);
+  assert.deepEqual(findMatchingFiles(temporaryRoot), []);
 });
