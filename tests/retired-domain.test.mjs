@@ -26,7 +26,9 @@ function findMatchingFiles(root) {
 
   return repositoryFiles.filter((path) => {
     try {
-      return readFileSync(new URL(path, root)).includes(retiredDomain);
+      return readFileSync(new URL(path, root), "utf8")
+        .toLowerCase()
+        .includes(retiredDomain);
     } catch (error) {
       if (
         error &&
@@ -62,4 +64,20 @@ test("the repository scan ignores tracked files deleted from the worktree", (t) 
 
   const temporaryRoot = pathToFileURL(`${temporaryRepository}/`);
   assert.deepEqual(findMatchingFiles(temporaryRoot), []);
+});
+
+test("the repository scan rejects mixed-case retired domains", (t) => {
+  const temporaryRepository = mkdtempSync(
+    join(tmpdir(), "secpal-retired-domain-")
+  );
+  t.after(() => rmSync(temporaryRepository, { recursive: true, force: true }));
+
+  execFileSync("git", ["init", "--quiet"], { cwd: temporaryRepository });
+  writeFileSync(
+    join(temporaryRepository, "mixed-case.txt"),
+    ["DEV", "SECPAL", "APP"].join(".")
+  );
+
+  const temporaryRoot = pathToFileURL(`${temporaryRepository}/`);
+  assert.deepEqual(findMatchingFiles(temporaryRoot), ["mixed-case.txt"]);
 });
