@@ -9,6 +9,9 @@ import { de } from "../src/i18n/de.ts";
 import { en } from "../src/i18n/en.ts";
 import { androidDistributionContent } from "../src/lib/android-distribution.ts";
 
+const classTokens = (classNames) =>
+  new Set(classNames.trim().split(/\s+/).filter(Boolean));
+
 test("global layout accounts for mobile safe-area insets", () => {
   const css = readFileSync(
     new URL("../src/styles/global.css", import.meta.url),
@@ -194,7 +197,7 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   const TECHNICAL_DETAILS_HEADING_PATTERN =
     /<h3\b[^>]*>\s*\{content\.technicalDetailsTitle\}\s*<\/h3>/;
   const verificationItem = component.match(
-    /content\.verificationItems\.map\(\(item\) => \(\s*<div class="([^"]*)">[\s\S]*?<dd class="([^"]*)">\s*\{item\.value\}\s*<\/dd>/
+    /content\.verificationItems\.map\(\(item\) => \(\s*<div\b[^>]*\bclass="([^"]*)"[^>]*>[\s\S]*?<dd\b[^>]*\bclass="([^"]*)"[^>]*>\s*\{item\.value\}\s*<\/dd>/
   );
 
   // download and rollout cards keep min-w-0 to prevent overflow
@@ -214,8 +217,8 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   );
   assert.ok(verificationItem, "verification item markup must remain present");
 
-  const verificationItemClasses = new Set(verificationItem[1].split(/\s+/));
-  const verificationValueClasses = new Set(verificationItem[2].split(/\s+/));
+  const verificationItemClasses = classTokens(verificationItem[1]);
+  const verificationValueClasses = classTokens(verificationItem[2]);
   const forbiddenClasses = [
     "overflow-x-auto",
     "whitespace-nowrap",

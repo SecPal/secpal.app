@@ -34,6 +34,9 @@ import { GET as getBetaMetadata } from "../src/pages/android/beta/latest.json.ts
 import { GET as getVersionedArtifact } from "../src/pages/android/releases/{versionCode}/app.secpal-{versionCode}.apk.ts";
 import { GET as getVersionedChecksum } from "../src/pages/android/releases/{versionCode}/SHA256SUMS.txt.ts";
 
+const classTokens = (classNames) =>
+  new Set(classNames.trim().split(/\s+/).filter(Boolean));
+
 test("buildVersionedMetadataDocument returns stable versioned Android release URLs", () => {
   const version = "123456789";
   const siteUrl = new URL("https://secpal.app");
@@ -530,10 +533,10 @@ test("Android hero becomes content-sized at lg without tightening mobile", () =>
     "utf8"
   );
   const heroVariants = component.match(
-    /overlayHeader\s*\?\s*"([^"]+)"\s*:\s*"([^"]+)"/
+    /overlayHeader\s*\?\s*(["'`])([^"'`]+)\1\s*:\s*(["'`])([^"'`]+)\3/
   );
   const heroGrid = component.match(
-    /<div\s+class="([^"]*lg:grid-cols-\[minmax\(0,1fr\)_22rem\][^"]*)"\s*>/
+    /<div\b[^>]*\bclass=(["'])([^"']*lg:grid-cols-\[minmax\(0,1fr\)_22rem\][^"']*)\1[^>]*>/
   );
 
   assert.ok(heroVariants, "both conditional hero variants must remain present");
@@ -542,9 +545,9 @@ test("Android hero becomes content-sized at lg without tightening mobile", () =>
     "the responsive two-column hero grid must remain present"
   );
 
-  const overlayHeroClasses = new Set(heroVariants[1].split(/\s+/));
-  const standardHeroClasses = new Set(heroVariants[2].split(/\s+/));
-  const heroGridClasses = new Set(heroGrid[1].split(/\s+/));
+  const overlayHeroClasses = classTokens(heroVariants[2]);
+  const standardHeroClasses = classTokens(heroVariants[4]);
+  const heroGridClasses = classTokens(heroGrid[2]);
 
   assert.ok(overlayHeroClasses.has("min-h-screen"));
   assert.ok(
@@ -572,7 +575,7 @@ test("early 0.x notice uses calm light and dark SecPal colors", () => {
     "utf8"
   );
   const notice = component.match(
-    /<div\s+class="([^"]*)"\s*>\s*<p[^>]*>\{content\.releaseNoticeTitle\}<\/p>/
+    /<div\b[^>]*\bclass="([^"]*)"[^>]*>\s*<p[^>]*>\{content\.releaseNoticeTitle\}<\/p>/
   );
 
   assert.ok(notice, "release notice container must remain present");
