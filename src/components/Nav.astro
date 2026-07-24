@@ -26,9 +26,12 @@ const t = useTranslations(locale);
 
 const otherLocale: Locale = locale === "en" ? "de" : "en";
 const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
+const roadmapPath = getLocalizedPath("/roadmap", locale);
 const androidPath = getLocalizedPath("/android", locale);
-const progressPath = `${getLocalizedPath("/", locale)}#progress`;
+const workflowPath = `${getLocalizedPath("/", locale)}#workflow`;
 const contactPath = `${getLocalizedPath("/", locale)}#contact`;
+const isRoadmapCurrent = currentPath === "/roadmap";
+const isAndroidCurrent = currentPath === "/android";
 const heroTone = tone === "androidHero";
 const headerBackgroundClass = heroTone
   ? "bg-transparent"
@@ -47,6 +50,11 @@ const mobileMenuCloseClass =
   transparent || heroTone
     ? "-m-2.5 rounded-md p-2.5 text-gray-900 dark:text-white"
     : "-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-400";
+const desktopLinkClass = "text-sm/6 font-semibold";
+const mobileLinkClass =
+  "-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold hover:bg-gray-50 dark:hover:bg-white/5";
+const defaultNavTextClass = "text-gray-900 dark:text-white";
+const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
 ---
 
 <!-- @tailwindplus/elements is loaded in Base.astro via script tag -->
@@ -81,29 +89,24 @@ const mobileMenuCloseClass =
     <!-- Desktop nav links -->
     <div class="hidden lg:flex lg:gap-x-6 2xl:gap-x-12">
       <a
-        href={progressPath}
-        class="text-sm/6 font-semibold text-gray-900 dark:text-white"
-        >{t.nav.progress}</a
+        href={workflowPath}
+        class:list={[desktopLinkClass, defaultNavTextClass]}>{t.nav.workflow}</a
       >
       <a
-        href={getLocalizedPath("/roadmap", locale)}
-        class="text-sm/6 font-semibold text-gray-900 dark:text-white"
-        >{t.nav.roadmap}</a
+        href={roadmapPath}
+        aria-current={isRoadmapCurrent ? "page" : undefined}
+        class:list={[
+          desktopLinkClass,
+          isRoadmapCurrent ? activeNavTextClass : defaultNavTextClass,
+        ]}>{t.nav.roadmap}</a
       >
       <a
         href={androidPath}
-        class="text-sm/6 font-semibold text-gray-900 dark:text-white"
-        >{t.nav.android}</a
-      >
-      <a
-        href={contactPath}
-        class="text-sm/6 font-semibold text-gray-900 dark:text-white"
-        >{t.nav.contact}</a
-      >
-      <a
-        href="https://github.com/SecPal"
-        class="text-sm/6 font-semibold text-gray-900 dark:text-white"
-        >{t.nav.github}</a
+        aria-current={isAndroidCurrent ? "page" : undefined}
+        class:list={[
+          desktopLinkClass,
+          isAndroidCurrent ? activeNavTextClass : defaultNavTextClass,
+        ]}>{t.nav.android}</a
       >
     </div>
 
@@ -112,6 +115,7 @@ const mobileMenuCloseClass =
       <!-- Language switcher -->
       <a
         href={otherLocalePath}
+        data-language-switch
         class:list={[
           "hidden text-xs font-semibold uppercase tracking-wide lg:block",
           utilityControlClass,
@@ -257,34 +261,31 @@ const mobileMenuCloseClass =
         <div class="-my-6 divide-y divide-gray-500/10 dark:divide-white/10">
           <div class="space-y-2 py-6">
             <a
-              href={progressPath}
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-              >{t.nav.progress}</a
+              href={workflowPath}
+              class:list={[mobileLinkClass, defaultNavTextClass]}
+              >{t.nav.workflow}</a
             >
             <a
-              href={getLocalizedPath("/roadmap", locale)}
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-              >{t.nav.roadmap}</a
+              href={roadmapPath}
+              aria-current={isRoadmapCurrent ? "page" : undefined}
+              class:list={[
+                mobileLinkClass,
+                isRoadmapCurrent ? activeNavTextClass : defaultNavTextClass,
+              ]}>{t.nav.roadmap}</a
             >
             <a
               href={androidPath}
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-              >{t.nav.android}</a
-            >
-            <a
-              href={contactPath}
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-              >{t.nav.contact}</a
-            >
-            <a
-              href="https://github.com/SecPal"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-              >{t.nav.github}</a
+              aria-current={isAndroidCurrent ? "page" : undefined}
+              class:list={[
+                mobileLinkClass,
+                isAndroidCurrent ? activeNavTextClass : defaultNavTextClass,
+              ]}>{t.nav.android}</a
             >
             <!-- Language switcher in mobile menu -->
             <a
               href={otherLocalePath}
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
+              data-language-switch
+              class:list={[mobileLinkClass, defaultNavTextClass]}
             >
               {otherLocale === "de" ? "Deutsch" : "English"}
             </a>

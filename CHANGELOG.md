@@ -32,6 +32,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- reduced the localized main navigation to Workflow, Roadmap, and Android;
+  kept contact solely as the primary header action and GitHub as a secondary
+  technical path in the closing CTA and footer; added active states for
+  Roadmap and Android; and preserved valid homepage anchors when switching
+  languages
 - tightened the localized homepage copy to separate product direction from
   development status, with professional contact now also the primary header
   action
