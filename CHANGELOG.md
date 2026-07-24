@@ -51,6 +51,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - refocused the localized homepage hero on clear, practice-led language for
   German security service providers, with one in-page action and a concise
   development status
+- retired the former live development host without replacement, removed its
+  build and deployment-check configuration, and made the public site the
+  default metadata origin
 - grouped GitHub Actions Dependabot updates under the stable `github-actions` identifier, so future workflow bump PRs use a predictable group-based title/branch instead of opaque reusable-workflow path slugs
 - refreshed the English and German roadmap copy so shift planning is the current focus, OWKS is the next milestone, and completed passkey, onboarding, and Android distribution work is no longer shown as in progress
 - replaced the stub `LICENSES/LicenseRef-TailwindPlus.txt` summary with the
@@ -79,6 +82,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- made retired-domain validation tolerate tracked files deleted from the
+  working tree and reject mixed-case hostnames, so local validation remains
+  usable during removals without allowing case-based policy bypasses
 - prevented long German roadmap and Android download labels from causing
   horizontal page overflow when the browser base font size is enlarged
 - aligned the mobile menu's visual and keyboard order and moved focus to
@@ -100,14 +106,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - added a repo-local `.preflight-exclude` baseline for generated lockfiles and license texts, so dependency bump PRs no longer fail the shared PR size check on `package-lock.json` churn alone
 - fixed mobile overflow and right-shift in `src/components/Hero.astro` so the hero headline, subline, and CTAs remain properly aligned on narrow viewports
 - upgraded `astro` to the first major release that officially carries patched `esbuild` support and kept the remaining npm audit remediations aligned through the lockfile plus targeted overrides (`brace-expansion`, `defu`), so the website toolchain findings no longer require out-of-range transitive overrides
-- neutral locale entry routes on `/` and `/android` now redirect German browser locales to `/de/...` and all other locales to `/en/...`, so `secpal.app` and `dev.secpal.app` no longer force the English Android page when the browser prefers German
+- neutral locale entry routes on `/` and `/android` now redirect German browser locales to `/de/...` and all other locales to `/en/...`, so `secpal.app` no longer forces the English Android page when the browser prefers German
 - added safe-area-aware body padding together with `viewport-fit=cover` and wrapping rules for Android machine-readable cards so text and content blocks no longer sit too close to the mobile screen edge or overflow on devices with asymmetric viewport insets
 
 ## [0.0.1] - 2026-03-31
 
 ### Changed
 
-- corrected repo-local domain guidance and validation so `secpal.app` is described only as the public website and real-email domain, while `api.secpal.dev` and `app.secpal.dev` remain the active API/PWA hosts and the Android application identifier stays Android-only; explicitly documented `dev.secpal.app` as the live staging/development host for this repository (a subdomain of `secpal.app`)
+- corrected repo-local domain guidance and validation so `secpal.app` is described only as the public website and real-email domain, while `api.secpal.dev` and `app.secpal.dev` remain the active API/PWA hosts and the Android application identifier stays Android-only
 - Six occurrences of four hard-coded English accessibility strings in `Nav.astro` (`"Open main menu"`, `"Close menu"`, `"Toggle dark mode"`, `"Mobile navigation"`) are now locale-aware via translation keys so screen readers on `/de` no longer announce mixed-language labels
 - Feature card 2 description reworded in both `de.ts` and `en.ts` to break the identical sentence opening shared with card 1; the meaning is preserved while the three cards now read as clearly distinct items when scanned vertically
 - `.github/copilot-instructions.md` now requires a branch hygiene check before any write action so website work never starts on local `main` and dirty non-`main` branches must be assessed before continuing
@@ -138,7 +144,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The social preview build step now relies on a declared local `sharp` dependency instead of an implicit transitive install, so `npm run build` remains stable when upstream package trees change
 - Social preview badge backgrounds in the top label now use a conservative per-locale text-width estimate including letter spacing and tuned padding, so both the English and German badge copy stay fully inside the tinted pill without the English badge growing unnecessarily long
 - Social preview logo placement is now slightly smaller and lower inside the circular stage, so the shield sits more naturally within the round frame instead of touching the upper visual boundary
-- Default website builds from the live repository checkout now derive canonical and social preview origins from `https://dev.secpal.app`, so the dev host no longer emits production `canonical`, `og:url`, or preview image URLs unless `SECPAL_SITE_URL` explicitly targets production
+- Default website builds now derive canonical and social preview origins from
+  the configured site URL, so alternate builds do not emit production
+  `canonical`, `og:url`, or preview image URLs unless `SECPAL_SITE_URL`
+  explicitly targets production
 - Social preview assets are now regenerated from the canonical `logo-dark-512.png` brand asset for dark preview cards before every build, so the final OG/Twitter cards use the original SecPal logo instead of a manually reconstructed or wrong-contrast variant while still emitting absolute image URLs from the active build domain
 - `astro.config.mjs` now filters Astro's known false-positive `UNUSED_EXTERNAL_IMPORT` warning for `@astrojs/internal-helpers/remote`, and the site now tracks `astro@6.1.1`, so local builds finish without upstream warning noise
 - `package.json` now pins `typescript` to the `5.9.x` support range used by `@typescript-eslint`, and npm overrides now lift vulnerable transitive `brace-expansion`, `picomatch`, and `yaml` packages to patched releases so linting and `npm audit` both run cleanly
@@ -154,7 +163,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `package-lock.json` now resolves `flatted` to `3.4.2` and `h3` to `1.15.10`, removing the known npm audit findings without changing declared package ranges
-- Deployment checks and README guidance now point to the real live development host `dev.secpal.app` instead of the old `secpal.dev` assumption, while keeping server-side locale negotiation documented only for production
+- Deployment checks and README guidance now distinguish development behavior
+  from server-side locale negotiation, which remains documented only for
+  production
 - Shared links now emit complete Open Graph and Twitter Card metadata from the shared base layout, so localized pages consistently expose the correct title, description, locale, and `1200x630` preview image to messenger and social crawlers
 - The neutral `/` entry page now exposes the same preview metadata before redirecting to `/en/`, so root links still unfurl with the correct SecPal card when crawlers do not fully evaluate redirects
 - German landing and legal pages now point social preview metadata at a dedicated German Open Graph image instead of reusing the English preview card
@@ -167,7 +178,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Hero now presents `SecPal – A guard’s best friend` as a compact eyebrow tagline above the main positioning headline
 - Footer no longer claims "All rights reserved" on the public site, avoiding a misleading rights statement for the AGPL-published project
 - Landing page now leads with the SecPal product name, removes the duplicated hero view, and reframes the homepage as a focused coming-soon preview while the product is still under active construction
-- Alternate deployment builds now derive canonical and hreflang URLs from `SECPAL_SITE_URL` so `dev.secpal.app` no longer points metadata at production
+- Alternate deployment builds now derive canonical and hreflang URLs from
+  `SECPAL_SITE_URL` so their metadata does not point at production
 - Dark mode toggle: added `is:inline` to ensure the script runs after DOM is ready
 - Language switcher: `getLocalizedPath` now produces trailing-slash URLs (`/de/`, `/en/`) matching Astro's canonical page paths
 - Footer links and Nav language switcher now always produce canonical trailing-slash URLs for non-root paths (e.g. `/en/privacy/` instead of `/en/privacy`) — `getLocalizedPath` normalized to always append trailing slash for non-root routes, so no unnecessary redirects occur

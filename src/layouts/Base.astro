@@ -26,7 +26,7 @@ const {
   socialImagePath,
   socialImageAlt,
 } = Astro.props;
-const siteUrl = Astro.site ?? new URL("https://dev.secpal.app");
+const siteUrl = Astro.site ?? new URL("https://secpal.app");
 const canonicalUrl = canonicalPath
   ? new URL(canonicalPath, siteUrl).toString()
   : undefined;
