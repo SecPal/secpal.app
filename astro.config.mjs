@@ -5,7 +5,7 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import { createLogger } from "vite";
 
-const siteUrl = process.env.SECPAL_SITE_URL ?? "https://dev.secpal.app";
+const siteUrl = process.env.SECPAL_SITE_URL ?? "https://secpal.app";
 const astroInternalHelpersWarning =
   '"matchHostname", "matchPathname", "matchPort" and "matchProtocol" are imported from external module "@astrojs/internal-helpers/remote" but never used in "node_modules/astro/dist/assets/utils/index.js"';
 const viteLogger = createLogger();

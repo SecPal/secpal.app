@@ -39,11 +39,8 @@ npm install
 npm run dev    # http://localhost:4321
 ```
 
-For alternate deployments you can override the generated site base URL at build time:
-
-```bash
-SECPAL_SITE_URL=https://dev.secpal.app npm run build
-```
+For controlled alternate deployments, set `SECPAL_SITE_URL` to the deployment
+origin before running the build.
 
 ### Available commands
 
@@ -68,9 +65,8 @@ Run the preflight script before every push:
 
 ## Stable release workflow
 
-`dev.secpal.app` can continue to use the live repository checkout. `secpal.app`
-is deployed separately from `/home/secpal/www/secpal.app/current`, so the public
-site is independent from the working tree on the VPS.
+`secpal.app` is deployed from `/home/secpal/www/secpal.app/current`, so the
+public site is independent from the working tree on the VPS.
 
 ### Promote a stable release
 
@@ -107,9 +103,9 @@ bash ./scripts/check-stable.sh
 
 The health-check helper verifies the `current` and `previous` release links,
 checks that the localized static files and `RELEASE.txt` exist, validates the
-Nginx configuration, and confirms that `secpal.app`, `www.secpal.app`, and the
-live development host `dev.secpal.app` behave as expected over HTTPS,
-including the language-based root redirect on `secpal.app`.
+Nginx configuration, and confirms that `secpal.app` and `www.secpal.app`
+behave as expected over HTTPS, including the language-based root redirect on
+`secpal.app`.
 
 If the shell session cannot read the live TLS material and also cannot use
 passwordless `sudo`, you can skip only the `nginx -t` step explicitly:
@@ -140,12 +136,6 @@ All user-facing strings live in `src/i18n/en.ts` and `src/i18n/de.ts`. Both file
 In production, the root route `/` is redirected at the web-server (Nginx)
 layer. `Accept-Language` requests preferring German resolve to `/de/`, while
 all other requests fall back to `/en/`.
-
-The live development host runs directly on `https://dev.secpal.app`. There, the
-localized pages are served under `/en/` and `/de/`, while the neutral entry
-routes under `/` and `/android` redirect browsers to the locale-specific pages
-based on the browser language and still expose the correct social preview
-metadata.
 
 ## License
 
