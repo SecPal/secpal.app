@@ -27,7 +27,7 @@ const expectedShellProps = {
     'currentPath="/privacy"',
     'eyebrow="Rechtliches"',
     'headline="Datenschutzerklärung"',
-    'intro="Diese Datenschutzerklärung betrifft die öffentliche Website secpal.app, die über apk.secpal.app bereitgestellten Downloadressourcen, die Domain- und DNS-Infrastruktur sowie die direkte Kontaktaufnahme per E-Mail."',
+    'intro="Diese Datenschutzerklärung betrifft die öffentliche Website secpal.app, die über apk.secpal.app bereitgestellten Downloadressourcen, das Domain Name System (DNS) sowie die direkte Kontaktaufnahme per E-Mail."',
     'updatedLabel="Stand"',
     'updatedAt="24. Juli 2026"',
   ],
@@ -38,7 +38,7 @@ const expectedShellProps = {
     'currentPath="/privacy"',
     'eyebrow="Legal"',
     'headline="Privacy Notice"',
-    'intro="This privacy notice concerns the public secpal.app website, download resources provided through apk.secpal.app, the domain and DNS infrastructure, and direct contact by email."',
+    'intro="This privacy notice concerns the public secpal.app website, download resources provided through apk.secpal.app, the Domain Name System (DNS), and direct contact by email."',
     'updatedLabel="Last updated"',
     'updatedAt="July 24, 2026"',
   ],
@@ -50,7 +50,7 @@ const expectedSections = {
     "Verantwortlicher",
     "Technische Bereitstellung und Hosting",
     "Keine reguläre Zugriffsprotokollierung",
-    "Domainverwaltung und DNS",
+    "Domain Name System (DNS)",
     "Öffentliche Downloadressourcen",
     "Lokale Darstellungspräferenz",
     "Keine Webanalyse oder Besucherprofilbildung",
@@ -68,7 +68,7 @@ const expectedSections = {
     "Controller",
     "Technical delivery and hosting",
     "No regular access logging",
-    "Domain management and DNS",
+    "Domain Name System (DNS)",
     "Public download resources",
     "Local display preference",
     "No web analytics or visitor profiling",
@@ -84,8 +84,8 @@ const expectedSections = {
 };
 
 const extractSectionNames = (source) =>
-  [...source.matchAll(/<h2\b[^>]*>\s*\d+\.\s*([^<]+?)\s*<\/h2>/g)].map(
-    (match) => match[1].replace(/\s+/g, " ").trim()
+  [...source.matchAll(/<h2\b[^>]*>\s*(?:\d+\.\s*)?([^<]+?)\s*<\/h2>/g)].map(
+    ([, heading]) => heading.replace(/\s+/g, " ").trim()
   );
 
 test("localized privacy pages retain their shell metadata and aligned sections", () => {
@@ -151,6 +151,16 @@ test("hosting, transient delivery, and disabled regular logging are precise", ()
   assert.match(compactPages.en, /no regular web server access or error logs/);
   assert.match(compactPages.de, /Art\. 6 Abs\. 1 lit\. f DSGVO/);
   assert.match(compactPages.en, /Article 6\(1\)\(f\) GDPR/);
+  assert.match(
+    compactPages.de,
+    /Unabhängig von der durch SecPal deaktivierten regulären Protokollierung/
+  );
+  assert.match(
+    compactPages.en,
+    /Independently of the regular logging disabled by SecPal/
+  );
+  assert.doesNotMatch(compactPages.de, /in eigener Verantwortung/);
+  assert.doesNotMatch(compactPages.en, /under their own responsibility/);
   assert.doesNotMatch(compactPages.de, /keinerlei Daten verarbeitet/i);
   assert.doesNotMatch(compactPages.en, /no data (?:is|are) processed/i);
 });
@@ -170,6 +180,8 @@ test("Cloudflare is limited to authoritative DNS and transfer safeguards", () =>
   }
   assert.match(compactPages.de, /autoritative DNS-Dienste/);
   assert.match(compactPages.en, /authoritative DNS services/);
+  assert.doesNotMatch(compactPages.de, /Domainverwaltung/);
+  assert.doesNotMatch(compactPages.en, /domain management/i);
   assert.match(
     compactPages.de,
     /HTTP- und HTTPS-Verkehr[^.]*direkt[^.]*Hetzner/

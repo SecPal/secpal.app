@@ -12,7 +12,7 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
   currentPath="/privacy"
   eyebrow="Rechtliches"
   headline="Datenschutzerklärung"
-  intro="Diese Datenschutzerklärung betrifft die öffentliche Website secpal.app, die über apk.secpal.app bereitgestellten Downloadressourcen, die Domain- und DNS-Infrastruktur sowie die direkte Kontaktaufnahme per E-Mail."
+  intro="Diese Datenschutzerklärung betrifft die öffentliche Website secpal.app, die über apk.secpal.app bereitgestellten Downloadressourcen, das Domain Name System (DNS) sowie die direkte Kontaktaufnahme per E-Mail."
   updatedLabel="Stand"
   updatedAt="24. Juli 2026"
 >
@@ -105,9 +105,11 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
         SecPal speichert dabei keine individuellen IP-Adressen, User-Agents oder
         Crawlerinformationen und erstellt keine Besucher-, Referrer-, Länder-,
         Geräte- oder Downloadstatistiken. Die flüchtige technische Verarbeitung
-        während der Verbindung bleibt davon unberührt. Infrastrukturbetreiber
-        können technisch erforderliche Betriebs- oder Sicherheitsdaten in
-        eigener Verantwortung verarbeiten.
+        während der Verbindung bleibt davon unberührt. Unabhängig von der durch
+        SecPal deaktivierten regulären Protokollierung können die eingesetzten
+        Dienstleister technisch erforderliche Betriebs- und
+        Sicherheitsverarbeitungen nach den jeweils geltenden vertraglichen und
+        gesetzlichen Rahmenbedingungen durchführen.
       </p>
     </div>
 
@@ -115,11 +117,11 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        5. Domainverwaltung und DNS
+        5. Domain Name System (DNS)
       </h2>
       <p class="mt-6">
-        Die Domainverwaltung und die autoritativen DNS-Dienste erfolgen über
-        Cloudflare. Die Web-DNS-Einträge sind DNS-only und beantworten
+        Die autoritativen DNS-Dienste für secpal.app werden über Cloudflare
+        bereitgestellt. Die Web-DNS-Einträge sind DNS-only und beantworten
         DNS-Abfragen mit der tatsächlichen Hetzner-Origin-IP. Der reguläre HTTP-
         und HTTPS-Verkehr läuft direkt zu Hetzner.
       </p>
@@ -279,8 +281,8 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
             >Cloudflare, Inc.:</strong
           >
           {" "}
-          Domainverwaltung und autoritative DNS-Dienste. Wegen der DNS-only-Konfiguration
-          erhält Cloudflare nicht den regulären HTTP- oder HTTPS-Verkehr.
+          autoritative DNS-Dienste. Wegen der DNS-only-Konfiguration erhält Cloudflare
+          nicht den regulären HTTP- oder HTTPS-Verkehr.
         </li>
         <li>
           <strong class="font-semibold text-gray-900 dark:text-white"

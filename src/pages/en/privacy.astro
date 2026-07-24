@@ -12,7 +12,7 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
   currentPath="/privacy"
   eyebrow="Legal"
   headline="Privacy Notice"
-  intro="This privacy notice concerns the public secpal.app website, download resources provided through apk.secpal.app, the domain and DNS infrastructure, and direct contact by email."
+  intro="This privacy notice concerns the public secpal.app website, download resources provided through apk.secpal.app, the Domain Name System (DNS), and direct contact by email."
   updatedLabel="Last updated"
   updatedAt="July 24, 2026"
 >
@@ -102,9 +102,10 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
         SecPal does not store individual IP addresses, user agents, or crawler
         information and does not use such requests to produce visitor, referrer,
         country, device, or download statistics. This does not affect the
-        transient technical processing during the connection. Infrastructure
-        operators may process technically necessary operational or security data
-        under their own responsibility.
+        transient technical processing during the connection. Independently of
+        the regular logging disabled by SecPal, the service providers may carry
+        out technically necessary operational and security processing under the
+        applicable contractual and legal frameworks.
       </p>
     </div>
 
@@ -112,10 +113,10 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        5. Domain management and DNS
+        5. Domain Name System (DNS)
       </h2>
       <p class="mt-6">
-        Domain management and authoritative DNS services are provided through
+        Authoritative DNS services for secpal.app are provided through
         Cloudflare. The web DNS records are DNS-only and answer DNS queries with
         the actual Hetzner origin IP address. Regular HTTP and HTTPS traffic
         goes directly to Hetzner.
@@ -271,8 +272,8 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
             >Cloudflare, Inc.:</strong
           >
           {" "}
-          domain management and authoritative DNS services. Because the configuration
-          is DNS-only, Cloudflare does not receive regular HTTP or HTTPS traffic.
+          authoritative DNS services. Because the configuration is DNS-only, Cloudflare
+          does not receive regular HTTP or HTTPS traffic.
         </li>
         <li>
           <strong class="font-semibold text-gray-900 dark:text-white"
