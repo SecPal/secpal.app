@@ -200,7 +200,8 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   assert.match(component, /<section\b[^>]*class="[^"]*\bmin-w-0\b[^"]*"[^>]*>/);
   // technical endpoints stay at the bottom of the page when a public download exists.
   assert.match(component, TECHNICAL_DETAILS_HEADING_PATTERN);
-  assert.match(component, /androidDirectDownloadAvailable\s*\?/);
+  assert.match(component, /content\.endpointGroups\.length\s*>\s*0/);
+  assert.doesNotMatch(component, /androidDirectDownloadAvailable/);
   // individual endpoint links keep long machine paths wrapped on the rendered href element
   assert.match(component, ENDPOINT_LINK_PARAGRAPH_PATTERN);
   // verification items keep correct definition-list semantics for label/value pairs.

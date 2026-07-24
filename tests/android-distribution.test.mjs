@@ -282,6 +282,14 @@ test("public Google Play links are emitted only for public availability", () => 
 
     assert.equal(unavailable.heroSecondary, null);
     assert.ok(!("action" in unavailable.downloadOptions[1]));
+    assert.equal(available.heroPrimary, null);
+    assert.ok(!available.downloadOptions[0]?.action);
+    assert.equal(
+      available.badge,
+      locale === "de"
+        ? "Direkter Download in Vorbereitung"
+        : "Direct download in preparation"
+    );
     assert.equal(available.heroSecondary?.href, androidPlayStoreUrl);
     assert.equal(
       available.downloadOptions[1]?.action?.href,
@@ -493,7 +501,8 @@ test("Android distribution surface renders only real, accessible public actions"
   assert.doesNotMatch(component, /aria-disabled/);
   assert.doesNotMatch(component, /option\.href/);
   assert.doesNotMatch(component, /\bmin-h-\[1\.5rem\]\b/);
-  assert.match(component, /androidDirectDownloadAvailable\s*\?/);
+  assert.match(component, /content\.endpointGroups\.length\s*>\s*0/);
+  assert.doesNotMatch(component, /androidDirectDownloadAvailable/);
   assert.match(component, /locale === "de" \? "break-words" : null/);
   assert.doesNotMatch(component, /content\.betaNotice/);
 });

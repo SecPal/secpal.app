@@ -3,10 +3,7 @@
 // SPDX-FileCopyrightText: Tailwind Labs Inc.
 // SPDX-License-Identifier: AGPL-3.0-or-later AND LicenseRef-TailwindPlus
 import type { Locale } from "../i18n/index.ts";
-import {
-  androidDirectDownloadAvailable,
-  getAndroidDistributionContent,
-} from "../lib/android-distribution.ts";
+import { getAndroidDistributionContent } from "../lib/android-distribution.ts";
 
 interface Props {
   locale: Locale;
@@ -215,7 +212,7 @@ const content = getAndroidDistributionContent(locale);
       </div>
 
       {
-        androidDirectDownloadAvailable ? (
+        content.endpointGroups.length > 0 ? (
           <section class="mt-10 overflow-hidden rounded-3xl border border-gray-200 bg-gray-950 shadow-xl ring-1 ring-gray-900/10 dark:border-white/10 dark:ring-white/10">
             <div class="border-b border-white/10 px-6 py-4">
               <h3 class="text-base font-semibold text-white">
