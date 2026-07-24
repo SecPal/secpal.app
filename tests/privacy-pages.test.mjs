@@ -84,12 +84,8 @@ const expectedSections = {
 };
 
 const extractSectionNames = (source) =>
-  [...source.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/g)].map((match) =>
-    match[1]
-      .replace(/<[^>]+>/g, "")
-      .replace(/\s+/g, " ")
-      .trim()
-      .replace(/^\d+\.\s*/, "")
+  [...source.matchAll(/<h2\b[^>]*>\s*\d+\.\s*([^<]+?)\s*<\/h2>/g)].map(
+    (match) => match[1].replace(/\s+/g, " ").trim()
   );
 
 test("localized privacy pages retain their shell metadata and aligned sections", () => {
@@ -104,6 +100,12 @@ test("localized privacy pages retain their shell metadata and aligned sections",
   }
   assert.deepEqual(extractSectionNames(pages.de), expectedSections.de);
   assert.deepEqual(extractSectionNames(pages.en), expectedSections.en);
+});
+
+test("section extraction rejects headings that contain markup", () => {
+  const headingWithMarkup = "<h2>1. Scope <em>note</em></h2>";
+
+  assert.deepEqual(extractSectionNames(headingWithMarkup), []);
 });
 
 test("the controller is identified with SecPal before Holger Schmermbeck", () => {
