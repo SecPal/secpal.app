@@ -316,13 +316,24 @@ export function buildAndroidDistributionContent(
   if (locale === "de") {
     return {
       title: "SecPal für Android",
-      description:
-        "Informationen zur Android-Version von SecPal, zum direkten Download über secpal.app und zur späteren öffentlichen Veröffentlichung im Play Store.",
+      description: publicPlayStoreAvailable
+        ? "Informationen zur Android-Version von SecPal, zum direkten Download über secpal.app und zur öffentlichen Verfügbarkeit im Play Store."
+        : "Informationen zur Android-Version von SecPal, zum direkten Download über secpal.app und zur späteren öffentlichen Veröffentlichung im Play Store.",
       eyebrow: "SecPal für Android",
       headline: "SecPal. Immer dabei.",
-      subline: directDownloadAvailable
-        ? "Die aktuelle Android-Version von SecPal kann direkt über secpal.app heruntergeladen werden. SecPal befindet sich weiterhin in einer frühen 0.x-Entwicklungsphase. Eine öffentliche Veröffentlichung im Play Store folgt später."
-        : "Die erste Android-Version von SecPal wird für den direkten Download über secpal.app vorbereitet. SecPal befindet sich in einer frühen 0.x-Entwicklungsphase. Eine öffentliche Veröffentlichung im Play Store ist für später vorgesehen.",
+      subline: [
+        directDownloadAvailable
+          ? "Die aktuelle Android-Version von SecPal kann direkt über secpal.app heruntergeladen werden."
+          : "Die erste Android-Version von SecPal wird für den direkten Download über secpal.app vorbereitet.",
+        directDownloadAvailable
+          ? "SecPal befindet sich weiterhin in einer frühen 0.x-Entwicklungsphase."
+          : "SecPal befindet sich in einer frühen 0.x-Entwicklungsphase.",
+        publicPlayStoreAvailable
+          ? "SecPal ist auch öffentlich im Play Store verfügbar."
+          : directDownloadAvailable
+            ? "Eine öffentliche Veröffentlichung im Play Store folgt später."
+            : "Eine öffentliche Veröffentlichung im Play Store ist für später vorgesehen.",
+      ].join(" "),
       badge: directDownloadAvailable
         ? "Direkter Download verfügbar"
         : "Direkter Download in Vorbereitung",
@@ -354,12 +365,15 @@ export function buildAndroidDistributionContent(
         },
         {
           label: "Play Store",
-          value: "Öffentliche Veröffentlichung später",
+          value: publicPlayStoreAvailable
+            ? "Öffentlich verfügbar"
+            : "Öffentliche Veröffentlichung später",
         },
       ],
       downloadTitle: "Download-Möglichkeiten",
-      downloadIntro:
-        "Die öffentliche Android-Verteilung unterscheidet zwischen dem direkten Download über SecPal und der späteren öffentlichen Veröffentlichung im Play Store.",
+      downloadIntro: publicPlayStoreAvailable
+        ? "Die öffentliche Android-Verteilung unterscheidet zwischen dem direkten Download über SecPal und der öffentlichen Verfügbarkeit im Play Store."
+        : "Die öffentliche Android-Verteilung unterscheidet zwischen dem direkten Download über SecPal und der späteren öffentlichen Veröffentlichung im Play Store.",
       downloadOptions: [
         {
           badge: directDownloadAvailable ? "Verfügbar" : "In Vorbereitung",
@@ -417,13 +431,22 @@ export function buildAndroidDistributionContent(
 
   return {
     title: "SecPal for Android",
-    description:
-      "Information about the SecPal Android release, direct downloads from secpal.app, and the later public release on Google Play.",
+    description: publicPlayStoreAvailable
+      ? "Information about the SecPal Android release, direct downloads from secpal.app, and public availability on Google Play."
+      : "Information about the SecPal Android release, direct downloads from secpal.app, and the later public release on Google Play.",
     eyebrow: "SecPal for Android",
     headline: "SecPal in your pocket.",
-    subline: directDownloadAvailable
-      ? "The current SecPal Android release can be downloaded directly from secpal.app. SecPal remains in an early 0.x development phase. A public release on Google Play will follow later."
-      : "The first SecPal Android release is being prepared for direct download from secpal.app. SecPal remains in an early 0.x development phase. A public release on Google Play is planned for later.",
+    subline: [
+      directDownloadAvailable
+        ? "The current SecPal Android release can be downloaded directly from secpal.app."
+        : "The first SecPal Android release is being prepared for direct download from secpal.app.",
+      "SecPal remains in an early 0.x development phase.",
+      publicPlayStoreAvailable
+        ? "SecPal is also publicly available on Google Play."
+        : directDownloadAvailable
+          ? "A public release on Google Play will follow later."
+          : "A public release on Google Play is planned for later.",
+    ].join(" "),
     badge: directDownloadAvailable
       ? "Direct download available"
       : "Direct download in preparation",
@@ -455,12 +478,15 @@ export function buildAndroidDistributionContent(
       },
       {
         label: "Google Play",
-        value: "Public release later",
+        value: publicPlayStoreAvailable
+          ? "Publicly available"
+          : "Public release later",
       },
     ],
     downloadTitle: "Download options",
-    downloadIntro:
-      "Public Android distribution distinguishes between direct download from SecPal and the later public release on Google Play.",
+    downloadIntro: publicPlayStoreAvailable
+      ? "Public Android distribution distinguishes between direct download from SecPal and public availability on Google Play."
+      : "Public Android distribution distinguishes between direct download from SecPal and the later public release on Google Play.",
     downloadOptions: [
       {
         badge: directDownloadAvailable ? "Available" : "In preparation",

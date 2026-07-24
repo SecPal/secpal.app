@@ -286,6 +286,66 @@ test("public Google Play links are emitted only for public availability", () => 
   }
 });
 
+test("public Google Play availability updates all surrounding release copy", () => {
+  const expectations = {
+    en: {
+      description:
+        "Information about the SecPal Android release, direct downloads from secpal.app, and public availability on Google Play.",
+      playSentence: "SecPal is also publicly available on Google Play.",
+      summary: "Publicly available",
+      intro:
+        "Public Android distribution distinguishes between direct download from SecPal and public availability on Google Play.",
+    },
+    de: {
+      description:
+        "Informationen zur Android-Version von SecPal, zum direkten Download über secpal.app und zur öffentlichen Verfügbarkeit im Play Store.",
+      playSentence: "SecPal ist auch öffentlich im Play Store verfügbar.",
+      summary: "Öffentlich verfügbar",
+      intro:
+        "Die öffentliche Android-Verteilung unterscheidet zwischen dem direkten Download über SecPal und der öffentlichen Verfügbarkeit im Play Store.",
+    },
+  };
+
+  for (const locale of ["en", "de"]) {
+    for (const directDownloadAvailable of [false, true]) {
+      const content = buildAndroidDistributionContent(
+        locale,
+        directDownloadAvailable,
+        true
+      );
+      const expectation = expectations[locale];
+
+      assert.equal(content.description, expectation.description);
+      assert.ok(content.subline.endsWith(expectation.playSentence));
+      assert.equal(content.summaryItems[3]?.value, expectation.summary);
+      assert.equal(content.downloadIntro, expectation.intro);
+    }
+  }
+});
+
+test("pending Google Play copy preserves the direct-download rollout phase", () => {
+  const expectations = {
+    en: {
+      preparing: "A public release on Google Play is planned for later.",
+      available: "A public release on Google Play will follow later.",
+    },
+    de: {
+      preparing:
+        "Eine öffentliche Veröffentlichung im Play Store ist für später vorgesehen.",
+      available:
+        "Eine öffentliche Veröffentlichung im Play Store folgt später.",
+    },
+  };
+
+  for (const locale of ["en", "de"]) {
+    const preparing = buildAndroidDistributionContent(locale, false, false);
+    const available = buildAndroidDistributionContent(locale, true, false);
+
+    assert.ok(preparing.subline.endsWith(expectations[locale].preparing));
+    assert.ok(available.subline.endsWith(expectations[locale].available));
+  }
+});
+
 test("public Android content contains no beta or restricted-testing language", () => {
   const publicContent = JSON.stringify(androidDistributionContent);
   const forbiddenPhrases = [
