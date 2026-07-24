@@ -103,7 +103,10 @@ test("workflow component keeps the process semantic, responsive, and text-free",
   assert.match(component, /SPDX-FileCopyrightText: 2026 SecPal/);
   assert.match(component, /SPDX-FileCopyrightText: Tailwind Labs Inc\./);
   assert.ok(component.includes(expectedLicenseLine));
-  assert.match(component, /<section\s+aria-labelledby="workflow-heading"/);
+  assert.match(
+    component,
+    /<section\s+id="workflow"\s+aria-labelledby="workflow-heading"/
+  );
   assert.equal(component.match(/<h2\b/g)?.length, 1);
   assert.match(component, /<h2\s+id="workflow-heading"/);
   assert.equal(component.match(/<ol\b/g)?.length, 1);

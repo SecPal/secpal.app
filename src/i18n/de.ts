@@ -5,11 +5,9 @@ import type { Translations } from "./en.ts";
 
 export const de: Translations = {
   nav: {
-    progress: "Fortschritt",
+    workflow: "Ablauf",
     roadmap: "Roadmap",
     android: "Android",
-    github: "GitHub",
-    contact: "Kontakt",
     headerCta: "Kontakt aufnehmen",
     toggleDarkMode: "Dunkelmodus umschalten",
     openMenu: "Hauptmenü öffnen",

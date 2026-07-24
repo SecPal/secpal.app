@@ -3,11 +3,9 @@
 
 export const en = {
   nav: {
-    progress: "Progress",
+    workflow: "Workflow",
     roadmap: "Roadmap",
     android: "Android",
-    github: "GitHub",
-    contact: "Contact",
     headerCta: "Get in touch",
     toggleDarkMode: "Toggle dark mode",
     openMenu: "Open main menu",

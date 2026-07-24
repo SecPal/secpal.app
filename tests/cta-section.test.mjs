@@ -123,9 +123,8 @@ test("desktop and mobile navigation point to the localized contact section", () 
     nav,
     /const contactPath = `\$\{getLocalizedPath\("\/", locale\)\}#contact`;/
   );
-  assert.equal(nav.match(/href=\{contactPath\}/g)?.length, 4);
-  assert.equal(nav.match(/\{t\.nav\.contact\}/g)?.length, 2);
-  assert.doesNotMatch(nav, /updatesPath|t\.nav\.updates|#updates/);
+  assert.equal(nav.match(/href=\{contactPath\}/g)?.length, 2);
+  assert.doesNotMatch(nav, /\{t\.nav\.contact\}/);
   assert.equal(headerCtaAnchors.length, 2);
   assert.match(
     headerCtaAnchors[0],
@@ -152,15 +151,12 @@ test("desktop and mobile navigation point to the localized contact section", () 
     nav,
     /id="dark-toggle"[\s\S]*?class:list=\{\[[\s\S]*?"[^"]*min-h-\[44px\][^"]*min-w-\[44px\][^"]*"[\s\S]*?utilityControlClass[\s\S]*?\]\}/
   );
-  assert.equal(nav.match(/href="https:\/\/github\.com\/SecPal"/g)?.length, 2);
-  assert.equal(nav.match(/\{t\.nav\.github\}/g)?.length, 2);
-  assert.doesNotMatch(nav, /t\.nav\.followProgress/);
-  assert.ok(!("updates" in de.nav));
-  assert.ok(!("updates" in en.nav));
-  assert.ok(!("followProgress" in de.nav));
-  assert.ok(!("followProgress" in en.nav));
-  assert.equal(de.nav.contact, "Kontakt");
-  assert.equal(en.nav.contact, "Contact");
+  assert.doesNotMatch(nav, /href="https:\/\/github\.com\/SecPal"/);
+  assert.doesNotMatch(nav, /\{t\.nav\.github\}/);
+  assert.ok(!("contact" in de.nav));
+  assert.ok(!("contact" in en.nav));
+  assert.ok(!("github" in de.nav));
+  assert.ok(!("github" in en.nav));
   assert.equal(de.nav.headerCta, "Kontakt aufnehmen");
   assert.equal(en.nav.headerCta, "Get in touch");
 });

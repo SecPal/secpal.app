@@ -130,6 +130,33 @@ const previewUrl = canonicalUrl ?? xDefaultUrl;
           var mobileMenu = document.getElementById("mobile-menu");
           var mobileMenuOpen = document.getElementById("mobile-menu-open");
           var mobileMenuClose = document.getElementById("mobile-menu-close");
+          document
+            .querySelectorAll("[data-language-switch]")
+            .forEach(function (link) {
+              link.addEventListener("click", function () {
+                var isHomepage =
+                  window.location.pathname === "/de/" ||
+                  window.location.pathname === "/en/";
+                if (!isHomepage || !window.location.hash) {
+                  return;
+                }
+
+                var anchorId;
+                var targetUrl;
+                try {
+                  anchorId = decodeURIComponent(window.location.hash.slice(1));
+                  targetUrl = new URL(link.href, window.location.href);
+                } catch {
+                  return;
+                }
+                if (!document.getElementById(anchorId)) {
+                  return;
+                }
+
+                targetUrl.hash = window.location.hash;
+                link.href = targetUrl.toString();
+              });
+            });
           if (btn) {
             btn.addEventListener("click", function () {
               var isDark = document.documentElement.classList.toggle("dark");
