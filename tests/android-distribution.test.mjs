@@ -349,6 +349,9 @@ test("hero, summary, and distribution copy follow the concise public hierarchy",
         "The first SecPal Android release is being prepared for direct download from secpal.app. SecPal remains in an early 0.x development phase.",
       available:
         "The current SecPal Android release is available for direct download from secpal.app. SecPal remains in an early 0.x development phase.",
+      releaseNoticeTitle: "About early 0.x releases",
+      releaseNoticeBody:
+        "Early 0.x releases are under active development. Features and workflows may change in later releases.",
       distributionLabel: "Distribution",
       distributionValue: "Direct from secpal.app",
       playStatus: "Planned",
@@ -367,6 +370,9 @@ test("hero, summary, and distribution copy follow the concise public hierarchy",
         "Die erste Android-Version von SecPal wird für den direkten Download über secpal.app vorbereitet. SecPal befindet sich in einer frühen 0.x-Entwicklungsphase.",
       available:
         "Die aktuelle Android-Version von SecPal steht direkt über secpal.app zum Download bereit. SecPal befindet sich weiterhin in einer frühen 0.x-Entwicklungsphase.",
+      releaseNoticeTitle: "Hinweis zu frühen 0.x-Versionen",
+      releaseNoticeBody:
+        "Frühe 0.x-Versionen befinden sich in aktiver Entwicklung. Funktionen und Abläufe können sich mit weiteren Versionen verändern.",
       distributionLabel: "Bereitstellung",
       distributionValue: "Direkt über secpal.app",
       playStatus: "Geplant",
@@ -388,6 +394,8 @@ test("hero, summary, and distribution copy follow the concise public hierarchy",
 
     assert.equal(preparing.subline, expectation.preparing);
     assert.equal(available.subline, expectation.available);
+    assert.equal(preparing.releaseNoticeTitle, expectation.releaseNoticeTitle);
+    assert.equal(preparing.releaseNoticeBody, expectation.releaseNoticeBody);
     assert.equal(
       preparing.summaryItems[1]?.label,
       expectation.distributionLabel
@@ -500,7 +508,9 @@ test("Android distribution surface renders only real, accessible public actions"
     component,
     /content\.heroPrimary\s*\|\|\s*content\.heroSecondary/
   );
-  assert.match(component, /option\.action/);
+  assert.match(component, /option\.action\s*\|\|\s*option\.secondaryLink/);
+  assert.match(component, /\{option\.action\s*\?/);
+  assert.match(component, /\{option\.secondaryLink\s*\?/);
   assert.match(component, /min-h-\[44px\]/);
   assert.doesNotMatch(component, /aria-disabled/);
   assert.doesNotMatch(component, /option\.href/);
@@ -509,4 +519,70 @@ test("Android distribution surface renders only real, accessible public actions"
   assert.doesNotMatch(component, /androidDirectDownloadAvailable/);
   assert.match(component, /locale === "de" \? "break-words" : null/);
   assert.doesNotMatch(component, /content\.betaNotice/);
+});
+
+test("Android hero becomes content-sized at lg without tightening mobile", () => {
+  const component = readFileSync(
+    new URL(
+      "../src/components/AndroidDistributionSurface.astro",
+      import.meta.url
+    ),
+    "utf8"
+  );
+  const heroVariants = component.match(
+    /overlayHeader\s*\?\s*"([^"]+)"\s*:\s*"([^"]+)"/
+  );
+  const heroGrid = component.match(
+    /<div\s+class="([^"]*lg:grid-cols-\[minmax\(0,1fr\)_22rem\][^"]*)"\s*>/
+  );
+
+  assert.ok(heroVariants, "both conditional hero variants must remain present");
+  assert.ok(
+    heroGrid,
+    "the responsive two-column hero grid must remain present"
+  );
+
+  const overlayHeroClasses = new Set(heroVariants[1].split(/\s+/));
+  const standardHeroClasses = new Set(heroVariants[2].split(/\s+/));
+  const heroGridClasses = new Set(heroGrid[1].split(/\s+/));
+
+  assert.ok(overlayHeroClasses.has("min-h-screen"));
+  assert.ok(
+    overlayHeroClasses.has("pt-[var(--secpal-nav-height)]"),
+    "overlay hero must retain navigation clearance"
+  );
+  assert.ok(
+    standardHeroClasses.has("min-h-[calc(100svh-var(--secpal-nav-height))]")
+  );
+  assert.ok(overlayHeroClasses.has("lg:min-h-0"));
+  assert.ok(standardHeroClasses.has("lg:min-h-0"));
+  assert.ok(heroGridClasses.has("py-20"));
+  assert.ok(heroGridClasses.has("lg:py-16"));
+  assert.ok(heroGridClasses.has("xl:py-20"));
+  assert.ok(!heroGridClasses.has("lg:py-28"));
+  assert.ok(heroGridClasses.has("lg:grid-cols-[minmax(0,1fr)_22rem]"));
+});
+
+test("early 0.x notice uses calm light and dark SecPal colors", () => {
+  const component = readFileSync(
+    new URL(
+      "../src/components/AndroidDistributionSurface.astro",
+      import.meta.url
+    ),
+    "utf8"
+  );
+  const notice = component.match(
+    /<div\s+class="([^"]*)"\s*>\s*<p[^>]*>\{content\.releaseNoticeTitle\}<\/p>/
+  );
+
+  assert.ok(notice, "release notice container must remain present");
+  const noticeClasses = notice[1];
+  assert.match(noticeClasses, /\bborder-indigo-200\b/);
+  assert.match(noticeClasses, /\bbg-indigo-50\b/);
+  assert.match(noticeClasses, /\btext-indigo-950\b/);
+  assert.match(noticeClasses, /\bdark:border-indigo-400\/20\b/);
+  assert.match(noticeClasses, /\bdark:bg-indigo-400\/10\b/);
+  assert.match(noticeClasses, /\bdark:text-indigo-100\b/);
+  assert.doesNotMatch(noticeClasses, /\b(?:border|bg|text)-amber-/);
+  assert.match(component, /<p[^>]*>\{content\.releaseNoticeBody\}<\/p>/);
 });

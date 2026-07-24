@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- refined the public Android page with a content-sized desktop hero, calmer
+  mobile signing-fingerprint typography, and a cooler early-release notice
 - made direct SecPal downloads the primary public Android distribution path,
   positioned the public Google Play release as a later step, removed visible
   beta distribution while retaining the internal track infrastructure, and

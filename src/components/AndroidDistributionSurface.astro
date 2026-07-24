@@ -24,8 +24,8 @@ const content = getAndroidDistributionContent(locale);
     class:list={[
       "relative isolate flex items-center overflow-hidden border-b border-gray-200 dark:border-white/10",
       overlayHeader
-        ? "min-h-screen pt-[var(--secpal-nav-height)]"
-        : "min-h-[calc(100svh-var(--secpal-nav-height))]",
+        ? "min-h-screen pt-[var(--secpal-nav-height)] lg:min-h-0"
+        : "min-h-[calc(100svh-var(--secpal-nav-height))] lg:min-h-0",
       inheritHeroBackground
         ? null
         : "bg-linear-to-br from-sky-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-slate-900",
@@ -43,7 +43,7 @@ const content = getAndroidDistributionContent(locale);
     </div>
 
     <div
-      class="mx-auto grid w-full max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[minmax(0,1fr)_22rem] lg:px-8 lg:py-28"
+      class="mx-auto grid w-full max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[minmax(0,1fr)_22rem] lg:px-8 lg:py-16 xl:py-20"
     >
       <div class="max-w-3xl">
         <p
@@ -177,7 +177,7 @@ const content = getAndroidDistributionContent(locale);
         }
       </div>
       <div
-        class="mt-8 rounded-3xl border border-amber-200 bg-amber-50 px-6 py-5 text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-100"
+        class="mt-8 rounded-3xl border border-indigo-200 bg-indigo-50 px-6 py-5 text-indigo-950 dark:border-indigo-400/20 dark:bg-indigo-400/10 dark:text-indigo-100"
       >
         <p class="text-sm font-semibold">{content.releaseNoticeTitle}</p>
         <p class="mt-2 text-sm/7">{content.releaseNoticeBody}</p>
@@ -202,7 +202,7 @@ const content = getAndroidDistributionContent(locale);
                 <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
                   {item.label}
                 </dt>
-                <dd class="mt-1 break-all font-mono text-sm text-gray-900 dark:text-gray-100">
+                <dd class="mt-1 break-all font-mono text-xs/5 text-gray-900 sm:text-sm/6 dark:text-gray-100">
                   {item.value}
                 </dd>
               </div>

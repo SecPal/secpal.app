@@ -193,6 +193,9 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
     /<p\b[^>]*class="[^"]*\bbreak-all\b[^"]*\bfont-mono\b[^"]*"[^>]*>\s*\{\s*entry\.href\s*\}\s*<\/p>/;
   const TECHNICAL_DETAILS_HEADING_PATTERN =
     /<h3\b[^>]*>\s*\{content\.technicalDetailsTitle\}\s*<\/h3>/;
+  const verificationItem = component.match(
+    /content\.verificationItems\.map\(\(item\) => \(\s*<div class="([^"]*)">[\s\S]*?<dd class="([^"]*)">\s*\{item\.value\}\s*<\/dd>/
+  );
 
   // download and rollout cards keep min-w-0 to prevent overflow
   assert.match(component, ARTICLE_WITH_MIN_W_0_PATTERN);
@@ -209,11 +212,26 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
     component,
     /<dl\b[^>]*class="[^"]*\bgrid\b[^"]*\bsm:grid-cols-2\b[^"]*"[^>]*>[\s\S]*<dt\b[\s\S]*<dd\b[\s\S]*<\/dl>/
   );
-  // verification items also keep machine-readable values on break-all mono elements.
-  assert.match(
-    component,
-    /<dd\b[^>]*class="[^"]*\bbreak-all\b[^"]*\bfont-mono\b[^"]*"[^>]*>\s*\{\s*item\.value\s*\}\s*<\/dd>/
-  );
+  assert.ok(verificationItem, "verification item markup must remain present");
+
+  const verificationItemClasses = new Set(verificationItem[1].split(/\s+/));
+  const verificationValueClasses = new Set(verificationItem[2].split(/\s+/));
+  const forbiddenClasses = [
+    "overflow-x-auto",
+    "whitespace-nowrap",
+    "truncate",
+    "text-ellipsis",
+  ];
+
+  assert.ok(verificationItemClasses.has("min-w-0"));
+  assert.ok(verificationValueClasses.has("break-all"));
+  assert.ok(verificationValueClasses.has("font-mono"));
+  assert.ok(verificationValueClasses.has("text-xs/5"));
+  assert.ok(verificationValueClasses.has("sm:text-sm/6"));
+  for (const className of forbiddenClasses) {
+    assert.ok(!verificationItemClasses.has(className));
+    assert.ok(!verificationValueClasses.has(className));
+  }
 });
 
 test("long German roadmap and Android labels wrap without changing English typography", () => {
