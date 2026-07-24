@@ -242,7 +242,7 @@ test("unavailable public Android content does not expose public download or stor
   const publicContent = JSON.stringify(androidDistributionContent);
 
   assert.doesNotMatch(publicContent, /https:\/\/apk\.secpal\.app/);
-  assert.doesNotMatch(publicContent, new RegExp(androidPlayStoreUrl));
+  assert.ok(!publicContent.includes(androidPlayStoreUrl));
 });
 
 test("available direct downloads reuse the canonical latest alias builders", () => {
