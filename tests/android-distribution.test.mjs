@@ -230,10 +230,10 @@ test("public Android content exposes exactly direct download and public Google P
       content.downloadOptions[1]?.name,
       locale === "de" ? "Play Store" : "Google Play"
     );
-    assert.equal(content.heroPrimary.href, null);
-    assert.equal(content.heroSecondary.href, null);
-    assert.equal(content.downloadOptions[0]?.href, null);
-    assert.equal(content.downloadOptions[1]?.href, null);
+    assert.equal(content.heroPrimary, null);
+    assert.equal(content.heroSecondary, null);
+    assert.ok(!("action" in content.downloadOptions[0]));
+    assert.ok(!("action" in content.downloadOptions[1]));
     assert.ok(!("secondaryLink" in content.downloadOptions[0]));
   }
 });
@@ -251,11 +251,11 @@ test("available direct downloads reuse the canonical latest alias builders", () 
     const directDownload = content.downloadOptions[0];
 
     assert.equal(
-      content.heroPrimary.href,
+      content.heroPrimary?.href,
       buildArtifactUrl(buildLatestArtifactPath())
     );
     assert.equal(
-      directDownload.href,
+      directDownload.action?.href,
       buildArtifactUrl(buildLatestArtifactPath())
     );
     assert.equal(
@@ -270,7 +270,8 @@ test("available direct downloads reuse the canonical latest alias builders", () 
         buildArtifactUrl(buildLatestChecksumPath()),
       ]
     );
-    assert.equal(content.heroSecondary.href, null);
+    assert.equal(content.heroSecondary, null);
+    assert.ok(!("action" in content.downloadOptions[1]));
   }
 });
 
@@ -279,30 +280,32 @@ test("public Google Play links are emitted only for public availability", () => 
     const unavailable = buildAndroidDistributionContent(locale, false, false);
     const available = buildAndroidDistributionContent(locale, false, true);
 
-    assert.equal(unavailable.heroSecondary.href, null);
-    assert.equal(unavailable.downloadOptions[1]?.href, null);
-    assert.equal(available.heroSecondary.href, androidPlayStoreUrl);
-    assert.equal(available.downloadOptions[1]?.href, androidPlayStoreUrl);
+    assert.equal(unavailable.heroSecondary, null);
+    assert.ok(!("action" in unavailable.downloadOptions[1]));
+    assert.equal(available.heroSecondary?.href, androidPlayStoreUrl);
+    assert.equal(
+      available.downloadOptions[1]?.action?.href,
+      androidPlayStoreUrl
+    );
   }
 });
 
-test("public Google Play availability updates all surrounding release copy", () => {
+test("public Google Play availability changes only concise status and real actions", () => {
   const expectations = {
     en: {
       description:
         "Information about the SecPal Android release, direct downloads from secpal.app, and public availability on Google Play.",
-      playSentence: "SecPal is also publicly available on Google Play.",
-      summary: "Publicly available",
-      intro:
-        "Public Android distribution distinguishes between direct download from SecPal and public availability on Google Play.",
+      summary: "Available",
+      intro: "Current and planned distribution paths for SecPal on Android.",
+      cardDescription: "SecPal is also publicly available on Google Play.",
     },
     de: {
       description:
         "Informationen zur Android-Version von SecPal, zum direkten Download über secpal.app und zur öffentlichen Verfügbarkeit im Play Store.",
-      playSentence: "SecPal ist auch öffentlich im Play Store verfügbar.",
-      summary: "Öffentlich verfügbar",
-      intro:
-        "Die öffentliche Android-Verteilung unterscheidet zwischen dem direkten Download über SecPal und der öffentlichen Verfügbarkeit im Play Store.",
+      summary: "Verfügbar",
+      intro: "Aktuelle und geplante Bezugswege für SecPal auf Android.",
+      cardDescription:
+        "SecPal ist zusätzlich öffentlich im Play Store verfügbar.",
     },
   };
 
@@ -316,33 +319,107 @@ test("public Google Play availability updates all surrounding release copy", () 
       const expectation = expectations[locale];
 
       assert.equal(content.description, expectation.description);
-      assert.ok(content.subline.endsWith(expectation.playSentence));
+      assert.ok(!content.subline.includes("Play"));
       assert.equal(content.summaryItems[3]?.value, expectation.summary);
       assert.equal(content.downloadIntro, expectation.intro);
+      assert.equal(
+        content.downloadOptions[1]?.description,
+        expectation.cardDescription
+      );
     }
   }
 });
 
-test("pending Google Play copy preserves the direct-download rollout phase", () => {
+test("hero, summary, and distribution copy follow the concise public hierarchy", () => {
   const expectations = {
     en: {
-      preparing: "A public release on Google Play is planned for later.",
-      available: "A public release on Google Play will follow later.",
+      preparing:
+        "The first SecPal Android release is being prepared for direct download from secpal.app. SecPal remains in an early 0.x development phase.",
+      available:
+        "The current SecPal Android release is available for direct download from secpal.app. SecPal remains in an early 0.x development phase.",
+      distributionLabel: "Distribution",
+      distributionValue: "Direct from secpal.app",
+      playStatus: "Planned",
+      sectionTitle: "Distribution",
+      sectionIntro:
+        "Current and planned distribution paths for SecPal on Android.",
+      directPreparing:
+        "The first public Android release will be provided through secpal.app.",
+      directAvailable:
+        "The current Android release is available directly through secpal.app. Its signature and checksum can be used to verify the package.",
+      playPreparing:
+        "A public release on Google Play is planned as an additional distribution path.",
     },
     de: {
       preparing:
-        "Eine öffentliche Veröffentlichung im Play Store ist für später vorgesehen.",
+        "Die erste Android-Version von SecPal wird für den direkten Download über secpal.app vorbereitet. SecPal befindet sich in einer frühen 0.x-Entwicklungsphase.",
       available:
-        "Eine öffentliche Veröffentlichung im Play Store folgt später.",
+        "Die aktuelle Android-Version von SecPal steht direkt über secpal.app zum Download bereit. SecPal befindet sich weiterhin in einer frühen 0.x-Entwicklungsphase.",
+      distributionLabel: "Bereitstellung",
+      distributionValue: "Direkt über secpal.app",
+      playStatus: "Geplant",
+      sectionTitle: "Bezugswege",
+      sectionIntro: "Aktuelle und geplante Bezugswege für SecPal auf Android.",
+      directPreparing:
+        "Die erste öffentliche Android-Version wird über secpal.app bereitgestellt.",
+      directAvailable:
+        "Die aktuelle Android-Version steht direkt über secpal.app bereit. Signatur und Prüfsumme ermöglichen die Überprüfung des Pakets.",
+      playPreparing:
+        "Eine öffentliche Veröffentlichung im Play Store ist als zusätzlicher Bezugsweg vorgesehen.",
     },
   };
 
   for (const locale of ["en", "de"]) {
     const preparing = buildAndroidDistributionContent(locale, false, false);
     const available = buildAndroidDistributionContent(locale, true, false);
+    const expectation = expectations[locale];
 
-    assert.ok(preparing.subline.endsWith(expectations[locale].preparing));
-    assert.ok(available.subline.endsWith(expectations[locale].available));
+    assert.equal(preparing.subline, expectation.preparing);
+    assert.equal(available.subline, expectation.available);
+    assert.equal(
+      preparing.summaryItems[1]?.label,
+      expectation.distributionLabel
+    );
+    assert.equal(
+      preparing.summaryItems[1]?.value,
+      expectation.distributionValue
+    );
+    assert.equal(preparing.summaryItems[3]?.value, expectation.playStatus);
+    assert.equal(preparing.downloadTitle, expectation.sectionTitle);
+    assert.equal(preparing.downloadIntro, expectation.sectionIntro);
+    assert.equal(
+      preparing.downloadOptions[0]?.description,
+      expectation.directPreparing
+    );
+    assert.equal(
+      available.downloadOptions[0]?.description,
+      expectation.directAvailable
+    );
+    assert.equal(
+      preparing.downloadOptions[1]?.description,
+      expectation.playPreparing
+    );
+  }
+});
+
+test("public actions exist only when their public targets are available", () => {
+  for (const locale of ["en", "de"]) {
+    const unavailable = buildAndroidDistributionContent(locale, false, false);
+    const directOnly = buildAndroidDistributionContent(locale, true, false);
+    const allPublic = buildAndroidDistributionContent(locale, true, true);
+
+    assert.equal(unavailable.heroPrimary, null);
+    assert.equal(unavailable.heroSecondary, null);
+    assert.ok(unavailable.downloadOptions.every((option) => !option.action));
+
+    assert.ok(directOnly.heroPrimary);
+    assert.equal(directOnly.heroSecondary, null);
+    assert.ok(directOnly.downloadOptions[0]?.action);
+    assert.ok(!directOnly.downloadOptions[1]?.action);
+
+    assert.ok(allPublic.heroPrimary);
+    assert.ok(allPublic.heroSecondary);
+    assert.ok(allPublic.downloadOptions.every((option) => option.action));
   }
 });
 
@@ -371,7 +448,33 @@ test("public Android content contains no beta or restricted-testing language", (
   }
 });
 
-test("Android distribution surface conditionally renders accessible public actions", () => {
+test("unavailable public action labels are absent from the content model", () => {
+  const source = readFileSync(
+    new URL("../src/lib/android-distribution.ts", import.meta.url),
+    "utf8"
+  );
+  const removedActionLabels = [
+    "Android-Version in Vorbereitung",
+    "Play Store folgt später",
+    "Android release in preparation",
+    "Google Play release later",
+    "Download in Vorbereitung",
+    "Noch nicht öffentlich verfügbar",
+    "Download in preparation",
+    "Not publicly available yet",
+    "Öffentliche Veröffentlichung später",
+    "Public release later",
+  ];
+
+  for (const label of removedActionLabels) {
+    assert.ok(
+      !source.includes(`"${label}"`),
+      `content model must not contain the action label ${label}`
+    );
+  }
+});
+
+test("Android distribution surface renders only real, accessible public actions", () => {
   const component = readFileSync(
     new URL(
       "../src/components/AndroidDistributionSurface.astro",
@@ -381,9 +484,16 @@ test("Android distribution surface conditionally renders accessible public actio
   );
 
   assert.match(component, /\blg:grid-cols-2\b/);
-  assert.match(component, /aria-disabled="true"/);
-  assert.match(component, /content\.heroPrimary\.href\s*\?/);
-  assert.match(component, /content\.heroSecondary\.href\s*\?/);
+  assert.match(
+    component,
+    /content\.heroPrimary\s*\|\|\s*content\.heroSecondary/
+  );
+  assert.match(component, /option\.action/);
+  assert.match(component, /min-h-\[44px\]/);
+  assert.doesNotMatch(component, /aria-disabled/);
+  assert.doesNotMatch(component, /option\.href/);
+  assert.doesNotMatch(component, /\bmin-h-\[1\.5rem\]\b/);
   assert.match(component, /androidDirectDownloadAvailable\s*\?/);
+  assert.match(component, /locale === "de" \? "break-words" : null/);
   assert.doesNotMatch(component, /content\.betaNotice/);
 });
