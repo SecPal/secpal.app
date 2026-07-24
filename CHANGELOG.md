@@ -61,7 +61,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `LicenseRef-TailwindPlus` is the repo's SPDX reference for Tailwind
   Plus-derived components
 - replaced the repo-local `markdownlint-cli2` pre-commit and preflight path with pinned `markdownlint-cli@0.49.0` usage and removed the stale `cli2` file references from export/licensing metadata
-- expanded the public privacy notice so it now covers the SecPal Android app, beta distribution, Google Play / third-party store context, and app-data deletion contact paths in addition to the website itself
+- refocused the localized privacy notice on the public website, direct download
+  infrastructure, DNS services, local display preference, and email contact;
+  removed product-internal app and beta-processing descriptions; and prevented
+  GitHub links from transmitting the referring SecPal page
 - refocused the public Android landing page on end users: stable and beta are now presented as simple download choices, rollout methods are explained without pretending to be separate APK channels, and the deeper machine-readable endpoints are tucked behind secondary technical details
 - corrected the provider-neutral governance baseline so `AGENTS.md` and the Copilot mirror now advertise the workflow overlay, describe the existing `npm test` suite accurately, track Astro 7 instead of Astro 6, and pin the shared reusable quality workflows plus their `governance-ref` inputs to the reviewed `.github` SHA for reproducible validation
 - refactored `mobile-safe-area` test assertions: extracted complex inline regex literals to named constants and restored the coupled `break-all`+`{line}` assertion so endpoint-line paragraph failures remain diagnosable without weakening test coverage
