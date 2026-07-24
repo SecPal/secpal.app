@@ -7,25 +7,43 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
 <LegalPageShell
   locale="de"
   title="Datenschutz | SecPal"
-  description="Datenschutzhinweise für secpal.app, die SecPal-Android-App, Beta-Verteilungen und direkte E-Mail-Kontakte mit SecPal."
+  description="Datenschutzhinweise für secpal.app, apk.secpal.app und die direkte Kontaktaufnahme mit SecPal."
   canonicalPath="/de/privacy/"
   currentPath="/privacy"
   eyebrow="Rechtliches"
   headline="Datenschutzerklärung"
-  intro="Diese Datenschutzerklärung beschreibt, welche personenbezogenen Daten beim Besuch von secpal.app, bei der Nutzung der SecPal-Android-App, bei Android-Beta-Verteilungen sowie bei direktem E-Mail-Kontakt mit SecPal verarbeitet werden."
+  intro="Diese Datenschutzerklärung betrifft die öffentliche Website secpal.app, die über apk.secpal.app bereitgestellten Downloadressourcen, das Domain Name System (DNS) sowie die direkte Kontaktaufnahme per E-Mail."
   updatedLabel="Stand"
-  updatedAt="28. Juni 2026"
+  updatedAt="24. Juli 2026"
 >
   <section class="space-y-8">
     <div>
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        1. Verantwortlicher
+        1. Geltungsbereich
       </h2>
       <p class="mt-6">
-        Verantwortlich für die Datenverarbeitung auf dieser Website ist:
+        Diese Datenschutzerklärung gilt für die öffentliche Website secpal.app,
+        die über apk.secpal.app bereitgestellten Downloadressourcen, die über
+        Cloudflare bereitgestellten autoritativen DNS-Dienste sowie die direkte
+        Kontaktaufnahme mit SecPal.
       </p>
+      <p class="mt-4">
+        Sie beschreibt nicht die Verarbeitung personenbezogener Daten innerhalb
+        einer installierten oder betriebenen SecPal-Instanz. Für solche
+        Verarbeitungen ist die Stelle verantwortlich, die den Betrieb und die
+        Zwecke der jeweiligen Instanz bestimmt.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        2. Verantwortlicher
+      </h2>
+      <p class="mt-6">Verantwortlicher im Sinne der DSGVO ist:</p>
       <div
         class="mt-4 rounded-2xl border border-gray-200 p-6 dark:border-white/10"
       >
@@ -33,6 +51,7 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
         <p class="mt-2">Holger Schmermbeck</p>
         <p class="mt-2">Enno-Arends-Str. 4</p>
         <p class="mt-2">26571 Juist</p>
+        <p class="mt-2">Deutschland</p>
       </div>
       <p class="mt-4">
         Kontakt per E-Mail:{" "}
@@ -48,119 +67,236 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        2. Zugriffsdaten und Hosting
+        3. Technische Bereitstellung und Hosting
       </h2>
       <p class="mt-6">
-        Beim Aufruf dieser Website werden technisch erforderliche Daten
-        verarbeitet, damit die Seite ausgeliefert und sicher betrieben werden
-        kann.
+        Beim Aufruf der Website oder einer Downloadressource übermittelt der
+        Browser technisch notwendige Verbindungs- und Anfragedaten. Dazu gehören
+        insbesondere die IP-Adresse, der angeforderte Host und die angeforderte
+        Ressource, Verbindungs- und Protokolldaten sowie technisch übermittelte
+        HTTP-Header.
       </p>
-      <ul
-        role="list"
-        class="mt-8 max-w-xl space-y-6 text-gray-600 dark:text-gray-400"
-      >
-        <li class="flex gap-x-3">
-          <span
-            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
-          ></span>
-          <span
-            ><strong class="font-semibold text-gray-900 dark:text-white"
-              >Verarbeitete Daten:</strong
-            > IP-Adresse, Datum und Uhrzeit des Abrufs, angeforderte URL, Referrer,
-            Browsertyp und Betriebssystem.</span
-          >
-        </li>
-        <li class="flex gap-x-3">
-          <span
-            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
-          ></span>
-          <span
-            ><strong class="font-semibold text-gray-900 dark:text-white"
-              >Zweck:</strong
-            > Bereitstellung der Website, Fehleranalyse, Missbrauchserkennung und
-            Absicherung des technischen Betriebs.</span
-          >
-        </li>
-        <li class="flex gap-x-3">
-          <span
-            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
-          ></span>
-          <span
-            ><strong class="font-semibold text-gray-900 dark:text-white"
-              >Rechtsgrundlage:</strong
-            > Art. 6 Abs. 1 lit. f DSGVO auf Basis des berechtigten Interesses an
-            einem sicheren und funktionsfähigen Webauftritt.</span
-          >
-        </li>
-      </ul>
-      <p class="mt-8">Das Hosting dieser Website erfolgt bei Hetzner.</p>
+      <p class="mt-4">
+        Diese Daten werden für die Dauer der Verbindung flüchtig verarbeitet,
+        damit die angeforderte Website oder Datei übertragen werden kann. Das
+        Hosting von secpal.app und apk.secpal.app erfolgt über die Hetzner
+        Online GmbH.
+      </p>
+      <p class="mt-4">
+        Zwecke der Verarbeitung sind die Auslieferung der angeforderten Inhalte,
+        ein stabiler und sicherer Transport sowie der Betrieb der
+        Hostinginfrastruktur. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.
+        Das berechtigte Interesse liegt in der sicheren und funktionsfähigen
+        Bereitstellung dieser Inhalte.
+      </p>
     </div>
 
     <div>
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        3. Android-App, Beta-Verteilungen und Update-Bereitstellung
+        4. Keine reguläre Zugriffsprotokollierung
       </h2>
       <p class="mt-6">
-        SecPal wird auch als native Android-App mit dem Paketnamen
-        {" "}
-        <strong class="font-semibold text-gray-900 dark:text-white"
-          >app.secpal</strong
-        >
-        {" "}
-        bereitgestellt. Die Verteilung erfolgt über den Google Play Store oder über
-        SecPal-Download-URLs. Unabhängig vom Verteilungsweg bleibt die signierte App
-        identisch.
+        SecPal führt für secpal.app und apk.secpal.app keine regulären
+        Webserver-Zugriffs- oder Fehlerprotokolle. Einzelne Seiten- und
+        Downloadabrufe werden von SecPal nicht dauerhaft protokolliert.
       </p>
+      <p class="mt-4">
+        SecPal speichert dabei keine individuellen IP-Adressen, User-Agents oder
+        Crawlerinformationen und erstellt keine Besucher-, Referrer-, Länder-,
+        Geräte- oder Downloadstatistiken. Die flüchtige technische Verarbeitung
+        während der Verbindung bleibt davon unberührt. Unabhängig von der durch
+        SecPal deaktivierten regulären Protokollierung können die eingesetzten
+        Dienstleister technisch erforderliche Betriebs- und
+        Sicherheitsverarbeitungen nach den jeweils geltenden vertraglichen und
+        gesetzlichen Rahmenbedingungen durchführen.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        5. Domain Name System (DNS)
+      </h2>
+      <p class="mt-6">
+        Die autoritativen DNS-Dienste für secpal.app werden über Cloudflare
+        bereitgestellt. Die Web-DNS-Einträge sind DNS-only und beantworten
+        DNS-Abfragen mit der tatsächlichen Hetzner-Origin-IP. Der reguläre HTTP-
+        und HTTPS-Verkehr läuft direkt zu Hetzner.
+      </p>
+      <p class="mt-4">
+        Cloudflare wird für diese Hosts nicht als Reverse Proxy, CDN, WAF oder
+        HTTP-Analyseplattform eingesetzt. Cloudflare erhält daher nicht den
+        regulären Seiten- oder Downloadverkehr.
+      </p>
+      <p class="mt-4">
+        Im Rahmen der DNS-Auflösung kann Cloudflare technisch notwendige
+        DNS-Abfragedaten verarbeiten. Zweck ist die zuverlässige und sichere
+        Erreichbarkeit der Domains. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f
+        DSGVO; das berechtigte Interesse liegt in einer stabilen und sicheren
+        Domainauflösung.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        6. Öffentliche Downloadressourcen
+      </h2>
+      <p class="mt-6">
+        apk.secpal.app kann APK-Dateien, Manifeste, Veröffentlichungsmetadaten
+        und Prüfsummen bereitstellen. Der Abruf erfordert dieselbe flüchtige
+        technische Verbindungsverarbeitung wie ein normaler Websiteabruf.
+      </p>
+      <p class="mt-4">
+        SecPal führt keine Downloadprotokolle oder individuellen Downloadzähler.
+        Aus dem Abruf erhält secpal.app keine Informationen über die spätere
+        Installation oder Verwendung der heruntergeladenen Anwendung.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        7. Lokale Darstellungspräferenz
+      </h2>
+      <p class="mt-6">
+        Wenn eine Person den Hell- oder Dunkelmodus manuell auswählt, speichert
+        die Website den Wert{" "}
+        <code class="break-all">light</code> oder{" "}
+        <code class="break-all">dark</code> unter dem Schlüssel{" "}
+        <code class="break-all">theme</code> im lokalen Speicher des Browsers. Ohne
+        eine manuelle Auswahl orientiert sich die Darstellung an der Systemeinstellung.
+      </p>
+      <p class="mt-4">
+        Die Einstellung verbleibt im Browser und wird weder an SecPal noch an
+        einen externen Anbieter übermittelt. Sie bleibt gespeichert, bis sie
+        geändert oder der lokale Browserspeicher gelöscht wird.
+      </p>
+      <p class="mt-4">
+        Die Speicherung ist erforderlich, um den ausdrücklich gewählten
+        Darstellungsmodus bei späteren Seitenaufrufen bereitzustellen. Sie
+        erfolgt auf Grundlage von § 25 Abs. 2 Nr. 2 TDDDG und erfordert keine
+        Einwilligung.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        8. Keine Webanalyse oder Besucherprofilbildung
+      </h2>
+      <p class="mt-6">
+        SecPal setzt auf secpal.app und apk.secpal.app keine Webanalyse-,
+        Marketing- oder Nutzertrackingdienste ein. Es werden keine
+        Besucherprofile erstellt und keine optionalen Analyse- oder
+        Marketing-Cookies gesetzt.
+      </p>
+      <p class="mt-4">
+        Da keine optionalen Trackingtechnologien verwendet werden, ist kein
+        Einwilligungsbanner für solche Zwecke eingebunden.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        9. Kontaktaufnahme per E-Mail
+      </h2>
+      <p class="mt-6">
+        Die E-Mail-Kommunikation wird technisch über Uberspace bereitgestellt.
+        Uberspace wird von Jonas Pasche in Mainz betrieben.
+      </p>
+      <p class="mt-4">
+        Verarbeitet werden können die Absenderadresse, der Name, falls
+        angegeben, der Betreff, der Nachrichteninhalt, der
+        Kommunikationszeitpunkt, Anhänge sowie technisch notwendige
+        E-Mail-Metadaten. Zweck ist ausschließlich die Bearbeitung der Anfrage
+        und die dafür erforderliche Kommunikation.
+      </p>
+      <p class="mt-4">
+        Art. 6 Abs. 1 lit. b DSGVO gilt, wenn eine Person durch ihre Anfrage
+        vorvertragliche Maßnahmen anfordert oder die Kommunikation einen Vertrag
+        betrifft. In sonstigen Fällen gilt Art. 6 Abs. 1 lit. f DSGVO. Das
+        berechtigte Interesse liegt in der Bearbeitung eingehender Anfragen und
+        Sicherheitsmeldungen.
+      </p>
+      <p class="mt-4">
+        Nach abschließender Bearbeitung löscht SecPal die Nachricht. Sie wird
+        nicht für Marketing, Newsletter, Besucheranalyse oder CRM-Profile
+        weiterverwendet. Zwingende gesetzliche Aufbewahrungspflichten bleiben
+        vorbehalten. Technisch notwendige Vorgänge in Sicherungs-, Zustell- oder
+        Warteschlangensystemen des E-Mail-Anbieters können davon abweichen.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        10. Externe Links
+      </h2>
+      <p class="mt-6">
+        Diese Website enthält Links zu externen Angeboten, insbesondere zu
+        GitHub. Inhalte dieser Anbieter werden nicht in secpal.app eingebettet.
+        Beim bloßen Aufruf der Website wird daher keine Verbindung zu GitHub
+        hergestellt.
+      </p>
+      <p class="mt-4">
+        Erst beim Auswählen eines externen Links verlässt die Person secpal.app,
+        und der Browser stellt eine Verbindung zum jeweiligen Anbieter her. Für
+        die Verarbeitung auf dem externen Angebot ist der jeweilige Anbieter
+        verantwortlich.
+      </p>
+      <p class="mt-4">
+        Bei Links zum SecPal-Auftritt auf GitHub unterdrückt SecPal die
+        Übermittlung der zuvor besuchten Seite als HTTP-Referrer.
+      </p>
+    </div>
+
+    <div>
+      <h2
+        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      >
+        11. Empfänger und Dienstleister
+      </h2>
       <ul
         role="list"
         class="mt-8 max-w-3xl space-y-6 text-gray-600 dark:text-gray-400"
       >
-        <li class="flex gap-x-3">
-          <span
-            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
-          ></span>
-          <span
-            ><strong class="font-semibold text-gray-900 dark:text-white"
-              >Verarbeitete Daten:</strong
-            > je nach Nutzung insbesondere Kontodaten, von Nutzerinnen und Nutzern
-            eingegebene Einsatz- und Organisationsdaten, technische Geräte- und App-Daten,
-            Protokolldaten, Version- und Update-Informationen sowie bei Managed-Device-
-            oder Device-Owner-Szenarien erforderliche Provisioning- oder Bootstrap-Informationen.</span
+        <li>
+          <strong class="font-semibold text-gray-900 dark:text-white"
+            >Hetzner Online GmbH:</strong
           >
+          {" "}
+          Hosting und Auslieferung der Website und der Downloadressourcen.
         </li>
-        <li class="flex gap-x-3">
-          <span
-            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
-          ></span>
-          <span
-            ><strong class="font-semibold text-gray-900 dark:text-white"
-              >Zweck:</strong
-            > Bereitstellung der App, Authentifizierung, Bereitstellung von Funktionen,
-            sichere technische Auslieferung von Installations- und Update-Informationen,
-            Fehleranalyse, Missbrauchserkennung und Systemsicherheit.</span
+        <li>
+          <strong class="font-semibold text-gray-900 dark:text-white"
+            >Cloudflare, Inc.:</strong
           >
+          {" "}
+          autoritative DNS-Dienste. Wegen der DNS-only-Konfiguration erhält Cloudflare
+          nicht den regulären HTTP- oder HTTPS-Verkehr.
         </li>
-        <li class="flex gap-x-3">
-          <span
-            class="mt-1 size-2 flex-none rounded-full bg-indigo-600 dark:bg-indigo-400"
-          ></span>
-          <span
-            ><strong class="font-semibold text-gray-900 dark:text-white"
-              >Rechtsgrundlagen:</strong
-            > Art. 6 Abs. 1 lit. b DSGVO für die Bereitstellung vereinbarter App-Funktionen
-            und vorvertraglicher oder vertraglicher Leistungen; Art. 6 Abs. 1 lit.
-            f DSGVO für den sicheren Betrieb, die Abwehr von Missbrauch, die technische
-            Integrität der Verteilung sowie die Stabilität der verbundenen Systeme.</span
+        <li>
+          <strong class="font-semibold text-gray-900 dark:text-white"
+            >Uberspace, betrieben von Jonas Pasche:</strong
           >
+          {" "}
+          technische E-Mail-Kommunikation.
         </li>
       </ul>
-      <p class="mt-8">
-        Für geschlossene oder offene Beta-Phasen gelten dieselben Grundsätze.
-        Beta-Versionen können zusätzlich technische Diagnosedaten und
-        Fehlerkontexte verarbeiten, soweit dies zur Stabilisierung und sicheren
-        Bereitstellung der Vorabversion erforderlich ist.
+      <p class="mt-6">
+        GitHub ist beim bloßen Seitenaufruf kein Empfänger personenbezogener
+        Daten. Eine Verbindung entsteht erst durch das Auswählen eines externen
+        GitHub-Links.
       </p>
     </div>
 
@@ -168,26 +304,19 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        4. Google Play Store und Drittplattformen
+        12. Drittlandübermittlung bei Cloudflare
       </h2>
       <p class="mt-6">
-        Wenn die SecPal-Android-App über den Google Play Store oder andere
-        Drittplattformen bereitgestellt wird, können diese Plattformen im
-        Zusammenhang mit Listing, Download, Installation, Lizenzierung,
-        Abrechnung, Update-Auslieferung oder Missbrauchsprävention eigene
-        personenbezogene Daten verarbeiten.
+        Cloudflare ist ein Anbieter mit Sitz in den USA und globaler
+        Infrastruktur. Im Rahmen der DNS-Dienste kann eine Verarbeitung
+        außerhalb des Europäischen Wirtschaftsraums nicht vollständig
+        ausgeschlossen werden.
       </p>
       <p class="mt-4">
-        Diese Verarbeitungen erfolgen grundsätzlich in der Verantwortlichkeit
-        der jeweiligen Plattformbetreiber. Für die Datenverarbeitung durch
-        Google gelten ergänzend die Datenschutz- und Nutzungsbedingungen von
-        Google.
-      </p>
-      <p class="mt-4">
-        Soweit wir über solche Plattformen Beta- oder Release-Programme
-        organisieren, verarbeiten wir die dort erforderlichen Informationen nur,
-        soweit dies für Bereitstellung, Support, Release-Kommunikation oder
-        Sicherheit notwendig ist.
+        Für Übermittlungen in die USA kann das EU-US Data Privacy Framework
+        genutzt werden, solange die Zertifizierung wirksam ist. Ergänzend
+        beziehungsweise für andere relevante Drittlandübermittlungen sieht
+        Cloudflare Standardvertragsklauseln vor.
       </p>
     </div>
 
@@ -195,17 +324,17 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        5. Kontaktaufnahme per E-Mail
+        13. Bereitstellung der Daten
       </h2>
       <p class="mt-6">
-        Wenn Sie per E-Mail Kontakt aufnehmen, verarbeiten wir die von Ihnen
-        übermittelten Angaben, um Ihre Anfrage zu beantworten und die weitere
-        Kommunikation zu dokumentieren.
+        Die Verarbeitung der Verbindungsdaten ist technisch erforderlich, um die
+        Website oder Downloadressourcen auszuliefern. Ohne diese Verarbeitung
+        kann der angeforderte Inhalt nicht übertragen werden.
       </p>
       <p class="mt-4">
-        Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit es um
-        vorvertragliche Maßnahmen oder die Bearbeitung einer konkreten Anfrage
-        geht, andernfalls Art. 6 Abs. 1 lit. f DSGVO.
+        Die Kontaktaufnahme per E-Mail ist freiwillig. Ohne eine erreichbare
+        Absenderadresse und ausreichende Angaben kann eine Anfrage
+        möglicherweise nicht beantwortet werden.
       </p>
     </div>
 
@@ -213,12 +342,19 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        6. Keine Cookies und kein Tracking auf dieser Website
+        14. Speicherdauer
       </h2>
       <p class="mt-6">
-        Auf dieser Website werden derzeit keine Analyse-, Tracking- oder
-        Marketing-Cookies eingesetzt. Es wird auch kein Cookie-Banner für
-        optionale Tracking-Zwecke verwendet.
+        SecPal speichert keine individuellen Website- oder Downloadzugriffe in
+        regulären Webserverlogs. Die Theme-Einstellung bleibt ausschließlich im
+        Browser, bis sie geändert oder der lokale Browserspeicher gelöscht wird.
+      </p>
+      <p class="mt-4">
+        E-Mails werden nach abschließender Bearbeitung gelöscht, sofern keine
+        gesetzliche Pflicht oder ein konkreter rechtlicher Grund für eine
+        längere Aufbewahrung besteht. Für technisch erforderliche Verarbeitungen
+        der Dienstleister gelten deren jeweilige betriebliche und rechtliche
+        Anforderungen; SecPal nennt hierfür keine unbelegte feste Frist.
       </p>
     </div>
 
@@ -226,51 +362,37 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        7. Speicherdauer
+        15. Rechte betroffener Personen
       </h2>
       <p class="mt-6">
-        Server-Logdaten werden nur so lange gespeichert, wie dies zur
-        technischen Bereitstellung, Fehleranalyse und Sicherheitsüberwachung
-        erforderlich ist.
+        Soweit die jeweiligen gesetzlichen Voraussetzungen vorliegen, bestehen
+        Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der
+        Verarbeitung und Datenübertragbarkeit. Gegen Verarbeitungen auf
+        Grundlage von Art. 6 Abs. 1 lit. f DSGVO besteht außerdem ein
+        Widerspruchsrecht.
       </p>
       <p class="mt-4">
-        Daten aus E-Mails werden gelöscht, sobald die jeweilige Anfrage
-        abgeschlossen ist, sofern keine gesetzlichen Aufbewahrungspflichten
-        entgegenstehen.
+        Betroffene Personen können sich zudem bei einer
+        Datenschutzaufsichtsbehörde beschweren. Zuständig ist insbesondere:
       </p>
-      <p class="mt-4">
-        Daten aus der Nutzung der Android-App oder aus Beta-Verteilungen werden
-        nur so lange gespeichert, wie dies für die Bereitstellung der jeweiligen
-        Funktion, die Sicherheitsüberwachung, Support, Fehleranalyse,
-        Release-Verwaltung oder gesetzliche Aufbewahrungspflichten erforderlich
-        ist.
-      </p>
-    </div>
-
-    <div>
-      <h2
-        class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
+      <div
+        class="mt-4 rounded-2xl border border-gray-200 p-6 dark:border-white/10"
       >
-        8. Rechte der betroffenen Personen
-      </h2>
-      <p class="mt-6">
-        Ihnen stehen nach Maßgabe der DSGVO insbesondere Rechte auf Auskunft,
-        Berichtigung, Löschung, Einschränkung der Verarbeitung,
-        Datenübertragbarkeit sowie Widerspruch gegen die Verarbeitung zu.
-      </p>
+        <p class="font-semibold text-gray-900 dark:text-white">
+          Der Landesbeauftragte für den Datenschutz Niedersachsen
+        </p>
+        <p class="mt-2">Prinzenstraße 5</p>
+        <p class="mt-2">30159 Hannover</p>
+      </div>
       <p class="mt-4">
-        Außerdem haben Sie das Recht, sich bei einer Datenschutzaufsichtsbehörde
-        zu beschweren.
-      </p>
-      <p class="mt-4">
-        Wenn Sie ein Konto für SecPal nutzen oder personenbezogene Daten aus der
-        App löschen lassen möchten, können Sie sich unter{" "}
+        Anfragen zu Betroffenenrechten können an{" "}
         <a
           href="mailto:hello@secpal.app"
           class="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
           >hello@secpal.app</a
         >
-        {" "}an uns wenden.
+        {" "}
+        gerichtet werden.
       </p>
     </div>
 
@@ -278,12 +400,12 @@ import LegalPageShell from "../../components/LegalPageShell.astro";
       <h2
         class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white"
       >
-        9. Änderungen dieser Datenschutzerklärung
+        16. Änderungen der Datenschutzerklärung
       </h2>
       <p class="mt-6">
-        Wir passen diese Datenschutzerklärung an, wenn sich die Website, die
-        Android-App, die tatsächlichen Datenverarbeitungen, die Beta- oder
-        Release-Prozesse oder die rechtlichen Anforderungen ändern.
+        SecPal aktualisiert diese Datenschutzerklärung, wenn sich die Website,
+        die Download-Infrastruktur, die eingesetzten Dienstleister oder die
+        rechtlichen Anforderungen ändern.
       </p>
     </div>
   </section>
