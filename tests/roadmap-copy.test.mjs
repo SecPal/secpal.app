@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import { en } from "../src/i18n/en.ts";
@@ -73,4 +74,16 @@ test("roadmap reflects the current shift-planning and OWKS priorities", () => {
     !germanActiveNames.includes("Android-App"),
     "expected German Android app work to be removed from the active roadmap phases"
   );
+});
+
+test("roadmap has no retired changelog call to action", () => {
+  const roadmapComponent = readFileSync(
+    new URL("../src/components/Roadmap.astro", import.meta.url),
+    "utf8"
+  );
+
+  assert.ok(!("changelog" in en.roadmap));
+  assert.ok(!("changelog" in de.roadmap));
+  assert.doesNotMatch(roadmapComponent, /changelog\.secpal\.app/i);
+  assert.doesNotMatch(roadmapComponent, /r\.changelog/);
 });

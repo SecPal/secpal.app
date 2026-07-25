@@ -188,13 +188,6 @@ export const de: Translations = {
         },
       ],
     },
-    changelog: {
-      label: "Was ausgeliefert wurde",
-      description:
-        "Jedes ausgelieferte Feature und jeden Fix dokumentiert changelog.secpal.app — die vollständige Versionshistorie über API, Web-App und Android.",
-      link: "Zum Changelog",
-      href: "https://changelog.secpal.app",
-    },
   },
   footer: {
     rights: "",

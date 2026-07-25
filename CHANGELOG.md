@@ -24,7 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - added a public roadmap page at `/roadmap/`, localized as `/en/roadmap/` and `/de/roadmap/`
 - documented current roadmap focus (shift planning), the next planned step (online guard tour system), and longer-term direction (contract management and service instruction configurator)
 - added a Node regression test that keeps the English and German roadmap copy aligned with the current shift-planning focus and the next OWKS milestone
-- linked the roadmap page to the full changelog at `changelog.secpal.app`
 - added roadmap navigation link to desktop and mobile menus, and roadmap paths to the sitemap
 - added the public Android distribution surface on `secpal.app/android`, including localized human-facing landing pages, stable machine-readable latest and versioned release JSON endpoints, navigation/sitemap discovery, and explicit `apk.secpal.app` host documentation for the single-package Android rollout architecture
 - added a concrete Android release metadata template endpoint at `apk.secpal.app/android/releases/{versionCode}/metadata.json` plus shared versioned metadata helpers, so release automation and documentation can reference one stable machine-readable contract before APK hosting is wired up
@@ -32,9 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- extended the localized privacy notice to cover changelog.secpal.app under the
-  same confirmed Hetzner hosting, Cloudflare DNS-only, disabled logging,
-  local-theme, and no-tracking conditions as the other public SecPal hosts
+- removed retired standalone changelog links, privacy scope, domain-policy
+  allowance, and active documentation before release
 - refined the public Android page with a content-sized desktop hero, calmer
   mobile signing-fingerprint typography, and a cooler early-release notice
 - made direct SecPal downloads the primary public Android distribution path,

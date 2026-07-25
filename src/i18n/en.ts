@@ -186,13 +186,6 @@ export const en = {
         },
       ],
     },
-    changelog: {
-      label: "What has shipped",
-      description:
-        "Every released feature and fix is documented at changelog.secpal.app — the full history of what has shipped across API, web app, and Android.",
-      link: "Read the changelog",
-      href: "https://changelog.secpal.app",
-    },
   },
   footer: {
     rights: "",
