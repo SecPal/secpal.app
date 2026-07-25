@@ -32,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- extended the localized privacy notice to cover changelog.secpal.app under the
+  same confirmed Hetzner hosting, Cloudflare DNS-only, disabled logging,
+  local-theme, and no-tracking conditions as the other public SecPal hosts
 - refined the public Android page with a content-sized desktop hero, calmer
   mobile signing-fingerprint typography, and a cooler early-release notice
 - made direct SecPal downloads the primary public Android distribution path,
