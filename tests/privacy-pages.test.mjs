@@ -22,25 +22,25 @@ const compactPages = Object.fromEntries(
 const expectedShellProps = {
   de: [
     'title="Datenschutz | SecPal"',
-    'description="Datenschutzhinweise für secpal.app, apk.secpal.app und die direkte Kontaktaufnahme mit SecPal."',
+    'description="Datenschutzhinweise für secpal.app, changelog.secpal.app, apk.secpal.app und die direkte Kontaktaufnahme mit SecPal."',
     'canonicalPath="/de/privacy/"',
     'currentPath="/privacy"',
     'eyebrow="Rechtliches"',
     'headline="Datenschutzerklärung"',
-    'intro="Diese Datenschutzerklärung betrifft die öffentliche Website secpal.app, die über apk.secpal.app bereitgestellten Downloadressourcen, das Domain Name System (DNS) sowie die direkte Kontaktaufnahme per E-Mail."',
+    'intro="Diese Datenschutzerklärung betrifft die öffentlichen Websites secpal.app und changelog.secpal.app, die über apk.secpal.app bereitgestellten Downloadressourcen, das Domain Name System (DNS) sowie die direkte Kontaktaufnahme per E-Mail."',
     'updatedLabel="Stand"',
-    'updatedAt="24. Juli 2026"',
+    'updatedAt="25. Juli 2026"',
   ],
   en: [
     'title="Privacy Notice | SecPal"',
-    'description="Privacy notice for secpal.app, apk.secpal.app, and direct contact with SecPal."',
+    'description="Privacy notice for secpal.app, changelog.secpal.app, apk.secpal.app, and direct contact with SecPal."',
     'canonicalPath="/en/privacy/"',
     'currentPath="/privacy"',
     'eyebrow="Legal"',
     'headline="Privacy Notice"',
-    'intro="This privacy notice concerns the public secpal.app website, download resources provided through apk.secpal.app, the Domain Name System (DNS), and direct contact by email."',
+    'intro="This privacy notice concerns the public secpal.app and changelog.secpal.app websites, download resources provided through apk.secpal.app, the Domain Name System (DNS), and direct contact by email."',
     'updatedLabel="Last updated"',
-    'updatedAt="July 24, 2026"',
+    'updatedAt="July 25, 2026"',
   ],
 };
 
@@ -102,7 +102,12 @@ test("localized privacy pages retain their shell metadata and aligned sections",
   assert.deepEqual(extractSectionNames(pages.en), expectedSections.en);
 });
 
-test("the formal scope includes authoritative DNS services", () => {
+test("the formal scope covers all public hosts and authoritative DNS services", () => {
+  for (const source of Object.values(pages)) {
+    assert.match(source, /secpal\.app/);
+    assert.match(source, /changelog\.secpal\.app/);
+    assert.match(source, /apk\.secpal\.app/);
+  }
   assert.match(
     compactPages.de,
     /<h2[^>]*> 1\. Geltungsbereich <\/h2> <p class="mt-6"> [^<]*autoritativen DNS-Dienste[^<]*<\/p>/
@@ -141,8 +146,14 @@ test("the controller is identified with SecPal before Holger Schmermbeck", () =>
 });
 
 test("hosting, transient delivery, and disabled regular logging are precise", () => {
-  assert.match(compactPages.de, /Hetzner Online GmbH/);
-  assert.match(compactPages.en, /Hetzner Online GmbH/);
+  assert.match(
+    compactPages.de,
+    /Hosting von secpal\.app, changelog\.secpal\.app und apk\.secpal\.app erfolgt über die Hetzner Online GmbH/
+  );
+  assert.match(
+    compactPages.en,
+    /secpal\.app, changelog\.secpal\.app, and apk\.secpal\.app are hosted through Hetzner Online GmbH/
+  );
   assert.match(compactPages.de, /flüchtig|Dauer der Verbindung/);
   assert.match(compactPages.en, /transient|duration of the connection/);
   assert.match(compactPages.de, /IP-Adresse/);
@@ -160,6 +171,14 @@ test("hosting, transient delivery, and disabled regular logging are precise", ()
     /keine regulären Webserver-Zugriffs- oder Fehlerprotokolle/
   );
   assert.match(compactPages.en, /no regular web server access or error logs/);
+  assert.match(
+    compactPages.de,
+    /für secpal\.app, changelog\.secpal\.app und apk\.secpal\.app keine regulären/
+  );
+  assert.match(
+    compactPages.en,
+    /for secpal\.app, changelog\.secpal\.app, and apk\.secpal\.app/
+  );
   assert.match(compactPages.de, /Art\. 6 Abs\. 1 lit\. f DSGVO/);
   assert.match(compactPages.en, /Article 6\(1\)\(f\) GDPR/);
   assert.match(
@@ -181,6 +200,7 @@ test("Cloudflare is limited to authoritative DNS and transfer safeguards", () =>
     assert.match(source, /Cloudflare/);
     assert.match(source, /DNS-only/);
     assert.match(source, /Hetzner/);
+    assert.match(source, /changelog\.secpal\.app/);
     assert.match(source, /Reverse Proxy/i);
     assert.match(source, /\bWAF\b/);
     assert.match(source, /Data Privacy Framework/);
@@ -260,13 +280,15 @@ test("email processing and deletion are documented for Uberspace", () => {
 });
 
 test("the local theme preference is the only documented browser storage", () => {
-  for (const source of Object.values(pages)) {
-    assert.match(source, /<code[^>]*>theme<\/code>/);
-    assert.match(source, /<code[^>]*>light<\/code>/);
-    assert.match(source, /<code[^>]*>dark<\/code>/);
+  for (const source of Object.values(compactPages)) {
+    assert.match(source, /<code[^>]*>theme<\/code\s*>/);
+    assert.match(source, /<code[^>]*>light<\/code\s*>/);
+    assert.match(source, /<code[^>]*>dark<\/code\s*>/);
   }
   assert.match(compactPages.de, /lokalen Speicher des Browsers/);
   assert.match(compactPages.en, /browser's local storage/);
+  assert.match(compactPages.de, /secpal\.app und changelog\.secpal\.app/);
+  assert.match(compactPages.en, /secpal\.app and changelog\.secpal\.app/);
   assert.match(compactPages.de, /§ 25 Abs\. 2 Nr\. 2 TDDDG/);
   assert.match(compactPages.en, /Section 25\(2\)\(2\) TDDDG/);
   assert.match(
@@ -295,6 +317,12 @@ test("the pages exclude web analytics, tracking, and visitor profiles", () => {
     /keine optionalen Analyse- oder Marketing-Cookies/
   );
   assert.match(compactPages.en, /no optional analytics or marketing cookies/);
+  for (const source of Object.values(compactPages)) {
+    assert.match(
+      source,
+      /secpal\.app, changelog\.secpal\.app und apk\.secpal\.app|secpal\.app, changelog\.secpal\.app, and apk\.secpal\.app/
+    );
+  }
 });
 
 test("external GitHub navigation is click-only and suppresses the referrer", () => {
@@ -302,12 +330,9 @@ test("external GitHub navigation is click-only and suppresses the referrer", () 
   assert.match(compactPages.en, /external services/);
   assert.match(
     compactPages.de,
-    /Inhalte dieser Anbieter werden nicht in secpal\.app eingebettet/
+    /Inhalte dieser Anbieter werden nicht eingebettet/
   );
-  assert.match(
-    compactPages.en,
-    /Content from these providers is not embedded in secpal\.app/
-  );
+  assert.match(compactPages.en, /Content from these providers is not embedded/);
   assert.match(compactPages.de, /Erst beim Auswählen eines externen Links/);
   assert.match(compactPages.en, /Only when a person selects an external link/);
   assert.match(compactPages.de, /jeweilige Anbieter verantwortlich/);
