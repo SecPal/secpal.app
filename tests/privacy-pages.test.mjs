@@ -103,18 +103,13 @@ test("localized privacy pages retain their shell metadata and aligned sections",
 });
 
 test("the formal scope covers all public hosts and authoritative DNS services", () => {
-  for (const source of Object.values(pages)) {
-    assert.match(source, /secpal\.app/);
-    assert.match(source, /changelog\.secpal\.app/);
-    assert.match(source, /apk\.secpal\.app/);
-  }
   assert.match(
     compactPages.de,
-    /<h2[^>]*> 1\. Geltungsbereich <\/h2> <p class="mt-6"> [^<]*autoritativen DNS-Dienste[^<]*<\/p>/
+    /<h2[^>]*> 1\. Geltungsbereich <\/h2> <p class="mt-6"> [^<]*secpal\.app[^<]*changelog\.secpal\.app[^<]*apk\.secpal\.app[^<]*autoritativen DNS-Dienste[^<]*<\/p>/
   );
   assert.match(
     compactPages.en,
-    /<h2[^>]*> 1\. Scope <\/h2> <p class="mt-6"> [^<]*authoritative DNS services[^<]*<\/p>/
+    /<h2[^>]*> 1\. Scope <\/h2> <p class="mt-6"> [^<]*secpal\.app[^<]*changelog\.secpal\.app[^<]*apk\.secpal\.app[^<]*authoritative DNS services[^<]*<\/p>/
   );
 });
 
