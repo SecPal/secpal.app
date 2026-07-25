@@ -32,7 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - removed retired standalone changelog links, privacy scope, domain-policy
-  allowance, and active documentation before release
+  allowance, and active documentation before release, and hardened the domain
+  check against mixed allowed, forbidden, and retired host references
 - refined the public Android page with a content-sized desktop hero, calmer
   mobile signing-fingerprint typography, and a cooler early-release notice
 - made direct SecPal downloads the primary public Android distribution path,
