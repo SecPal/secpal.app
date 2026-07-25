@@ -16,10 +16,9 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 echo -e "${BLUE}=== Domain Policy Check ===${NC}"
-echo "Allowed: secpal.app, www.secpal.app, changelog.secpal.app, apk.secpal.app, secpal.dev"
+echo "Allowed: secpal.app, www.secpal.app, apk.secpal.app, secpal.dev"
 echo "Active web hosts: api.secpal.dev, app.secpal.dev"
 echo "Android artifact host: apk.secpal.app"
-echo "Changelog site: changelog.secpal.app"
 echo "Identifier-only: app.secpal (Android application ID)"
 echo "Deprecated web hosts: api.secpal.app"
 echo "Forbidden: secpal.com, secpal.org, secpal.net, secpal.io, secpal.example, ANY other"
@@ -49,13 +48,21 @@ matches=$(grep -r -n -i -E "secpal\.[A-Za-z0-9][A-Za-z0-9.-]*" \
     grep -v -- '- "secpal\.' | \
     grep -v -- '^[[:space:]]*- \[' || true)
 
-# Allowlist approach: flag any secpal.* domain not matching an approved pattern.
-# Approved or temporarily tolerated here: secpal.app, www.secpal.app, secpal.dev (including
-# api/app subdomains), apk.secpal.app, and deprecated-but-allowed api.secpal.app.
-# This catches unknown domains (e.g. secpal.xyz) that a denylist-only check would miss.
-violations=$(printf '%s\n' "$matches" | \
-    grep -Evi '(^|[^A-Za-z0-9.-])secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])secpal\.app\.git($|[^A-Za-z0-9._-]|\.$)|(^|[^A-Za-z0-9.-])www\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])changelog\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])apk\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])(\*\.|\.)?([A-Za-z0-9-]+\.)*secpal\.dev($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)|(^|[^A-Za-z0-9.-])api\.secpal\.app($|[^A-Za-z0-9._-]|\.[^A-Za-z0-9_-]|\.$)' |
-    grep -Ei 'secpal\.' || true)
+# Extract each SecPal domain separately so an allowed host cannot hide a
+# forbidden host elsewhere on the same line.
+domains=$(printf '%s\n' "$matches" | \
+    grep -Eio '([*A-Za-z0-9-]+\.)*secpal\.[A-Za-z0-9][A-Za-z0-9.-]*' || true)
+
+# Allowlist approach: flag any extracted domain not matching an approved pattern.
+# Approved or temporarily tolerated here: secpal.app, www.secpal.app, secpal.dev
+# (including api/app subdomains), apk.secpal.app, the app.secpal Android
+# identifier, and deprecated-but-allowed api.secpal.app.
+violations=$(printf '%s\n' "$domains" | \
+    grep -Evi '^(secpal\.app(\.git)?|www\.secpal\.app|apk\.secpal\.app|(\*\.)?([A-Za-z0-9-]+\.)*secpal\.dev|api\.secpal\.app|app\.secpal)\.?$' |
+    grep -Evi '^changelog\.secpal\.app\.?$' || true)
+
+retired_web_hosts=$(printf '%s\n' "$domains" | \
+    grep -Ei '^changelog\.secpal\.app\.?$' || true)
 
 deprecated_web_hosts=$(printf '%s\n' "$matches" | \
     grep -Ei 'api\.secpal\.app' | \
@@ -85,7 +92,7 @@ deprecated_web_hosts=$(printf '%s\n' "$matches" | \
     grep -v -- 'must not appear as active web hosts' | \
     grep -v -- 'not treated as a deployable web domain' || true)
 
-if [[ -z "$violations" && -z "$deprecated_web_hosts" ]]; then
+if [[ -z "$violations" && -z "$retired_web_hosts" && -z "$deprecated_web_hosts" ]]; then
     echo -e "${GREEN}✅ Domain Policy Check PASSED${NC}"
     echo "All domain usage matches the approved SecPal split"
     exit 0
@@ -95,6 +102,11 @@ else
     if [[ -n "$violations" ]]; then
         echo "Found forbidden domains:"
         echo "$violations"
+        echo ""
+    fi
+    if [[ -n "$retired_web_hosts" ]]; then
+        echo "Found retired web hosts:"
+        echo "$retired_web_hosts"
         echo ""
     fi
     if [[ -n "$deprecated_web_hosts" ]]; then
@@ -108,7 +120,6 @@ else
     echo "  - api.secpal.dev: live API host"
     echo "  - app.secpal.dev: live PWA/frontend host"
     echo "  - secpal.dev: development, staging, testing, examples"
-    echo "  - changelog.secpal.app: public changelog site"
     echo "  - app.secpal: Android application identifier only"
     echo "  - DEPRECATED as web hosts: api.secpal.app"
     echo "  - FORBIDDEN: secpal.com, secpal.org, secpal.net, secpal.io, secpal.example"
