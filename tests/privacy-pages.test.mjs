@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import assert from "node:assert/strict";
-import { readdirSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 
 const readSource = (path) =>
@@ -22,25 +22,25 @@ const compactPages = Object.fromEntries(
 const expectedShellProps = {
   de: [
     'title="Datenschutz | SecPal"',
-    'description="Datenschutzhinweise für secpal.app, apk.secpal.app und die direkte Kontaktaufnahme mit SecPal."',
+    'description="Datenschutzhinweise für secpal.app, die Downloadressourcen auf apk.secpal.app und die Kontaktaufnahme mit SecPal."',
     'canonicalPath="/de/privacy/"',
     'currentPath="/privacy"',
     'eyebrow="Rechtliches"',
     'headline="Datenschutzerklärung"',
-    'intro="Diese Datenschutzerklärung betrifft die öffentliche Website secpal.app, die über apk.secpal.app bereitgestellten Downloadressourcen, das Domain Name System (DNS) sowie die direkte Kontaktaufnahme per E-Mail."',
+    'intro="Diese Datenschutzhinweise erklären, wie personenbezogene Daten beim Besuch von secpal.app, beim Abruf von Downloadressourcen auf apk.secpal.app und bei der Kontaktaufnahme per E-Mail verarbeitet werden."',
     'updatedLabel="Stand"',
-    'updatedAt="25. Juli 2026"',
+    'updatedAt="26. Juli 2026"',
   ],
   en: [
     'title="Privacy Notice | SecPal"',
-    'description="Privacy notice for secpal.app, apk.secpal.app, and direct contact with SecPal."',
+    'description="Privacy notice for secpal.app, download resources on apk.secpal.app, and direct contact with SecPal."',
     'canonicalPath="/en/privacy/"',
     'currentPath="/privacy"',
     'eyebrow="Legal"',
     'headline="Privacy Notice"',
-    'intro="This privacy notice concerns the public secpal.app website, download resources provided through apk.secpal.app, the Domain Name System (DNS), and direct contact by email."',
+    'intro="This privacy notice explains how personal data is processed when secpal.app is visited, download resources on apk.secpal.app are requested, or SecPal is contacted by email."',
     'updatedLabel="Last updated"',
-    'updatedAt="July 25, 2026"',
+    'updatedAt="July 26, 2026"',
   ],
 };
 
@@ -48,332 +48,287 @@ const expectedSections = {
   de: [
     "Geltungsbereich",
     "Verantwortlicher",
-    "Technische Bereitstellung und Hosting",
-    "Keine reguläre Zugriffsprotokollierung",
-    "Domain Name System (DNS)",
-    "Öffentliche Downloadressourcen",
+    "Bereitstellung von Website und Downloads",
     "Lokale Darstellungspräferenz",
-    "Keine Webanalyse oder Besucherprofilbildung",
     "Kontaktaufnahme per E-Mail",
-    "Externe Links",
-    "Empfänger und Dienstleister",
-    "Drittlandübermittlung bei Cloudflare",
-    "Bereitstellung der Daten",
-    "Speicherdauer",
     "Rechte betroffener Personen",
-    "Änderungen der Datenschutzerklärung",
   ],
   en: [
     "Scope",
     "Controller",
-    "Technical delivery and hosting",
-    "No regular access logging",
-    "Domain Name System (DNS)",
-    "Public download resources",
+    "Website and download delivery",
     "Local display preference",
-    "No web analytics or visitor profiling",
     "Contact by email",
-    "External links",
-    "Recipients and service providers",
-    "International transfers involving Cloudflare",
-    "Provision of data",
-    "Storage periods",
     "Data subject rights",
-    "Changes to this privacy notice",
   ],
 };
 
-const extractSectionNames = (source) =>
-  [...source.matchAll(/<h2\b[^>]*>\s*(?:\d+\.\s*)?([^<]+?)\s*<\/h2>/g)].map(
-    ([, heading]) => heading.replace(/\s+/g, " ").trim()
+const extractHeadings = (source) =>
+  [...source.matchAll(/<h2\b[^>]*>\s*(\d+)\.\s*([^<]+?)\s*<\/h2>/g)].map(
+    ([, number, name]) => ({
+      number: Number(number),
+      name: name.replace(/\s+/g, " ").trim(),
+    })
   );
 
-test("localized privacy pages retain their shell metadata and aligned sections", () => {
+test("localized privacy pages use the exact shell metadata", () => {
   for (const [locale, source] of Object.entries(pages)) {
     assert.match(source, /import LegalPageShell from/);
     for (const property of expectedShellProps[locale]) {
       assert.ok(
         source.includes(property),
-        `${locale} privacy page must retain ${property}`
+        `${locale} privacy page must contain ${property}`
       );
     }
   }
-  assert.deepEqual(extractSectionNames(pages.de), expectedSections.de);
-  assert.deepEqual(extractSectionNames(pages.en), expectedSections.en);
 });
 
-test("the formal scope covers the public website, download resources, and authoritative DNS services", () => {
+test("localized privacy pages have exactly six aligned numbered sections", () => {
+  for (const [locale, source] of Object.entries(pages)) {
+    const headings = extractHeadings(source);
+
+    assert.equal(headings.length, 6);
+    assert.deepEqual(
+      headings.map(({ number }) => number),
+      [1, 2, 3, 4, 5, 6]
+    );
+    assert.deepEqual(
+      headings.map(({ name }) => name),
+      expectedSections[locale]
+    );
+  }
+
+  assert.equal(
+    extractHeadings(pages.de).length,
+    extractHeadings(pages.en).length
+  );
+});
+
+test("the controller and contact details remain complete and ordered", () => {
   assert.match(
     compactPages.de,
-    /<h2[^>]*> 1\. Geltungsbereich <\/h2> <p class="mt-6"> [^<]*secpal\.app[^<]*apk\.secpal\.app[^<]*autoritativen DNS-Dienste[^<]*<\/p>/
+    /Verantwortlicher im Sinne der DSGVO ist:<\/p> <div[^>]*> <p[^>]*>SecPal<\/p> <p[^>]*>Holger Schmermbeck<\/p>/
   );
   assert.match(
     compactPages.en,
-    /<h2[^>]*> 1\. Scope <\/h2> <p class="mt-6"> [^<]*secpal\.app[^<]*apk\.secpal\.app[^<]*authoritative DNS services[^<]*<\/p>/
-  );
-});
-
-test("section extraction rejects headings that contain markup", () => {
-  const headingWithMarkup = "<h2>1. Scope <em>note</em></h2>";
-
-  assert.deepEqual(extractSectionNames(headingWithMarkup), []);
-});
-
-test("the controller is identified with SecPal before Holger Schmermbeck", () => {
-  assert.match(
-    compactPages.de,
-    /<p class="mt-6">Verantwortlicher im Sinne der DSGVO ist:<\/p> <div[^>]*> <p[^>]*>SecPal<\/p> <p[^>]*>Holger Schmermbeck<\/p>/
-  );
-  assert.match(
-    compactPages.en,
-    /<p class="mt-6">The controller within the meaning of the GDPR is:<\/p> <div[^>]*> <p[^>]*>SecPal<\/p> <p[^>]*>Holger Schmermbeck<\/p>/
+    /The controller within the meaning of the GDPR is:<\/p> <div[^>]*> <p[^>]*>SecPal<\/p> <p[^>]*>Holger Schmermbeck<\/p>/
   );
 
   for (const source of Object.values(pages)) {
     assert.match(source, /Enno-Arends-Str\. 4/);
     assert.match(source, /26571 Juist/);
-    assert.match(source, /hello@secpal\.app/);
+    assert.match(source, /href="mailto:hello@secpal\.app"/);
     assert.doesNotMatch(
       source,
       /Datenschutzbeauftragter|Data Protection Officer/i
     );
   }
+  assert.match(pages.de, /Deutschland/);
+  assert.match(pages.en, /Germany/);
 });
 
-test("hosting, transient delivery, and disabled regular logging are precise", () => {
+test("scope distinguishes public services from customer-operated instances", () => {
+  assert.match(compactPages.de, /öffentliche Website secpal\.app/);
+  assert.match(compactPages.de, /Downloadressourcen auf apk\.secpal\.app/);
+  assert.match(compactPages.de, /direkte Kontaktaufnahme mit SecPal/);
   assert.match(
     compactPages.de,
-    /Hosting von secpal\.app und apk\.secpal\.app erfolgt über die Hetzner Online GmbH/
+    /nicht für die Verarbeitung personenbezogener Daten innerhalb einer von einem Kunden installierten oder betriebenen SecPal-Instanz/
   );
+  assert.match(compactPages.de, /über die Zwecke und Mittel[^.]*entscheidet/);
+
+  assert.match(compactPages.en, /public secpal\.app website/);
+  assert.match(compactPages.en, /download resources on apk\.secpal\.app/);
+  assert.match(compactPages.en, /direct contact with SecPal/);
   assert.match(
     compactPages.en,
-    /secpal\.app and apk\.secpal\.app are hosted through Hetzner Online GmbH/
+    /does not apply to the processing of personal data within a SecPal instance installed or operated by a customer/
   );
-  assert.match(compactPages.de, /flüchtig|Dauer der Verbindung/);
-  assert.match(compactPages.en, /transient|duration of the connection/);
-  assert.match(compactPages.de, /IP-Adresse/);
-  assert.match(compactPages.en, /IP address/);
-  assert.match(
-    compactPages.de,
-    /keine individuellen IP-Adressen, User-Agents oder Crawlerinformationen/
-  );
-  assert.match(
-    compactPages.en,
-    /does not store individual IP addresses, user agents, or crawler information/
-  );
-  assert.match(
-    compactPages.de,
-    /keine regulären Webserver-Zugriffs- oder Fehlerprotokolle/
-  );
-  assert.match(compactPages.en, /no regular web server access or error logs/);
-  assert.match(
-    compactPages.de,
-    /für secpal\.app und apk\.secpal\.app keine regulären/
-  );
-  assert.match(compactPages.en, /for secpal\.app and apk\.secpal\.app/);
-  assert.match(compactPages.de, /Art\. 6 Abs\. 1 lit\. f DSGVO/);
-  assert.match(compactPages.en, /Article 6\(1\)\(f\) GDPR/);
-  assert.match(
-    compactPages.de,
-    /Unabhängig von der durch SecPal deaktivierten regulären Protokollierung/
-  );
-  assert.match(
-    compactPages.en,
-    /Independently of the regular logging disabled by SecPal/
-  );
-  assert.doesNotMatch(compactPages.de, /in eigener Verantwortung/);
-  assert.doesNotMatch(compactPages.en, /under their own responsibility/);
-  assert.doesNotMatch(compactPages.de, /keinerlei Daten verarbeitet/i);
-  assert.doesNotMatch(compactPages.en, /no data (?:is|are) processed/i);
+  assert.match(compactPages.en, /determines the purposes and means/);
 });
 
-test("Cloudflare is limited to authoritative DNS and transfer safeguards", () => {
-  for (const source of Object.values(compactPages)) {
-    assert.match(source, /Cloudflare/);
-    assert.match(source, /DNS-only/);
-    assert.match(source, /Hetzner/);
-    assert.doesNotMatch(source, /changelog\.secpal\.app/i);
-    assert.match(source, /Reverse Proxy/i);
-    assert.match(source, /\bWAF\b/);
-    assert.match(source, /Data Privacy Framework/);
-    assert.match(
-      source,
-      /Standardvertragsklauseln|Standard Contractual Clauses/
-    );
-  }
-  assert.match(compactPages.de, /autoritative DNS-Dienste/);
-  assert.match(compactPages.en, /authoritative DNS services/);
-  assert.doesNotMatch(compactPages.de, /Domainverwaltung/);
-  assert.doesNotMatch(compactPages.en, /domain management/i);
-  assert.match(
-    compactPages.de,
-    /HTTP- und HTTPS-Verkehr[^.]*direkt[^.]*Hetzner/
-  );
-  assert.match(
-    compactPages.en,
-    /HTTP and HTTPS traffic[^.]*directly[^.]*Hetzner/
-  );
-});
-
-test("recipient labels preserve a visible space after the colon", () => {
-  const recipientLabels = {
+test("website and download delivery contains the required processing information", () => {
+  const expectedPatterns = {
     de: [
-      "Hetzner Online GmbH:",
-      "Cloudflare, Inc.:",
-      "Uberspace, betrieben von Jonas Pasche:",
+      /IP-Adresse/,
+      /angeforderte Inhalt/,
+      /vorübergehend verarbeitet/,
+      /Hetzner Online GmbH/,
+      /Art\. 6 Abs\. 1 lit\. f DSGVO/,
+      /berechtigte Interesse/,
+      /keine regulären Webserver-Zugriffs- oder Fehlerprotokolle/,
+      /keine Analyse-, Marketing- oder Trackingdienste/,
+      /nicht dauerhaft gespeichert/,
+      /technisch erforderlichen Verbindungsdaten ist notwendig/,
     ],
     en: [
-      "Hetzner Online GmbH:",
-      "Cloudflare, Inc.:",
-      "Uberspace, operated by Jonas Pasche:",
+      /IP address/,
+      /requested content/,
+      /processed temporarily/,
+      /Hetzner Online GmbH/,
+      /Article 6\(1\)\(f\) GDPR/,
+      /legitimate interest/,
+      /no regular web server access or error logs/,
+      /does not use analytics, marketing, or tracking services/,
+      /not stored permanently/,
+      /technically necessary connection data is required/,
     ],
   };
 
-  for (const [locale, labels] of Object.entries(recipientLabels)) {
-    for (const label of labels) {
-      assert.ok(
-        compactPages[locale].includes(`${label}</strong > {" "}`),
-        `${locale} recipient label "${label}" must retain explicit spacing`
-      );
+  for (const [locale, patterns] of Object.entries(expectedPatterns)) {
+    for (const pattern of patterns) {
+      assert.match(compactPages[locale], pattern);
     }
   }
+  assert.doesNotMatch(compactPages.de, /keine Daten werden verarbeitet/i);
+  assert.doesNotMatch(compactPages.en, /no data is processed/i);
 });
 
-test("inline email links preserve surrounding spaces and punctuation", () => {
-  assert.match(
-    compactPages.de,
-    /Anfragen zu Betroffenenrechten können an\{" "\} <a[^>]*href="mailto:hello@secpal\.app"[^>]*>hello@secpal\.app<\/a\s*> \{" "\} gerichtet werden\./
-  );
-  assert.match(
-    compactPages.en,
-    /Requests concerning data subject rights may be sent to\{" "\} <a[^>]*href="mailto:hello@secpal\.app"[^>]*>hello@secpal\.app<\/a\s*>\{"\."\}/
-  );
-});
+test("local display preference is explained without implementation details", () => {
+  const expectedPatterns = {
+    de: [
+      /Hell- oder Dunkelmodus manuell auswählt/,
+      /lokalen Speicher des Browsers/,
+      /nicht an SecPal oder einen externen Anbieter übermittelt/,
+      /bis sie geändert oder der lokale Browserspeicher gelöscht wird/,
+      /§ 25 Abs\. 2 Nr\. 2 TDDDG/,
+      /erfordert keine Einwilligung/,
+    ],
+    en: [
+      /manually selects light or dark mode/,
+      /browser's local storage/,
+      /not transmitted to SecPal or an external provider/,
+      /until it is changed or the browser's local storage is cleared/,
+      /Section 25\(2\)\(2\) TDDDG/,
+      /does not require consent/,
+    ],
+  };
 
-test("email processing and deletion are documented for Uberspace", () => {
+  for (const [locale, patterns] of Object.entries(expectedPatterns)) {
+    for (const pattern of patterns) {
+      assert.match(compactPages[locale], pattern);
+    }
+  }
   for (const source of Object.values(pages)) {
-    assert.match(source, /Uberspace/);
-    assert.match(source, /Jonas Pasche/);
-    assert.match(source, /hello@secpal\.app/);
-  }
-  assert.match(pages.de, /Nachrichteninhalt/);
-  assert.match(pages.en, /message content/);
-  assert.match(pages.de, /Anhänge/);
-  assert.match(pages.en, /attachments/);
-  assert.match(pages.de, /Art\. 6 Abs\. 1 lit\. b DSGVO/);
-  assert.match(pages.de, /Art\. 6 Abs\. 1 lit\. f DSGVO/);
-  assert.match(pages.en, /Article 6\(1\)\(b\) GDPR/);
-  assert.match(pages.en, /Article 6\(1\)\(f\) GDPR/);
-  assert.match(pages.de, /nach abschließender Bearbeitung/);
-  assert.match(
-    pages.en,
-    /after (?:the request has been finally processed|final processing)/
-  );
-});
-
-test("the local theme preference is the only documented browser storage", () => {
-  for (const source of Object.values(compactPages)) {
-    assert.match(source, /<code[^>]*>theme<\/code\s*>/);
-    assert.match(source, /<code[^>]*>light<\/code\s*>/);
-    assert.match(source, /<code[^>]*>dark<\/code\s*>/);
-  }
-  assert.match(compactPages.de, /lokalen Speicher des Browsers/);
-  assert.match(compactPages.en, /browser's local storage/);
-  assert.match(compactPages.de, /Auf secpal\.app kann eine Person/);
-  assert.match(compactPages.en, /On secpal\.app, a person can manually select/);
-  assert.match(compactPages.de, /§ 25 Abs\. 2 Nr\. 2 TDDDG/);
-  assert.match(compactPages.en, /Section 25\(2\)\(2\) TDDDG/);
-  assert.match(
-    compactPages.de,
-    /weder an SecPal noch an einen externen Anbieter übermittelt/
-  );
-  assert.match(
-    compactPages.en,
-    /not transmitted to SecPal or an external provider/
-  );
-});
-
-test("the pages exclude web analytics, tracking, and visitor profiles", () => {
-  assert.match(
-    compactPages.de,
-    /keine Webanalyse-, Marketing- oder Nutzertrackingdienste/
-  );
-  assert.match(
-    compactPages.en,
-    /does not use web analytics, marketing, or user-tracking services/
-  );
-  assert.match(compactPages.de, /keine Besucherprofile/);
-  assert.match(compactPages.en, /No visitor profiles/);
-  assert.match(
-    compactPages.de,
-    /keine optionalen Analyse- oder Marketing-Cookies/
-  );
-  assert.match(compactPages.en, /no optional analytics or marketing cookies/);
-  for (const source of Object.values(compactPages)) {
-    assert.match(
-      source,
-      /secpal\.app und apk\.secpal\.app|secpal\.app and apk\.secpal\.app/
-    );
+    assert.doesNotMatch(source, /<code\b/i);
+    assert.doesNotMatch(source, /\btheme\b/i);
   }
 });
 
-test("external GitHub navigation is click-only and suppresses the referrer", () => {
-  assert.match(compactPages.de, /externen Angeboten/);
-  assert.match(compactPages.en, /external services/);
-  assert.match(
-    compactPages.de,
-    /Inhalte dieser Anbieter werden nicht eingebettet/
-  );
-  assert.match(compactPages.en, /Content from these providers is not embedded/);
-  assert.match(compactPages.de, /Erst beim Auswählen eines externen Links/);
-  assert.match(compactPages.en, /Only when a person selects an external link/);
-  assert.match(compactPages.de, /jeweilige Anbieter verantwortlich/);
-  assert.match(compactPages.en, /respective provider is responsible/);
-  assert.match(compactPages.de, /HTTP-Referrer/);
-  assert.match(compactPages.en, /HTTP referrer/);
-});
+test("email processing, legal bases, necessity, and deletion remain visible", () => {
+  const expectedPatterns = {
+    de: [
+      /Uberspace/,
+      /Jonas Pasche/,
+      /Mainz/,
+      /Kontaktdaten/,
+      /Inhalt der Nachricht/,
+      /Anhänge/,
+      /Bearbeitung der Anfrage/,
+      /Art\. 6 Abs\. 1 lit\. b DSGVO/,
+      /Art\. 6 Abs\. 1 lit\. f DSGVO/,
+      /Kontaktaufnahme ist freiwillig/,
+      /erreichbare Absenderadresse/,
+      /nach abschließender Bearbeitung/,
+      /gesetzliche Aufbewahrungspflicht/,
+    ],
+    en: [
+      /Uberspace/,
+      /Jonas Pasche/,
+      /Mainz, Germany/,
+      /contact details/,
+      /content of the message/,
+      /attachments/,
+      /handle the inquiry/,
+      /Article 6\(1\)\(b\) GDPR/,
+      /Article 6\(1\)\(f\) GDPR/,
+      /Contact by email is voluntary/,
+      /reachable sender address/,
+      /after the inquiry has been finally processed/,
+      /statutory retention obligation/,
+    ],
+  };
 
-test("every visible SecPal GitHub link suppresses the referrer", () => {
-  const sourceFiles = readdirSync(new URL("../src", import.meta.url), {
-    recursive: true,
-    withFileTypes: true,
-  })
-    .filter((entry) => entry.isFile() && entry.name.endsWith(".astro"))
-    .map(
-      (entry) => new URL(entry.name, new URL(`${entry.parentPath}/`, "file:"))
-    );
-  let linkCount = 0;
-
-  for (const path of sourceFiles) {
-    const source = readFileSync(path, "utf8");
-    const githubAnchors =
-      source.match(
-        /<a\b(?=[^>]*href="https:\/\/github\.com\/SecPal")[^>]*>/g
-      ) ?? [];
-
-    linkCount += githubAnchors.length;
-    for (const anchor of githubAnchors) {
-      assert.match(
-        anchor,
-        /\breferrerpolicy="no-referrer"/,
-        `${path.pathname} contains an unhardened GitHub link`
-      );
-      assert.doesNotMatch(anchor, /\btarget="_blank"/);
+  for (const [locale, patterns] of Object.entries(expectedPatterns)) {
+    for (const pattern of patterns) {
+      assert.match(compactPages[locale], pattern);
     }
   }
-
-  assert.equal(linkCount, 2);
 });
 
-test("superseded app and beta topics are absent from both privacy pages", () => {
-  const forbidden =
-    /\b(?:Beta|beta distribution|Google Play|Play Store|Device Owner|Managed Device|Provisioning|Bootstrap|Push|Benutzerkonto|user account|Beschäftigtendaten|employee data|SaaS|GoAccess|App-Daten löschen|delete app data)\b/i;
+test("data subject rights and supervisory authority remain complete", () => {
+  const expectedPatterns = {
+    de: [
+      /Auskunft/,
+      /Berichtigung/,
+      /Löschung/,
+      /Einschränkung/,
+      /Datenübertragbarkeit/,
+      /Widerspruchsrecht/,
+      /beschweren/,
+      /Landesbeauftragte für den Datenschutz Niedersachsen/,
+      /hello@secpal\.app/,
+    ],
+    en: [
+      /access/,
+      /rectification/,
+      /erasure/,
+      /restriction/,
+      /data portability/,
+      /right to object/,
+      /lodge a complaint/,
+      /State Commissioner for Data Protection of Lower Saxony/,
+      /hello@secpal\.app/,
+    ],
+  };
+
+  for (const [locale, patterns] of Object.entries(expectedPatterns)) {
+    for (const pattern of patterns) {
+      assert.match(compactPages[locale], pattern);
+    }
+    assert.match(pages[locale], /href="mailto:hello@secpal\.app"/);
+    assert.doesNotMatch(pages[locale], /Prinzenstraße 5|30159 Hannover/);
+  }
+});
+
+test("public privacy pages exclude disproportionate infrastructure detail", () => {
+  const forbiddenTerms = [
+    /Cloudflare/i,
+    /Domain Name System/i,
+    /\bDNS\b/i,
+    /DNS-only/i,
+    /Reverse Proxy/i,
+    /\bCDN\b/i,
+    /\bWAF\b/i,
+    /Data Privacy Framework/i,
+    /Standardvertragsklauseln/i,
+    /Standard Contractual Clauses/i,
+    /Drittlandübermittlung/i,
+    /international transfers/i,
+    /GitHub/i,
+    /HTTP-Referrer/i,
+    /HTTP referrer/i,
+    /CRM-Profile/i,
+    /CRM profiles/i,
+    /Warteschlangensystem/i,
+    /queue systems/i,
+    /User-Agent/i,
+    /user agent/i,
+    /Crawlerinformation/i,
+    /crawler information/i,
+    /Besucherprofil/i,
+    /visitor profiling/i,
+    /Einwilligungsbanner/i,
+    /consent banner/i,
+  ];
 
   for (const [locale, source] of Object.entries(pages)) {
-    assert.doesNotMatch(
-      source,
-      forbidden,
-      `${locale} privacy page contains superseded product-internal content`
-    );
+    for (const term of forbiddenTerms) {
+      assert.doesNotMatch(
+        source,
+        term,
+        `${locale} privacy page contains forbidden term ${term}`
+      );
+    }
   }
 });
