@@ -134,6 +134,26 @@ test("contact is only the highlighted header action and GitHub stays secondary",
   assert.equal(footer.match(/https:\/\/github\.com\/SecPal/g)?.length, 1);
 });
 
+test("external GitHub links suppress referrer transmission", () => {
+  for (const [componentName, component] of Object.entries({ cta, footer })) {
+    const githubAnchors =
+      component.match(
+        /<a\b(?=[^>]*href="https:\/\/github\.com\/SecPal")[^>]*>/g
+      ) ?? [];
+
+    assert.equal(
+      githubAnchors.length,
+      1,
+      `${componentName} must contain one SecPal GitHub link`
+    );
+    assert.match(
+      githubAnchors[0],
+      /\breferrerpolicy="no-referrer"/,
+      `${componentName} must suppress referrer transmission`
+    );
+  }
+});
+
 test("navigation translations are aligned and obsolete fields are removed", () => {
   assert.equal(de.nav.workflow, "Ablauf");
   assert.equal(en.nav.workflow, "Workflow");

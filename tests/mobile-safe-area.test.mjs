@@ -147,6 +147,10 @@ test("German hero heading provides a readable manual compound-word break", () =>
 });
 
 test("localized legal headings wrap without English auto-hyphenation", () => {
+  const legalShell = readFileSync(
+    new URL("../src/components/LegalPageShell.astro", import.meta.url),
+    "utf8"
+  );
   const germanSecurity = readFileSync(
     new URL("../src/pages/de/security.astro", import.meta.url),
     "utf8"
@@ -162,6 +166,18 @@ test("localized legal headings wrap without English auto-hyphenation", () => {
   assert.match(
     germanSecurity,
     /<h2\b[^>]*class="[^"]*\bbreak-words\b[^"]*\bhyphens-auto\b[^"]*"[^>]*>\s*Sicherheitsmeldungen\s*<\/h2>/
+  );
+  assert.match(
+    legalShell,
+    /const headlineHyphenationClass =\s*locale === "de" \? "hyphens-auto" : "hyphens-none";/
+  );
+  assert.match(
+    legalShell,
+    /<h1\b[^>]*class:list=\{\[[\s\S]*?\bheadlineHyphenationClass\b[\s\S]*?\]\}[^>]*>/
+  );
+  assert.doesNotMatch(
+    legalShell,
+    /<h1\b[^>]*class="[^"]*\bhyphens-auto\b[^"]*"[^>]*>/
   );
   assert.equal(englishPrivacyHeadings.length, 6);
   for (const [, classNames] of englishPrivacyHeadings) {

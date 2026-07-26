@@ -38,6 +38,8 @@ const {
 const alternateEnPath = `/en${currentPath}/`;
 const alternateDePath = `/de${currentPath}/`;
 const resolvedXDefaultPath = xDefaultPath ?? alternateEnPath;
+const headlineHyphenationClass =
+  locale === "de" ? "hyphens-auto" : "hyphens-none";
 ---
 
 <Base
@@ -61,7 +63,10 @@ const resolvedXDefaultPath = xDefaultPath ?? alternateEnPath;
           {eyebrow}
         </p>
         <h1
-          class="mt-2 text-4xl font-semibold tracking-tight text-pretty break-words hyphens-auto text-gray-900 sm:text-5xl dark:text-white"
+          class:list={[
+            "mt-2 text-4xl font-semibold tracking-tight text-pretty break-words text-gray-900 sm:text-5xl dark:text-white",
+            headlineHyphenationClass,
+          ]}
         >
           {headline}
         </h1>
