@@ -146,6 +146,32 @@ test("German hero heading provides a readable manual compound-word break", () =>
   assert.match(translations, /Sicherheits\\u00addienst/);
 });
 
+test("localized legal headings wrap without English auto-hyphenation", () => {
+  const germanSecurity = readFileSync(
+    new URL("../src/pages/de/security.astro", import.meta.url),
+    "utf8"
+  );
+  const englishPrivacy = readFileSync(
+    new URL("../src/pages/en/privacy.astro", import.meta.url),
+    "utf8"
+  );
+  const englishPrivacyHeadings = [
+    ...englishPrivacy.matchAll(/<h2\b[^>]*class="([^"]*)"[^>]*>/g),
+  ];
+
+  assert.match(
+    germanSecurity,
+    /<h2\b[^>]*class="[^"]*\bbreak-words\b[^"]*\bhyphens-auto\b[^"]*"[^>]*>\s*Sicherheitsmeldungen\s*<\/h2>/
+  );
+  assert.equal(englishPrivacyHeadings.length, 6);
+  for (const [, classNames] of englishPrivacyHeadings) {
+    const tokens = classTokens(classNames);
+    assert.ok(tokens.has("break-words"));
+    assert.ok(tokens.has("hyphens-none"));
+    assert.ok(!tokens.has("hyphens-auto"));
+  }
+});
+
 test("homepage hero keeps the localized status and progress target with tighter copy", () => {
   const hero = readFileSync(
     new URL("../src/components/Hero.astro", import.meta.url),

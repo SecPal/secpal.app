@@ -127,24 +127,42 @@ test("the controller and contact details remain complete and ordered", () => {
   assert.match(pages.en, /Germany/);
 });
 
-test("scope distinguishes public services from customer-operated instances", () => {
+test("scope distinguishes public services from processing inside SecPal instances", () => {
   assert.match(compactPages.de, /öffentliche Website secpal\.app/);
   assert.match(compactPages.de, /Downloadressourcen auf apk\.secpal\.app/);
   assert.match(compactPages.de, /direkte Kontaktaufnahme mit SecPal/);
   assert.match(
     compactPages.de,
-    /nicht für die Verarbeitung personenbezogener Daten innerhalb einer von einem Kunden installierten oder betriebenen SecPal-Instanz/
+    /nicht für die Verarbeitung personenbezogener Daten innerhalb einer installierten oder betriebenen SecPal-Instanz/
   );
-  assert.match(compactPages.de, /über die Zwecke und Mittel[^.]*entscheidet/);
+  assert.match(
+    compactPages.de,
+    /über die Zwecke und Mittel der Verarbeitung innerhalb der jeweiligen Instanz entscheidet/
+  );
 
   assert.match(compactPages.en, /public secpal\.app website/);
   assert.match(compactPages.en, /download resources on apk\.secpal\.app/);
   assert.match(compactPages.en, /direct contact with SecPal/);
   assert.match(
     compactPages.en,
-    /does not apply to the processing of personal data within a SecPal instance installed or operated by a customer/
+    /does not apply to the processing of personal data within an installed or operated SecPal instance/
   );
-  assert.match(compactPages.en, /determines the purposes and means/);
+  assert.match(
+    compactPages.en,
+    /determines the purposes and means of processing within the respective instance/
+  );
+
+  for (const source of Object.values(pages)) {
+    assert.doesNotMatch(
+      source,
+      /von einem Kunden installierten oder betriebenen/i
+    );
+    assert.doesNotMatch(source, /installed or operated by a customer/i);
+    assert.doesNotMatch(
+      source,
+      /customer-operated|customer-hosted|SecPal-operated|self-hosted/i
+    );
+  }
 });
 
 test("website and download delivery contains the required processing information", () => {
