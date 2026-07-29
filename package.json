@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@tailwindplus/elements": "^1.0.0",
-    "astro": "^7.1.4"
+    "astro": "^7.1.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
