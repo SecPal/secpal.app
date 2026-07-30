@@ -337,6 +337,7 @@ If you experience issues with the pre-push hook (e.g., it runs on commands other
    This will check your hook installation, git configuration, and shell environment.
 
 2. **Common causes:**
+
    - **Shell prompts** (starship, oh-my-zsh) may execute git commands on every prompt render
    - **Directory hooks** (direnv, `.envrc` files) may trigger on `cd` commands
    - **Git aliases** or wrapper functions may intercept git commands
@@ -369,7 +370,6 @@ If you experience issues with the pre-push hook (e.g., it runs on commands other
 - **Skip tests locally:** Tests are skipped by default in pre-push hooks (run in CI instead)
 - **Force enable tests:** `PREFLIGHT_RUN_TESTS=1 git push` (useful before major PRs)
 - **Force dependency reinstall:** `PREFLIGHT_FORCE_INSTALL=1 git push`
-- **Skip hook temporarily:** `git push --no-verify` (use sparingly)
 
 ## Getting Help
 

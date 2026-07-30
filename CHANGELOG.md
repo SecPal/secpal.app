@@ -31,6 +31,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- changed local and hosted pull-request size reporting to treat 600 changed
+  lines as an advisory reviewability threshold, removed the obsolete override
+  file, and preserved all non-size validation failures
 - removed retired standalone changelog links, privacy scope, domain-policy
   allowance, and active documentation before release, and hardened the domain
   check against mixed allowed, forbidden, and retired host references

@@ -145,26 +145,25 @@ if [ "$UNSIGNED" -gt 0 ]; then
 fi
 echo "✅ All commits are signed"
 
-# 3) PR Size Check
-DIFF_STAT=$(git diff --shortstat origin/"$BASE"...HEAD 2>/dev/null || echo "")
-if [ -n "$DIFF_STAT" ]; then
-  LINES_CHANGED=$(git diff --stat origin/"$BASE"...HEAD 2>/dev/null | tail -1 | grep -oE '[0-9]+ insertion' | grep -oE '[0-9]+' || echo "0")
-  DELETIONS=$(git diff --stat origin/"$BASE"...HEAD 2>/dev/null | tail -1 | grep -oE '[0-9]+ deletion' | grep -oE '[0-9]+' || echo "0")
-  TOTAL_CHANGES=$((LINES_CHANGED + DELETIONS))
-  MAX_LINES=600
+# 3) PR size advisory
+MERGE_BASE=$(git merge-base "origin/$BASE" HEAD 2>/dev/null || echo "")
+DIFF_OUTPUT=""
+if [ -n "$MERGE_BASE" ]; then
+  DIFF_OUTPUT=$(git diff --numstat "$MERGE_BASE"..HEAD 2>/dev/null || echo "")
+fi
 
-  # Allow override via local file
-  if [ -f ".preflight-allow-large-pr" ]; then
-    echo "⚠️  Large PR override active (.preflight-allow-large-pr). Document the reason in your PR."
-  elif [ "$TOTAL_CHANGES" -gt "$MAX_LINES" ]; then
-    echo ""
-    echo "⚠️  WARNING: PR is large (${TOTAL_CHANGES} lines changed, limit is ${MAX_LINES})"
-    echo "Consider splitting this into smaller PRs."
-    echo "To override: touch .preflight-allow-large-pr (do NOT commit)"
-    echo ""
-  else
-    echo "✅ PR size OK (${TOTAL_CHANGES}/${MAX_LINES} lines)"
-  fi
+PR_SIZE_ADVISORY_THRESHOLD=600
+INSERTIONS=$(echo "$DIFF_OUTPUT" | awk '{ins+=$1} END {print ins+0}')
+DELETIONS=$(echo "$DIFF_OUTPUT" | awk '{del+=$2} END {print del+0}')
+TOTAL_CHANGES=$((INSERTIONS + DELETIONS))
+SIZE_REPORT="PR size: $TOTAL_CHANGES changed lines ($INSERTIONS insertions, $DELETIONS deletions; advisory threshold: $PR_SIZE_ADVISORY_THRESHOLD)"
+
+if [ "$TOTAL_CHANGES" -gt "$PR_SIZE_ADVISORY_THRESHOLD" ]; then
+  echo "$SIZE_REPORT" >&2
+  echo "WARNING: PR size advisory threshold exceeded." >&2
+  echo "Keep this pull request focused on one logical topic and make the review plan explicit." >&2
+else
+  echo "Preflight OK · $SIZE_REPORT"
 fi
 
 echo ""
