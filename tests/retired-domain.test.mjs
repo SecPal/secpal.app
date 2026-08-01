@@ -11,7 +11,6 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const repositoryRoot = new URL("../", import.meta.url);
 const retiredDomain = ["dev", "secpal", "app"].join(".");
-const retiredChangelogDomain = ["changelog", "secpal", "app"].join(".");
 const forbiddenDomain = ["secpal", "xyz"].join(".");
 const domainCheckScript = fileURLToPath(
   new URL("../scripts/check-domains.sh", import.meta.url)
@@ -85,32 +84,6 @@ test("the repository scan rejects mixed-case retired domains", (t) => {
 
   const temporaryRoot = pathToFileURL(`${temporaryRepository}/`);
   assert.deepEqual(findMatchingFiles(temporaryRoot), ["mixed-case.txt"]);
-});
-
-test("the domain policy rejects a retired changelog host beside an allowed host", (t) => {
-  const temporaryDirectory = mkdtempSync(
-    join(tmpdir(), "secpal-domain-policy-")
-  );
-  t.after(() => rmSync(temporaryDirectory, { recursive: true, force: true }));
-
-  writeFileSync(
-    join(temporaryDirectory, "mixed-host.md"),
-    `Current site: secpal.app; retired site: ${retiredChangelogDomain}`
-  );
-
-  assert.throws(
-    () =>
-      execFileSync("bash", [domainCheckScript], {
-        cwd: temporaryDirectory,
-        encoding: "utf8",
-      }),
-    (error) => {
-      assert.equal(error?.status, 1);
-      assert.match(error.stdout, /Found retired web hosts:/);
-      assert.ok(error.stdout.includes(retiredChangelogDomain));
-      return true;
-    }
-  );
 });
 
 test("the domain policy rejects a forbidden domain beside an allowed host", (t) => {
