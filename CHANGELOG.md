@@ -31,6 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- removed the remaining retired standalone changelog host exceptions and
+  dedicated regression cases from website domain policy
 - removed retired standalone changelog links, privacy scope, domain-policy
   allowance, and active documentation before release, and hardened the domain
   check against mixed allowed, forbidden, and retired host references

@@ -87,7 +87,7 @@ test("the repository scan rejects mixed-case retired domains", (t) => {
   assert.deepEqual(findMatchingFiles(temporaryRoot), ["mixed-case.txt"]);
 });
 
-test("the domain policy rejects a retired changelog host beside an allowed host", (t) => {
+test("the domain policy rejects the former changelog host beside an allowed host", (t) => {
   const temporaryDirectory = mkdtempSync(
     join(tmpdir(), "secpal-domain-policy-")
   );
@@ -95,7 +95,7 @@ test("the domain policy rejects a retired changelog host beside an allowed host"
 
   writeFileSync(
     join(temporaryDirectory, "mixed-host.md"),
-    `Current site: secpal.app; retired site: ${retiredChangelogDomain}`
+    `Current site: secpal.app; former site: ${retiredChangelogDomain}`
   );
 
   assert.throws(
@@ -106,7 +106,7 @@ test("the domain policy rejects a retired changelog host beside an allowed host"
       }),
     (error) => {
       assert.equal(error?.status, 1);
-      assert.match(error.stdout, /Found retired web hosts:/);
+      assert.match(error.stdout, /Found forbidden domains:/);
       assert.ok(error.stdout.includes(retiredChangelogDomain));
       return true;
     }

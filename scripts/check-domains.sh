@@ -58,11 +58,7 @@ domains=$(printf '%s\n' "$matches" | \
 # (including api/app subdomains), apk.secpal.app, the app.secpal Android
 # identifier, and deprecated-but-allowed api.secpal.app.
 violations=$(printf '%s\n' "$domains" | \
-    grep -Evi '^(secpal\.app(\.git)?|www\.secpal\.app|apk\.secpal\.app|(\*\.)?([A-Za-z0-9-]+\.)*secpal\.dev|api\.secpal\.app|app\.secpal)\.?$' |
-    grep -Evi '^changelog\.secpal\.app\.?$' || true)
-
-retired_web_hosts=$(printf '%s\n' "$domains" | \
-    grep -Ei '^changelog\.secpal\.app\.?$' || true)
+    grep -Evi '^(secpal\.app(\.git)?|www\.secpal\.app|apk\.secpal\.app|(\*\.)?([A-Za-z0-9-]+\.)*secpal\.dev|api\.secpal\.app|app\.secpal)\.?$' || true)
 
 deprecated_web_hosts=$(printf '%s\n' "$matches" | \
     grep -Ei 'api\.secpal\.app' | \
@@ -92,7 +88,7 @@ deprecated_web_hosts=$(printf '%s\n' "$matches" | \
     grep -v -- 'must not appear as active web hosts' | \
     grep -v -- 'not treated as a deployable web domain' || true)
 
-if [[ -z "$violations" && -z "$retired_web_hosts" && -z "$deprecated_web_hosts" ]]; then
+if [[ -z "$violations" && -z "$deprecated_web_hosts" ]]; then
     echo -e "${GREEN}✅ Domain Policy Check PASSED${NC}"
     echo "All domain usage matches the approved SecPal split"
     exit 0
@@ -102,11 +98,6 @@ else
     if [[ -n "$violations" ]]; then
         echo "Found forbidden domains:"
         echo "$violations"
-        echo ""
-    fi
-    if [[ -n "$retired_web_hosts" ]]; then
-        echo "Found retired web hosts:"
-        echo "$retired_web_hosts"
         echo ""
     fi
     if [[ -n "$deprecated_web_hosts" ]]; then
