@@ -18,51 +18,51 @@ permissions:
 jobs:
   reuse:
     name: Check REUSE Compliance
-    uses: SecPal/.github/.github/workflows/reusable-reuse.yml@c2956851d9158722cae9639d9482d4addd763ace
+    uses: SecPal/.github/.github/workflows/reusable-reuse.yml@177beb19b9f20978480bf96f1ada74e8bbbaccee
 
   license-compatibility:
     name: Check License Compatibility
-    uses: SecPal/.github/.github/workflows/reusable-license-compatibility.yml@c2956851d9158722cae9639d9482d4addd763ace
+    uses: SecPal/.github/.github/workflows/reusable-license-compatibility.yml@177beb19b9f20978480bf96f1ada74e8bbbaccee
 
   prettier:
     name: Formatting Check
-    uses: SecPal/.github/.github/workflows/reusable-prettier.yml@c2956851d9158722cae9639d9482d4addd763ace
+    uses: SecPal/.github/.github/workflows/reusable-prettier.yml@177beb19b9f20978480bf96f1ada74e8bbbaccee
 
   markdown-lint:
     name: Markdown Lint
-    uses: SecPal/.github/.github/workflows/reusable-markdown-lint.yml@c2956851d9158722cae9639d9482d4addd763ace
+    uses: SecPal/.github/.github/workflows/reusable-markdown-lint.yml@177beb19b9f20978480bf96f1ada74e8bbbaccee
     with:
       governance-ref: "6f8e13a7a62cee356811a7f58d6b92119941652f"
 
   ai-instructions:
     name: AI Instructions
-    uses: SecPal/.github/.github/workflows/reusable-ai-instructions.yml@c2956851d9158722cae9639d9482d4addd763ace
+    uses: SecPal/.github/.github/workflows/reusable-ai-instructions.yml@177beb19b9f20978480bf96f1ada74e8bbbaccee
     with:
       governance-ref: "6f8e13a7a62cee356811a7f58d6b92119941652f"
 
   eslint:
     name: ESLint
-    uses: SecPal/.github/.github/workflows/reusable-node-lint.yml@c2956851d9158722cae9639d9482d4addd763ace
+    uses: SecPal/.github/.github/workflows/reusable-node-lint.yml@177beb19b9f20978480bf96f1ada74e8bbbaccee
     with:
       node-version: "22"
 
   astro-check:
     name: Astro TypeScript Check
-    uses: SecPal/.github/.github/workflows/reusable-node-build.yml@c2956851d9158722cae9639d9482d4addd763ace
+    uses: SecPal/.github/.github/workflows/reusable-node-build.yml@177beb19b9f20978480bf96f1ada74e8bbbaccee
     with:
       node-version: "22"
       build-command: "npm run check"
 
   build:
     name: Astro Build
-    uses: SecPal/.github/.github/workflows/reusable-node-build.yml@c2956851d9158722cae9639d9482d4addd763ace
+    uses: SecPal/.github/.github/workflows/reusable-node-build.yml@177beb19b9f20978480bf96f1ada74e8bbbaccee
     with:
       node-version: "22"
       build-command: "npm run build"
 
   test:
     name: Node Tests
-    uses: SecPal/.github/.github/workflows/reusable-node-test.yml@c2956851d9158722cae9639d9482d4addd763ace
+    uses: SecPal/.github/.github/workflows/reusable-node-test.yml@177beb19b9f20978480bf96f1ada74e8bbbaccee
     with:
       node-version: "22"
       test-command: "npm test"
