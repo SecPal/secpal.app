@@ -85,6 +85,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- pinned every external GitHub Actions workflow reference to a full commit SHA
+  with its source tag or branch recorded inline, preventing mutable action
+  revisions from changing workflow behavior unexpectedly
 - made retired-domain validation tolerate tracked files deleted from the
   working tree and reject mixed-case hostnames, so local validation remains
   usable during removals without allowing case-based policy bypasses
