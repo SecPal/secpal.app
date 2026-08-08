@@ -85,6 +85,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- parsed GitHub Actions workflows as YAML when checking immutable action pins,
+  covering valid multiline scalar syntax
+- bounded the project-automation secret check and made workflow-pin regression
+  failures identify the offending missing revision or source annotation
+- pinned every external GitHub Actions workflow reference to a full commit SHA
+  with its source tag or branch recorded inline, preventing mutable action
+  revisions from changing workflow behavior unexpectedly
 - made retired-domain validation tolerate tracked files deleted from the
   working tree and reject mixed-case hostnames, so local validation remains
   usable during removals without allowing case-based policy bypasses
