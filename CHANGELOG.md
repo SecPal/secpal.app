@@ -87,6 +87,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - updated transitive `brace-expansion` and `nanoid` dependencies to patched
   releases, resolving their high-severity denial-of-service advisories
+- reconciled workflow YAML linting with Prettier's inline-comment convention,
+  made document-start markers optional, and scoped line-length exemptions to
+  immutable action references that retain their same-line source annotations
 - parsed GitHub Actions workflows as YAML when checking immutable action pins,
   covering valid multiline scalar syntax
 - bounded the project-automation secret check and made workflow-pin regression
