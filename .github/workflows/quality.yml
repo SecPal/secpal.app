@@ -22,6 +22,7 @@ jobs:
 
   license-compatibility:
     name: Check License Compatibility
+    # yamllint disable-line rule:line-length
     uses: SecPal/.github/.github/workflows/reusable-license-compatibility.yml@eefac02583d4c50c77323c0200745ab4fb988fa1 # main
 
   prettier:

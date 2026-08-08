@@ -4,10 +4,18 @@
 extends: default
 
 rules:
-  # Allow longer lines (default is 80)
+  # Allow longer lines (default is 80). Immutable action references that
+  # include a same-line source annotation use a targeted disable-line.
   line-length:
     max: 120
     level: warning
+
+  # Match Prettier's one-space inline comment convention.
+  comments:
+    min-spaces-from-content: 1
+
+  # Workflows do not require a document-start marker, and Prettier does not add one.
+  document-start: disable
 
   # GitHub Actions workflows often have long keys
   key-ordering: disable
