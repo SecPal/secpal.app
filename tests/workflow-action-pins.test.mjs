@@ -6,34 +6,70 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { LineCounter, isMap, isScalar, isSeq, parseDocument } from "yaml";
 
 const workflowsDirectory = new URL("../.github/workflows/", import.meta.url);
 const immutableRevision = /^[0-9a-f]{40}$/;
 const sourceReference = /^[A-Za-z0-9][A-Za-z0-9._/-]*$/;
 
-function parseExternalWorkflowReference(line) {
-  const blockMatch = line.match(
-    /^\s*(?:-\s+)?(?:"uses"|'uses'|uses)\s*:\s*("[^"]+"|'[^']+'|[^\s#]+)(?:\s+#\s*(.*?))?\s*$/
-  );
-  const flowMatch = line.match(
-    /^\s*-\s*\{.*?(?:"uses"|'uses'|uses)\s*:\s*("[^"]+"|'[^']+'|[^,\s#}]+).*?\}\s*(?:#\s*(.*?))?\s*$/
-  );
-  const match = blockMatch ?? flowMatch;
-  const rawReference = match?.[1];
-  const reference = rawReference?.replace(/^(?:"(.*)"|'(.*)')$/, "$1$2");
-
-  if (!reference || reference.startsWith("./")) {
-    return null;
-  }
-
-  return {
-    reference,
-    source: match[2],
-  };
-}
-
 function workflowPath(directory, entryName) {
   return join(fileURLToPath(directory), entryName);
+}
+
+function externalWorkflowReferencesFromSource(file, source) {
+  const lineCounter = new LineCounter();
+  const document = parseDocument(source, {
+    lineCounter,
+    prettyErrors: false,
+    strict: true,
+  });
+  const parseErrors = document.errors.map((error) => error.message).join("; ");
+
+  assert.equal(
+    document.errors.length,
+    0,
+    `${file} must contain valid YAML${parseErrors ? `: ${parseErrors}` : ""}`
+  );
+
+  const lines = source.split("\n");
+  const references = [];
+
+  function visit(node) {
+    if (isMap(node)) {
+      for (const pair of node.items) {
+        if (isScalar(pair.key) && pair.key.value === "uses") {
+          const offset = pair.value?.range?.[0] ?? pair.key.range?.[0] ?? 0;
+          const line = lineCounter.linePos(offset).line;
+
+          assert.ok(
+            isScalar(pair.value) && typeof pair.value.value === "string",
+            `${file}:${line} uses must be a string scalar`
+          );
+
+          const reference = pair.value.value;
+
+          if (!reference.startsWith("./")) {
+            references.push({
+              file,
+              line,
+              reference,
+              source: lines[line - 1]?.match(/#\s*(.*?)\s*$/)?.[1],
+            });
+          }
+        }
+
+        visit(pair.value);
+      }
+    } else if (isSeq(node)) {
+      for (const item of node.items) {
+        visit(item);
+      }
+    }
+  }
+
+  visit(document.contents);
+
+  return references;
 }
 
 function assertImmutableWorkflowReference({ reference, source, location }) {
@@ -67,23 +103,10 @@ function externalWorkflowReferences() {
     .flatMap((entry) => {
       const path = workflowPath(workflowsDirectory, entry.name);
 
-      return readFileSync(path, "utf8")
-        .split("\n")
-        .flatMap((line, index) => {
-          const parsedReference = parseExternalWorkflowReference(line);
-
-          if (!parsedReference) {
-            return [];
-          }
-
-          return [
-            {
-              file: entry.name,
-              line: index + 1,
-              ...parsedReference,
-            },
-          ];
-        });
+      return externalWorkflowReferencesFromSource(
+        entry.name,
+        readFileSync(path, "utf8")
+      );
     });
 }
 
@@ -91,38 +114,40 @@ test("external workflow references are discovered in valid YAML forms", () => {
   const revision = "a".repeat(40);
 
   assert.deepEqual(
-    parseExternalWorkflowReference("- uses: actions/checkout@v7 # v7"),
-    {
-      reference: "actions/checkout@v7",
-      source: "v7",
-    }
+    externalWorkflowReferencesFromSource(
+      "fixture.yml",
+      `steps:
+  - uses: actions/checkout@v7 # v7
+  - "uses": "actions/checkout@${revision}" # v7
+  - 'uses': 'actions/checkout@v7' # v7
+  - { name: Checkout, uses: "actions/checkout@${revision}" } # v7
+  - uses: ./local-action
+`
+    ).map(({ reference, source }) => ({ reference, source })),
+    [
+      { reference: "actions/checkout@v7", source: "v7" },
+      { reference: `actions/checkout@${revision}`, source: "v7" },
+      { reference: "actions/checkout@v7", source: "v7" },
+      { reference: `actions/checkout@${revision}`, source: "v7" },
+    ]
   );
+});
+
+test("external workflow references are discovered in multiline YAML scalars", () => {
   assert.deepEqual(
-    parseExternalWorkflowReference(
-      `"uses": "actions/checkout@${revision}" # v7`
+    externalWorkflowReferencesFromSource(
+      "fixture.yml",
+      'steps:\n  - uses:\n      "actions/checkout@v7" # v7\n'
     ),
-    {
-      reference: `actions/checkout@${revision}`,
-      source: "v7",
-    }
+    [
+      {
+        file: "fixture.yml",
+        line: 3,
+        reference: "actions/checkout@v7",
+        source: "v7",
+      },
+    ]
   );
-  assert.deepEqual(
-    parseExternalWorkflowReference("uses: 'actions/checkout@v7' # v7 release"),
-    {
-      reference: "actions/checkout@v7",
-      source: "v7 release",
-    }
-  );
-  assert.deepEqual(
-    parseExternalWorkflowReference(
-      `- { name: Checkout, uses: "actions/checkout@${revision}" } # v7`
-    ),
-    {
-      reference: `actions/checkout@${revision}`,
-      source: "v7",
-    }
-  );
-  assert.equal(parseExternalWorkflowReference("- uses: ./local-action"), null);
 });
 
 test("workflow paths decode file URL path segments", () => {
