@@ -38,11 +38,28 @@ BASE="$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/rem
 
 echo "Using base branch: $BASE"
 
-# Fetch base branch for PR size check (failure is handled later)
+# Fetch the selected base for branch comparisons (a missing ref fails below)
 git fetch origin "$BASE" 2>/dev/null || true
 
-# Get list of changed files for conditional checks
-CHANGED_FILES=$(git diff --name-only --cached 2>/dev/null || git diff --name-only HEAD 2>/dev/null || echo "")
+# Get branch changes against the selected base for conditional checks. The index
+# is normally clean during pre-push, so staged changes do not represent the
+# commits that are about to be pushed.
+BRANCH_DIFF="origin/$BASE...HEAD"
+CHANGED_FILES=$(git diff --name-only "$BRANCH_DIFF")
+CHANGED_FILE_STATUS=$(git diff --name-status "$BRANCH_DIFF")
+
+is_license_related_path() {
+  local path="$1"
+
+  case "/$path" in
+    */REUSE.toml | */LICENSE | */LICENSE.* | */LICENSE-* | */LICENSES/* | */COPYING | */COPYING.* | */COPYING-* | *.license)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
 
 if [ "$HAS_NODE_PROJECT" -eq 1 ]; then
   echo "Installing dependencies..."
@@ -74,7 +91,16 @@ fi
 # Only run REUSE lint if new files were added or license-related files changed
 if command -v reuse >/dev/null 2>&1; then
   if [ -n "$CHANGED_FILES" ]; then
-    NEW_OR_LICENSE=$(git diff --name-status --cached 2>/dev/null | grep -E '^(A|M.*LICENSE)' || echo "")
+    NEW_OR_LICENSE=""
+    while IFS=$'\t' read -r status old_path new_path; do
+      if [[ "$status" == A* || "$status" == C* ]] ||
+        is_license_related_path "$old_path" ||
+        { [ -n "${new_path:-}" ] && is_license_related_path "$new_path"; }; then
+        NEW_OR_LICENSE=1
+        break
+      fi
+    done <<<"$CHANGED_FILE_STATUS"
+
     if [ -n "$NEW_OR_LICENSE" ]; then
       reuse lint || FORMAT_EXIT=1
     else
