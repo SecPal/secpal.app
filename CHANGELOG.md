@@ -85,6 +85,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- bounded the project-automation secret check and made workflow-pin regression
+  failures identify the offending missing revision or source annotation
 - pinned every external GitHub Actions workflow reference to a full commit SHA
   with its source tag or branch recorded inline, preventing mutable action
   revisions from changing workflow behavior unexpectedly

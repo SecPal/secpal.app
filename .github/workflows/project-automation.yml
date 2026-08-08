@@ -30,6 +30,7 @@ jobs:
   check-project-automation-secrets:
     name: Check project automation secrets
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       available: ${{ steps.check.outputs.available }}
     steps:

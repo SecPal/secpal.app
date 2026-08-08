@@ -36,6 +36,31 @@ function workflowPath(directory, entryName) {
   return join(fileURLToPath(directory), entryName);
 }
 
+function assertImmutableWorkflowReference({ reference, source, location }) {
+  const revisionStart = reference.lastIndexOf("@");
+  const revision =
+    revisionStart === -1 ? "" : reference.slice(revisionStart + 1);
+  const annotation = source ?? "";
+
+  assert.notEqual(
+    revisionStart,
+    -1,
+    `${location} must include an @ followed by a full commit SHA`
+  );
+  assert.ok(revision, `${location} must include a full commit SHA`);
+  assert.ok(annotation, `${location} must identify the source tag or branch`);
+  assert.match(
+    revision,
+    immutableRevision,
+    `${location} must use a full commit SHA`
+  );
+  assert.match(
+    annotation,
+    sourceReference,
+    `${location} must identify the source tag or branch`
+  );
+}
+
 function externalWorkflowReferences() {
   return readdirSync(workflowsDirectory, { withFileTypes: true })
     .filter((entry) => entry.isFile() && /\.ya?ml$/.test(entry.name))
@@ -111,6 +136,48 @@ test("workflow paths decode file URL path segments", () => {
   );
 });
 
+test("missing workflow pin details report actionable assertion failures", () => {
+  assert.throws(
+    () =>
+      assertImmutableWorkflowReference({
+        reference: "actions/checkout",
+        source: "v7",
+        location: "fixture.yml:1",
+      }),
+    /fixture\.yml:1 must include an @ followed by a full commit SHA/
+  );
+  assert.throws(
+    () =>
+      assertImmutableWorkflowReference({
+        reference: "actions/checkout@",
+        source: "v7",
+        location: "fixture.yml:2",
+      }),
+    /fixture\.yml:2 must include a full commit SHA/
+  );
+  assert.throws(
+    () =>
+      assertImmutableWorkflowReference({
+        reference: "actions/checkout@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        source: undefined,
+        location: "fixture.yml:3",
+      }),
+    /fixture\.yml:3 must identify the source tag or branch/
+  );
+});
+
+test("project automation secret checks have a bounded timeout", () => {
+  const workflow = readFileSync(
+    new URL("../.github/workflows/project-automation.yml", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(
+    workflow,
+    /  check-project-automation-secrets:\n(?:    [^\n]*\n)*?    timeout-minutes:/
+  );
+});
+
 test("external workflow references use immutable revisions with source annotations", () => {
   const references = externalWorkflowReferences();
 
@@ -120,18 +187,10 @@ test("external workflow references use immutable revisions with source annotatio
   );
 
   for (const { file, line, reference, source } of references) {
-    const [, revision] = reference.split("@");
-    const location = `${file}:${line}`;
-
-    assert.match(
-      revision,
-      immutableRevision,
-      `${location} must use a full commit SHA`
-    );
-    assert.match(
+    assertImmutableWorkflowReference({
+      reference,
       source,
-      sourceReference,
-      `${location} must identify the source tag or branch`
-    );
+      location: `${file}:${line}`,
+    });
   }
 });
