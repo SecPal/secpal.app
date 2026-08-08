@@ -44,8 +44,26 @@ git fetch origin "$BASE" 2>/dev/null || true
 # Get branch changes against the selected base for conditional checks. The index
 # is normally clean during pre-push, so staged changes do not represent the
 # commits that are about to be pushed.
-BRANCH_DIFF="origin/$BASE...HEAD"
+BASE_REF="origin/$BASE"
+if ! git rev-parse --verify --quiet "$BASE_REF" >/dev/null; then
+  echo "Error: Base ref '$BASE_REF' is unavailable. Run 'git fetch origin $BASE' and retry." >&2
+  exit 1
+fi
+
+BRANCH_DIFF="$BASE_REF...HEAD"
 CHANGED_FILES=$(git diff --name-only "$BRANCH_DIFF")
+MARKDOWN_CHANGED=$(
+  git diff --name-only -z "$BRANCH_DIFF" |
+    {
+      found=""
+      while IFS= read -r -d '' path; do
+        if [[ "$path" == *.md ]]; then
+          found=1
+        fi
+      done
+      printf '%s' "$found"
+    }
+)
 
 is_license_related_path() {
   local path="$1"
@@ -71,7 +89,7 @@ if command -v npx >/dev/null 2>&1; then
   npx --no-install prettier --check --cache '**/*.{md,yml,yaml,json,ts,tsx,js,mjs,astro}' || FORMAT_EXIT=1
 
   # Only run markdownlint if .md files changed
-  if echo "$CHANGED_FILES" | grep -q '\.md$'; then
+  if [ -n "$MARKDOWN_CHANGED" ]; then
     npx --no-install markdownlint --config .markdownlint.json --dot '**/*.md' --ignore node_modules --ignore dist --ignore .astro --ignore .git || FORMAT_EXIT=1
   else
     echo "ℹ️  No markdown files changed, skipping markdownlint"
@@ -119,7 +137,7 @@ if command -v reuse >/dev/null 2>&1; then
       echo "ℹ️  No new files or license changes, skipping REUSE lint"
     fi
   else
-    reuse lint || FORMAT_EXIT=1
+    echo "ℹ️  No branch changes, skipping REUSE lint"
   fi
 fi
 
