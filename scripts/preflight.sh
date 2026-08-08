@@ -38,11 +38,45 @@ BASE="$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/rem
 
 echo "Using base branch: $BASE"
 
-# Fetch base branch for PR size check (failure is handled later)
+# Fetch the selected base for branch comparisons (a missing ref fails below)
 git fetch origin "$BASE" 2>/dev/null || true
 
-# Get list of changed files for conditional checks
-CHANGED_FILES=$(git diff --name-only --cached 2>/dev/null || git diff --name-only HEAD 2>/dev/null || echo "")
+# Get branch changes against the selected base for conditional checks. The index
+# is normally clean during pre-push, so staged changes do not represent the
+# commits that are about to be pushed.
+BASE_REF="origin/$BASE"
+if ! git rev-parse --verify --quiet "$BASE_REF" >/dev/null; then
+  echo "Error: Base ref '$BASE_REF' is unavailable. Run 'git fetch origin $BASE' and retry." >&2
+  exit 1
+fi
+
+BRANCH_DIFF="$BASE_REF...HEAD"
+CHANGED_FILES=$(git diff --name-only "$BRANCH_DIFF")
+MARKDOWN_CHANGED=$(
+  git diff --name-only -z "$BRANCH_DIFF" |
+    {
+      found=""
+      while IFS= read -r -d '' path; do
+        if [[ "$path" == *.md ]]; then
+          found=1
+        fi
+      done
+      printf '%s' "$found"
+    }
+)
+
+is_license_related_path() {
+  local path="$1"
+
+  case "/$path" in
+    */REUSE.toml | */LICENSE | */LICENSE.* | */LICENSE-* | */LICENSES/* | */COPYING | */COPYING.* | */COPYING-* | *.license)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
 
 if [ "$HAS_NODE_PROJECT" -eq 1 ]; then
   echo "Installing dependencies..."
@@ -55,7 +89,7 @@ if command -v npx >/dev/null 2>&1; then
   npx --no-install prettier --check --cache '**/*.{md,yml,yaml,json,ts,tsx,js,mjs,astro}' || FORMAT_EXIT=1
 
   # Only run markdownlint if .md files changed
-  if echo "$CHANGED_FILES" | grep -q '\.md$'; then
+  if [ -n "$MARKDOWN_CHANGED" ]; then
     npx --no-install markdownlint --config .markdownlint.json --dot '**/*.md' --ignore node_modules --ignore dist --ignore .astro --ignore .git || FORMAT_EXIT=1
   else
     echo "ℹ️  No markdown files changed, skipping markdownlint"
@@ -71,17 +105,39 @@ if [ -d .github/workflows ]; then
   fi
 fi
 
-# Only run REUSE lint if new files were added or license-related files changed
+# Only run REUSE lint if files were added or renamed, or license-related files changed
 if command -v reuse >/dev/null 2>&1; then
   if [ -n "$CHANGED_FILES" ]; then
-    NEW_OR_LICENSE=$(git diff --name-status --cached 2>/dev/null | grep -E '^(A|M.*LICENSE)' || echo "")
+    NEW_OR_LICENSE=$(
+      git diff --name-status -z "$BRANCH_DIFF" |
+        {
+          found=""
+          while IFS= read -r -d '' status && IFS= read -r -d '' old_path; do
+            new_path=""
+            if [[ "$status" == R* || "$status" == C* ]]; then
+              IFS= read -r -d '' new_path || {
+                echo "Invalid name-status output for $status" >&2
+                exit 1
+              }
+            fi
+
+            if [[ "$status" == A* || "$status" == C* || "$status" == R* ]] ||
+              is_license_related_path "$old_path" ||
+              { [ -n "$new_path" ] && is_license_related_path "$new_path"; }; then
+              found=1
+            fi
+          done
+          printf '%s' "$found"
+        }
+    )
+
     if [ -n "$NEW_OR_LICENSE" ]; then
       reuse lint || FORMAT_EXIT=1
     else
       echo "ℹ️  No new files or license changes, skipping REUSE lint"
     fi
   else
-    reuse lint || FORMAT_EXIT=1
+    echo "ℹ️  No branch changes, skipping REUSE lint"
   fi
 fi
 

@@ -85,6 +85,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- based conditional Markdown and REUSE preflight checks on the branch diff
+  against the selected base, so clean pre-push indexes no longer skip checks
+  for committed changes, license metadata, or non-ASCII Markdown paths, while
+  unavailable base refs now produce an actionable error
 - removed the obsolete local large-PR override mechanism, keeping the 600-line
   threshold advisory in preflight to match the shared pull-request size check
 - updated transitive `brace-expansion` and `nanoid` dependencies to patched
