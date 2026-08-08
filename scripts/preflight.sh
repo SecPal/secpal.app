@@ -46,7 +46,6 @@ git fetch origin "$BASE" 2>/dev/null || true
 # commits that are about to be pushed.
 BRANCH_DIFF="origin/$BASE...HEAD"
 CHANGED_FILES=$(git diff --name-only "$BRANCH_DIFF")
-CHANGED_FILE_STATUS=$(git diff --name-status "$BRANCH_DIFF")
 
 is_license_related_path() {
   local path="$1"
@@ -88,18 +87,31 @@ if [ -d .github/workflows ]; then
   fi
 fi
 
-# Only run REUSE lint if new files were added or license-related files changed
+# Only run REUSE lint if files were added or renamed, or license-related files changed
 if command -v reuse >/dev/null 2>&1; then
   if [ -n "$CHANGED_FILES" ]; then
-    NEW_OR_LICENSE=""
-    while IFS=$'\t' read -r status old_path new_path; do
-      if [[ "$status" == A* || "$status" == C* ]] ||
-        is_license_related_path "$old_path" ||
-        { [ -n "${new_path:-}" ] && is_license_related_path "$new_path"; }; then
-        NEW_OR_LICENSE=1
-        break
-      fi
-    done <<<"$CHANGED_FILE_STATUS"
+    NEW_OR_LICENSE=$(
+      git diff --name-status -z "$BRANCH_DIFF" |
+        {
+          found=""
+          while IFS= read -r -d '' status && IFS= read -r -d '' old_path; do
+            new_path=""
+            if [[ "$status" == R* || "$status" == C* ]]; then
+              IFS= read -r -d '' new_path || {
+                echo "Invalid name-status output for $status" >&2
+                exit 1
+              }
+            fi
+
+            if [[ "$status" == A* || "$status" == C* || "$status" == R* ]] ||
+              is_license_related_path "$old_path" ||
+              { [ -n "$new_path" ] && is_license_related_path "$new_path"; }; then
+              found=1
+            fi
+          done
+          printf '%s' "$found"
+        }
+    )
 
     if [ -n "$NEW_OR_LICENSE" ]; then
       reuse lint || FORMAT_EXIT=1

@@ -25,7 +25,23 @@ async function writeExecutable(path, contents) {
   await chmod(path, 0o755);
 }
 
-async function runPreflight(changedFiles, changedFileStatus) {
+function encodeNulDelimitedStatus(changedFileStatus) {
+  if (!changedFileStatus) {
+    return "";
+  }
+
+  return `${changedFileStatus
+    .split("\n")
+    .flatMap((line) => line.split("\t"))
+    .map((field) => field.replaceAll("\\", "\\\\"))
+    .join("\\0")}\\0`;
+}
+
+async function runPreflight(
+  changedFiles,
+  changedFileStatus,
+  quotedChangedFileStatus = changedFileStatus
+) {
   const fixture = await mkdtemp(join(tmpdir(), "secpal-preflight-changes-"));
 
   try {
@@ -50,7 +66,9 @@ elif [[ "$*" == "symbolic-ref refs/remotes/origin/HEAD" ]]; then
 elif [[ "$*" == "diff --name-only origin/main...HEAD" ]]; then
   printf '%s\\n' "$TEST_CHANGED_FILES"
 elif [[ "$*" == "diff --name-status origin/main...HEAD" ]]; then
-  printf '%s\\n' "$TEST_CHANGED_FILE_STATUS"
+  printf '%s\\n' "$TEST_QUOTED_CHANGED_FILE_STATUS"
+elif [[ "$*" == "diff --name-status -z origin/main...HEAD" ]]; then
+  printf '%b' "$TEST_NUL_CHANGED_FILE_STATUS"
 fi
 `
     );
@@ -74,8 +92,10 @@ printf 'reuse %s\\n' "$*" >> "$TEST_COMMAND_LOG"
         ...process.env,
         PATH: `${binDir}:${process.env.PATH}`,
         TEST_CHANGED_FILES: changedFiles,
-        TEST_CHANGED_FILE_STATUS: changedFileStatus,
         TEST_COMMAND_LOG: commandLog,
+        TEST_NUL_CHANGED_FILE_STATUS:
+          encodeNulDelimitedStatus(changedFileStatus),
+        TEST_QUOTED_CHANGED_FILE_STATUS: quotedChangedFileStatus,
         TEST_ROOT: fixture,
       },
     });
@@ -118,6 +138,25 @@ for (const [
 
 test("runs REUSE lint for a file added on the branch", async () => {
   const commands = await runPreflight("src/new-file.ts", "A\tsrc/new-file.ts");
+
+  assert.match(commands, /^reuse lint$/m);
+});
+
+test("runs REUSE lint for a file renamed on the branch", async () => {
+  const commands = await runPreflight(
+    ".node-version",
+    "R100\t.nvmrc\t.node-version"
+  );
+
+  assert.match(commands, /^reuse lint$/m);
+});
+
+test("runs REUSE lint for a non-ASCII license path", async () => {
+  const commands = await runPreflight(
+    '"docs/\\303\\274ber/LICENSE"',
+    "M\tdocs/über/LICENSE",
+    'M\t"docs/\\303\\274ber/LICENSE"'
+  );
 
   assert.match(commands, /^reuse lint$/m);
 });
