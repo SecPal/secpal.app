@@ -85,6 +85,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- removed the obsolete local large-PR override mechanism, keeping the 600-line
+  threshold advisory in preflight to match the shared pull-request size check
 - updated transitive `brace-expansion` and `nanoid` dependencies to patched
   releases, resolving their high-severity denial-of-service advisories
 - reconciled workflow YAML linting with Prettier's inline-comment convention,
