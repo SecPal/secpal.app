@@ -85,6 +85,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- updated transitive `brace-expansion` and `nanoid` dependencies to patched
+  releases, resolving their high-severity denial-of-service advisories
 - parsed GitHub Actions workflows as YAML when checking immutable action pins,
   covering valid multiline scalar syntax
 - bounded the project-automation secret check and made workflow-pin regression
