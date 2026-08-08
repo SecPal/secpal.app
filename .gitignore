@@ -39,9 +39,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Preflight overrides (local only)
-.preflight-allow-large-pr
-
 # Temporary files
 *.tmp
 *.temp

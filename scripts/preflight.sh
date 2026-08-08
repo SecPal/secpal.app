@@ -153,14 +153,10 @@ if [ -n "$DIFF_STAT" ]; then
   TOTAL_CHANGES=$((LINES_CHANGED + DELETIONS))
   MAX_LINES=600
 
-  # Allow override via local file
-  if [ -f ".preflight-allow-large-pr" ]; then
-    echo "⚠️  Large PR override active (.preflight-allow-large-pr). Document the reason in your PR."
-  elif [ "$TOTAL_CHANGES" -gt "$MAX_LINES" ]; then
+  if [ "$TOTAL_CHANGES" -gt "$MAX_LINES" ]; then
     echo ""
     echo "⚠️  WARNING: PR is large (${TOTAL_CHANGES} lines changed, limit is ${MAX_LINES})"
-    echo "Consider splitting this into smaller PRs."
-    echo "To override: touch .preflight-allow-large-pr (do NOT commit)"
+    echo "Keep this pull request focused on one logical topic and make the review plan explicit."
     echo ""
   else
     echo "✅ PR size OK (${TOTAL_CHANGES}/${MAX_LINES} lines)"
