@@ -14,6 +14,8 @@ const gitignore = await readFile(
   new URL("../.gitignore", import.meta.url),
   "utf8",
 );
+const removedLargePrOverridePattern =
+  /\.preflight-allow-large-pr|Large PR override/i;
 
 async function writeExecutable(path, contents) {
   await writeFile(path, contents);
@@ -77,17 +79,24 @@ test("reports ordinary changes normally even with a stale local override file", 
   const output = await runPreflight(119);
 
   assert.match(output, /PR size OK \(119\/600 lines\)/);
-  assert.doesNotMatch(output, /override/i);
+  assert.doesNotMatch(output, removedLargePrOverridePattern);
 });
 
 test("reports oversized changes as advisory without an override", async () => {
   const output = await runPreflight(601);
 
   assert.match(output, /WARNING: PR is large \(601 lines changed, limit is 600\)/);
-  assert.doesNotMatch(output, /override/i);
+  assert.doesNotMatch(output, removedLargePrOverridePattern);
 });
 
 test("does not retain the obsolete local override mechanism", () => {
-  assert.doesNotMatch(preflight, /preflight-allow-large-pr|override/i);
+  assert.doesNotMatch(preflight, removedLargePrOverridePattern);
   assert.doesNotMatch(gitignore, /preflight-allow-large-pr/);
+});
+
+test("does not confuse unrelated override wording with the removed mechanism", () => {
+  assert.doesNotMatch(
+    "An unrelated configuration override remains supported.",
+    removedLargePrOverridePattern,
+  );
 });
