@@ -45,9 +45,6 @@ instructions, issues, pull requests, tests, or planning documents.
   instead of pasting large code blocks.
 - When creating or editing pull requests programmatically, write multiline body
   content to a file and use `--body-file` so shell escaping cannot corrupt it.
-- Never reply to AI review comments with GitHub comment tools. Apply an
-  authorized fix, push it, and resolve the thread through the approved
-  non-comment workflow.
 - Do not add AI self-references, generated-by text, promotional AI wording, or
   AI attribution to commits, pull requests, issues, changelogs, documentation,
   code comments, UI copy, or release notes unless the task explicitly requires
