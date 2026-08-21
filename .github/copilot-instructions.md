@@ -27,9 +27,11 @@ Repository-specific constraints:
   `apk.secpal.app` for Android artifacts and metadata, `api.secpal.dev` for the
   API, `app.secpal.dev` for the PWA, `secpal.dev` for non-production examples
   and environments, and `app.secpal` only for the Android application ID.
-- Inspect the worktree before writes, preserve existing changes, use no bypass
-  or force-push, keep commits signed, and update `CHANGELOG.md` for product
-  changes rather than governance-only work.
+- Inspect the worktree before writes, preserve existing changes, and use no
+  bypass or force-push.
+- Keep user commits cryptographically signed using a repository-accepted
+  signature format, with successful local and GitHub verification.
+- Update `CHANGELOG.md` for product changes rather than governance-only work.
 - Use the smallest applicable subset of `npm test`, `npm run lint`,
   `npm run check`, `npm run format:check`, `npm run build`, domain validation,
   changed-file Markdown/REUSE checks, pre-commit hooks, and `git diff --check`.

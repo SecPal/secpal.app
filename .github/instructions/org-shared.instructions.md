@@ -18,7 +18,8 @@ applyTo: "**"
   canonical domains, asset integrity, and minimal client-side JavaScript.
 - Apply the domain ownership and applicable local validation commands defined in
   `AGENTS.md`.
-- Preserve existing worktree changes, use no bypass or force-push, and keep
-  commits signed.
+- Preserve existing worktree changes and use no bypass or force-push.
+- Keep user commits cryptographically signed using a repository-accepted
+  signature format, with successful local and GitHub verification.
 - Keep GitHub communication in English and omit AI attribution or promotional
   wording unless the task explicitly documents AI tooling behavior.

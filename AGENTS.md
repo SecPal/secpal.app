@@ -37,7 +37,8 @@ instructions, issues, pull requests, tests, or planning documents.
   existing changes, preserve the current scope, and never overwrite changes you
   did not make.
 - Never use bypasses such as `--no-verify` or force-push.
-- Keep commits GPG-signed.
+- Keep user commits cryptographically signed using a repository-accepted
+  signature format, with successful local and GitHub verification.
 - Update `CHANGELOG.md` for real fixes, features, and breaking changes. Pure
   governance, planning, formatting, and other non-product changes do not need an
   entry.
