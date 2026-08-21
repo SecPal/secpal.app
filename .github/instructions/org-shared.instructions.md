@@ -2,24 +2,23 @@
 # SPDX-FileCopyrightText: 2026 SecPal
 # SPDX-License-Identifier: AGPL-3.0-or-later
 name: secpal.app Runtime Overlay
-description: Reinforces strict SecPal governance for all files in this repo.
+description: Applies the authoritative repository baseline to all files.
 applyTo: "**"
 ---
 
 # secpal.app Runtime Overlay
 
-This file auto-applies to all files in this repo so strict SecPal governance stays always present at runtime.
-
-- `AGENTS.md` is the authoritative runtime baseline for this repo.
-  `.github/copilot-instructions.md` is only a compatibility mirror.
-- Non-negotiable: TDD first, quality first, 1 topic = 1 PR = 1 branch,
-  immediate GitHub issue creation for every real out-of-scope finding, and no
-  bypass.
-- If work needs more than one PR, or probably will, create an EPIC with linked
-  sub-issues before implementation.
-- Design discipline is always-on: DRY, KISS, YAGNI, SOLID, and fail fast.
-- GitHub communication stays in English and uses file and line references instead of large verbatim code quotes.
-- Do not add AI self-references, generated-by text, tool promotion, or AI
-  attribution unless the task explicitly requires documenting AI tooling.
-- Keep changes repo-local, minimal, and consistent with Astro, Tailwind CSS, and static-site conventions.
-- Apply the SecPal domain policy and immediate warning and issue triage rules from the repo baseline.
+- Root `AGENTS.md` is the authoritative repository baseline.
+- The canonical
+  [`SecPal/.github` work-graph contract](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md)
+  exclusively defines generic work-graph, delivery, review, finding,
+  replanning, evidence, and stop semantics. Do not restate them locally.
+- Preserve the static-first Astro and strict TypeScript architecture, semantic
+  HTML, accessibility, keyboard safety, responsive behavior, metadata,
+  canonical domains, asset integrity, and minimal client-side JavaScript.
+- Apply the domain ownership and applicable local validation commands defined in
+  `AGENTS.md`.
+- Preserve existing worktree changes, use no bypass or force-push, and keep
+  commits signed.
+- Keep GitHub communication in English and omit AI attribution or promotional
+  wording unless the task explicitly documents AI tooling behavior.
