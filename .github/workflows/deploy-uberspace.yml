@@ -1,0 +1,66 @@
+# SPDX-FileCopyrightText: 2026 SecPal Contributors
+# SPDX-License-Identifier: CC0-1.0
+
+---
+name: Deploy secpal.app to Uberspace
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-uberspace-secpal-app
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Build static release
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+          test -f dist/index.html
+
+      - name: Install restricted SSH credentials
+        env:
+          UBERSPACE_KNOWN_HOSTS: ${{ secrets.UBERSPACE_KNOWN_HOSTS }}
+          UBERSPACE_SSH_KEY: ${{ secrets.UBERSPACE_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$UBERSPACE_SSH_KEY" >"$HOME/.ssh/deploy_key"
+          printf '%s\n' "$UBERSPACE_KNOWN_HOSTS" >"$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/deploy_key"
+          chmod 644 "$HOME/.ssh/known_hosts"
+
+      - name: Publish atomically
+        env:
+          REVISION: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          tar -C dist -czf - . | ssh \
+            -i "$HOME/.ssh/deploy_key" \
+            -o BatchMode=yes \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            secpal@triangulum.uberspace.de \
+            "deploy-secpal-app $REVISION"
