@@ -32,13 +32,9 @@ const roadmapHref = getLocalizedPath("/roadmap", locale);
   class="border-b border-gray-200 bg-white py-20 sm:py-24 dark:border-white/10 dark:bg-gray-900"
 >
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div
-      class="grid grid-cols-1 gap-y-12 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-10"
-    >
+    <div class="grid grid-cols-1 gap-y-12 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-10">
       <div class="max-w-2xl">
-        <p
-          class="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400"
-        >
+        <p class="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">
           {t.developmentStatus.overline}
         </p>
         <h2
@@ -52,30 +48,26 @@ const roadmapHref = getLocalizedPath("/roadmap", locale);
         </p>
       </div>
 
-      <ol
-        class="divide-y divide-gray-200 lg:col-start-2 lg:row-span-2 lg:row-start-1 dark:divide-white/10"
-      >
-        {
-          t.developmentStatus.phases.map((phase) => (
-            <li class="grid min-w-0 grid-cols-1 gap-y-3 py-7 first:pt-0 last:pb-0 sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:gap-x-6">
-              <span class="inline-flex w-fit self-start items-center gap-x-2 rounded-md bg-gray-100 px-2.5 py-1 text-xs/5 font-semibold text-gray-700 sm:mt-0.5 dark:bg-white/10 dark:text-gray-300">
-                <span
-                  aria-hidden="true"
-                  class="size-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400"
-                />
-                {phase.status}
-              </span>
-              <div class="min-w-0 break-words">
-                <h3 class="text-lg/8 font-semibold text-gray-900 dark:text-white">
-                  {phase.name}
-                </h3>
-                <p class="mt-2 text-base/7 text-gray-600 dark:text-gray-400">
-                  {phase.description}
-                </p>
-              </div>
-            </li>
-          ))
-        }
+      <ol class="divide-y divide-gray-200 lg:col-start-2 lg:row-span-2 lg:row-start-1 dark:divide-white/10">
+        {t.developmentStatus.phases.map((phase) => (
+          <li class="grid min-w-0 grid-cols-1 gap-y-3 py-7 first:pt-0 last:pb-0 sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:gap-x-6">
+            <span class="inline-flex w-fit self-start items-center gap-x-2 rounded-md bg-gray-100 px-2.5 py-1 text-xs/5 font-semibold text-gray-700 sm:mt-0.5 dark:bg-white/10 dark:text-gray-300">
+              <span
+                aria-hidden="true"
+                class="size-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400"
+              />
+              {phase.status}
+            </span>
+            <div class="min-w-0 break-words">
+              <h3 class="text-lg/8 font-semibold text-gray-900 dark:text-white">
+                {phase.name}
+              </h3>
+              <p class="mt-2 text-base/7 text-gray-600 dark:text-gray-400">
+                {phase.description}
+              </p>
+            </div>
+          </li>
+        ))}
       </ol>
 
       <div class="max-w-2xl lg:col-start-1">

@@ -90,24 +90,30 @@ const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
     <div class="hidden lg:flex lg:gap-x-6 2xl:gap-x-12">
       <a
         href={workflowPath}
-        class:list={[desktopLinkClass, defaultNavTextClass]}>{t.nav.workflow}</a
+        class:list={[desktopLinkClass, defaultNavTextClass]}
       >
+        {t.nav.workflow}
+      </a>
       <a
         href={roadmapPath}
         aria-current={isRoadmapCurrent ? "page" : undefined}
         class:list={[
           desktopLinkClass,
           isRoadmapCurrent ? activeNavTextClass : defaultNavTextClass,
-        ]}>{t.nav.roadmap}</a
+        ]}
       >
+        {t.nav.roadmap}
+      </a>
       <a
         href={androidPath}
         aria-current={isAndroidCurrent ? "page" : undefined}
         class:list={[
           desktopLinkClass,
           isAndroidCurrent ? activeNavTextClass : defaultNavTextClass,
-        ]}>{t.nav.android}</a
+        ]}
       >
+        {t.nav.android}
+      </a>
     </div>
 
     <!-- Right-side: language switcher + dark toggle + CTA -->
@@ -120,9 +126,9 @@ const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
           "hidden text-xs font-semibold uppercase tracking-wide lg:block",
           utilityControlClass,
         ]}
-        aria-label={otherLocale === "de"
-          ? "Auf Deutsch wechseln"
-          : "Switch to English"}
+        aria-label={
+          otherLocale === "de" ? "Auf Deutsch wechseln" : "Switch to English"
+        }
       >
         {otherLocale}
       </a>
@@ -172,8 +178,9 @@ const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
       <a
         href={contactPath}
         class="hidden min-h-[44px] min-[360px]:inline-flex items-center justify-center rounded-md bg-indigo-600 px-1 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:px-3 sm:text-sm dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus-visible:outline-indigo-500"
-        >{t.nav.headerCta}</a
       >
+        {t.nav.headerCta}
+      </a>
     </div>
 
     <!-- Mobile menu button -->
@@ -198,7 +205,8 @@ const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
           <path
             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
             stroke-linecap="round"
-            stroke-linejoin="round"></path>
+            stroke-linejoin="round"
+          ></path>
         </svg>
       </button>
     </div>
@@ -212,9 +220,7 @@ const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
     aria-modal="true"
     aria-label={t.nav.mobileMenu}
   >
-    <div
-      class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-gray-900 dark:sm:ring-gray-100/10"
-    >
+    <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-gray-900 dark:sm:ring-gray-100/10">
       <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
         <a href={getLocalizedPath("/", locale)} class="-m-1.5 p-1.5">
           <span class="sr-only">SecPal</span>
@@ -248,14 +254,16 @@ const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
             <path
               d="M6 18 18 6M6 6l12 12"
               stroke-linecap="round"
-              stroke-linejoin="round"></path>
+              stroke-linejoin="round"
+            ></path>
           </svg>
         </button>
         <a
           href={contactPath}
           class="inline-flex min-h-[44px] w-full items-center justify-center break-words rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-600"
-          >{t.nav.headerCta}</a
         >
+          {t.nav.headerCta}
+        </a>
       </div>
       <div class="mt-6 flow-root">
         <div class="-my-6 divide-y divide-gray-500/10 dark:divide-white/10">
@@ -263,24 +271,29 @@ const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
             <a
               href={workflowPath}
               class:list={[mobileLinkClass, defaultNavTextClass]}
-              >{t.nav.workflow}</a
             >
+              {t.nav.workflow}
+            </a>
             <a
               href={roadmapPath}
               aria-current={isRoadmapCurrent ? "page" : undefined}
               class:list={[
                 mobileLinkClass,
                 isRoadmapCurrent ? activeNavTextClass : defaultNavTextClass,
-              ]}>{t.nav.roadmap}</a
+              ]}
             >
+              {t.nav.roadmap}
+            </a>
             <a
               href={androidPath}
               aria-current={isAndroidCurrent ? "page" : undefined}
               class:list={[
                 mobileLinkClass,
                 isAndroidCurrent ? activeNavTextClass : defaultNavTextClass,
-              ]}>{t.nav.android}</a
+              ]}
             >
+              {t.nav.android}
+            </a>
             <!-- Language switcher in mobile menu -->
             <a
               href={otherLocalePath}
