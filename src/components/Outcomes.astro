@@ -34,13 +34,9 @@ const iconPaths = [
   class="border-y border-gray-200 bg-gray-50 py-20 sm:py-24 dark:border-white/10 dark:bg-gray-800/50"
 >
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div
-      class="grid grid-cols-1 gap-y-12 lg:grid-cols-5 lg:gap-x-16 lg:gap-y-10"
-    >
+    <div class="grid grid-cols-1 gap-y-12 lg:grid-cols-5 lg:gap-x-16 lg:gap-y-10">
       <div class="max-w-2xl lg:col-span-2">
-        <p
-          class="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400"
-        >
+        <p class="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">
           {t.outcomes.overline}
         </p>
         <h2
@@ -54,43 +50,37 @@ const iconPaths = [
         </p>
       </div>
 
-      <ul
-        class="divide-y divide-gray-200 lg:col-span-3 lg:row-span-2 dark:divide-white/10"
-      >
-        {
-          t.outcomes.items.map((item, index) => (
-            <li class="grid min-w-0 grid-cols-[1.5rem_minmax(0,1fr)] gap-x-4 py-7 first:pt-0 last:pb-0 sm:grid-cols-[2rem_minmax(0,1fr)] sm:gap-x-5">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                data-slot="icon"
-                aria-hidden="true"
-                class="mt-1 size-6 text-indigo-600 sm:size-7 dark:text-indigo-400"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d={iconPaths[index]}
-                />
-              </svg>
-              <div class="min-w-0 break-words">
-                <h3 class="text-lg/8 font-semibold text-gray-900 dark:text-white">
-                  {item.name}
-                </h3>
-                <p class="mt-2 text-base/7 text-gray-600 dark:text-gray-400">
-                  {item.description}
-                </p>
-              </div>
-            </li>
-          ))
-        }
+      <ul class="divide-y divide-gray-200 lg:col-span-3 lg:row-span-2 dark:divide-white/10">
+        {t.outcomes.items.map((item, index) => (
+          <li class="grid min-w-0 grid-cols-[1.5rem_minmax(0,1fr)] gap-x-4 py-7 first:pt-0 last:pb-0 sm:grid-cols-[2rem_minmax(0,1fr)] sm:gap-x-5">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              data-slot="icon"
+              aria-hidden="true"
+              class="mt-1 size-6 text-indigo-600 sm:size-7 dark:text-indigo-400"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d={iconPaths[index]}
+              />
+            </svg>
+            <div class="min-w-0 break-words">
+              <h3 class="text-lg/8 font-semibold text-gray-900 dark:text-white">
+                {item.name}
+              </h3>
+              <p class="mt-2 text-base/7 text-gray-600 dark:text-gray-400">
+                {item.description}
+              </p>
+            </div>
+          </li>
+        ))}
       </ul>
 
-      <p
-        class="max-w-2xl text-sm/6 text-gray-500 lg:col-span-2 dark:text-gray-400"
-      >
+      <p class="max-w-2xl text-sm/6 text-gray-500 lg:col-span-2 dark:text-gray-400">
         {t.outcomes.closing}
       </p>
     </div>
