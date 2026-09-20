@@ -23,7 +23,7 @@ Use only the approved SecPal domains in content, configuration, and examples:
 Make sure the following tools are installed:
 
 - Git
-- Node.js 22
+- Node.js 24.21.0 or later within the Node 24 LTS line
 - npm
 
 ## Local Setup
