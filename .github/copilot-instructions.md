@@ -17,8 +17,8 @@ semantics here.
 
 Repository-specific constraints:
 
-- Preserve the Node 22, Astro 7, Tailwind CSS v4, strict TypeScript, static-first
-  architecture and minimize client-side JavaScript.
+- Preserve the Node 24 LTS (minimum 24.21.0), Astro 7, Tailwind CSS v4, strict
+  TypeScript, static-first architecture and minimize client-side JavaScript.
 - Preserve semantic HTML, accessibility, keyboard-safe interactions, responsive
   behavior, metadata, canonical links, assets, and generated static output.
 - Prefer Astro and platform primitives plus existing patterns before custom
