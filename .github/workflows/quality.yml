@@ -28,18 +28,22 @@ jobs:
   prettier:
     name: Formatting Check
     uses: SecPal/.github/.github/workflows/reusable-prettier.yml@14c5bcf19eaa9e144af5e9afa05f12f2c08648dc # main
+    with:
+      node-version: "24.21.0"
 
   markdown-lint:
     name: Markdown Lint
     uses: SecPal/.github/.github/workflows/reusable-markdown-lint.yml@14c5bcf19eaa9e144af5e9afa05f12f2c08648dc # main
     with:
       governance-ref: "6f8e13a7a62cee356811a7f58d6b92119941652f"
+      node-version: "24.21.0"
 
   ai-instructions:
     name: AI Instructions
     uses: SecPal/.github/.github/workflows/reusable-ai-instructions.yml@14c5bcf19eaa9e144af5e9afa05f12f2c08648dc # main
     with:
       governance-ref: "6f8e13a7a62cee356811a7f58d6b92119941652f"
+      node-version: "24.21.0"
 
   eslint:
     name: ESLint
