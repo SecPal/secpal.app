@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 import { LineCounter, isMap, isScalar, isSeq, parseDocument } from "yaml";
 
 const workflowsDirectory = new URL("../.github/workflows/", import.meta.url);
+const repositoryRoot = new URL("../", import.meta.url);
 const immutableRevision = /^[0-9a-f]{40}$/;
 const sourceReference = /^[A-Za-z0-9][A-Za-z0-9._/-]*$/;
 
@@ -110,6 +111,42 @@ function externalWorkflowReferences() {
     });
 }
 
+function workflowNodeVersions(file, source) {
+  const document = parseDocument(source, { prettyErrors: false, strict: true });
+  const parseErrors = document.errors.map((error) => error.message).join("; ");
+
+  assert.equal(
+    document.errors.length,
+    0,
+    `${file} must contain valid YAML${parseErrors ? `: ${parseErrors}` : ""}`
+  );
+
+  const versions = [];
+
+  function visit(node) {
+    if (isMap(node)) {
+      for (const pair of node.items) {
+        if (isScalar(pair.key) && pair.key.value === "node-version") {
+          assert.ok(
+            isScalar(pair.value) && typeof pair.value.value === "string",
+            `${file} node-version must be a string scalar`
+          );
+          versions.push(pair.value.value);
+        }
+
+        visit(pair.value);
+      }
+    } else if (isSeq(node)) {
+      for (const item of node.items) {
+        visit(item);
+      }
+    }
+  }
+
+  visit(document.contents);
+  return versions;
+}
+
 test("external workflow references are discovered in valid YAML forms", () => {
   const revision = "a".repeat(40);
 
@@ -201,6 +238,49 @@ test("project automation secret checks have a bounded timeout", () => {
     workflow,
     /  check-project-automation-secrets:\n(?:    [^\n]*\n)*?    timeout-minutes:/
   );
+});
+
+test("owned Node selectors and active authority match the package engine", () => {
+  const manifest = JSON.parse(
+    readFileSync(new URL("package.json", repositoryRoot), "utf8")
+  );
+  const engine = manifest.engines?.node;
+
+  assert.match(engine, /^\^(\d+)\.(\d+)\.(\d+)$/);
+
+  const qualifiedVersion = engine.slice(1);
+  const qualifiedMajor = qualifiedVersion.split(".")[0];
+  const nvmMajor = readFileSync(
+    new URL(".nvmrc", repositoryRoot),
+    "utf8"
+  ).trim();
+  const selectors = readdirSync(workflowsDirectory, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && /\.ya?ml$/.test(entry.name))
+    .flatMap((entry) => {
+      const path = workflowPath(workflowsDirectory, entry.name);
+
+      return workflowNodeVersions(entry.name, readFileSync(path, "utf8"));
+    });
+
+  assert.equal(nvmMajor, qualifiedMajor);
+  assert.ok(selectors.length > 0, "expected at least one owned Node selector");
+  assert.ok(
+    selectors.every((version) => version === qualifiedVersion),
+    `owned Node selectors must use the qualified engine floor ${qualifiedVersion}`
+  );
+
+  for (const file of [
+    "README.md",
+    "CONTRIBUTING.md",
+    "AGENTS.md",
+    ".github/copilot-instructions.md",
+  ]) {
+    assert.doesNotMatch(
+      readFileSync(new URL(file, repositoryRoot), "utf8"),
+      /\bNode(?:\.js)? 22\b/,
+      `${file} must not prescribe Node 22`
+    );
+  }
 });
 
 test("external workflow references use immutable revisions with source annotations", () => {
