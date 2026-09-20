@@ -263,6 +263,11 @@ test("owned Node selectors and active authority match the package engine", () =>
     });
 
   assert.equal(nvmMajor, qualifiedMajor);
+  assert.match(
+    readFileSync(new URL(".npmrc", repositoryRoot), "utf8"),
+    /^engine-strict=true$/m,
+    "npm must reject runtimes outside the package engine contract"
+  );
   assert.ok(selectors.length > 0, "expected at least one owned Node selector");
   assert.ok(
     selectors.every((version) => version === qualifiedVersion),
