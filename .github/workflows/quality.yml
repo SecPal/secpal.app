@@ -28,42 +28,46 @@ jobs:
   prettier:
     name: Formatting Check
     uses: SecPal/.github/.github/workflows/reusable-prettier.yml@d59d2e1655544c651256564aeeafa313469e2d0a # main
+    with:
+      node-version: "26.10.0"
 
   markdown-lint:
     name: Markdown Lint
     uses: SecPal/.github/.github/workflows/reusable-markdown-lint.yml@d59d2e1655544c651256564aeeafa313469e2d0a # main
     with:
       governance-ref: "6f8e13a7a62cee356811a7f58d6b92119941652f"
+      node-version: "26.10.0"
 
   ai-instructions:
     name: AI Instructions
     uses: SecPal/.github/.github/workflows/reusable-ai-instructions.yml@d59d2e1655544c651256564aeeafa313469e2d0a # main
     with:
       governance-ref: "6f8e13a7a62cee356811a7f58d6b92119941652f"
+      node-version: "26.10.0"
 
   eslint:
     name: ESLint
     uses: SecPal/.github/.github/workflows/reusable-node-lint.yml@d59d2e1655544c651256564aeeafa313469e2d0a # main
     with:
-      node-version: "22"
+      node-version: "26.10.0"
 
   astro-check:
     name: Astro TypeScript Check
     uses: SecPal/.github/.github/workflows/reusable-node-build.yml@d59d2e1655544c651256564aeeafa313469e2d0a # main
     with:
-      node-version: "22"
+      node-version: "26.10.0"
       build-command: "npm run check"
 
   build:
     name: Astro Build
     uses: SecPal/.github/.github/workflows/reusable-node-build.yml@d59d2e1655544c651256564aeeafa313469e2d0a # main
     with:
-      node-version: "22"
+      node-version: "26.10.0"
       build-command: "npm run build"
 
   test:
     name: Node Tests
     uses: SecPal/.github/.github/workflows/reusable-node-test.yml@d59d2e1655544c651256564aeeafa313469e2d0a # main
     with:
-      node-version: "22"
+      node-version: "26.10.0"
       test-command: "npm test"
