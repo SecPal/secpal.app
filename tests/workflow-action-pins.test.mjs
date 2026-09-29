@@ -230,6 +230,10 @@ test("owned Node toolchain selectors follow the project engine", () => {
   const engine = packageJson.engines?.node;
 
   assert.match(engine ?? "", /^\^26\.\d+\.\d+$/, "engine must select Node 26 only");
+  assert.ok(
+    Number(engine.split(".")[1]) >= 10,
+    "engine must stay at or above the qualified Node 26.10.0 minimum"
+  );
   assert.equal(lockfile.packages[""].engines?.node, engine);
   assert.equal(
     readFileSync(new URL("../.nvmrc", import.meta.url), "utf8").trim(),
