@@ -31,6 +31,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Breaking:** raised the public-site repository tooling baseline from Node.js
+  22 to Node.js 26.10.0 or later within major 26; install-time engine
+  enforcement now rejects unsupported Node runtimes
 - removed the remaining retired standalone changelog host exceptions and
   dedicated regression cases from website domain policy
 - removed retired standalone changelog links, privacy scope, domain-policy
