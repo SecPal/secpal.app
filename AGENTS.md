@@ -37,8 +37,10 @@ instructions, issues, pull requests, tests, or planning documents.
   existing changes, preserve the current scope, and never overwrite changes you
   did not make.
 - Never use bypasses such as `--no-verify` or force-push.
-- Keep user commits cryptographically signed using a repository-accepted
-  signature format, with successful local and GitHub verification.
+- `SECPAL_SIGNING_FORMAT: SSH`; apply the [canonical signing authority](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md#532-signing-authority).
+  Preserve existing SSH keys and signing configuration. GitHub-generated
+  signatures are provider evidence, not SecPal OpenPGP signing authority.
+  Every PR commit must have GitHub `verification.verified == true`.
 - Update `CHANGELOG.md` for real fixes, features, and breaking changes. Pure
   governance, planning, formatting, and other non-product changes do not need an
   entry.
@@ -93,6 +95,15 @@ Domain policy is strict:
 - `app.secpal.dev` is the PWA/frontend.
 - `secpal.dev` is for development, staging, testing, and examples.
 - `app.secpal` is only the Android application identifier.
+
+## Initial Automated Review
+
+Apply the [canonical review-acquisition rule](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md#531-initial-automated-review).
+These runtime assertions consume that owner; they define no separate lifecycle.
+
+- `PRIMARY_AUTOMATED_REVIEW_TRIGGER: DRAFT_TO_READY`
+- `PRIMARY_CODEX_COMMENT_TRIGGER_ALLOWED: NO`
+- `POST_READY_BOUNDED_COMMENT_FALLBACK: YES`
 
 ## Validation
 

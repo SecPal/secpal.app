@@ -19,7 +19,7 @@ applyTo: "**"
 - Apply the domain ownership and applicable local validation commands defined in
   `AGENTS.md`.
 - Preserve existing worktree changes and use no bypass or force-push.
-- Keep user commits cryptographically signed using a repository-accepted
-  signature format, with successful local and GitHub verification.
+- Keep new SecPal user commits SSH-signed with the existing identity and
+  successful local and GitHub verification. Provider signatures are evidence.
 - Keep GitHub communication in English and omit AI attribution or promotional
   wording unless the task explicitly documents AI tooling behavior.
