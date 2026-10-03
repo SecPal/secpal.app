@@ -56,6 +56,9 @@ npm run build
 npm test
 ```
 
+For a controlled alternate deployment origin, set `SECPAL_SITE_URL` before
+building; see [`astro.config.mjs`](astro.config.mjs).
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the contributor workflow and maintained
 validation commands, including the repository [preflight](scripts/preflight.sh).
 
@@ -64,8 +67,8 @@ validation commands, including the repository [preflight](scripts/preflight.sh).
 The site-specific [release](scripts/release-stable.sh),
 [rollback](scripts/rollback-stable.sh), and
 [stable-deployment verification](scripts/check-stable.sh) helpers own the public
-website's operational interfaces; use each helper's `--help` for usage. General
-product deployment and self-hosting belong to
+website's operational interfaces. Run each helper through `bash` with `--help`
+for usage. General product deployment and self-hosting belong to
 [SecPal/deployment](https://github.com/SecPal/deployment).
 
 ## Contributing and security
