@@ -28,13 +28,13 @@ Built with [Astro](https://astro.build), [Tailwind CSS v4](https://tailwindcss.c
 
 ### Prerequisites
 
-- Node.js 22 (use `.nvmrc`)
+- Node.js 26.10.0 or a newer Node 26 release (`.nvmrc` tracks major 26)
 - npm
 
 ### Setup
 
 ```bash
-nvm use        # switch to Node 22
+nvm use        # switch to Node 26
 npm install
 npm run dev    # http://localhost:4321
 ```

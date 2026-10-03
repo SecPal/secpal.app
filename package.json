@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Public website for SecPal – A guard’s best friend",
   "private": true,
+  "engines": {
+    "node": "^26.10.0"
+  },
   "type": "module",
   "author": "SecPal",
   "license": "AGPL-3.0-or-later",

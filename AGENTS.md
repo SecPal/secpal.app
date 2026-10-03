@@ -61,7 +61,8 @@ instructions, issues, pull requests, tests, or planning documents.
 
 ## Static-Site Architecture
 
-- Stack: Node 22, Astro 7, Tailwind CSS v4, and TypeScript strict mode.
+- Stack: Node 26 (minimum 26.10.0; `.nvmrc` tracks major 26), Astro 7,
+  Tailwind CSS v4, and TypeScript strict mode.
 - This repository is the public SecPal landing page and static marketing site.
 - Preserve static rendering by default and use minimal client-side JavaScript
   only where static markup cannot satisfy the requirement.
