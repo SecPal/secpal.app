@@ -23,7 +23,7 @@ Use only the approved SecPal domains in content, configuration, and examples:
 Make sure the following tools are installed:
 
 - Git
-- Node.js 22
+- Node.js 26.10.0 or a newer Node 26 release (`.nvmrc` tracks major 26)
 - npm
 
 ## Local Setup
@@ -162,24 +162,27 @@ Closes #123"
 
 ## Signing Commits
 
-All commits must be signed with GPG. To set up commit signing:
+SecPal uses SSH signing, not GPG/OpenPGP. Follow the
+[canonical signing authority](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md#532-signing-authority)
+for commits and role-specific lifecycle, attestation and publication signers.
+
+Preserve the existing SSH signing identity and configuration. Do not replace
+keys, reuse a transport key as a signing credential, disable signing, or switch
+to another signature format. If the required SSH identity is unavailable, stop
+at that credential boundary rather than provisioning an alternative.
+
+Verify local commits with the maintained SSH trust configuration:
 
 ```bash
-# Generate a GPG key (if you don't have one)
-gpg --gen-key
-
-# List your GPG keys
-gpg --list-secret-keys --keyid-format LONG
-
-# Configure Git to use your key
-git config --global user.signingkey <YOUR_KEY_ID>
-git config --global commit.gpgSign true
-
-# Add your GPG key to GitHub
-gpg --armor --export <YOUR_KEY_ID>
-# Copy the entire output (including the BEGIN and END PGP PUBLIC KEY BLOCK lines)
-# and paste it into GitHub under Settings → SSH and GPG keys → New GPG key.
+git config --get gpg.format
+git verify-commit HEAD
 ```
+
+The configured format must be `ssh`; Git's `gpg.format` option name does not
+mean GPG/OpenPGP is used. Every PR commit must satisfy the maintained GitHub
+Verified gate. GitHub-generated PGP signatures and strictly necessary immutable
+historical verification are provider/history evidence, never new SecPal signing
+authority.
 
 ## Pull Request Guidelines
 
@@ -337,6 +340,7 @@ If you experience issues with the pre-push hook (e.g., it runs on commands other
    This will check your hook installation, git configuration, and shell environment.
 
 2. **Common causes:**
+
    - **Shell prompts** (starship, oh-my-zsh) may execute git commands on every prompt render
    - **Directory hooks** (direnv, `.envrc` files) may trigger on `cd` commands
    - **Git aliases** or wrapper functions may intercept git commands

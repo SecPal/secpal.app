@@ -219,3 +219,75 @@ test("external workflow references use immutable revisions with source annotatio
     });
   }
 });
+
+test("owned Node toolchain selectors follow the project engine", () => {
+  const packageJson = JSON.parse(
+    readFileSync(new URL("../package.json", import.meta.url), "utf8")
+  );
+  const lockfile = JSON.parse(
+    readFileSync(new URL("../package-lock.json", import.meta.url), "utf8")
+  );
+  const engine = packageJson.engines?.node;
+
+  assert.match(engine ?? "", /^\^26\.\d+\.\d+$/, "engine must select Node 26 only");
+  assert.ok(
+    Number(engine.split(".")[1]) >= 10,
+    "engine must stay at or above the qualified Node 26.10.0 minimum"
+  );
+  assert.equal(lockfile.packages[""].engines?.node, engine);
+  assert.equal(
+    readFileSync(new URL("../.nvmrc", import.meta.url), "utf8").trim(),
+    engine.slice(1).split(".")[0]
+  );
+  assert.match(
+    readFileSync(new URL("../.npmrc", import.meta.url), "utf8"),
+    /^engine-strict=true$/m
+  );
+
+  const exactVersion = engine.slice(1);
+  const sharedNodeWorkflow =
+    /\/reusable-(?:node-(?:lint|build|test)|prettier|markdown-lint|ai-instructions)\.yml@/;
+  let selectedJobs = 0;
+
+  for (const entry of readdirSync(workflowsDirectory, { withFileTypes: true })) {
+    if (!entry.isFile() || !/\.ya?ml$/.test(entry.name)) continue;
+
+    const workflow = parseDocument(
+      readFileSync(workflowPath(workflowsDirectory, entry.name), "utf8")
+    ).toJS();
+
+    for (const [jobName, job] of Object.entries(workflow.jobs ?? {})) {
+      if (sharedNodeWorkflow.test(job.uses ?? "")) {
+        assert.equal(
+          job.with?.["node-version"],
+          exactVersion,
+          `${entry.name}:${jobName} must select the engine floor explicitly`
+        );
+        selectedJobs++;
+      }
+
+      for (const step of job.steps ?? []) {
+        if (!/^actions\/setup-node@/.test(step.uses ?? "")) continue;
+        assert.equal(
+          step.with?.["node-version"],
+          exactVersion,
+          `${entry.name}:${jobName} must select the engine floor explicitly`
+        );
+        selectedJobs++;
+      }
+    }
+  }
+
+  assert.ok(selectedJobs > 0, "expected owned Node workflow selectors");
+
+  for (const path of [
+    "README.md",
+    "CONTRIBUTING.md",
+    "AGENTS.md",
+    ".github/copilot-instructions.md",
+  ]) {
+    const source = readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
+    assert.match(source, /Node(?:\.js)? 26/, `${path} must prescribe Node 26`);
+    assert.doesNotMatch(source, /Node(?:\.js)? (?:22|24|27)\b/);
+  }
+});

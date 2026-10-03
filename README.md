@@ -10,33 +10,38 @@ SPDX-License-Identifier: CC0-1.0
 [![Quality Gates](https://github.com/SecPal/secpal.app/actions/workflows/quality.yml/badge.svg)](https://github.com/SecPal/secpal.app/actions/workflows/quality.yml)
 [![License](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
-## About
+This repository implements the public [secpal.app](https://secpal.app) website:
+company and product information, legal pages, and contact paths. It owns the
+public site's source, assets, static generation, and deployable website artifact.
 
-This repository implements the public [secpal.app](https://secpal.app) website.
-It presents public product and company information, legal and contact pages, and
-localized website routes as a statically generated site.
+The site uses [Astro](https://astro.build),
+[Tailwind CSS](https://tailwindcss.com), and strict TypeScript, with English and
+German public routes and minimal client-side JavaScript.
 
-## Repository responsibility
+## Repository boundaries
 
-This repository owns the public site's source, site-specific frontend assets,
-static generation, and deployable website artifact. It favors Astro-rendered
-markup with minimal client-side JavaScript.
+The SecPal product application, API, Android client, public API contracts,
+self-hosting infrastructure, and organization governance have separate owners:
 
-It does not contain the SecPal product application, backend API, Android client,
-self-hosting infrastructure, organization governance, or product-family
-architecture. Those responsibilities belong to the related repositories below.
+- [SecPal/frontend](https://github.com/SecPal/frontend) — browser/PWA product
+  application.
+- [SecPal/api](https://github.com/SecPal/api) — product backend/API implementation.
+- [SecPal/android](https://github.com/SecPal/android) — Android product client.
+- [SecPal/contracts](https://github.com/SecPal/contracts) — public HTTP API
+  contracts.
+- [SecPal/deployment](https://github.com/SecPal/deployment) — product integration,
+  self-hosting, and deployment infrastructure.
+- [SecPal/.github](https://github.com/SecPal/.github) — organization governance,
+  shared policy, and public organization presentation. Its
+  [architecture navigation](https://github.com/SecPal/.github/blob/main/docs/architecture.md)
+  and [public status authority](https://github.com/SecPal/.github/blob/main/docs/public-status-semantics.md)
+  distinguish accepted architecture from implementation and operational evidence.
 
-## Technology
+## Local development
 
-The site uses [Astro](https://astro.build) and
-[Tailwind CSS](https://tailwindcss.com) with strict TypeScript. It includes
-English and German public routes; source configuration remains authoritative for
-the currently supported locales and routing behavior.
-
-## Quick start
-
-Use the Node.js version selected by [`.nvmrc`](.nvmrc), then install dependencies
-and start the development server:
+Use Node.js 26.10.0 or a newer Node 26 release. [`.nvmrc`](.nvmrc) selects the
+maintained line; [`package.json`](package.json) defines the minimum. Install
+dependencies and start the local server:
 
 ```bash
 nvm use
@@ -44,52 +49,37 @@ npm ci
 npm run dev
 ```
 
-Build and run the deterministic site tests with:
+Build the static site and run its deterministic tests with:
 
 ```bash
 npm run build
 npm test
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the contributor workflow and the
-maintained validation commands.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the contributor workflow and maintained
+validation commands, including the repository [preflight](scripts/preflight.sh).
 
 ## Release operations
 
-Site-specific release, rollback, and stable-deployment verification helpers live
-in [`scripts/`](scripts/). Their command-line help defines their operational
-interfaces. General SecPal product integration and self-hosting infrastructure
-belong to [SecPal/deployment](https://github.com/SecPal/deployment), not this
-public-site repository.
+The site-specific [release](scripts/release-stable.sh),
+[rollback](scripts/rollback-stable.sh), and
+[stable-deployment verification](scripts/check-stable.sh) helpers own the public
+website's operational interfaces; use each helper's `--help` for usage. General
+product deployment and self-hosting belong to
+[SecPal/deployment](https://github.com/SecPal/deployment).
 
-## Related repositories
-
-- [SecPal/.github](https://github.com/SecPal/.github) — organization governance,
-  shared policy, and the public GitHub profile.
-- [SecPal/frontend](https://github.com/SecPal/frontend) — browser and PWA product
-  application.
-- [SecPal/api](https://github.com/SecPal/api) — product backend.
-- [SecPal/android](https://github.com/SecPal/android) — Android product client.
-- [SecPal/contracts](https://github.com/SecPal/contracts) — public HTTP API
-  contract.
-- [SecPal/deployment](https://github.com/SecPal/deployment) — product integration,
-  self-hosting, and deployment infrastructure.
-
-## Contributing
+## Contributing and security
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) and the
-[Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
-
-## Security
-
-Do not report vulnerabilities in public issues. Follow the private reporting
-process in [SECURITY.md](SECURITY.md).
+[Code of Conduct](CODE_OF_CONDUCT.md) before contributing. Report vulnerabilities
+privately through the process in [SECURITY.md](SECURITY.md).
 
 ## License
 
 Repository-owned source is licensed under `AGPL-3.0-or-later` where indicated;
-see [LICENSE](LICENSE). File-level SPDX and [REUSE](REUSE.toml) metadata are
-authoritative.
+see [LICENSE](LICENSE). File-level SPDX headers and [REUSE metadata](REUSE.toml)
+define the applicable licenses.
 
-Components derived from Tailwind Plus material also remain subject to the
-separate [Tailwind Plus license](LICENSES/LicenseRef-TailwindPlus.txt).
+Tailwind Plus-derived components additionally use `LicenseRef-TailwindPlus`.
+The separate [Tailwind Plus license](LICENSES/LicenseRef-TailwindPlus.txt) contains
+the Personal and Team license terms published by Tailwind Labs.

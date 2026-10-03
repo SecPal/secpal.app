@@ -5,6 +5,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 # SecPal/secpal.app Copilot Instructions
 
+## Canonical Review And Signing
+
+Apply `AGENTS.md` and the organization-wide [review-acquisition rule](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md#531-initial-automated-review)
+and [SSH signing authority](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md#532-signing-authority).
+This compatibility mirror defines no separate lifecycle or signing authority.
+
 This file is a concise compatibility surface for tooling that automatically
 loads `.github/copilot-instructions.md`. Root `AGENTS.md` is the authoritative
 repository baseline.
@@ -17,8 +23,9 @@ semantics here.
 
 Repository-specific constraints:
 
-- Preserve the Node 22, Astro 7, Tailwind CSS v4, strict TypeScript, static-first
-  architecture and minimize client-side JavaScript.
+- Preserve the Node 26 (minimum 26.10.0; `.nvmrc` tracks major 26), Astro 7,
+  Tailwind CSS v4, strict TypeScript, static-first architecture and minimize
+  client-side JavaScript.
 - Preserve semantic HTML, accessibility, keyboard-safe interactions, responsive
   behavior, metadata, canonical links, assets, and generated static output.
 - Prefer Astro and platform primitives plus existing patterns before custom
@@ -29,8 +36,8 @@ Repository-specific constraints:
   and environments, and `app.secpal` only for the Android application ID.
 - Inspect the worktree before writes, preserve existing changes, and use no
   bypass or force-push.
-- Keep user commits cryptographically signed using a repository-accepted
-  signature format, with successful local and GitHub verification.
+- Keep new SecPal user commits SSH-signed with the existing identity and
+  successful local and GitHub verification. Provider signatures are evidence.
 - Update `CHANGELOG.md` for product changes rather than governance-only work.
 - Use the smallest applicable subset of `npm test`, `npm run lint`,
   `npm run check`, `npm run format:check`, `npm run build`, domain validation,
