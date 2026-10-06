@@ -88,6 +88,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- updated vulnerable build and lint dependencies to patched releases, including
+  targeted overrides for dependencies constrained by upstream version ranges
 - based conditional Markdown and REUSE preflight checks on the branch diff
   against the selected base, so clean pre-push indexes no longer skip checks
   for committed changes, license metadata, or non-ASCII Markdown paths, while
