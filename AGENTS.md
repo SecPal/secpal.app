@@ -9,18 +9,11 @@ This file is the authoritative, provider-neutral runtime baseline for this
 repository. Edit it first when repository-specific guidance changes. Keep the
 focused overlays below aligned only where their paths need the same constraint.
 
-## Canonical Work-Graph Governance
+## GitHub Collaboration
 
-The canonical
-[`SecPal/.github` work-graph contract](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md)
-is the single authority for hierarchy, dependencies, sibling ordering, derived
-states and selection, leaf and epic decomposition, delivery pull requests,
-finding classification, replanning, review and evidence semantics, and stop
-conditions.
-
-Use GitHub-native issue state and relationships as required by that contract.
-Do not redefine or mirror its generic semantics in this repository's
-instructions, issues, pull requests, tests, or planning documents.
+Use GitHub issues and their native relationships for scope and dependencies.
+Use pull requests, reviews, conversations, and required checks for delivery and
+merge decisions. Keep repository-specific guidance in this file.
 
 ## Focused Overlays
 
@@ -37,7 +30,7 @@ instructions, issues, pull requests, tests, or planning documents.
   existing changes, preserve the current scope, and never overwrite changes you
   did not make.
 - Never use bypasses such as `--no-verify` or force-push.
-- `SECPAL_SIGNING_FORMAT: SSH`; apply the [canonical signing authority](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md#532-signing-authority).
+- Sign commits with SSH using the existing signing identity.
   Preserve existing SSH keys and signing configuration. GitHub-generated
   signatures are provider evidence, not SecPal OpenPGP signing authority.
   Every PR commit must have GitHub `verification.verified == true`.
@@ -97,19 +90,18 @@ Domain policy is strict:
 - `secpal.dev` is for development, staging, testing, and examples.
 - `app.secpal` is only the Android application identifier.
 
-## Initial Automated Review
+## Pull Request Review
 
-Apply the [canonical review-acquisition rule](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md#531-initial-automated-review).
-These runtime assertions consume that owner; they define no separate lifecycle.
-
-- `PRIMARY_AUTOMATED_REVIEW_TRIGGER: DRAFT_TO_READY`
-- `PRIMARY_CODEX_COMMENT_TRIGGER_ALLOWED: NO`
-- `POST_READY_BOUNDED_COMMENT_FALLBACK: YES`
+Open a Draft pull request while work is in progress and mark it Ready when it
+is ready for review. Keep Ready pull requests Ready. Request another review
+directly when a code change or new evidence invalidates an earlier review.
+Address material findings with concrete evidence and satisfy native required
+reviews and checks before merging.
 
 ## Validation
 
-Select the smallest non-redundant evidence required by the canonical contract
-and the touched area. Observable site behavior may use a focused Node test,
+Select the smallest non-redundant evidence for the touched area. Observable
+site behavior may use a focused Node test,
 Astro check, generated static output, semantic or accessibility assertion,
 domain or canonical-link check, or build result. Governance-only prose,
 issue-body graph migration, formatting-only work, and behavior-preserving

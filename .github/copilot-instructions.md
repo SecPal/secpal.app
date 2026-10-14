@@ -5,21 +5,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 # SecPal/secpal.app Copilot Instructions
 
-## Canonical Review And Signing
+Root `AGENTS.md` is the authoritative repository baseline. This file is a
+concise compatibility surface for tooling that automatically loads
+`.github/copilot-instructions.md`.
 
-Apply `AGENTS.md` and the organization-wide [review-acquisition rule](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md#531-initial-automated-review)
-and [SSH signing authority](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md#532-signing-authority).
-This compatibility mirror defines no separate lifecycle or signing authority.
-
-This file is a concise compatibility surface for tooling that automatically
-loads `.github/copilot-instructions.md`. Root `AGENTS.md` is the authoritative
-repository baseline.
-
-The canonical
-[`SecPal/.github` work-graph contract](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md)
-is the only authority for generic work-graph, delivery, review, finding,
-replanning, evidence, and stop semantics. Follow it and do not duplicate those
-semantics here.
+Use GitHub issues and native relationships for scope and dependencies, and
+pull requests, reviews, conversations, and required checks for delivery.
+Follow the pull request review and SSH signing guidance in `AGENTS.md`.
 
 Repository-specific constraints:
 

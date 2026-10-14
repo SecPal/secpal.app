@@ -9,10 +9,9 @@ applyTo: "**"
 # secpal.app Runtime Overlay
 
 - Root `AGENTS.md` is the authoritative repository baseline.
-- The canonical
-  [`SecPal/.github` work-graph contract](https://github.com/SecPal/.github/blob/main/docs/work-graph-contract.md)
-  exclusively defines generic work-graph, delivery, review, finding,
-  replanning, evidence, and stop semantics. Do not restate them locally.
+- Use GitHub issues and native relationships for scope and dependencies, and
+  pull requests, reviews, conversations, and required checks for delivery.
+- Apply the pull request review guidance from `AGENTS.md`.
 - Preserve the static-first Astro and strict TypeScript architecture, semantic
   HTML, accessibility, keyboard safety, responsive behavior, metadata,
   canonical domains, asset integrity, and minimal client-side JavaScript.
