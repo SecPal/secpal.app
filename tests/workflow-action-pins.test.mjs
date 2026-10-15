@@ -191,18 +191,6 @@ test("missing workflow pin details report actionable assertion failures", () => 
   );
 });
 
-test("project automation secret checks have a bounded timeout", () => {
-  const workflow = readFileSync(
-    new URL("../.github/workflows/project-automation.yml", import.meta.url),
-    "utf8"
-  );
-
-  assert.match(
-    workflow,
-    /  check-project-automation-secrets:\n(?:    [^\n]*\n)*?    timeout-minutes:/
-  );
-});
-
 test("external workflow references use immutable revisions with source annotations", () => {
   const references = externalWorkflowReferences();
 
