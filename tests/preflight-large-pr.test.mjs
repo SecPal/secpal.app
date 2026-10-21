@@ -2,7 +2,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import assert from "node:assert/strict";
-import { chmod, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import {
+  chmod,
+  mkdir,
+  mkdtemp,
+  readFile,
+  rm,
+  writeFile,
+} from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -12,7 +19,7 @@ const preflightPath = new URL("../scripts/preflight.sh", import.meta.url);
 const preflight = await readFile(preflightPath, "utf8");
 const gitignore = await readFile(
   new URL("../.gitignore", import.meta.url),
-  "utf8",
+  "utf8"
 );
 const removedLargePrOverridePattern =
   /\.preflight-allow-large-pr|Large PR override/i;
@@ -49,12 +56,12 @@ elif [[ "\${1:-}" == "diff" && "\${2:-}" == "--shortstat" ]]; then
 elif [[ "\${1:-}" == "diff" && "\${2:-}" == "--stat" ]]; then
   printf ' 1 file changed, %s insertions(+)\\n' "$TEST_CHANGED_LINES"
 fi
-`,
+`
     );
     await writeExecutable(join(binDir, "npx"), "#!/usr/bin/env bash\nexit 0\n");
     await writeExecutable(
       join(binDir, "reuse"),
-      "#!/usr/bin/env bash\nexit 0\n",
+      "#!/usr/bin/env bash\nexit 0\n"
     );
 
     const result = spawnSync("bash", ["scripts/preflight.sh"], {
@@ -85,7 +92,10 @@ test("reports ordinary changes normally even with a stale local override file", 
 test("reports oversized changes as advisory without an override", async () => {
   const output = await runPreflight(601);
 
-  assert.match(output, /WARNING: PR is large \(601 lines changed, limit is 600\)/);
+  assert.match(
+    output,
+    /WARNING: PR is large \(601 lines changed, limit is 600\)/
+  );
   assert.doesNotMatch(output, removedLargePrOverridePattern);
 });
 
@@ -97,6 +107,6 @@ test("does not retain the obsolete local override mechanism", () => {
 test("does not confuse unrelated override wording with the removed mechanism", () => {
   assert.doesNotMatch(
     "An unrelated configuration override remains supported.",
-    removedLargePrOverridePattern,
+    removedLargePrOverridePattern
   );
 });

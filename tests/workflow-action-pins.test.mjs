@@ -217,7 +217,11 @@ test("owned Node toolchain selectors follow the project engine", () => {
   );
   const engine = packageJson.engines?.node;
 
-  assert.match(engine ?? "", /^\^26\.\d+\.\d+$/, "engine must select Node 26 only");
+  assert.match(
+    engine ?? "",
+    /^\^26\.\d+\.\d+$/,
+    "engine must select Node 26 only"
+  );
   assert.ok(
     Number(engine.split(".")[1]) >= 10,
     "engine must stay at or above the qualified Node 26.10.0 minimum"
@@ -237,7 +241,9 @@ test("owned Node toolchain selectors follow the project engine", () => {
     /\/reusable-(?:node-(?:lint|build|test)|prettier|markdown-lint|ai-instructions)\.yml@/;
   let selectedJobs = 0;
 
-  for (const entry of readdirSync(workflowsDirectory, { withFileTypes: true })) {
+  for (const entry of readdirSync(workflowsDirectory, {
+    withFileTypes: true,
+  })) {
     if (!entry.isFile() || !/\.ya?ml$/.test(entry.name)) continue;
 
     const workflow = parseDocument(

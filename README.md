@@ -77,6 +77,21 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and the
 [Code of Conduct](CODE_OF_CONDUCT.md) before contributing. Report vulnerabilities
 privately through the process in [SECURITY.md](SECURITY.md).
 
+The existing required Astro Build check admits only successful CLEAN evidence
+from the immutable organization Trivy repository scanner before installing
+dependencies or building. The Uberspace workflow independently repeats that
+admission for its exact main commit before build and SSH credential access;
+it does not infer acceptance from a separate quality run. Failed, skipped,
+cancelled, missing, stale or non-CLEAN scanning cannot authorize these steps.
+
+The shared action owns vulnerability (including development dependency),
+secret and supported misconfiguration scanning, database freshness, v4
+evidence, policy and redaction. It retains only bounded secret-safe results
+for 14 days. Astro, domain and accessibility checks remain separate owners.
+Actions definitions remain candidate-controlled and subject to the existing
+GitHub protections and maintainer review; this is not independent, tamper-proof
+workflow enforcement.
+
 ## License
 
 Repository-owned source is licensed under `AGPL-3.0-or-later` where indicated;

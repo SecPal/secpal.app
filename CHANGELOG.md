@@ -12,6 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- Require pinned organization Trivy v4 CLEAN admission in the existing required
+  Astro Build check and independently in the main-only Uberspace deployment
+  before building or exposing SSH credentials, preserving shared policy,
+  freshness and secret-safe evidence ownership (closes #293).
+
 ### Added
 
 - added a localized homepage development-status section that distinguishes
