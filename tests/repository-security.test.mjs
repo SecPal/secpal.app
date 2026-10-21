@@ -38,7 +38,7 @@ for (const [name, job] of boundaries) {
     const scan = steps.find((step) => step.id === "repository-security");
     assert.equal(
       scan?.uses,
-      "SecPal/.github/.github/actions/trivy-repository-scan@e89bf9b04bd90bd29b6909994bb7431b56ce5aa2"
+      "SecPal/.github/.github/actions/trivy-repository-scan@55bcdb6f00eb7d552da206f83fcdc87cf2c43375"
     );
     for (const key of ["with", "env", "if", "continue-on-error"]) {
       assert.equal(Object.hasOwn(scan, key), false);
