@@ -58,11 +58,45 @@ jobs:
       build-command: "npm run check"
 
   build:
-    name: Astro Build
-    uses: SecPal/.github/.github/workflows/reusable-node-build.yml@35b064b1df08f4fd02fb982117dadac3e4edc36d # main
-    with:
-      node-version: "26.10.0"
-      build-command: "npm run build"
+    # Preserve the existing required check while admitting security before build.
+    name: Astro Build / Build Project
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Scan repository security
+        id: repository-security
+        # yamllint disable-line rule:line-length
+        uses: SecPal/.github/.github/actions/trivy-repository-scan@e89bf9b04bd90bd29b6909994bb7431b56ce5aa2 # main
+
+      - name: Require clean repository security
+        if: ${{ always() }}
+        shell: bash
+        env:
+          SCAN_OUTCOME: ${{ steps.repository-security.outcome }}
+          GATE_STATE: ${{ steps.repository-security.outputs.gate-state }}
+        run: |
+          test "$SCAN_OUTCOME" = success
+          test "$GATE_STATE" = CLEAN
+
+      - name: Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "26.10.0"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
 
   test:
     name: Node Tests
