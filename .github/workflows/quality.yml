@@ -18,41 +18,41 @@ permissions:
 jobs:
   reuse:
     name: Check REUSE Compliance
-    uses: SecPal/.github/.github/workflows/reusable-reuse.yml@86c921a638669c7c9e9995bee276cf672e126bef # main
+    uses: SecPal/.github/.github/workflows/reusable-reuse.yml@57a1b7ce698a2ef7e253a05e6cf008b9fdab646c # main
 
   license-compatibility:
     name: Check License Compatibility
     # yamllint disable-line rule:line-length
-    uses: SecPal/.github/.github/workflows/reusable-license-compatibility.yml@86c921a638669c7c9e9995bee276cf672e126bef # main
+    uses: SecPal/.github/.github/workflows/reusable-license-compatibility.yml@57a1b7ce698a2ef7e253a05e6cf008b9fdab646c # main
 
   prettier:
     name: Formatting Check
-    uses: SecPal/.github/.github/workflows/reusable-prettier.yml@86c921a638669c7c9e9995bee276cf672e126bef # main
+    uses: SecPal/.github/.github/workflows/reusable-prettier.yml@57a1b7ce698a2ef7e253a05e6cf008b9fdab646c # main
     with:
       node-version: "26.10.0"
 
   markdown-lint:
     name: Markdown Lint
-    uses: SecPal/.github/.github/workflows/reusable-markdown-lint.yml@86c921a638669c7c9e9995bee276cf672e126bef # main
+    uses: SecPal/.github/.github/workflows/reusable-markdown-lint.yml@57a1b7ce698a2ef7e253a05e6cf008b9fdab646c # main
     with:
       governance-ref: "6f8e13a7a62cee356811a7f58d6b92119941652f"
       node-version: "26.10.0"
 
   ai-instructions:
     name: AI Instructions
-    uses: SecPal/.github/.github/workflows/reusable-ai-instructions.yml@86c921a638669c7c9e9995bee276cf672e126bef # main
+    uses: SecPal/.github/.github/workflows/reusable-ai-instructions.yml@57a1b7ce698a2ef7e253a05e6cf008b9fdab646c # main
     with:
       node-version: "26.10.0"
 
   eslint:
     name: ESLint
-    uses: SecPal/.github/.github/workflows/reusable-node-lint.yml@86c921a638669c7c9e9995bee276cf672e126bef # main
+    uses: SecPal/.github/.github/workflows/reusable-node-lint.yml@57a1b7ce698a2ef7e253a05e6cf008b9fdab646c # main
     with:
       node-version: "26.10.0"
 
   astro-check:
     name: Astro TypeScript Check
-    uses: SecPal/.github/.github/workflows/reusable-node-build.yml@86c921a638669c7c9e9995bee276cf672e126bef # main
+    uses: SecPal/.github/.github/workflows/reusable-node-build.yml@57a1b7ce698a2ef7e253a05e6cf008b9fdab646c # main
     with:
       node-version: "26.10.0"
       build-command: "npm run check"
@@ -74,7 +74,7 @@ jobs:
       - name: Scan repository security
         id: repository-security
         # yamllint disable-line rule:line-length
-        uses: SecPal/.github/.github/actions/trivy-repository-scan@86c921a638669c7c9e9995bee276cf672e126bef # main
+        uses: SecPal/.github/.github/actions/trivy-repository-scan@57a1b7ce698a2ef7e253a05e6cf008b9fdab646c # main
 
       - name: Require clean repository security
         if: ${{ always() }}
@@ -100,7 +100,7 @@ jobs:
 
   test:
     name: Node Tests
-    uses: SecPal/.github/.github/workflows/reusable-node-test.yml@86c921a638669c7c9e9995bee276cf672e126bef # main
+    uses: SecPal/.github/.github/workflows/reusable-node-test.yml@57a1b7ce698a2ef7e253a05e6cf008b9fdab646c # main
     with:
       node-version: "26.10.0"
       test-command: "npm test"
