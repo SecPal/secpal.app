@@ -42,7 +42,7 @@ const cards = [
     badgeText: "BUILT IN PUBLIC · OPEN SOURCE",
     badgeHorizontalPadding: 96,
     headline: "SecPal",
-    subheadline: "A guard’s best friend",
+    subheadline: "A guard's best friend",
     bodyLines: [
       "Less paperwork. Fewer fragmented tools.",
       "Clearer workflows for security operations.",
@@ -57,7 +57,7 @@ const cards = [
     badgeText: "ÖFFENTLICH ENTWICKELT · OPEN SOURCE",
     badgeHorizontalPadding: 112,
     headline: "SecPal",
-    subheadline: "A guard’s best friend",
+    subheadline: "A guard's best friend",
     bodyLines: [
       "Weniger Zettelwirtschaft. Weniger Medienbrüche.",
       "Klarere Abläufe für den Sicherheitsdienst.",
