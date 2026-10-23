@@ -31,7 +31,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   <text x="144" y="144" fill="#d7f3ff" font-size="20" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif" letter-spacing="0.08em">BUILT IN PUBLIC · OPEN SOURCE</text>
 
   <text x="112" y="286" fill="#ffffff" font-size="104" font-weight="700" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">SecPal</text>
-  <text x="112" y="344" fill="#8bdcff" font-size="40" font-weight="600" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">A guard’s best friend</text>
+  <text x="112" y="344" fill="#8bdcff" font-size="40" font-weight="600" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">A guard&apos;s best friend</text>
 
   <text x="112" y="426" fill="#e2edf6" font-size="32" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">Less paperwork. Fewer fragmented tools.</text>
   <text x="112" y="470" fill="#e2edf6" font-size="32" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">Clearer workflows for security operations.</text>

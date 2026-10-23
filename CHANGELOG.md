@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Corrected the official SecPal slogan apostrophe in homepage metadata, package
+  metadata, and generated social previews to match the central brand authority
+  (closes #334).
+
 ### Security
 
 - Require pinned organization Trivy v4 CLEAN admission in the existing required
