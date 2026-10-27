@@ -122,3 +122,5 @@ Before a commit or pull request, announce the applicable checks, stop on the
 first failure, and record the evidence actually produced. Preserve executable
 workflow pin validation even where prose guidance is awaiting separate
 alignment.
+
+For evidence and external-system architecture, follow the [canonical Evidence Architecture contract](https://github.com/SecPal/.github/blob/main/docs/evidence-architecture-contract.md).
