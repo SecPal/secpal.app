@@ -50,7 +50,7 @@
     "eslint-plugin-astro": "^3.2.1",
     "markdownlint-cli": "0.50.0",
     "prettier": "^3.9.10",
-    "prettier-plugin-astro": "^1.1.1",
+    "prettier-plugin-astro": "^1.1.2",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.0",
     "typescript": "6.0.x",
