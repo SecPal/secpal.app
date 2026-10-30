@@ -45,7 +45,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@tailwindcss/vite": "^4.3.3",
-    "@typescript-eslint/parser": "^8.72.0",
+    "@typescript-eslint/parser": "^8.72.1",
     "eslint": "^10.13.0",
     "eslint-plugin-astro": "^3.2.1",
     "markdownlint-cli": "0.50.0",
