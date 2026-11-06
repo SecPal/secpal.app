@@ -153,3 +153,23 @@ test("publication stays main-only with credentials and atomic SSH after security
   assert.match(steps[publish].run, /UserKnownHostsFile=/);
   assert.match(steps[publish].run, /deploy-secpal-app \$REVISION/);
 });
+
+test("CI-only deliveries do not publish the website", () => {
+  assert.deepEqual(deployment.on.push["paths-ignore"], [
+    ".github/**",
+    "tests/**",
+  ]);
+  assert.ok(Object.hasOwn(deployment.on, "workflow_dispatch"));
+  assert.deepEqual(deployment.on.push.branches, ["main"]);
+  for (const path of [
+    "src/pages/index.astro",
+    "public/favicon.svg",
+    "package-lock.json",
+  ]) {
+    assert.ok(
+      !deployment.on.push["paths-ignore"].some((pattern) =>
+        path.startsWith(pattern.slice(0, -2))
+      )
+    );
+  }
+});
