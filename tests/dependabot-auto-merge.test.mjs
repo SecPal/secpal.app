@@ -5,7 +5,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import { parse } from "yaml";
 
-test("accepted enrollment reconciles every PR and remains phase one until protection is ready", () => {
+test("accepted enrollment reconciles every PR under protected phase two", () => {
   const w = parse(
     readFileSync(".github/workflows/dependabot-auto-merge.yml", "utf8")
   );
@@ -32,7 +32,7 @@ test("accepted enrollment reconciles every PR and remains phase one until protec
   );
   assert.equal(job.steps, undefined);
   assert.equal(job.secrets, undefined);
-  assert.equal(job.with.phase, "1");
+  assert.equal(job.with.phase, "2");
   assert.equal(job.with["merge-method"], "squash");
   assert.equal(job.with["allowed-ecosystems"], "github_actions,npm_and_yarn");
   assert.deepEqual(w.permissions, {
@@ -41,4 +41,20 @@ test("accepted enrollment reconciles every PR and remains phase one until protec
     checks: "read",
     statuses: "read",
   });
+});
+
+test("Actions groups are homogeneous and shared immutable pins remain manual", () => {
+  const config = parse(readFileSync(".github/dependabot.yml", "utf8"));
+  const groups = config.updates.find(
+    (entry) => entry["package-ecosystem"] === "github-actions"
+  ).groups;
+  assert.deepEqual(groups["shared-workflow-pins"].patterns, [
+    "SecPal/.github*",
+  ]);
+  for (const kind of ["patch", "minor", "major"]) {
+    assert.deepEqual(groups[`github-actions-${kind}`]["update-types"], [kind]);
+    assert.deepEqual(groups[`github-actions-${kind}`]["exclude-patterns"], [
+      "SecPal/.github*",
+    ]);
+  }
 });

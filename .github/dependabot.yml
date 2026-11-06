@@ -31,9 +31,20 @@ updates:
       timezone: "Europe/Berlin"
     open-pull-requests-limit: 10
     groups:
-      github-actions:
-        patterns:
-          - "*"
+      shared-workflow-pins:
+        patterns: ["SecPal/.github*"]
+      github-actions-patch:
+        patterns: ["*"]
+        exclude-patterns: ["SecPal/.github*"]
+        update-types: ["patch"]
+      github-actions-minor:
+        patterns: ["*"]
+        exclude-patterns: ["SecPal/.github*"]
+        update-types: ["minor"]
+      github-actions-major:
+        patterns: ["*"]
+        exclude-patterns: ["SecPal/.github*"]
+        update-types: ["major"]
     labels:
       - "dependencies"
       - "github-actions"
