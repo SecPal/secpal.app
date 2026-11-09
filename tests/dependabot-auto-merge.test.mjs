@@ -22,7 +22,7 @@ test("accepted enrollment reconciles every PR under protected phase two", () => 
   ])
     assert.ok(w.on.pull_request_target.types.includes(event));
   assert.equal(w.on.pull_request, undefined);
-  assert.equal(w["cache-mode"], undefined);
+  assert.equal(w["cache-mode"], "none");
   assert.equal(w.concurrency["cancel-in-progress"], true);
   const job = w.jobs["auto-merge"];
   assert.equal(job.if, undefined);
