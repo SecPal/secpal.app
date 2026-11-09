@@ -40,10 +40,12 @@
   },
   "dependencies": {
     "@tailwindplus/elements": "^1.0.0",
-    "astro": "^7.4.5"
+    "astro": "^7.4.7"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@emnapi/core": "1.11.3",
+    "@emnapi/runtime": "1.11.3",
     "@tailwindcss/vite": "^4.3.4",
     "@typescript-eslint/parser": "^8.72.1",
     "eslint": "^10.14.0",
