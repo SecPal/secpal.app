@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Keep the Astro checker's required WebAssembly runtime peers installed during
+  clean dependency installs so valid Astro PATCH updates pass type checking.
+
 - Corrected the official SecPal slogan apostrophe in homepage metadata, package
   metadata, and generated social previews to match the central brand authority
   (closes #334).
