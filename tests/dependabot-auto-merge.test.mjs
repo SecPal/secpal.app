@@ -26,9 +26,9 @@ test("accepted enrollment reconciles every PR under protected phase two", () => 
   assert.equal(w.concurrency["cancel-in-progress"], true);
   const job = w.jobs["auto-merge"];
   assert.equal(job.if, undefined);
-  assert.match(
+  assert.equal(
     job.uses,
-    /^SecPal\/\.github\/\.github\/workflows\/reusable-dependabot-auto-merge\.yml@[a-f0-9]{40}$/
+    "SecPal/.github/.github/workflows/reusable-dependabot-auto-merge.yml@31555f23d459031248006f77785d872bc3947127"
   );
   assert.equal(job.steps, undefined);
   assert.equal(job.secrets, undefined);
