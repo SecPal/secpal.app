@@ -50,3 +50,16 @@ updates:
       - "github-actions"
       - "dependabot"
     rebase-strategy: "auto"
+
+  # pre-commit - Remote hook revisions
+  - package-ecosystem: "pre-commit"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "04:00"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "dependabot"
+    rebase-strategy: "auto"
