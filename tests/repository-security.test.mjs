@@ -158,6 +158,7 @@ test("CI-only deliveries do not publish the website", () => {
   assert.deepEqual(deployment.on.push["paths-ignore"], [
     ".github/**",
     "tests/**",
+    ".pre-commit-config.yaml",
   ]);
   assert.ok(Object.hasOwn(deployment.on, "workflow_dispatch"));
   assert.deepEqual(deployment.on.push.branches, ["main"]);
@@ -168,7 +169,9 @@ test("CI-only deliveries do not publish the website", () => {
   ]) {
     assert.ok(
       !deployment.on.push["paths-ignore"].some((pattern) =>
-        path.startsWith(pattern.slice(0, -2))
+        pattern.endsWith("/**")
+          ? path.startsWith(pattern.slice(0, -2))
+          : path === pattern
       )
     );
   }
