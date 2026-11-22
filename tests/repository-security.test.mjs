@@ -16,6 +16,7 @@ const load = (name) =>
   );
 const quality = load("quality.yml");
 const deployment = load("deploy-uberspace.yml");
+const dailyWorkflow = "daily-repository-security.yml";
 const boundaries = [
   ["required quality build", quality.jobs.build],
   ["Uberspace publication", deployment.jobs.deploy],
@@ -116,6 +117,95 @@ test("quality preserves its required build identity and never skips it through d
   assert.deepEqual(quality.on.pull_request.branches, ["main"]);
 });
 
+test("CodeQL retains its independent schedule and source triggers", () => {
+  const codeql = load("codeql.yml");
+  assert.deepEqual(codeql.on, {
+    push: { branches: ["main"] },
+    pull_request: { branches: ["main"] },
+    schedule: [{ cron: "0 2 * * *" }],
+  });
+  assert.deepEqual(codeql.jobs.analyze.strategy.matrix.language, [
+    "javascript-typescript",
+  ]);
+});
+
+test("daily assessment only reuses the required source scan and CLEAN gate", () => {
+  const daily = load(dailyWorkflow);
+  assert.deepEqual(Object.keys(daily).sort(), [
+    "jobs",
+    "name",
+    "on",
+    "permissions",
+  ]);
+  assert.deepEqual(daily.on, {
+    schedule: [{ cron: "37 3 * * *" }],
+    workflow_dispatch: null,
+  });
+  assert.deepEqual(daily.permissions, { contents: "read" });
+  assert.deepEqual(Object.keys(daily.jobs), ["repository-security"]);
+  const job = daily.jobs["repository-security"];
+  assert.deepEqual(Object.keys(job).sort(), [
+    "name",
+    "runs-on",
+    "steps",
+    "timeout-minutes",
+  ]);
+  const qualityBuild = quality.jobs.build;
+  assert.equal(job["runs-on"], qualityBuild["runs-on"]);
+  assert.equal(job["timeout-minutes"], qualityBuild["timeout-minutes"]);
+  const [guard, ...assessment] = job.steps;
+  assert.deepEqual(Object.keys(guard).sort(), ["name", "run", "shell"]);
+  assert.equal(guard.shell, "bash");
+  // These are the exact checkout, immutable scanner, and shell gate exercised above.
+  assert.deepEqual(assessment, qualityBuild.steps.slice(0, 3));
+});
+
+test("daily schedule and diagnostic admit only exact protected website main", () => {
+  const guard = load(dailyWorkflow).jobs["repository-security"].steps[0];
+  const cases = [
+    {},
+    { GITHUB_EVENT_NAME: "push" },
+    { GITHUB_REPOSITORY: "Other/secpal.app" },
+    { GITHUB_REF: "refs/heads/topic" },
+    { GITHUB_REF: "refs/tags/main" },
+    { GITHUB_REF_PROTECTED: "false" },
+    { GITHUB_REF_PROTECTED: "" },
+    { GITHUB_SHA: "main" },
+    { GITHUB_SHA: "a".repeat(39) },
+    { GITHUB_SHA: "A".repeat(40) },
+    { GITHUB_SHA: "" },
+  ];
+  for (const event of ["schedule", "workflow_dispatch"]) {
+    for (const [index, changes] of cases.entries()) {
+      const result = spawnSync(
+        "bash",
+        ["--noprofile", "--norc", "-eo", "pipefail", "-c", guard.run],
+        {
+          encoding: "utf8",
+          env: {
+            GITHUB_EVENT_NAME: event,
+            GITHUB_REPOSITORY: "SecPal/secpal.app",
+            GITHUB_REF: "refs/heads/main",
+            GITHUB_REF_PROTECTED: "true",
+            GITHUB_SHA: "a".repeat(40),
+            ...changes,
+          },
+        }
+      );
+      assert.equal(result.status, index === 0 ? 0 : 1, event + "/" + index);
+      assert.equal(result.stdout, "");
+      if (index === 0) {
+        assert.equal(result.stderr, "");
+      } else {
+        assert.match(
+          result.stderr,
+          /requires protected SecPal\/secpal\.app main/
+        );
+      }
+    }
+  }
+});
+
 test("publication stays main-only with credentials and atomic SSH after security admission", () => {
   const job = deployment.jobs.deploy;
   const steps = job.steps;
@@ -162,17 +252,19 @@ test("CI-only deliveries do not publish the website", () => {
   ]);
   assert.ok(Object.hasOwn(deployment.on, "workflow_dispatch"));
   assert.deepEqual(deployment.on.push.branches, ["main"]);
+  const ignored = (path) =>
+    deployment.on.push["paths-ignore"].some((pattern) =>
+      pattern.endsWith("/**")
+        ? path.startsWith(pattern.slice(0, -2))
+        : path === pattern
+    );
+  assert.ok(ignored(".github/workflows/" + dailyWorkflow));
+  assert.ok(ignored("tests/repository-security.test.mjs"));
   for (const path of [
     "src/pages/index.astro",
     "public/favicon.svg",
     "package-lock.json",
   ]) {
-    assert.ok(
-      !deployment.on.push["paths-ignore"].some((pattern) =>
-        pattern.endsWith("/**")
-          ? path.startsWith(pattern.slice(0, -2))
-          : path === pattern
-      )
-    );
+    assert.ok(!ignored(path));
   }
 });

@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: 2026 SecPal
+# SPDX-License-Identifier: CC0-1.0
+
+---
+name: Daily Repository Security
+
+# yamllint disable-line rule:truthy
+on:
+  schedule:
+    - cron: "37 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  repository-security:
+    name: Assess accepted source
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Require an accepted source event
+        shell: bash
+        run: |
+          if [[ ( "$GITHUB_EVENT_NAME" != schedule && "$GITHUB_EVENT_NAME" != workflow_dispatch ) ||
+                "$GITHUB_REPOSITORY" != SecPal/secpal.app ||
+                "$GITHUB_REF" != refs/heads/main ||
+                "$GITHUB_REF_PROTECTED" != true ||
+                ! "$GITHUB_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            printf 'Daily source security requires protected SecPal/secpal.app main and an exact event commit.\n' >&2
+            exit 1
+          fi
+
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Scan repository security
+        id: repository-security
+        # yamllint disable-line rule:line-length
+        uses: SecPal/.github/.github/actions/trivy-repository-scan@482d55cf6732dd27c7075283b2a8055259f5c3c6 # main
+
+      - name: Require clean repository security
+        if: ${{ always() }}
+        shell: bash
+        env:
+          SCAN_OUTCOME: ${{ steps.repository-security.outcome }}
+          GATE_STATE: ${{ steps.repository-security.outputs.gate-state }}
+        run: |
+          test "$SCAN_OUTCOME" = success
+          test "$GATE_STATE" = CLEAN
