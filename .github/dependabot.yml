@@ -31,6 +31,10 @@ updates:
       timezone: "Europe/Berlin"
     open-pull-requests-limit: 10
     groups:
+      shared-no-op-workflow-pins:
+        patterns:
+          - "SecPal/.github/.github/workflows/reusable-check-conflict-markers.yml"
+          - "SecPal/.github/.github/workflows/reusable-pr-size.yml"
       shared-workflow-pins:
         patterns: ["SecPal/.github*"]
       github-actions-patch:

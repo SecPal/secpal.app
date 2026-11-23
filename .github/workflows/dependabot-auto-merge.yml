@@ -39,9 +39,11 @@ permissions:
 jobs:
   auto-merge:
     # yamllint disable-line rule:line-length
-    uses: SecPal/.github/.github/workflows/reusable-dependabot-auto-merge.yml@482d55cf6732dd27c7075283b2a8055259f5c3c6 # main
+    uses: SecPal/.github/.github/workflows/reusable-dependabot-auto-merge.yml@7bc1c3f16f07dcc9cfa91b414d66a16ae27c9318 # main
     with:
       allowed-ecosystems: "github_actions,npm_and_yarn,pre_commit"
       pre-commit-path: ".pre-commit-config.yaml"
+      shared-sha-workflow-paths: >-
+        [".github/workflows/check-conflict-markers.yml",".github/workflows/pr-size.yml"]
       phase: "2" # Phase 2: verified PATCH and MINOR updates
       merge-method: "squash" # Use squash merge for cleaner history

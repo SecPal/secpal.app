@@ -39,6 +39,10 @@ test("accepted enrollment reconciles every PR under protected phase two", () => 
     "github_actions,npm_and_yarn,pre_commit"
   );
   assert.equal(job.with["pre-commit-path"], ".pre-commit-config.yaml");
+  assert.deepEqual(JSON.parse(job.with["shared-sha-workflow-paths"]), [
+    ".github/workflows/check-conflict-markers.yml",
+    ".github/workflows/pr-size.yml",
+  ]);
   assert.deepEqual(w.permissions, {
     contents: "write",
     "pull-requests": "write",
@@ -47,11 +51,16 @@ test("accepted enrollment reconciles every PR under protected phase two", () => 
   });
 });
 
-test("Actions groups are homogeneous and shared immutable pins remain manual", () => {
+test("Actions groups isolate exact no-op candidates from manual shared pins", () => {
   const config = parse(readFileSync(".github/dependabot.yml", "utf8"));
   const groups = config.updates.find(
     (entry) => entry["package-ecosystem"] === "github-actions"
   ).groups;
+  assert.equal(Object.keys(groups)[0], "shared-no-op-workflow-pins");
+  assert.deepEqual(groups["shared-no-op-workflow-pins"].patterns, [
+    "SecPal/.github/.github/workflows/reusable-check-conflict-markers.yml",
+    "SecPal/.github/.github/workflows/reusable-pr-size.yml",
+  ]);
   assert.deepEqual(groups["shared-workflow-pins"].patterns, [
     "SecPal/.github*",
   ]);
