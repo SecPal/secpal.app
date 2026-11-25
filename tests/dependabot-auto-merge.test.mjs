@@ -31,7 +31,14 @@ test("accepted enrollment reconciles every PR under protected phase two", () => 
     "SecPal/.github/.github/workflows/reusable-dependabot-auto-merge.yml"
   );
   assert.equal(job.steps, undefined);
-  assert.equal(job.secrets, undefined);
+  assert.deepEqual(job.secrets, {
+    "dependabot-merger-private-key":
+      "${{ secrets.DEPENDABOT_MERGER_PRIVATE_KEY }}",
+  });
+  assert.equal(
+    job.with["publisher-events"],
+    "${{ vars.DEPENDABOT_MERGER_APP_ID != '' }}"
+  );
   assert.equal(job.with.phase, "2");
   assert.equal(job.with["merge-method"], "squash");
   assert.equal(
