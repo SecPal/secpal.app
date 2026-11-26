@@ -58,23 +58,20 @@ test("accepted enrollment reconciles every PR under protected phase two", () => 
   });
 });
 
-test("Actions groups isolate exact no-op candidates from manual shared pins", () => {
+test("Actions groups leave every shared component independent", () => {
   const config = parse(readFileSync(".github/dependabot.yml", "utf8"));
   const groups = config.updates.find(
     (entry) => entry["package-ecosystem"] === "github-actions"
   ).groups;
-  assert.equal(Object.keys(groups)[0], "shared-no-op-workflow-pins");
-  assert.deepEqual(groups["shared-no-op-workflow-pins"].patterns, [
-    "SecPal/.github/.github/workflows/reusable-check-conflict-markers.yml",
-    "SecPal/.github/.github/workflows/reusable-pr-size.yml",
-  ]);
-  assert.deepEqual(groups["shared-workflow-pins"].patterns, [
-    "SecPal/.github*",
+  assert.deepEqual(Object.keys(groups).sort(), [
+    "github-actions-major",
+    "github-actions-minor",
+    "github-actions-patch",
   ]);
   for (const kind of ["patch", "minor", "major"]) {
     assert.deepEqual(groups[`github-actions-${kind}`]["update-types"], [kind]);
     assert.deepEqual(groups[`github-actions-${kind}`]["exclude-patterns"], [
-      "SecPal/.github*",
+      "SecPal/.github/*",
     ]);
   }
 });
