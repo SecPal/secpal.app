@@ -52,6 +52,7 @@ test("accepted enrollment reconciles every PR under protected phase two", () => 
     "pull-requests": "write",
     checks: "read",
     statuses: "read",
+    attestations: "read",
   });
 });
 
