@@ -33,8 +33,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   <text x="112" y="286" fill="#ffffff" font-size="104" font-weight="700" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">SecPal</text>
   <text x="112" y="344" fill="#8bdcff" font-size="40" font-weight="600" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">A guard&apos;s best friend</text>
 
-  <text x="112" y="426" fill="#e2edf6" font-size="32" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">Less paperwork. Fewer fragmented tools.</text>
-  <text x="112" y="470" fill="#e2edf6" font-size="32" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">Clearer workflows for security operations.</text>
+  <text x="112" y="426" fill="#e2edf6" font-size="32" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">For professional security operations.</text>
+  <text x="112" y="470" fill="#e2edf6" font-size="32" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">Under active development.</text>
 
   <rect x="112" y="500" width="252" height="36" rx="18" fill="url(#accent)" opacity="0.96" />
   <text x="138" y="524" fill="#081019" font-size="24" font-weight="700" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif" letter-spacing="0.02em">secpal.app</text>

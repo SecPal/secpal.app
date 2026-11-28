@@ -1,6 +1,7 @@
 ---
 // SPDX-FileCopyrightText: 2026 SecPal
 // SPDX-License-Identifier: AGPL-3.0-or-later
+import { useTranslations } from "../../i18n/index.ts";
 import Base from "../../layouts/Base.astro";
 import Nav from "../../components/Nav.astro";
 import Hero from "../../components/Hero.astro";
@@ -14,7 +15,7 @@ import Footer from "../../components/Footer.astro";
 
 <Base
   title="SecPal – A guard's best friend"
-  description="SecPal reduziert Zettelwirtschaft, Medienbrüche und operative Reibung im Sicherheitsdienst — mit einem klaren, durchgängigen Ablauf."
+  description={useTranslations("de").hero.description}
   lang="de"
   canonicalPath="/de/"
 >

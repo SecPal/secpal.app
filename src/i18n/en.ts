@@ -13,17 +13,19 @@ export const en = {
     closeMenu: "Close menu",
   },
   hero: {
+    description:
+      "Open-source software for professional security operations. Explore SecPal’s development and product priorities.",
     badge: "Built on years of experience in the security industry",
     headline: "More clarity in security operations.",
     subline:
-      "SecPal is being built for security service providers in Germany: duty scheduling, assignment information, and documentation in one place—instead of being scattered across paper, spreadsheets, and separate applications.",
+      "SecPal develops open-source software for physical, organizational, and personnel security. It is designed for security service providers, professional security operations, and their customers.",
     cta: "Learn about SecPal",
-    note: "SecPal is currently under development.",
+    note: "SecPal is under active development and remains pre-1.0.",
   },
   features: {
     headline: "Important information. Too many separate places.",
     subline:
-      "SecPal focuses on clear workflows, dependable documentation, and visibility in day-to-day operations.",
+      "These examples show where connected tools could help day-to-day security operations.",
     items: [
       {
         name: "Duty scheduling",
@@ -42,13 +44,13 @@ export const en = {
       },
     ],
     closing:
-      "SecPal connects these areas in one clear, understandable workflow.",
+      "SecPal’s goal is to make related information easier to find and reuse.",
   },
   workflow: {
-    overline: "One connected workflow",
-    headline: "From duty scheduling to reporting.",
+    overline: "Example workflow",
+    headline: "From preparing an assignment to reviewing it.",
     introduction:
-      "SecPal connects information throughout day-to-day security operations—instead of keeping it in separate applications.",
+      "This example shows how information could carry through a security assignment.",
     steps: [
       {
         name: "Plan",
@@ -77,7 +79,7 @@ export const en = {
       },
     ],
     closing:
-      "The principle: record information once and make it available wherever it is needed.",
+      "Record information once so the people who need it can use it throughout the assignment.",
   },
   outcomes: {
     overline: "Traceable security services",
@@ -102,36 +104,18 @@ export const en = {
       },
     ],
     closing:
-      "SecPal turns operational documentation into a clear overview for the security provider and the client.",
+      "SecPal aims to make these records easier for security teams and their customers to review.",
   },
   developmentStatus: {
-    overline: "Current development status",
-    headline: "SecPal is being built step by step.",
+    headline: "Development and operation",
     introduction:
-      "The current focus is duty scheduling. Further operational areas are planned for later development stages, without fixed delivery dates.",
-    phases: [
-      {
-        status: "Current focus",
-        name: "Duty scheduling",
-        description:
-          "The focus is on duty rosters, shift assignments, and clear staffing planning.",
-      },
-      {
-        status: "Next",
-        name: "Online guard tour system",
-        description:
-          "Guard tours are intended to be recorded in a structured way and connected with the logbook and assignment documentation.",
-      },
-      {
-        status: "Later",
-        name: "Further operational areas",
-        description:
-          "Contract management and structured service instructions are part of SecPal's longer-term direction.",
-      },
-    ],
-    closing:
-      "This sequence reflects the current planning status and may change as development progresses and practical experience provides new insights.",
-    link: "View the detailed roadmap",
+      "The roadmap describes product priorities. The architecture documentation links accepted decisions and the repositories responsible for implementation.",
+    roadmapLink: "View the roadmap",
+    architectureLink: "Explore the architecture",
+    hostingTitle: "Self-hosting and SecPal Managed",
+    hostingDescription:
+      "The same product functionality is intended for both. Self-hosting is designed to be portable. SecPal Managed is intended to add hosting and operation services.",
+    hostingLink: "Read the deployment documentation",
   },
   cta: {
     headline: "What matters is day-to-day operations.",
@@ -144,45 +128,45 @@ export const en = {
   roadmap: {
     title: "Roadmap – SecPal",
     description:
-      "Where SecPal is headed — current development focus, next planned steps, and longer-term direction.",
+      "Current product priorities for SecPal, SecPal Assure, and SecPal Visit.",
     headline: "Where SecPal is headed.",
     subline:
-      "SecPal is built in the open. This page shows the current development focus, the next planned steps, and the longer-term direction — with no fixed dates and no marketing promises.",
+      "These are product priorities. They can change as needs and evidence develop.",
     now: {
-      label: "Now",
-      description: "Actively in development",
+      label: "Current focus",
+      description: "Personnel and sites first, followed by operational records",
       items: [
         {
-          name: "Shift planning",
+          name: "Personnel and site management",
           description:
-            "Duty rosters, shift assignments, and coverage planning — integrated into the operational workflow rather than managed separately.",
+            "Bring together the people, responsibilities, and sites involved in security operations.",
+        },
+        {
+          name: "Guard book and working-time capture",
+          description:
+            "Keep a traceable record of events and corrections in the guard book. Record working time in its own domain.",
         },
       ],
     },
     next: {
-      label: "Next",
-      description: "Planned for the near term",
+      label: "According to operational need",
+      description: "Further priorities for the main product",
       items: [
         {
-          name: "Online guard tour system",
+          name: "Guard tours and scheduling",
           description:
-            "Record guard tours in a structured way and connect them clearly with the logbook and assignment documentation.",
+            "Support structured guard tours and planning for shifts and staffing.",
         },
       ],
     },
     later: {
-      label: "Later",
-      description: "Longer-term direction — no dates attached",
+      label: "Product family",
+      description: "Intended to follow incrementally",
       items: [
         {
-          name: "Contract management & digital signatures",
+          name: "SecPal Assure and SecPal Visit",
           description:
-            "Manage customer and employment contracts in one place and integrate digital signatures into the intended operational workflows.",
-        },
-        {
-          name: "Service instruction configurator",
-          description:
-            "Create and maintain site-specific service instructions — structured, versioned, and linked to the relevant objects and shifts.",
+            "The specialist products may operate independently or integrate with SecPal.",
         },
       ],
     },

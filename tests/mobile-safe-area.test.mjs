@@ -196,16 +196,22 @@ test("homepage hero keeps the localized status and progress target with tighter 
 
   assert.equal(
     de.hero.subline,
-    "SecPal entsteht für Sicherheitsdienste in Deutschland: Dienstplanung, Einsatzinformationen und Dokumentation an einem Ort – statt verteilt auf Papier, Tabellen und einzelne Programme."
+    "SecPal entwickelt Open-Source-Software für physische, organisatorische und personelle Sicherheit. Sie richtet sich an Sicherheitsdienstleister, professionelle Sicherheitsorganisationen und ihre Auftraggeber."
   );
   assert.equal(de.hero.cta, "SecPal kennenlernen");
-  assert.equal(de.hero.note, "SecPal befindet sich derzeit im Aufbau.");
+  assert.equal(
+    de.hero.note,
+    "SecPal ist in aktiver Entwicklung und hat die Version 1.0 noch nicht erreicht."
+  );
   assert.equal(
     en.hero.subline,
-    "SecPal is being built for security service providers in Germany: duty scheduling, assignment information, and documentation in one place—instead of being scattered across paper, spreadsheets, and separate applications."
+    "SecPal develops open-source software for physical, organizational, and personnel security. It is designed for security service providers, professional security operations, and their customers."
   );
   assert.equal(en.hero.cta, "Learn about SecPal");
-  assert.equal(en.hero.note, "SecPal is currently under development.");
+  assert.equal(
+    en.hero.note,
+    "SecPal is under active development and remains pre-1.0."
+  );
   assert.match(hero, /href="#progress"/);
   assert.doesNotMatch(
     JSON.stringify({ de: de.hero, en: en.hero }),
@@ -293,8 +299,8 @@ test("long German roadmap and Android labels wrap without changing English typog
   );
 
   assert.ok(
-    de.roadmap.later.items.some(
-      (item) => item.name === "Dienstanweisungskonfigurator"
+    de.roadmap.now.items.some(
+      (item) => item.name === "Wachbuch und Arbeitszeiterfassung"
     )
   );
   assert.ok(

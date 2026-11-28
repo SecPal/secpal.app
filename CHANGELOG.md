@@ -33,16 +33,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- added a localized homepage development-status section that distinguishes
-  the current focus, next planned area, and longer-term direction, with a
-  technology-neutral description of the planned online guard tour system
+- added localized homepage links to the public roadmap, accepted architecture,
+  and deployment documentation
 - added a localized homepage outcomes section that connects operational
   documentation with service visibility for security providers and clients
 - added a localized homepage workflow that presents the intended operational
   sequence from duty planning through reporting
 - added a public roadmap page at `/roadmap/`, localized as `/en/roadmap/` and `/de/roadmap/`
-- documented current roadmap focus (shift planning), the next planned step (online guard tour system), and longer-term direction (contract management and service instruction configurator)
-- added a Node regression test that keeps the English and German roadmap copy aligned with the current shift-planning focus and the next OWKS milestone
 - added roadmap navigation link to desktop and mobile menus, and roadmap paths to the sitemap
 - added the public Android distribution surface on `secpal.app/android`, including localized human-facing landing pages, stable machine-readable latest and versioned release JSON endpoints, navigation/sitemap discovery, and explicit `apk.secpal.app` host documentation for the single-package Android rollout architecture
 - added a concrete Android release metadata template endpoint at `apk.secpal.app/android/releases/{versionCode}/metadata.json` plus shared versioned metadata helpers, so release automation and documentation can reference one stable machine-readable contract before APK hosting is wired up
@@ -50,6 +47,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Aligned the English and German homepage, roadmap, and Android release status
+  with SecPal’s public positioning and current availability evidence (refs #483).
 - **Breaking:** raised the public-site repository tooling baseline from Node.js
   22 to Node.js 26.10.0 or later within major 26; install-time engine
   enforcement now rejects unsupported Node runtimes

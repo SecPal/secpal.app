@@ -66,23 +66,23 @@ const expectedEnglishSteps = [
 
 test("workflow translations describe exactly five ordered steps in both locales", () => {
   assert.deepEqual(de.workflow, {
-    overline: "Ein durchgängiger Ablauf",
-    headline: "Vom Dienstplan bis zur Auswertung.",
+    overline: "Beispielablauf",
+    headline: "Von der Vorbereitung bis zur Auswertung eines Einsatzes.",
     introduction:
-      "SecPal verbindet Informationen entlang der tatsächlichen Arbeit im Sicherheitsdienst – statt sie in getrennten Anwendungen festzuhalten.",
+      "Dieses Beispiel zeigt, wie Informationen über den gesamten Einsatz hinweg genutzt werden könnten.",
     steps: expectedGermanSteps,
     closing:
-      "Das Prinzip: Informationen einmal erfassen und anschließend dort bereitstellen, wo sie benötigt werden.",
+      "Informationen einmal erfassen, damit die Beteiligten sie während des gesamten Einsatzes nutzen können.",
   });
 
   assert.deepEqual(en.workflow, {
-    overline: "One connected workflow",
-    headline: "From duty scheduling to reporting.",
+    overline: "Example workflow",
+    headline: "From preparing an assignment to reviewing it.",
     introduction:
-      "SecPal connects information throughout day-to-day security operations—instead of keeping it in separate applications.",
+      "This example shows how information could carry through a security assignment.",
     steps: expectedEnglishSteps,
     closing:
-      "The principle: record information once and make it available wherever it is needed.",
+      "Record information once so the people who need it can use it throughout the assignment.",
   });
   assert.doesNotMatch(
     JSON.stringify({ de: de.workflow, en: en.workflow }),

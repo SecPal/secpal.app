@@ -294,8 +294,8 @@ test("public Google Play links are emitted only for public availability", () => 
     assert.equal(
       available.badge,
       locale === "de"
-        ? "Direkter Download in Vorbereitung"
-        : "Direct download in preparation"
+        ? "Kein öffentlicher Direktdownload"
+        : "No public direct download"
     );
     assert.equal(available.heroSecondary?.href, androidPlayStoreUrl);
     assert.equal(
@@ -309,14 +309,14 @@ test("public Google Play availability changes only concise status and real actio
   const expectations = {
     en: {
       description:
-        "Information about the SecPal Android release, direct downloads from secpal.app, and public availability on Google Play.",
+        "Distribution, current release status, and verification information for SecPal on Android.",
       summary: "Available",
       intro: "Current and planned distribution paths for SecPal on Android.",
       cardDescription: "SecPal is also publicly available on Google Play.",
     },
     de: {
       description:
-        "Informationen zur Android-Version von SecPal, zum direkten Download über secpal.app und zur öffentlichen Verfügbarkeit im Play Store.",
+        "Bezugswege, aktueller Veröffentlichungsstatus und Informationen zur Prüfung von SecPal für Android.",
       summary: "Verfügbar",
       intro: "Aktuelle und geplante Bezugswege für SecPal auf Android.",
       cardDescription:
@@ -349,20 +349,20 @@ test("hero, summary, and distribution copy follow the concise public hierarchy",
   const expectations = {
     en: {
       preparing:
-        "The first SecPal Android release is being prepared for direct download from secpal.app. SecPal remains in an early 0.x development phase.",
+        "No public Android download is currently available from secpal.app. SecPal remains in an early 0.x development phase.",
       available:
         "The current SecPal Android release is available for direct download from secpal.app. SecPal remains in an early 0.x development phase.",
       releaseNoticeTitle: "About early 0.x releases",
       releaseNoticeBody:
         "Early 0.x releases are under active development. Features and workflows may change in later releases.",
       distributionLabel: "Distribution",
-      distributionValue: "Direct from secpal.app",
+      distributionValue: "Planned",
       playStatus: "Planned",
       sectionTitle: "Distribution",
       sectionIntro:
         "Current and planned distribution paths for SecPal on Android.",
       directPreparing:
-        "The first public Android release will be provided through secpal.app.",
+        "Direct download from secpal.app is a planned distribution path.",
       directAvailable:
         "The current Android release is available directly through secpal.app. Its signature and checksum can be used to verify the package.",
       playPreparing:
@@ -370,19 +370,19 @@ test("hero, summary, and distribution copy follow the concise public hierarchy",
     },
     de: {
       preparing:
-        "Die erste Android-Version von SecPal wird für den direkten Download über secpal.app vorbereitet. SecPal befindet sich in einer frühen 0.x-Entwicklungsphase.",
+        "Über secpal.app steht derzeit kein öffentlicher Android-Download bereit. SecPal befindet sich in einer frühen 0.x-Entwicklungsphase.",
       available:
         "Die aktuelle Android-Version von SecPal steht direkt über secpal.app zum Download bereit. SecPal befindet sich weiterhin in einer frühen 0.x-Entwicklungsphase.",
       releaseNoticeTitle: "Hinweis zu frühen 0.x-Versionen",
       releaseNoticeBody:
         "Frühe 0.x-Versionen befinden sich in aktiver Entwicklung. Funktionen und Abläufe können sich mit weiteren Versionen verändern.",
       distributionLabel: "Bereitstellung",
-      distributionValue: "Direkt über secpal.app",
+      distributionValue: "Geplant",
       playStatus: "Geplant",
       sectionTitle: "Bezugswege",
       sectionIntro: "Aktuelle und geplante Bezugswege für SecPal auf Android.",
       directPreparing:
-        "Die erste öffentliche Android-Version wird über secpal.app bereitgestellt.",
+        "Der Direktdownload über secpal.app ist als Bezugsweg vorgesehen.",
       directAvailable:
         "Die aktuelle Android-Version steht direkt über secpal.app bereit. Signatur und Prüfsumme ermöglichen die Überprüfung des Pakets.",
       playPreparing:

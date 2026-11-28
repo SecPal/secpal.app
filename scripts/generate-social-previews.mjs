@@ -44,8 +44,8 @@ const cards = [
     headline: "SecPal",
     subheadline: "A guard's best friend",
     bodyLines: [
-      "Less paperwork. Fewer fragmented tools.",
-      "Clearer workflows for security operations.",
+      "For professional security operations.",
+      "Under active development.",
     ],
   },
   {
@@ -59,8 +59,8 @@ const cards = [
     headline: "SecPal",
     subheadline: "A guard's best friend",
     bodyLines: [
-      "Weniger Zettelwirtschaft. Weniger Medienbrüche.",
-      "Klarere Abläufe für den Sicherheitsdienst.",
+      "Für professionelle Sicherheitsarbeit.",
+      "In aktiver Entwicklung.",
     ],
   },
 ];
