@@ -30,7 +30,6 @@ Repository-specific constraints:
   bypass or force-push.
 - Keep new SecPal user commits SSH-signed with the existing identity and
   successful local and GitHub verification. Provider signatures are evidence.
-- Update `CHANGELOG.md` for product changes rather than governance-only work.
 - Use the smallest applicable subset of `npm test`, `npm run lint`,
   `npm run check`, `npm run format:check`, `npm run build`, domain validation,
   changed-file Markdown/REUSE checks, pre-commit hooks, and `git diff --check`.

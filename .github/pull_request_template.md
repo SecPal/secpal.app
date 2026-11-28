@@ -1,6 +1,8 @@
 # Description
 
-Please include a summary of the changes, the related issue, and any relevant context for the landing page or deployment behavior.
+Name the delivered change in the pull request title. In the description, link
+the related issue and explain relevant landing-page or deployment impact,
+including any breaking changes or required migration steps.
 
 Fixes # (issue)
 
@@ -28,5 +30,5 @@ Please describe the checks that you ran to verify your changes.
 
 - [ ] My change follows the repository conventions and domain policy (`secpal.app` / `secpal.dev` only)
 - [ ] I performed a self-review of the affected content, code, and workflows
-- [ ] I updated documentation and `CHANGELOG.md` when required
+- [ ] I updated the affected documentation when applicable
 - [ ] My change introduces no new warnings in the validations above
