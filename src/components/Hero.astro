@@ -5,16 +5,6 @@
 // Hero block based on Tailwind Plus UI Blocks — "Simple centered"
 // Source: https://tailwindcss.com/plus/ui-blocks/marketing/sections/heroes
 //
-// Design notes:
-//   - Fills the full first viewport (100svh minus in-flow nav height) so the
-//     next section only appears after the first scroll on both mobile and
-//     desktop.
-//   - Five quiet content layers: overline → H1 → description → CTA → status.
-//   - The overline remains visible at every viewport size.
-//   - svh used instead of vh/dvh: subtracts visible browser chrome, giving
-//     the "first screen before scrolling" behaviour on iOS Safari.
-//   - Nav height offset comes from shared CSS variables so header spacing and
-//     hero viewport math stay in sync.
 import type { Locale } from "../i18n/index.ts";
 import { useTranslations } from "../i18n/index.ts";
 
@@ -44,27 +34,22 @@ const t = useTranslations(locale);
     <div class="mx-auto w-full max-w-5xl py-10 sm:py-12">
       <div class="text-center">
         <p class="mx-auto max-w-2xl text-sm/6 font-semibold text-indigo-600 dark:text-indigo-400">
-          {t.hero.badge}
+          <span lang="en">SecPal – A guard's best friend</span>
         </p>
         <h1
           id="home-hero-title"
-          class="mx-auto mt-4 max-w-4xl text-[1.75rem]/9 font-semibold tracking-tight break-words text-balance hyphens-manual text-gray-900 sm:text-5xl lg:text-7xl dark:text-white"
+          class="mx-auto mt-4 max-w-4xl text-[1.75rem]/9 font-semibold tracking-tight wrap-break-word text-balance text-gray-900 sm:text-5xl lg:text-7xl dark:text-white"
         >
           {t.hero.headline}
         </h1>
         <p class="mx-auto mt-6 max-w-3xl text-base/7 text-pretty text-gray-600 sm:text-lg/8 dark:text-gray-300">
-          {t.hero.subline}
+          {t.hero.description}
         </p>
-        <div class="mt-8 flex justify-center">
-          <a
-            href="#progress"
-            class="inline-flex min-h-11 items-center justify-center rounded-md bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus-visible:outline-indigo-500"
-          >
-            {t.hero.cta}
-          </a>
-        </div>
-        <p class="mx-auto mt-4 max-w-2xl text-sm/6 text-gray-500 dark:text-gray-400">
-          {t.hero.note}
+        <p class="mx-auto mt-3 max-w-3xl text-base/7 text-pretty text-gray-600 sm:text-lg/8 dark:text-gray-300">
+          {t.hero.product}
+        </p>
+        <p class="mx-auto mt-4 max-w-2xl text-sm/6 text-gray-600 dark:text-gray-400">
+          {t.hero.status}
         </p>
       </div>
     </div>

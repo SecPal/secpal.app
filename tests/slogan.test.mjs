@@ -47,9 +47,13 @@ test("preview generator and checked-in SVGs preserve the exact slogan", () => {
     ),
   ].map((match) => match[1]);
   assert.deepEqual(subheadlines, [slogan, slogan]);
-  for (const name of ["og-default", "og-de"]) {
+  for (const [name, heading] of [
+    ["og-default", "Organizing security"],
+    ["og-de", "Sicherheit organisieren"],
+  ]) {
     const svg = source(`public/${name}.svg`);
     assert.ok(svg.includes("A guard&apos;s best friend"));
+    assert.ok(svg.includes(`>${heading}</text>`));
     assert.ok(!svg.includes("guard’s"));
   }
 });
@@ -75,7 +79,11 @@ test("real preview generation renders the approved apostrophe in both locales", 
   execFileSync(process.execPath, ["scripts/generate-social-previews.mjs"], {
     cwd: temporary,
     timeout: 30000,
-    env: { PATH: process.env.PATH, HOME: temporary },
+    env: {
+      PATH: process.env.PATH,
+      HOME: temporary,
+      FONTCONFIG_FILE: process.env.FONTCONFIG_FILE,
+    },
     stdio: "pipe",
   });
   // This band excludes the separately composited shield. Compare actual pixels
@@ -100,19 +108,24 @@ test("real preview generation renders the approved apostrophe in both locales", 
         .ensureAlpha()
         .raw()
         .toBuffer();
-      assert.deepEqual(actual, expected);
+      assert.ok(
+        actual.equals(expected),
+        "PNG and SVG slogan pixels must match"
+      );
       const wrong = await sharp(
         Buffer.from(
-          svg.replace("A guard&apos;s best friend", "A guard’s best friend")
+          svg.replace(
+            "A guard&apos;s best friend</text>",
+            "A guard’s best friend</text>"
+          )
         )
       )
         .extract(band)
         .ensureAlpha()
         .raw()
         .toBuffer();
-      assert.notDeepEqual(
-        actual,
-        wrong,
+      assert.ok(
+        !actual.equals(wrong),
         "curly-apostrophe rendering must differ"
       );
       const checkedIn = await sharp(

@@ -2,31 +2,16 @@
 // SPDX-FileCopyrightText: 2026 SecPal
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import type { GetStaticPaths } from "astro";
-import Base from "../../layouts/Base.astro";
-import Nav from "../../components/Nav.astro";
-import Footer from "../../components/Footer.astro";
-import RoadmapSurface from "../../components/Roadmap.astro";
-import { locales, type Locale, useTranslations } from "../../i18n/index.ts";
+import { getLocalizedPath, locales } from "../../i18n/routing.ts";
 
 export const getStaticPaths = (() =>
-  locales.map((locale) => ({ params: { locale } }))) satisfies GetStaticPaths;
+  locales.map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }))) satisfies GetStaticPaths;
 
-const locale = Astro.params.locale as Locale;
-const t = useTranslations(locale);
+return Astro.redirect(
+  `${getLocalizedPath("/", Astro.props.locale)}#focus`,
+  301
+);
 ---
-
-<Base
-  title={t.roadmap.title}
-  description={t.roadmap.description}
-  lang={locale}
-  canonicalPath={`/${locale}/roadmap/`}
-  alternateEnPath="/en/roadmap/"
-  alternateDePath="/de/roadmap/"
-  xDefaultPath="/roadmap/"
->
-  <Nav locale={locale} currentPath="/roadmap" />
-  <main>
-    <RoadmapSurface locale={locale} />
-  </main>
-  <Footer locale={locale} />
-</Base>

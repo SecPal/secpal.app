@@ -47,6 +47,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Reoriented the German and English homepages around SecPal, its main product,
+  and four durable focus areas. The navigation points to homepage sections,
+  and former roadmap URLs redirect to the homepage (refs #485).
+
 - Aligned the English and German homepage, roadmap, and Android release status
   with SecPal’s public positioning and current availability evidence (refs #483).
 - **Breaking:** raised the public-site repository tooling baseline from Node.js

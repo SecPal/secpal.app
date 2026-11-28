@@ -10,12 +10,12 @@ SPDX-License-Identifier: CC0-1.0
 [![Quality Gates](https://github.com/SecPal/secpal.app/actions/workflows/quality.yml/badge.svg)](https://github.com/SecPal/secpal.app/actions/workflows/quality.yml)
 [![License](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
-This repository contains [secpal.app](https://secpal.app), the public site for
-SecPal's open-source software for professional security operations. It publishes
-product information, a [curated roadmap](https://secpal.app/roadmap/), Android
-distribution status, legal pages, and contact information. The
-[SecPal organization profile](https://github.com/SecPal) introduces the project
-and its public repositories.
+This repository contains [secpal.app](https://secpal.app), the public
+introduction to SecPal and its main product of the same name. SecPal develops
+specialized open-source software for physical, organizational, and personnel security.
+The site describes the product's domain focus, development principles, and
+intended operating models. It also provides Android distribution information,
+legal pages, and contact and private security reporting paths.
 
 The site uses [Astro](https://astro.build),
 [Tailwind CSS](https://tailwindcss.com), and strict TypeScript, with English and
