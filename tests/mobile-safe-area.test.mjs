@@ -5,8 +5,6 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 
-import { de } from "../src/i18n/de.ts";
-import { en } from "../src/i18n/en.ts";
 import { androidDistributionContent } from "../src/lib/android-distribution.ts";
 
 const classTokens = (classNames) =>
@@ -95,21 +93,6 @@ test("mobile navigation avoids inline click handlers and is wired from script", 
   assert.match(layout, /firstFocusable\.focus\(\)/);
 });
 
-test("homepage primary actions preserve readable dark-mode hover contrast", () => {
-  const hero = readFileSync(
-    new URL("../src/components/Hero.astro", import.meta.url),
-    "utf8"
-  );
-  const nav = readFileSync(
-    new URL("../src/components/Nav.astro", import.meta.url),
-    "utf8"
-  );
-
-  assert.match(hero, /dark:hover:bg-indigo-600/);
-  assert.doesNotMatch(hero, /dark:hover:bg-indigo-400/);
-  assert.doesNotMatch(nav, /dark:hover:bg-indigo-400/);
-});
-
 test("narrow navigation and footer can contract without page overflow", () => {
   const nav = readFileSync(
     new URL("../src/components/Nav.astro", import.meta.url),
@@ -130,20 +113,6 @@ test("narrow navigation and footer can contract without page overflow", () => {
   );
   assert.match(nav, /class="[^"]*\bgap-x-1\b[^"]*\bsm:gap-x-4\b[^"]*"/);
   assert.match(footer, /\bflex\b[^"]*\bflex-wrap\b/);
-});
-
-test("German hero heading provides a readable manual compound-word break", () => {
-  const hero = readFileSync(
-    new URL("../src/components/Hero.astro", import.meta.url),
-    "utf8"
-  );
-  const translations = readFileSync(
-    new URL("../src/i18n/de.ts", import.meta.url),
-    "utf8"
-  );
-
-  assert.match(hero, /\bhyphens-manual\b/);
-  assert.match(translations, /Sicherheits\\u00addienst/);
 });
 
 test("localized legal headings wrap without English auto-hyphenation", () => {
@@ -186,45 +155,6 @@ test("localized legal headings wrap without English auto-hyphenation", () => {
     assert.ok(tokens.has("hyphens-none"));
     assert.ok(!tokens.has("hyphens-auto"));
   }
-});
-
-test("homepage hero keeps the localized status and progress target with tighter copy", () => {
-  const hero = readFileSync(
-    new URL("../src/components/Hero.astro", import.meta.url),
-    "utf8"
-  );
-
-  assert.equal(
-    de.hero.subline,
-    "SecPal entwickelt Open-Source-Software für physische, organisatorische und personelle Sicherheit. Sie richtet sich an Sicherheitsdienstleister, professionelle Sicherheitsorganisationen und ihre Auftraggeber."
-  );
-  assert.equal(de.hero.cta, "SecPal kennenlernen");
-  assert.equal(
-    de.hero.note,
-    "SecPal ist in aktiver Entwicklung und hat die Version 1.0 noch nicht erreicht."
-  );
-  assert.equal(
-    en.hero.subline,
-    "SecPal develops open-source software for physical, organizational, and personnel security. It is designed for security service providers, professional security operations, and their customers."
-  );
-  assert.equal(en.hero.cta, "Learn about SecPal");
-  assert.equal(
-    en.hero.note,
-    "SecPal is under active development and remains pre-1.0."
-  );
-  assert.match(hero, /href="#progress"/);
-  assert.doesNotMatch(
-    JSON.stringify({ de: de.hero, en: en.hero }),
-    /Mehr über SecPal erfahren|Learn more about SecPal/
-  );
-  assert.ok(!("tagline" in de.hero));
-  assert.ok(!("tagline" in en.hero));
-  assert.ok(!("explanation" in de.hero));
-  assert.ok(!("explanation" in en.hero));
-  assert.ok(!("highlights" in de.hero));
-  assert.ok(!("highlights" in en.hero));
-  assert.ok(!("ctaSecondary" in de.hero));
-  assert.ok(!("ctaSecondary" in en.hero));
 });
 
 test("android distribution cards wrap long visible machine paths on mobile", () => {
@@ -285,11 +215,7 @@ test("android distribution cards wrap long visible machine paths on mobile", () 
   }
 });
 
-test("long German roadmap and Android labels wrap without changing English typography", () => {
-  const roadmap = readFileSync(
-    new URL("../src/components/Roadmap.astro", import.meta.url),
-    "utf8"
-  );
+test("long German Android labels wrap without changing English typography", () => {
   const androidDistribution = readFileSync(
     new URL(
       "../src/components/AndroidDistributionSurface.astro",
@@ -299,18 +225,9 @@ test("long German roadmap and Android labels wrap without changing English typog
   );
 
   assert.ok(
-    de.roadmap.now.items.some(
-      (item) => item.name === "Wachbuch und Arbeitszeiterfassung"
-    )
-  );
-  assert.ok(
     androidDistributionContent.de.downloadOptions.some(
       (option) => option.name === "Direkter Download"
     )
-  );
-  assert.match(
-    roadmap,
-    /<p\s+class:list=\{\[\s*"font-semibold text-gray-900 dark:text-white",\s*locale === "de" \? "break-words" : null,\s*\]\}/
   );
   assert.match(
     androidDistribution,

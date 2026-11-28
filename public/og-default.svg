@@ -5,7 +5,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
   <title id="title">SecPal social preview</title>
-  <desc id="desc">Social preview card for SecPal with product name, tagline, and the canonical shield mark.</desc>
+  <desc id="desc">SecPal logo with the slogan ‘A guard&apos;s best friend’ and the heading ‘Organizing security’.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#081019" />
@@ -27,14 +27,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   <circle cx="160" cy="560" r="210" fill="#7dd3fc" opacity="0.08" />
   <rect x="72" y="72" width="1056" height="486" rx="32" fill="rgba(8,16,25,0.36)" stroke="rgba(125,211,252,0.18)" stroke-width="2" />
 
-  <rect x="112" y="118" width="455" height="40" rx="20" fill="rgba(125,211,252,0.12)" stroke="rgba(125,211,252,0.28)" />
-  <text x="144" y="144" fill="#d7f3ff" font-size="20" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif" letter-spacing="0.08em">BUILT IN PUBLIC · OPEN SOURCE</text>
-
   <text x="112" y="286" fill="#ffffff" font-size="104" font-weight="700" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">SecPal</text>
   <text x="112" y="344" fill="#8bdcff" font-size="40" font-weight="600" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">A guard&apos;s best friend</text>
 
-  <text x="112" y="426" fill="#e2edf6" font-size="32" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">For professional security operations.</text>
-  <text x="112" y="470" fill="#e2edf6" font-size="32" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">Under active development.</text>
+  <text x="112" y="426" fill="#e2edf6" font-size="32" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif">Organizing security</text>
 
   <rect x="112" y="500" width="252" height="36" rx="18" fill="url(#accent)" opacity="0.96" />
   <text x="138" y="524" fill="#081019" font-size="24" font-weight="700" font-family="Segoe UI, Noto Sans, Helvetica, Arial, sans-serif" letter-spacing="0.02em">secpal.app</text>

@@ -26,12 +26,13 @@ const t = useTranslations(locale);
 
 const otherLocale: Locale = locale === "en" ? "de" : "en";
 const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
-const roadmapPath = getLocalizedPath("/roadmap", locale);
-const androidPath = getLocalizedPath("/android", locale);
-const workflowPath = `${getLocalizedPath("/", locale)}#workflow`;
-const contactPath = `${getLocalizedPath("/", locale)}#contact`;
-const isRoadmapCurrent = currentPath === "/roadmap";
-const isAndroidCurrent = currentPath === "/android";
+const homePath = getLocalizedPath("/", locale);
+const sectionLinks = [
+  { href: `${homePath}#focus`, label: t.nav.focus },
+  { href: `${homePath}#approach`, label: t.nav.approach },
+  { href: `${homePath}#open-source`, label: t.nav.openSource },
+];
+const contactPath = `${homePath}#contact`;
 const heroTone = tone === "androidHero";
 const headerBackgroundClass = heroTone
   ? "bg-transparent"
@@ -54,10 +55,8 @@ const desktopLinkClass = "text-sm/6 font-semibold";
 const mobileLinkClass =
   "-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold hover:bg-gray-50 dark:hover:bg-white/5";
 const defaultNavTextClass = "text-gray-900 dark:text-white";
-const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
 ---
 
-<!-- @tailwindplus/elements is loaded in Base.astro via script tag -->
 <header
   class:list={[
     overlay ? "absolute inset-x-0 top-0 z-20" : "relative z-20",
@@ -65,17 +64,17 @@ const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
   ]}
 >
   <nav
-    aria-label="Global"
+    aria-label={t.nav.primary}
     class="mx-auto flex max-w-7xl items-center justify-between gap-x-3 px-4 py-[var(--secpal-nav-padding-y)] sm:gap-x-6 sm:px-6 lg:px-8"
   >
     <!-- Logo -->
     <div class="flex lg:flex-1">
-      <a href={getLocalizedPath("/", locale)} class="-m-1.5 p-1.5">
+      <a href={homePath} class="-m-1.5 p-1.5">
         <span class="sr-only">SecPal</span>
         <img
           src="/logo-light-48.png"
           class="h-[var(--secpal-nav-logo-height)] w-auto dark:hidden"
-          alt="SecPal"
+          alt=""
         />
         <img
           src="/logo-dark-48.png"
@@ -88,32 +87,11 @@ const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
 
     <!-- Desktop nav links -->
     <div class="hidden lg:flex lg:gap-x-6 2xl:gap-x-12">
-      <a
-        href={workflowPath}
-        class:list={[desktopLinkClass, defaultNavTextClass]}
-      >
-        {t.nav.workflow}
-      </a>
-      <a
-        href={roadmapPath}
-        aria-current={isRoadmapCurrent ? "page" : undefined}
-        class:list={[
-          desktopLinkClass,
-          isRoadmapCurrent ? activeNavTextClass : defaultNavTextClass,
-        ]}
-      >
-        {t.nav.roadmap}
-      </a>
-      <a
-        href={androidPath}
-        aria-current={isAndroidCurrent ? "page" : undefined}
-        class:list={[
-          desktopLinkClass,
-          isAndroidCurrent ? activeNavTextClass : defaultNavTextClass,
-        ]}
-      >
-        {t.nav.android}
-      </a>
+      {sectionLinks.map(({ href, label }) => (
+        <a href={href} class:list={[desktopLinkClass, defaultNavTextClass]}>
+          {label}
+        </a>
+      ))}
     </div>
 
     <!-- Right-side: language switcher + dark toggle + CTA -->
@@ -179,7 +157,7 @@ const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
         href={contactPath}
         class="hidden min-h-[44px] min-[360px]:inline-flex items-center justify-center rounded-md bg-indigo-600 px-1 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:px-3 sm:text-sm dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus-visible:outline-indigo-500"
       >
-        {t.nav.headerCta}
+        {t.nav.contact}
       </a>
     </div>
 
@@ -222,12 +200,12 @@ const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
   >
     <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-gray-900 dark:sm:ring-gray-100/10">
       <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
-        <a href={getLocalizedPath("/", locale)} class="-m-1.5 p-1.5">
+        <a href={homePath} class="-m-1.5 p-1.5">
           <span class="sr-only">SecPal</span>
           <img
             src="/logo-light-48.png"
             class="h-[var(--secpal-nav-logo-height)] w-auto dark:hidden"
-            alt="SecPal"
+            alt=""
           />
           <img
             src="/logo-dark-48.png"
@@ -258,53 +236,28 @@ const activeNavTextClass = "text-indigo-600 dark:text-indigo-400";
             ></path>
           </svg>
         </button>
+      </div>
+      <nav aria-label={t.nav.primary} class="mt-6 space-y-2">
+        {sectionLinks.map(({ href, label }) => (
+          <a href={href} class:list={[mobileLinkClass, defaultNavTextClass]}>
+            {label}
+          </a>
+        ))}
         <a
           href={contactPath}
-          class="inline-flex min-h-[44px] w-full items-center justify-center break-words rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-600"
+          class:list={[mobileLinkClass, defaultNavTextClass]}
         >
-          {t.nav.headerCta}
+          {t.nav.contact}
         </a>
-      </div>
-      <div class="mt-6 flow-root">
-        <div class="-my-6 divide-y divide-gray-500/10 dark:divide-white/10">
-          <div class="space-y-2 py-6">
-            <a
-              href={workflowPath}
-              class:list={[mobileLinkClass, defaultNavTextClass]}
-            >
-              {t.nav.workflow}
-            </a>
-            <a
-              href={roadmapPath}
-              aria-current={isRoadmapCurrent ? "page" : undefined}
-              class:list={[
-                mobileLinkClass,
-                isRoadmapCurrent ? activeNavTextClass : defaultNavTextClass,
-              ]}
-            >
-              {t.nav.roadmap}
-            </a>
-            <a
-              href={androidPath}
-              aria-current={isAndroidCurrent ? "page" : undefined}
-              class:list={[
-                mobileLinkClass,
-                isAndroidCurrent ? activeNavTextClass : defaultNavTextClass,
-              ]}
-            >
-              {t.nav.android}
-            </a>
-            <!-- Language switcher in mobile menu -->
-            <a
-              href={otherLocalePath}
-              data-language-switch
-              class:list={[mobileLinkClass, defaultNavTextClass]}
-            >
-              {otherLocale === "de" ? "Deutsch" : "English"}
-            </a>
-          </div>
-        </div>
-      </div>
+        <a
+          href={otherLocalePath}
+          data-language-switch
+          lang={otherLocale}
+          class:list={[mobileLinkClass, defaultNavTextClass]}
+        >
+          {otherLocale === "de" ? "Deutsch" : "English"}
+        </a>
+      </nav>
     </div>
   </div>
 </header>
