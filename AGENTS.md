@@ -34,15 +34,12 @@ merge decisions. Keep repository-specific guidance in this file.
   Preserve existing SSH keys and signing configuration. GitHub-generated
   signatures are provider evidence, not SecPal OpenPGP signing authority.
   Every PR commit must have GitHub `verification.verified == true`.
-- Update `CHANGELOG.md` for real fixes, features, and breaking changes. Pure
-  governance, planning, formatting, and other non-product changes do not need an
-  entry.
 - Keep GitHub-facing communication in English and reference files and lines
   instead of pasting large code blocks.
 - When creating or editing pull requests programmatically, write multiline body
   content to a file and use `--body-file` so shell escaping cannot corrupt it.
 - Do not add AI self-references, generated-by text, promotional AI wording, or
-  AI attribution to commits, pull requests, issues, changelogs, documentation,
+  AI attribution to commits, pull requests, issues, documentation,
   code comments, UI copy, or release notes unless the task explicitly requires
   documenting AI tooling behavior.
 - Keep `SPDX-FileCopyrightText` years current in edited files or companion
@@ -67,7 +64,8 @@ merge decisions. Keep repository-specific guidance in this file.
   requires them.
 - Because SecPal is pre-`1.0.0`, removing an insecure or obsolete compatibility
   layer may be preferable to retaining it. Keep that decision inside the
-  current contract and update applicable validation and `CHANGELOG.md`.
+  current contract, update applicable validation, and describe the change and
+  any required migration steps in the pull request.
 
 ## User-Facing Quality
 

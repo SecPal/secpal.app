@@ -67,9 +67,10 @@ The preflight script validates formatting, markdown, domain policy, linting, typ
 
 1. Create a focused branch from `main`.
 2. Keep the change to one topic only.
-3. Update `CHANGELOG.md` for real fixes, features, or breaking changes.
-4. Run the smallest relevant validation for the affected area.
-5. Open a pull request with a clear description and linked issue.
+3. Run the smallest relevant validation for the affected area.
+4. Open a pull request with a title that names the delivered change. Link the
+   issue and describe relevant user or deployment impact, breaking changes, and
+   required migration steps when applicable.
 
 ## Branch Naming
 

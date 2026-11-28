@@ -43,4 +43,3 @@
 .markdownlint.json export-ignore
 .yamllint.yml export-ignore
 scripts/ export-ignore
-CHANGELOG.md export-ignore
