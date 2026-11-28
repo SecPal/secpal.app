@@ -52,7 +52,7 @@ export const de: Translations = {
   approach: {
     headline: "Unser Ansatz",
     purpose:
-      "Software soll Arbeit abnehmen. Papierformulare zu digitalisieren ist ein Schritt dorthin.",
+      "Software soll Arbeit abnehmen. Papierformulare zu digitalisieren ist nur der erste Schritt auf dem Weg dorthin.",
     workflows:
       "Wir wollen Informationen wiederverwenden, zusammengehörige Abläufe verbinden und geeignete Routineaufgaben zuverlässig automatisieren.",
     data: "Wir entwickeln SecPal so, dass nur erforderliche Daten erhoben, für den festgelegten Zweck verwendet und nur Berechtigten zugänglich werden.",
