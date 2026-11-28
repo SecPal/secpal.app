@@ -48,7 +48,7 @@ export const en = {
   approach: {
     headline: "Our approach",
     purpose:
-      "Software should reduce the amount of work people do. Digitizing paperwork is only a step toward that goal.",
+      "Software should reduce the amount of work people do. Digitizing paperwork is only the first step toward that goal.",
     workflows:
       "We aim to reuse information, connect related workflows, and reliably automate routine tasks that lend themselves to automation.",
     data: "We design SecPal to collect only necessary data, use it for its intended purpose, and limit access to authorized people.",

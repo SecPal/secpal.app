@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Clarify in both languages that SecPal does not use trackers or ad networks.
+
+- Clarify in both homepage languages that digitizing paperwork is only the
+  first step toward reducing work.
+
 - Keep the Astro checker's required WebAssembly runtime peers installed during
   clean dependency installs so valid Astro PATCH updates pass type checking.
 
