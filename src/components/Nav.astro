@@ -26,6 +26,7 @@ const t = useTranslations(locale);
 
 const otherLocale: Locale = locale === "en" ? "de" : "en";
 const otherLocalePath = getLocalizedPath(currentPath, otherLocale);
+const otherLocaleName = otherLocale === "de" ? "Deutsch" : "English";
 const homePath = getLocalizedPath("/", locale);
 const sectionLinks = [
   { href: `${homePath}#focus`, label: t.nav.focus },
@@ -100,15 +101,13 @@ const defaultNavTextClass = "text-gray-900 dark:text-white";
       <a
         href={otherLocalePath}
         data-language-switch
+        lang={otherLocale}
         class:list={[
           "hidden text-xs font-semibold uppercase tracking-wide lg:block",
           utilityControlClass,
         ]}
-        aria-label={
-          otherLocale === "de" ? "Auf Deutsch wechseln" : "Switch to English"
-        }
       >
-        {otherLocale}
+        {otherLocaleName}
       </a>
 
       <!-- Dark mode toggle -->
@@ -255,7 +254,7 @@ const defaultNavTextClass = "text-gray-900 dark:text-white";
           lang={otherLocale}
           class:list={[mobileLinkClass, defaultNavTextClass]}
         >
-          {otherLocale === "de" ? "Deutsch" : "English"}
+          {otherLocaleName}
         </a>
       </nav>
     </div>
