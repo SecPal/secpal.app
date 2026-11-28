@@ -15,17 +15,19 @@ export const de: Translations = {
     closeMenu: "Menü schließen",
   },
   hero: {
+    description:
+      "Open-Source-Software für professionelle Sicherheitsorganisationen. Mehr über die Entwicklung und Produktprioritäten von SecPal.",
     badge: "Aus langjähriger Praxis im Sicherheitsdienst",
     headline: "Mehr Übersicht im Sicherheits\u00addienst.",
     subline:
-      "SecPal entsteht für Sicherheitsdienste in Deutschland: Dienstplanung, Einsatzinformationen und Dokumentation an einem Ort – statt verteilt auf Papier, Tabellen und einzelne Programme.",
+      "SecPal entwickelt Open-Source-Software für physische, organisatorische und personelle Sicherheit. Sie richtet sich an Sicherheitsdienstleister, professionelle Sicherheitsorganisationen und ihre Auftraggeber.",
     cta: "SecPal kennenlernen",
-    note: "SecPal befindet sich derzeit im Aufbau.",
+    note: "SecPal ist in aktiver Entwicklung und hat die Version 1.0 noch nicht erreicht.",
   },
   features: {
     headline: "Viele Informationen. Zu viele Wege.",
     subline:
-      "SecPal konzentriert sich auf klare Abläufe, verlässliche Dokumentation und Übersicht im täglichen Betrieb.",
+      "Diese Beispiele zeigen, wo verknüpfte Werkzeuge den Sicherheitsalltag erleichtern können.",
     items: [
       {
         name: "Dienstplanung",
@@ -44,13 +46,13 @@ export const de: Translations = {
       },
     ],
     closing:
-      "SecPal verbindet diese Bereiche in einem gemeinsamen, verständlichen Ablauf.",
+      "SecPal soll helfen, zusammengehörige Informationen leichter zu finden und weiterzuverwenden.",
   },
   workflow: {
-    overline: "Ein durchgängiger Ablauf",
-    headline: "Vom Dienstplan bis zur Auswertung.",
+    overline: "Beispielablauf",
+    headline: "Von der Vorbereitung bis zur Auswertung eines Einsatzes.",
     introduction:
-      "SecPal verbindet Informationen entlang der tatsächlichen Arbeit im Sicherheitsdienst – statt sie in getrennten Anwendungen festzuhalten.",
+      "Dieses Beispiel zeigt, wie Informationen über den gesamten Einsatz hinweg genutzt werden könnten.",
     steps: [
       {
         name: "Planen",
@@ -79,7 +81,7 @@ export const de: Translations = {
       },
     ],
     closing:
-      "Das Prinzip: Informationen einmal erfassen und anschließend dort bereitstellen, wo sie benötigt werden.",
+      "Informationen einmal erfassen, damit die Beteiligten sie während des gesamten Einsatzes nutzen können.",
   },
   outcomes: {
     overline: "Nachvollziehbare Sicherheitsdienstleistung",
@@ -104,36 +106,18 @@ export const de: Translations = {
       },
     ],
     closing:
-      "SecPal schafft aus operativer Dokumentation einen klaren Überblick für den eigenen Betrieb und den Auftraggeber.",
+      "SecPal soll es Sicherheitsorganisationen und ihren Auftraggebern erleichtern, diese Dokumentation auszuwerten.",
   },
   developmentStatus: {
-    overline: "Aktueller Entwicklungsstand",
-    headline: "SecPal entsteht Schritt für Schritt.",
+    headline: "Entwicklung und Betrieb",
     introduction:
-      "Der aktuelle Schwerpunkt liegt auf der Dienstplanung. Weitere betriebliche Bereiche sind für spätere Entwicklungsschritte vorgesehen – ohne feste Termine.",
-    phases: [
-      {
-        status: "Aktuell",
-        name: "Dienstplanung",
-        description:
-          "Im Mittelpunkt stehen Dienstpläne, Schichtzuweisungen und eine nachvollziehbare Besetzungsplanung.",
-      },
-      {
-        status: "Als Nächstes",
-        name: "Online-Wächterkontrollsystem",
-        description:
-          "Kontrollgänge sollen strukturiert erfasst und mit Wachbuch und Einsatzdokumentation verbunden werden.",
-      },
-      {
-        status: "Später",
-        name: "Weitere betriebliche Bereiche",
-        description:
-          "Vertragsverwaltung und strukturierte Dienstanweisungen gehören zur längerfristigen Richtung von SecPal.",
-      },
-    ],
-    closing:
-      "Diese Reihenfolge beschreibt den aktuellen Planungsstand. Sie kann sich mit den Erkenntnissen aus Entwicklung und Praxis verändern.",
-    link: "Roadmap im Detail ansehen",
+      "Die Roadmap beschreibt die Produktprioritäten. Die Architekturdokumentation verweist auf akzeptierte Entscheidungen und die für die Umsetzung zuständigen Repositories.",
+    roadmapLink: "Zur Roadmap",
+    architectureLink: "Zur Architektur",
+    hostingTitle: "Selbstbetrieb und SecPal Managed",
+    hostingDescription:
+      "Für beide Betriebsmodelle ist derselbe Funktionsumfang vorgesehen. Der Selbstbetrieb ist portabel ausgelegt. SecPal Managed soll Hosting und Betrieb als Dienstleistung ergänzen.",
+    hostingLink: "Zur Dokumentation für die Bereitstellung",
   },
   cta: {
     headline: "Was zählt, ist der Arbeits\u00adalltag.",
@@ -146,45 +130,46 @@ export const de: Translations = {
   roadmap: {
     title: "Roadmap – SecPal",
     description:
-      "Wohin SecPal sich entwickelt — aktueller Entwicklungsfokus, nächste geplante Schritte und längerfristige Richtung.",
+      "Aktuelle Produktprioritäten für SecPal, SecPal Assure und SecPal Visit.",
     headline: "Wohin SecPal sich entwickelt.",
     subline:
-      "SecPal entsteht öffentlich. Diese Seite zeigt den aktuellen Entwicklungsfokus, die nächsten geplanten Schritte und die längerfristige Richtung — ohne feste Termine und ohne Marketingversprechen.",
+      "Die Produktprioritäten können sich mit dem Bedarf und neuen Erkenntnissen ändern.",
     now: {
-      label: "Aktuell",
-      description: "In aktiver Entwicklung",
+      label: "Aktueller Schwerpunkt",
+      description:
+        "Zuerst Personal und Objekte, danach die Einsatzdokumentation",
       items: [
         {
-          name: "Dienstplanung",
+          name: "Personal- und Objektverwaltung",
           description:
-            "Dienstpläne, Schichtzuweisungen und Besetzungsplanung — eingebaut in den operativen Ablauf statt separat verwaltet.",
+            "Personal, Zuständigkeiten und Schutzobjekte im Sicherheitsbetrieb zusammenführen.",
+        },
+        {
+          name: "Wachbuch und Arbeitszeiterfassung",
+          description:
+            "Ereignisse und Korrekturen im Wachbuch nachvollziehbar dokumentieren. Arbeitszeit in einem eigenen Fachbereich erfassen.",
         },
       ],
     },
     next: {
-      label: "Als Nächstes",
-      description: "Für die nahe Zukunft geplant",
+      label: "Nach betrieblichem Bedarf",
+      description: "Weitere Prioritäten für das Hauptprodukt",
       items: [
         {
-          name: "Online-Wächterkontrollsystem (OWKS)",
+          name: "Kontrollgänge und Dienstplanung",
           description:
-            "Kontrollgänge strukturiert erfassen und nachvollziehbar mit Wachbuch und Einsatzdokumentation verbinden.",
+            "Strukturierte Kontrollgänge sowie die Schicht- und Besetzungsplanung unterstützen.",
         },
       ],
     },
     later: {
-      label: "Später",
-      description: "Längerfristige Richtung — ohne feste Termine",
+      label: "Produktfamilie",
+      description: "Sollen schrittweise folgen",
       items: [
         {
-          name: "Vertragsverwaltung & digitale Unterschrift",
+          name: "SecPal Assure und SecPal Visit",
           description:
-            "Kunden- und Arbeitsverträge an einem Ort verwalten und digitale Unterschriften in die vorgesehenen betrieblichen Abläufe einbinden.",
-        },
-        {
-          name: "Dienstanweisungskonfigurator",
-          description:
-            "Objektbezogene Dienstanweisungen erstellen und pflegen — strukturiert, versioniert und direkt mit Objekten und Schichten verknüpft.",
+            "Die Spezialprodukte können eigenständig oder mit SecPal verbunden konzipiert werden.",
         },
       ],
     },

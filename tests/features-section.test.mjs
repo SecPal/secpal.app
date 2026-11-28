@@ -48,12 +48,12 @@ test("second homepage view presents exactly the three localized operational situ
   assert.equal(de.features.headline, "Viele Informationen. Zu viele Wege.");
   assert.equal(
     de.features.subline,
-    "SecPal konzentriert sich auf klare Abläufe, verlässliche Dokumentation und Übersicht im täglichen Betrieb."
+    "Diese Beispiele zeigen, wo verknüpfte Werkzeuge den Sicherheitsalltag erleichtern können."
   );
   assert.deepEqual(de.features.items, expectedGermanItems);
   assert.equal(
     de.features.closing,
-    "SecPal verbindet diese Bereiche in einem gemeinsamen, verständlichen Ablauf."
+    "SecPal soll helfen, zusammengehörige Informationen leichter zu finden und weiterzuverwenden."
   );
 
   assert.equal(
@@ -62,16 +62,12 @@ test("second homepage view presents exactly the three localized operational situ
   );
   assert.equal(
     en.features.subline,
-    "SecPal focuses on clear workflows, dependable documentation, and visibility in day-to-day operations."
+    "These examples show where connected tools could help day-to-day security operations."
   );
   assert.deepEqual(en.features.items, expectedEnglishItems);
   assert.equal(
     en.features.closing,
-    "SecPal connects these areas in one clear, understandable workflow."
-  );
-  assert.doesNotMatch(
-    JSON.stringify({ de: de.features, en: en.features }),
-    /SecPal soll diese Bereiche|SecPal aims to bring these areas/
+    "SecPal’s goal is to make related information easier to find and reuse."
   );
 });
 

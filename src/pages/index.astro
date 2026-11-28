@@ -1,12 +1,13 @@
 ---
 // SPDX-FileCopyrightText: 2026 SecPal
 // SPDX-License-Identifier: AGPL-3.0-or-later
+import { useTranslations } from "../i18n/index.ts";
 import NeutralLocaleRedirectPage from "../components/NeutralLocaleRedirectPage.astro";
 ---
 
 <NeutralLocaleRedirectPage
   title="SecPal – A guard's best friend"
-  description="SecPal reduces paperwork, fragmented tools, and operational friction in security operations with one clear workflow."
+  description={useTranslations("en").hero.description}
   canonicalPath="/"
   alternateEnPath="/en/"
   alternateDePath="/de/"

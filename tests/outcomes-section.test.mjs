@@ -52,7 +52,7 @@ test("outcomes translations present exactly three ordered benefits in both local
       "Sicherheitsdienstleistungen sind für Auftraggeber oft schwer sichtbar – gerade dann, wenn sie zuverlässig und ohne besondere Vorkommnisse erbracht werden. Strukturierte Dokumentation macht sichtbar, welche Leistungen erbracht und welche Ereignisse während eines Einsatzes festgehalten wurden.",
     items: expectedGermanItems,
     closing:
-      "SecPal schafft aus operativer Dokumentation einen klaren Überblick für den eigenen Betrieb und den Auftraggeber.",
+      "SecPal soll es Sicherheitsorganisationen und ihren Auftraggebern erleichtern, diese Dokumentation auszuwerten.",
   });
 
   assert.deepEqual(en.outcomes, {
@@ -62,7 +62,7 @@ test("outcomes translations present exactly three ordered benefits in both local
       "Security services can be difficult for clients to see—especially when they are delivered reliably and without notable incidents. Structured documentation shows which services were delivered and which events were recorded during an assignment.",
     items: expectedEnglishItems,
     closing:
-      "SecPal turns operational documentation into a clear overview for the security provider and the client.",
+      "SecPal aims to make these records easier for security teams and their customers to review.",
   });
 
   assert.deepEqual(Object.keys(de.outcomes), Object.keys(en.outcomes));
@@ -78,14 +78,12 @@ test("outcomes copy avoids unsupported pattern-analysis language", () => {
     "wiederkehrende Entwicklungen",
     "wiederkehrende Auffälligkeiten",
     "Strukturierte Dokumentation soll zeigen",
-    "SecPal soll aus operativer Dokumentation",
   ];
   const forbiddenEnglishTerms = [
     "Recognize developments",
     "recurring developments",
     "recurring issues",
     "Structured documentation should show",
-    "SecPal aims to turn operational documentation",
   ];
   const germanOutcomes = JSON.stringify(de.outcomes).toLocaleLowerCase("de-DE");
   const englishOutcomes = JSON.stringify(en.outcomes).toLocaleLowerCase("en");

@@ -309,22 +309,21 @@ export function buildAndroidDistributionContent(
   if (locale === "de") {
     return {
       title: "SecPal für Android",
-      description: publicPlayStoreAvailable
-        ? "Informationen zur Android-Version von SecPal, zum direkten Download über secpal.app und zur öffentlichen Verfügbarkeit im Play Store."
-        : "Informationen zur Android-Version von SecPal, zum direkten Download über secpal.app und zur späteren öffentlichen Veröffentlichung im Play Store.",
+      description:
+        "Bezugswege, aktueller Veröffentlichungsstatus und Informationen zur Prüfung von SecPal für Android.",
       eyebrow: "SecPal für Android",
       headline: "SecPal. Immer dabei.",
       subline: [
         directDownloadAvailable
           ? "Die aktuelle Android-Version von SecPal steht direkt über secpal.app zum Download bereit."
-          : "Die erste Android-Version von SecPal wird für den direkten Download über secpal.app vorbereitet.",
+          : "Über secpal.app steht derzeit kein öffentlicher Android-Download bereit.",
         directDownloadAvailable
           ? "SecPal befindet sich weiterhin in einer frühen 0.x-Entwicklungsphase."
           : "SecPal befindet sich in einer frühen 0.x-Entwicklungsphase.",
       ].join(" "),
       badge: directDownloadAvailable
         ? "Direkter Download verfügbar"
-        : "Direkter Download in Vorbereitung",
+        : "Kein öffentlicher Direktdownload",
       heroPrimary: directDownloadAvailable
         ? {
             label: "Android-Version herunterladen",
@@ -345,7 +344,7 @@ export function buildAndroidDistributionContent(
         },
         {
           label: "Bereitstellung",
-          value: "Direkt über secpal.app",
+          value: directDownloadAvailable ? "Direkt über secpal.app" : "Geplant",
         },
         {
           label: "Entwicklungsphase",
@@ -360,11 +359,11 @@ export function buildAndroidDistributionContent(
       downloadIntro: "Aktuelle und geplante Bezugswege für SecPal auf Android.",
       downloadOptions: [
         {
-          badge: directDownloadAvailable ? "Verfügbar" : "In Vorbereitung",
+          badge: directDownloadAvailable ? "Verfügbar" : "Geplant",
           name: "Direkter Download",
           description: directDownloadAvailable
             ? "Die aktuelle Android-Version steht direkt über secpal.app bereit. Signatur und Prüfsumme ermöglichen die Überprüfung des Pakets."
-            : "Die erste öffentliche Android-Version wird über secpal.app bereitgestellt.",
+            : "Der Direktdownload über secpal.app ist als Bezugsweg vorgesehen.",
           kind: "primary",
           ...(directDownloadAvailable
             ? {
@@ -419,20 +418,19 @@ export function buildAndroidDistributionContent(
 
   return {
     title: "SecPal for Android",
-    description: publicPlayStoreAvailable
-      ? "Information about the SecPal Android release, direct downloads from secpal.app, and public availability on Google Play."
-      : "Information about the SecPal Android release, direct downloads from secpal.app, and the later public release on Google Play.",
+    description:
+      "Distribution, current release status, and verification information for SecPal on Android.",
     eyebrow: "SecPal for Android",
     headline: "SecPal in your pocket.",
     subline: [
       directDownloadAvailable
         ? "The current SecPal Android release is available for direct download from secpal.app."
-        : "The first SecPal Android release is being prepared for direct download from secpal.app.",
+        : "No public Android download is currently available from secpal.app.",
       "SecPal remains in an early 0.x development phase.",
     ].join(" "),
     badge: directDownloadAvailable
       ? "Direct download available"
-      : "Direct download in preparation",
+      : "No public direct download",
     heroPrimary: directDownloadAvailable
       ? {
           label: "Download Android release",
@@ -453,7 +451,7 @@ export function buildAndroidDistributionContent(
       },
       {
         label: "Distribution",
-        value: "Direct from secpal.app",
+        value: directDownloadAvailable ? "Direct from secpal.app" : "Planned",
       },
       {
         label: "Development phase",
@@ -469,11 +467,11 @@ export function buildAndroidDistributionContent(
       "Current and planned distribution paths for SecPal on Android.",
     downloadOptions: [
       {
-        badge: directDownloadAvailable ? "Available" : "In preparation",
+        badge: directDownloadAvailable ? "Available" : "Planned",
         name: "Direct download",
         description: directDownloadAvailable
           ? "The current Android release is available directly through secpal.app. Its signature and checksum can be used to verify the package."
-          : "The first public Android release will be provided through secpal.app.",
+          : "Direct download from secpal.app is a planned distribution path.",
         kind: "primary",
         ...(directDownloadAvailable
           ? {
